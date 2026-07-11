@@ -25,8 +25,8 @@ export default function MemberTiket({
 
   // New ticket state
   const [subjek, setSubjek] = useState('');
-  const [kategori, setKategori] = useState('Simpanan');
-  const [prioritas, setPrioritas] = useState('Biasa');
+  const [kategori, setKategori] = useState<'Simpanan' | 'Pinjaman' | 'Toko' | 'Aplikasi' | 'Lainnya'>('Simpanan');
+  const [prioritas, setPrioritas] = useState<'Rendah' | 'Sedang' | 'Tinggi'>('Rendah');
   const [pesan, setPesan] = useState('');
   const [success, setSuccess] = useState(false);
 

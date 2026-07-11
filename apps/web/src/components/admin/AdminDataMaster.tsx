@@ -9,7 +9,7 @@ import {
   X, AlertCircle, Search, Filter, Coins, ShieldAlert, CreditCard, 
   Calendar, Key, MapPin, Phone, Settings2, Info
 } from 'lucide-react';
-import { Pengurus, Karyawan, AsetBarang, SumberBayar, UserSession, Anggota } from '../../types';
+import { Pengurus, Karyawan, AsetBarang, SumberBayar, UserSession, Anggota, UserRole } from '../../types';
 
 interface AdminDataMasterProps {
   pengurusList: Pengurus[];
@@ -122,7 +122,7 @@ export default function AdminDataMaster({
   const [userForm, setUserForm] = useState({
     username: '',
     namaLengkap: '',
-    role: 'operator' as 'superadmin' | 'admin' | 'operator' | 'anggota',
+    role: 'operator' as UserRole,
     nik: '',
     memberId: '',
     isActive: true,
