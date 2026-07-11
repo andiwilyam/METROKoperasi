@@ -1,0 +1,6 @@
+{
+  "name": "MetroMitra",
+  "description": "Sistem Informasi Manajemen Koperasi Simpan Pinjam Terintegrasi",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi Eksklusif MetroCOOP v2.0 - Metro Komunika Asia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .slide-transition {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Custom scrollbar for presenter notes */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between select-none">
+
+    <!-- TOP BAR (No-print) -->
+    <header id="top-bar" class="bg-slate-900/80 backdrop-blur-md border-b border-slate-800 px-6 py-3 flex justify-between items-center relative z-50">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-white shadow-md shadow-blue-500/20">
+                M
+            </div>
+            <div>
+                <span class="text-sm font-bold tracking-tight text-white">MetroCOOP <span class="text-[10px] text-blue-400 font-mono">v2.0</span></span>
+                <span class="text-[10px] text-slate-400 block -mt-1">Dek Presentasi Interaktif</span>
+            </div>
+        </div>
+        
+        <!-- Controls -->
+        <div class="flex items-center space-x-2">
+            <button id="btn-prev" onclick="prevSlide()" class="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <span class="text-xs font-mono text-slate-400 px-2" id="slide-indicator">1 / 9</span>
+            <button id="btn-next" onclick="nextSlide()" class="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+            <div class="h-4 w-[1px] bg-slate-800 mx-2"></div>
+            <button id="btn-fullscreen" onclick="toggleFullscreen()" class="p-2 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition" title="Layar Penuh">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5"></path></svg>
+            </button>
+            <button id="btn-notes" onclick="toggleNotes()" class="px-3 py-1 bg-slate-800 hover:bg-slate-750 text-[11px] font-semibold rounded-lg border border-slate-700 transition flex items-center gap-1 text-amber-400">
+                <span>📋</span> Catatan Pembicara
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN SLIDE VIEWER CONTAINER -->
+    <main class="flex-1 relative overflow-hidden flex items-center justify-center p-4 md:p-8">
+        
+        <!-- Background Ambient Glow -->
+        <div id="glow-1" class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-blue-600/10 blur-3xl pointer-events-none slide-transition"></div>
+        <div id="glow-2" class="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none slide-transition"></div>
+
+        <!-- SLIDE 1: COVER -->
+        <section id="slide-1" class="slide-transition opacity-100 scale-100 absolute inset-0 flex flex-col items-center justify-center text-center p-6 max-w-5xl mx-auto z-10">
+            <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-6 animate-pulse">
+                <span>⚡</span>
+                <span>Metro Komunika Asia Presentasi Resmi</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-none text-white font-display">
+                MetroCOOP <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-emerald-400">v2.0</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-bold tracking-tight text-slate-300 mt-4">
+                Sistem Ekosistem Informasi Koperasi Masa Kini
+            </p>
+            <p class="text-slate-400 text-sm md:text-base mt-6 max-w-2xl leading-relaxed">
+                Transformasi digital menyeluruh untuk pengelolaan anggota, transaksi simpanan, pengajuan pinjaman cepat, pembukuan jurnal otomatis, dan unit usaha retail kasir toko terintegrasi.
+            </p>
+            
+            <div class="mt-12 flex flex-wrap gap-4 justify-center">
+                <div class="px-5 py-3 bg-slate-900/60 border border-slate-800 rounded-xl text-left">
+                    <span class="block text-[10px] text-slate-500 font-bold uppercase tracking-wider">Disiapkan Oleh</span>
+                    <span class="text-sm font-semibold text-slate-200">Andi Wilyam</span>
+                </div>
+                <div class="px-5 py-3 bg-slate-900/60 border border-slate-800 rounded-xl text-left">
+                    <span class="block text-[10px] text-slate-500 font-bold uppercase tracking-wider">Perusahaan</span>
+                    <span class="text-sm font-semibold text-slate-200">Metro Komunika Asia</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: MASALAH VS SOLUSI -->
+        <section id="slide-2" class="slide-transition opacity-0 scale-95 pointer-events-none absolute inset-0 flex flex-col justify-center p-6 max-w-5xl mx-auto z-0">
+            <div class="mb-6">
+                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Tantangan Koperasi</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-1">Masalah Klasik vs Era Digital</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 mt-4">
+                <div class="bg-red-950/20 border border-red-900/30 p-6 rounded-2xl space-y-4">
+                    <h3 class="text-lg font-bold text-red-400 flex items-center gap-2">
+                        <span>❌</span> Hambatan Koperasi Klasik
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-500 mt-0.5">•</span>
+                            <span><strong>Pencatatan Manual:</strong> Risiko salah hitung pembukuan keuangan dan manipulasi data.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-500 mt-0.5">•</span>
+                            <span><strong>Keterbatasan Akses:</strong> Anggota harus datang langsung ke kantor hanya untuk mengecek saldo.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-500 mt-0.5">•</span>
+                            <span><strong>Proses Pinjaman Lambat:</strong> Verifikasi manual berkas fisik memakan waktu berhari-hari.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-emerald-950/20 border border-emerald-900/30 p-6 rounded-2xl space-y-4">
+                    <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
+                        <span>✔</span> Solusi Modern MetroCOOP
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 mt-0.5">•</span>
+                            <span><strong>100% Real-time Cloud:</strong> Seluruh data sinkron instan dan aman terpusat di cloud server.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 mt-0.5">•</span>
+                            <span><strong>Portal Anggota Mandiri:</strong> Cek saldo simpanan dan ajukan pinjaman langsung dari layar HP.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-500 mt-0.5">•</span>
+                            <span><strong>Auto Journaling:</strong> Pembukuan akuntansi otomatis saat transaksi berlangsung.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: NILAI UNGGULAN -->
+        <section id="slide-3" class="slide-transition opacity-0 scale-95 pointer-events-none absolute inset-0 flex flex-col justify-center p-6 max-w-5xl mx-auto z-0">
+            <div class="mb-6">
+                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Kekuatan Utama</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-1">Mengapa Memilih MetroCOOP v2.0?</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                <div class="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl space-y-3">
+                    <div class="text-2xl">⚡</div>
+                    <h3 class="font-bold text-slate-200">Auto Journaling Akuntansi</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Setiap transaksi simpanan, angsuran, maupun penjualan toko langsung mencatat entri debit-kredit di Buku Besar secara otomatis dan bebas error manusia.
+                    </p>
+                </div>
+                <div class="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl space-y-3">
+                    <div class="text-2xl">👤</div>
+                    <h3 class="font-bold text-slate-200">Multi Portal Mandiri</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Memisahkan wilayah kerja Admin Pengurus untuk kendali penuh, Operator Staff untuk melayani operasional, dan Anggota untuk transparansi data keuangan.
+                    </p>
+                </div>
+                <div class="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl space-y-3">
+                    <div class="text-2xl">🏪</div>
+                    <h3 class="font-bold text-slate-200">Kasir Toko Terintegrasi</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Menggabungkan unit usaha perdagangan (toko fisik) dengan koperasi. Kelola stok barang, kasir Point of Sale (POS), dan supplier dalam satu tempat.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: FITUR KUNCI -->
+        <section id="slide-4" class="slide-transition opacity-0 scale-95 pointer-events-none absolute inset-0 flex flex-col justify-center p-6 max-w-5xl mx-auto z-0">
+            <div class="mb-6">
+                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Katalog Produk</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-1">Fungsionalitas Modul Terintegrasi</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-4">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 p-3 bg-slate-900/40 border border-slate-800 rounded-xl">
+                        <div class="w-10 h-10 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold">💳</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-200">Sistem Simpan Pinjam Digital</h4>
+                            <p class="text-xs text-slate-400">Mutasi otomatis simpanan pokok, wajib, sukarela, dan kalkulasi bunga pinjaman.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 bg-slate-900/40 border border-slate-800 rounded-xl">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold">📊</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-200">Laporan Keuangan Otomatis</h4>
+                            <p class="text-xs text-slate-400">Neraca saldo, laporan laba rugi, buku besar pembantu, dan jurnal transaksi terupdate seketika.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 p-3 bg-slate-900/40 border border-slate-800 rounded-xl">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold">🛒</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-200">Point of Sales (POS) Kasir Toko</h4>
+                            <p class="text-xs text-slate-400">Aplikasi kasir ramah sentuhan, pencatatan harga beli-jual, inventaris otomatis, dan supplier.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 p-3 bg-slate-900/40 border border-slate-800 rounded-xl">
+                        <div class="w-10 h-10 rounded-lg bg-amber-600/20 text-amber-400 flex items-center justify-center font-bold">📢</div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-200">Pengumuman & Tiket Support</h4>
+                            <p class="text-xs text-slate-400">Saluran komunikasi dua arah pengurus dan anggota serta helpdesk tiket gangguan digital.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: ROADMAP ROAD TO MOBILE -->
+        <section id="slide-5" class="slide-transition opacity-0 scale-95 pointer-events-none absolute inset-0 flex flex-col justify-center p-6 max-w-5xl mx-auto z-0">
+            <div class="mb-4">
+                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Peta Jalan Rilis</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-1">Roadmap Pengembangan Aplikasi Smartphone</h2>
+            </div>
+
+            <!-- Horizontal Timeline representation -->
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mt-4">
+                <div class="bg-slate-900/40 border-l-4 border-blue-500 p-4 rounded-r-xl space-y-1">
+                    <span class="text-[10px] font-bold text-blue-400 uppercase font-mono">Fase 1 - Bln 1</span>
+                    <h4 class="text-xs font-bold text-white">Web Optimization</h4>
+                    <p class="text-[10px] text-slate-400">Penyempurnaan sistem kasir toko, sinkronisasi buku besar, dan audit keamanan.</p>
+                </div>
+                <div class="bg-slate-900/40 border-l-4 border-amber-500 p-4 rounded-r-xl space-y-1">
+                    <span class="text-[10px] font-bold text-amber-400 uppercase font-mono">Fase 2 - Bln 2-3</span>
+                    <h4 class="text-xs font-bold text-white">Web Mobile & PWA</h4>
+                    <p class="text-[10px] text-slate-400">Manifest PWA, push notifications, adaptasi layout sentuh minimal 44px layar HP.</p>
+                </div>
+                <div class="bg-slate-900/40 border-l-4 border-purple-500 p-4 rounded-r-xl space-y-1">
+                    <span class="text-[10px] font-bold text-purple-400 uppercase font-mono">Fase 3 - Bln 4</span>
+                    <h4 class="text-xs font-bold text-white">RESTful API Gateway</h4>
+                    <p class="text-[10px] text-slate-400">Pembuatan pintu API aman berbasis enkripsi JWT token sekelas mobile banking.</p>
+                </div>
+                <div class="bg-slate-900/40 border-l-4 border-emerald-500 p-4 rounded-r-xl space-y-1">
+                    <span class="text-[10px] font-bold text-emerald-400 uppercase font-mono">Fase 4 - Bln 5-6</span>
+                    <h4 class="text-xs font-bold text-white">Smartphone App</h4>
+                    <p class="text-[10px] text-slate-400">Coding aplikasi native Android & iOS, scanner barcode toko, dan login biometrik.</p>
+                </div>
+                <div class="bg-slate-900/40 border-l-4 border-teal-500 p-4 rounded-r-xl space-y-1">
+                    <span class="text-[10px] font-bold text-teal-400 uppercase font-mono">Fase 5 - Bln 7-8</span>
+                    <h4 class="text-xs font-bold text-white">Ecosystem Pintar</h4>
+                    <p class="text-[10px] text-slate-400">Integrasi pembayaran VA bank, QRIS instan, skema syariah, & cerdas credit scoring.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: HARGA JUAL - PEMBELIAN PUTUS -->
+        <section id="slide-6" class="slide-transition opacity-0 scale-95 pointer-events-none absolute inset-0 flex flex-col justify-center p-6 max-w-5xl mx-auto z-0">
+            <div class="mb-4">
+                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Opsi Lisensi</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-1">Skema Finansial: Pembelian Lisensi Putus</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mt-4">
+                <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase">BASIC SYSTEM</span>
+                        <h4 class="text-lg font-bold text-white mt-1">Paket Silver</h4>
+                        <div class="text-xl font-extrabold text-blue-400 mt-2">Rp 45.000.000</div>
+                        <ul class="text-[10px] text-slate-400 space-y-1.5 mt-4 list-disc pl-3">
+                            <li>Web Portal Koperasi v2.0</li>
+                            <li>Multi-Akses Pengurus & Anggota</li>
+                            <li>Buku Jurnal Akuntansi otomatis</li>
+                            <li>Modul Toko & Kasir Retail</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[9px] text-slate-500">Maint: Rp 5.000.000 / thn</div>
+                </div>
+
+                <div class="bg-slate-900/80 border-2 border-indigo-500 p-5 rounded-2xl flex flex-col justify-between relative">
+                    <span class="absolute top-0 right-0 bg-indigo-500 text-slate-950 text-[8px] font-bold px-2 py-0.5 rounded-bl uppercase">Populer</span>
+                    <div>
+                        <span class="text-[10px] font-bold text-indigo-400 uppercase">SMARTPHONE PORTAL</span>
+                        <h4 class="text-lg font-bold text-white mt-1">Paket Gold</h4>
+                        <div class="text-xl font-extrabold text-indigo-400 mt-2">Rp 115.000.000</div>
+                        <ul class="text-[10px] text-slate-300 space-y-1.5 mt-4 list-disc pl-3">
+                            <li>Semua kelebihan Paket Silver</li>
+                            <li>Aplikasi Mobile Web PWA</li>
+                            <li>Notifikasi Web Push Real-Time</li>
+                            <li>Kamera Barcode Scan kasir HP</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[9px] text-slate-500">Maint: Rp 10.000.000 / thn</div>
+                </div>
+
+                <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-blue-400 uppercase">COMPLETE ECOSYSTEM</span>
+                        <h4 class="text-lg font-bold text-white mt-1">Paket Platinum</h4>
+                        <div class="text-xl font-extrabold text-emerald-400 mt-2">Rp 245.000.000</div>
+                        <ul class="text-[10px] text-slate-400 space-y-1.5 mt-4 list-disc pl-3">
+                            <li>Semua kelebihan Paket Gold</li>
+                            <li>App Native Android (Google Play)</li>
+                            <li>App Native iOS (Apple App Store)</li>
+                            <li>Payment Gateway (QRIS & VA Bank)</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[9px] text-slate-500 font-bold text-emerald-400">Maint: Gratis Tahun Pertama</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: HARGA JUAL - BERLANGGANAN (SAAS) -->
+        <section id="slide-7" class="slide-transition opacity-0 scale-95 pointer-events-none absolute inset-0 flex flex-col justify-center p-6 max-w-5xl mx-auto z-0">
+            <div class="mb-4">
+                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Opsi Langganan</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-1">Skema Finansial: Berlangganan Bulanan (SaaS)</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mt-4">
+                <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase">SaaS Lite</span>
+                        <div class="text-xl font-extrabold text-white mt-2">Rp 750.000 <span class="text-xs font-normal text-slate-400">/ bln</span></div>
+                        <p class="text-[9px] text-amber-500 font-bold mt-1">Setup Awal: Rp 2.500.000</p>
+                        <ul class="text-[10px] text-slate-400 space-y-1.5 mt-4 list-disc pl-3">
+                            <li>Web Portal Utama</li>
+                            <li>Maksimal 150 Anggota</li>
+                            <li>1 Akun Administrator</li>
+                            <li>Buku Jurnal Keuangan</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[9px] text-slate-500">Pemeliharaan server ditanggung Developer</div>
+                </div>
+
+                <div class="bg-slate-900/80 border-2 border-indigo-500 p-5 rounded-2xl flex flex-col justify-between relative">
+                    <span class="absolute top-0 right-0 bg-indigo-500 text-slate-950 text-[8px] font-bold px-2 py-0.5 rounded-bl uppercase">Rekomendasi</span>
+                    <div>
+                        <span class="text-[10px] font-bold text-indigo-400 uppercase font-bold">SaaS Growth</span>
+                        <div class="text-xl font-extrabold text-indigo-400 mt-2">Rp 2.250.000 <span class="text-xs font-normal text-slate-400">/ bln</span></div>
+                        <p class="text-[9px] text-amber-500 font-bold mt-1">Setup Awal: Rp 5.000.000</p>
+                        <ul class="text-[10px] text-slate-300 space-y-1.5 mt-4 list-disc pl-3">
+                            <li>Web Portal + App Mobile PWA</li>
+                            <li>Maksimal 1.000 Anggota</li>
+                            <li>3 Akun Administrator</li>
+                            <li>Notifikasi WhatsApp Terintegrasi</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[9px] text-slate-500">Domain Kustom & Backup Harian Otomatis</div>
+                </div>
+
+                <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-2xl flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] font-bold text-blue-400 uppercase">SaaS Enterprise</span>
+                        <div class="text-xl font-extrabold text-emerald-400 mt-2">Rp 4.500.000 <span class="text-xs font-normal text-slate-400">/ bln</span></div>
+                        <p class="text-[9px] text-amber-500 font-bold mt-1">Setup Awal: Rp 20.000.000</p>
+                        <ul class="text-[10px] text-slate-400 space-y-1.5 mt-4 list-disc pl-3">
+                            <li>Web Portal + Native Mobile Apps</li>
+                            <li>Kapasitas Anggota Tanpa Batas</li>
+                            <li>Akun Admin Bebas</li>
+                            <li>Payment Gateway QRIS & VA Bank</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-800 text-[9px] text-slate-500 font-bold text-emerald-400">Dukungan Prioritas Teknis 24/7</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: KEAMANAN DATA -->
+        <section id="slide-8" class="slide-transition opacity-0 scale-95 pointer-events-none absolute inset-0 flex flex-col justify-center p-6 max-w-5xl mx-auto z-0">
+            <div class="mb-6">
+                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Proteksi Sistem</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white mt-1">Keamanan Tingkat Finansial</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mt-4">
+                <div class="p-5 bg-slate-900/40 border border-slate-800 rounded-2xl space-y-3">
+                    <div class="text-2xl">🔒</div>
+                    <h3 class="font-bold text-slate-200">Enkripsi Data SSL/HTTPS</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Mengamankan komunikasi data antara browser, perangkat smartphone, dan server cloud sehingga tidak rentan disadap pihak tidak bertanggung jawab.
+                    </p>
+                </div>
+                <div class="p-5 bg-slate-900/40 border border-slate-800 rounded-2xl space-y-3">
+                    <div class="text-2xl">🔑</div>
+                    <h3 class="font-bold text-slate-200">JWT Token Security</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        JSON Web Token (JWT) yang kedaluwarsa berkala menjamin identitas pengguna mutlak terlindungi saat melakukan mutasi setoran maupun penarikan dana koperasi.
+                    </p>
+                </div>
+                <div class="p-5 bg-slate-900/40 border border-slate-800 rounded-2xl space-y-3">
+                    <div class="text-2xl">🛡</div>
+                    <h3 class="font-bold text-slate-200">Rate Limiter & DDoS Shield</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Membatasi aktivitas lalu lintas data mencurigakan untuk memblokir bot spam serta menolak serangan cyber yang mencoba melumpuhkan kestabilan server.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: SESI DISKUSI -->
+        <section id="slide-9" class="slide-transition opacity-0 scale-95 pointer-events-none absolute inset-0 flex flex-col justify-center text-center p-6 max-w-5xl mx-auto z-0">
+            <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold mb-6">
+                <span>💬</span>
+                <span>Tanya Jawab & Penutupan</span>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-extrabold text-white font-display">Sesi Diskusi & Langkah Berikutnya</h2>
+            <p class="text-slate-400 text-sm md:text-base mt-4 max-w-2xl mx-auto leading-relaxed">
+                Mari bersama mewujudkan era baru koperasi modern yang mandiri, transparan, dan berdaya saing tinggi bersama sistem MetroCOOP v2.0.
+            </p>
+
+            <div class="mt-12 p-6 bg-slate-900/40 border border-slate-800 rounded-2xl max-w-xl mx-auto text-left">
+                <h4 class="font-bold text-sm text-slate-200 mb-2 flex items-center gap-2">
+                    <span>📞</span> Hubungi Tim Pengembang Kami:
+                </h4>
+                <div class="grid grid-cols-2 gap-4 text-xs text-slate-400">
+                    <div>
+                        <span class="block text-[10px] text-slate-500 font-bold uppercase">Nama Pembuat</span>
+                        <span class="text-slate-200 font-semibold">Andi Wilyam</span>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] text-slate-500 font-bold uppercase">Agensi</span>
+                        <span class="text-slate-200 font-semibold">Metro Komunika Asia</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FLOATING CATATAN PEMBICARA / PRESENTER NOTES VIEW -->
+    <aside id="presenter-notes-container" class="hidden fixed bottom-16 right-6 w-96 max-h-60 bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl p-4 z-40 overflow-y-auto no-print">
+        <div class="flex justify-between items-center mb-2 border-b border-slate-800 pb-1.5">
+            <span class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                <span>📋</span> Catatan Pembicara (Panduan Rapat)
+            </span>
+            <button onclick="toggleNotes()" class="text-slate-400 hover:text-white text-xs font-bold">Tutup</button>
+        </div>
+        <p id="presenter-notes-text" class="text-xs text-slate-300 leading-relaxed italic">
+            Mulai presentasi dengan menyapa klien dan memperkenalkan MetroCOOP v2.0 sebagai lompatan besar koperasi digital modern.
+        </p>
+    </aside>
+
+    <!-- FOOTER PROGRESS BAR -->
+    <footer class="bg-slate-900/60 border-t border-slate-800 py-4 px-6 relative z-10 no-print">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <!-- Progress Bar -->
+            <div class="w-full sm:w-1/2 bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                <div id="progress-indicator" class="bg-blue-600 h-1.5 rounded-full transition-all" style="width: 11.1%"></div>
+            </div>
+            <!-- Slide list hints -->
+            <div class="text-[10px] text-slate-500 tracking-wider font-semibold uppercase">
+                Gunakan <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300 font-mono">←</kbd> dan <kbd class="px-1.5 py-0.5 bg-slate-800 border border-slate-700 rounded text-slate-300 font-mono">→</kbd> untuk berpindah Slide
+            </div>
+        </div>
+    </footer>
+
+    <!-- PRESENTER LOGIC SCRIPT -->
+    <script>
+        const totalSlides = 9;
+        let currentSlide = 1;
+
+        // Presenter Notes List for each slide
+        const notes = {
+            1: "Sambut audiens dengan hangat. Tekankan bahwa ini adalah usulan resmi transformasi digital koperasi masa kini dari Metro Komunika Asia.",
+            2: "Jelaskan dengan empati mengenai masalah pencatatan kasir toko manual dan repotnya anggota mengecek saldo simpanan secara fisik. Lalu tawarkan MetroCOOP sebagai penyelamat.",
+            3: "Soroti 3 pilar utama: Buku Besar otomatis murni dari semua transaksi, hak akses portal mandiri masing-masing peran, serta efisiensi unit usaha retail toko koperasi.",
+            4: "Ulas detail fungsionalitas: tabungan wajib, penarikan, helpdesk tiket keluhan anggota, dan kemudahan operator kasir POS toko mendaftarkan stok barang.",
+            5: "Sampaikan rencana strategis Peta Jalan (Roadmap). Tekankan transisi halus dari Web base saat ini ke PWA mobile ramah sentuh (Fase 2) hingga aplikasi smartphone native tangguh (Fase 4 & 5).",
+            6: "Jelaskan opsi kepemilikan putus lisensi seumur hidup (Lifetime License) murni. Paket Silver murni web, Gold ramah mobile PWA, dan Platinum mencakup penuh Android & iOS Play/App Store.",
+            7: "Tawarkan alternatif cerdas SaaS berlangganan bulanan tanpa modal awal besar. Gambarkan keuntungan stabil jangka panjang (passive income) untuk pihak kita dan barier biaya rendah untuk klien.",
+            8: "Tenangkan kekhawatiran klien soal keamanan dana tabungan anggota. Yakinkan bahwa enkripsi HTTPS dan teknologi otentikasi JWT token sangat aman dari ancaman penyusup cyber.",
+            9: "Sampaikan apresiasi penutup, undang diskusi Q&A interaktif, dan undang klien untuk bersinergi melangkah ke tahap penandatanganan kesepakatan kerjasama."
+        };
+
+        function updateSlideDisplay() {
+            // Update Active slide element
+            for (let i = 1; i <= totalSlides; i++) {
+                const el = document.getElementById('slide-' + i);
+                if (i === currentSlide) {
+                    el.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+                    el.classList.add('opacity-100', 'scale-100', 'z-10');
+                } else {
+                    el.classList.remove('opacity-100', 'scale-100', 'z-10');
+                    el.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+                }
+            }
+
+            // Update Glow Colors based on current slides
+            const glow1 = document.getElementById('glow-1');
+            const glow2 = document.getElementById('glow-2');
+            if (currentSlide === 1 || currentSlide === 2) {
+                glow1.className = 'absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-blue-600/10 blur-3xl pointer-events-none slide-transition';
+                glow2.className = 'absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none slide-transition';
+            } else if (currentSlide === 3 || currentSlide === 4) {
+                glow1.className = 'absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-indigo-600/10 blur-3xl pointer-events-none slide-transition';
+                glow2.className = 'absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none slide-transition';
+            } else if (currentSlide === 5) {
+                glow1.className = 'absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-amber-600/10 blur-3xl pointer-events-none slide-transition';
+                glow2.className = 'absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-purple-500/10 blur-3xl pointer-events-none slide-transition';
+            } else if (currentSlide === 6 || currentSlide === 7) {
+                glow1.className = 'absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-blue-600/10 blur-3xl pointer-events-none slide-transition';
+                glow2.className = 'absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none slide-transition';
+            } else {
+                glow1.className = 'absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-emerald-600/10 blur-3xl pointer-events-none slide-transition';
+                glow2.className = 'absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-teal-500/10 blur-3xl pointer-events-none slide-transition';
+            }
+
+            // Update top indicators
+            document.getElementById('slide-indicator').innerText = currentSlide + ' / ' + totalSlides;
+
+            // Update Progress bar
+            const percentage = (currentSlide / totalSlides) * 100;
+            document.getElementById('progress-indicator').style.width = percentage + '%';
+
+            // Update Presenter Notes Text
+            document.getElementById('presenter-notes-text').innerText = notes[currentSlide];
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                updateSlideDisplay();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                updateSlideDisplay();
+            }
+        }
+
+        function toggleNotes() {
+            const el = document.getElementById('presenter-notes-container');
+            el.classList.toggle('hidden');
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Keyboard Navigation Controls
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'ArrowRight' || event.key === ' ' || event.key === 'Enter') {
+                nextSlide();
+            } else if (event.key === 'ArrowLeft' || event.key === 'Backspace') {
+                prevSlide();
+            }
+        });
+
+        // Initialize presentation
+        updateSlideDisplay();
+    </script>
+</body>
+</html>

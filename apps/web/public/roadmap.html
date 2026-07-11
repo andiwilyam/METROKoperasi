@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap Pengembangan MetroCOOP - Web & Mobile App</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            .print-card {
+                break-inside: avoid;
+                border: 1px solid #e2e8f0 !important;
+                box-shadow: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- Top Navigation / Presenter Controls -->
+    <nav class="bg-slate-900 text-white py-4 px-6 sticky top-0 z-50 shadow-md no-print">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center font-bold text-lg text-white">
+                    M
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-tight">MetroCOOP Roadmap</h1>
+                    <p class="text-xs text-slate-400">Web Portal & Smartphone Application</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button onclick="window.print()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-lg border border-slate-700 transition flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                    Cetak / Simpan PDF
+                </button>
+                <a href="/" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-xs font-semibold rounded-lg transition">
+                    Kembali Ke Aplikasi
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Hero Section -->
+    <header class="bg-gradient-to-r from-slate-900 via-slate-850 to-blue-950 text-white py-16 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-900/40 via-transparent to-transparent pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold mb-6">
+                <span class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span>
+                <span>Dokumen Presentasi Klien Resmi</span>
+            </div>
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight max-w-4xl">
+                Rencana Strategis & Roadmap Pengembangan <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300">MetroCOOP</span>
+            </h1>
+            <p class="text-slate-300 text-base md:text-lg mt-4 max-w-3xl leading-relaxed">
+                Panduan komprehensif transformasi digital koperasi dari sistem web-base terintegrasi menuju ekosistem aplikasi mobile (smartphone) multiplatform (Android & iOS).
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl">
+                    <div class="text-2xl font-bold text-blue-400">Fase 1 - 5</div>
+                    <div class="text-xs text-slate-300 mt-1">Tahap Implementasi</div>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl">
+                    <div class="text-2xl font-bold text-amber-400">PWA & Hybrid</div>
+                    <div class="text-xs text-slate-300 mt-1">Teknologi Smartphone</div>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl">
+                    <div class="text-2xl font-bold text-emerald-400">6-8 Bulan</div>
+                    <div class="text-xs text-slate-300 mt-1">Estimasi Total Rilis</div>
+                </div>
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl">
+                    <div class="text-2xl font-bold text-purple-400">100% Real-time</div>
+                    <div class="text-xs text-slate-300 mt-1">Sinkronisasi Data</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto py-12 px-6">
+        
+        <!-- Interactive Navigation Options (No-Print) -->
+        <div class="flex flex-wrap gap-2 mb-8 no-print">
+            <button onclick="filterPhase('all')" id="btn-all" class="phase-btn px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold transition shadow-sm">
+                Tampilkan Semua Fase
+            </button>
+            <button onclick="filterPhase('1')" id="btn-1" class="phase-btn px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition border border-slate-200">
+                Fase 1: Web Optimization
+            </button>
+            <button onclick="filterPhase('2')" id="btn-2" class="phase-btn px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition border border-slate-200">
+                Fase 2: Mobile Web & PWA
+            </button>
+            <button onclick="filterPhase('3')" id="btn-3" class="phase-btn px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition border border-slate-200">
+                Fase 3: Mobile API & Backend
+            </button>
+            <button onclick="filterPhase('4')" id="btn-4" class="phase-btn px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition border border-slate-200">
+                Fase 4: Smartphone App
+            </button>
+            <button onclick="filterPhase('5')" id="btn-5" class="phase-btn px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition border border-slate-200">
+                Fase 5: Ekosistem Pintar
+            </button>
+        </div>
+
+        <!-- TIMELINE SECTION -->
+        <div class="space-y-12">
+            
+            <!-- PHASE 1 CARD -->
+            <div id="phase-1" class="phase-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden print-card transition-all">
+                <div class="p-6 md:p-8 border-b border-slate-100 bg-gradient-to-r from-blue-50/50 to-transparent">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center space-x-4">
+                            <span class="w-12 h-12 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white text-lg shadow-md shadow-blue-500/20">
+                                01
+                            </span>
+                            <div>
+                                <span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase">Langkah Pertama</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1">Fase 1: Konsolidasi & Optimalisasi Core Web Portal</h3>
+                            </div>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="block text-xs text-slate-400">Estimasi Durasi</span>
+                            <span class="text-sm font-bold text-slate-800">Bulan 1 (Selesai / Stabilisasi)</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-sm mt-4">
+                        Memastikan fondasi backend, basis data, dan antarmuka web saat ini berjalan dengan tingkat keamanan maksimal, bebas bug, dan siap menerima integrasi eksternal.
+                    </p>
+                </div>
+                <div class="p-6 md:p-8 bg-slate-50/40">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Milestone Utama & Tasks</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-emerald-500 mt-0.5">✔</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Sistem Akuntansi Jurnal Otomatis</p>
+                                        <p class="text-xs text-slate-500">Pencatatan kas masuk/keluar dari simpanan dan pinjaman langsung terpetakan ke Buku Besar.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-emerald-500 mt-0.5">✔</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Modul Perdagangan (Toko Koperasi)</p>
+                                        <p class="text-xs text-slate-500">Pencatatan stok barang toko, kasir penjualan kasir, pembelian supplier, dan laporan laba/rugi toko.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-blue-500 mt-0.5">⚙</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Keamanan Enkripsi SSL & Audit Kinerja</p>
+                                        <p class="text-xs text-slate-500">Uji penetrasi celah keamanan siber dasar dan optimalisasi query beban kerja tinggi.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Status Kesiapan</h4>
+                            <div class="flex items-center gap-2 mb-4">
+                                <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">STABIL (90%)</span>
+                                <span class="text-xs text-slate-400">Siap dilanjutkan ke Fase berikutnya</span>
+                            </div>
+                            <div class="w-full bg-slate-100 rounded-full h-2">
+                                <div class="bg-emerald-500 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-4 leading-relaxed italic">
+                                *Catatan: Sistem Web Base MetroCOOP v2.0 saat ini telah memiliki fungsionalitas core yang matang (Keanggotaan, Simpanan, Pinjaman, Laporan Keuangan, Kasir Toko, dan Pengumuman).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 2 CARD -->
+            <div id="phase-2" class="phase-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden print-card transition-all">
+                <div class="p-6 md:p-8 border-b border-slate-100 bg-gradient-to-r from-amber-50/50 to-transparent">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center space-x-4">
+                            <span class="w-12 h-12 rounded-xl bg-amber-500 flex items-center justify-center font-bold text-white text-lg shadow-md shadow-amber-500/20">
+                                02
+                            </span>
+                            <div>
+                                <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 text-xs font-bold uppercase">Langkah Kedua</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1">Fase 2: Mobile-Responsive UI & PWA (Progressive Web App)</h3>
+                            </div>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="block text-xs text-slate-400">Estimasi Durasi</span>
+                            <span class="text-sm font-bold text-slate-800">Bulan 2 - 3</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-sm mt-4">
+                        Membangun jembatan awal bagi pengguna smartphone tanpa perlu unduh dari Play Store, mengoptimalkan tata letak antarmuka agar sangat ramah layar sentuh, serta mengaktifkan fitur instalasi langsung.
+                    </p>
+                </div>
+                <div class="p-6 md:p-8 bg-slate-50/40">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Milestone Utama & Tasks</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-amber-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Implementasi Progressive Web App (PWA)</p>
+                                        <p class="text-xs text-slate-500">Menambahkan web manifest, service worker untuk caching offline, dan banner "Add to Home Screen" otomatis.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-amber-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Optimalisasi Antarmuka Touch-Friendly</p>
+                                        <p class="text-xs text-slate-500">Mendesain ulang tombol, tabel, dan diagram agar nyaman diakses satu jari dengan ukuran minimal 44px.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-amber-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Sistem Notifikasi Web Push</p>
+                                        <p class="text-xs text-slate-500">Mengirimkan pengingat angsuran pinjaman dan konfirmasi pengajuan simpanan langsung ke layar kunci perangkat.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Keuntungan Strategis (PWA)</h4>
+                            <ul class="space-y-2 text-xs text-slate-600 list-disc pl-4">
+                                <li><strong>Instan & Ringan:</strong> Anggota dapat menginstal aplikasi dalam 2 detik langsung dari browser Chrome/Safari tanpa memakan kuota/penyimpanan smartphone.</li>
+                                <li><strong>Kompatibilitas Penuh:</strong> Dapat berjalan lancar di Android (Samsung, Oppo, Xiaomi) maupun iOS (Apple iPhone).</li>
+                                <li><strong>Hemat Anggaran:</strong> Menjadi jembatan rilis produk tercepat sembari mematangkan aplikasi native smartphone.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 3 CARD -->
+            <div id="phase-3" class="phase-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden print-card transition-all">
+                <div class="p-6 md:p-8 border-b border-slate-100 bg-gradient-to-r from-purple-50/50 to-transparent">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center space-x-4">
+                            <span class="w-12 h-12 rounded-xl bg-purple-600 flex items-center justify-center font-bold text-white text-lg shadow-md shadow-purple-500/20">
+                                03
+                            </span>
+                            <div>
+                                <span class="px-2.5 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-bold uppercase">Langkah Ketiga</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1">Fase 3: Pembuatan RESTful API & Keamanan Server</h3>
+                            </div>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="block text-xs text-slate-400">Estimasi Durasi</span>
+                            <span class="text-sm font-bold text-slate-800">Bulan 4</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-sm mt-4">
+                        Membangun infrastruktur gerbang data (API) yang aman agar aplikasi smartphone native dapat melakukan sinkronisasi data dua arah dengan database server pusat secara real-time.
+                    </p>
+                </div>
+                <div class="p-6 md:p-8 bg-slate-50/40">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Milestone Utama & Tasks</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-purple-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Arsitektur Endpoint REST API</p>
+                                        <p class="text-xs text-slate-500">Mendesain gerbang khusus untuk Autentikasi, Transaksi Simpanan, Tagihan Pinjaman, dan Data Toko.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-purple-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Keamanan JWT Token & Autentikasi Ganda</p>
+                                        <p class="text-xs text-slate-500">Menerapkan JSON Web Token (JWT) yang terenkripsi dan protokol OAuth jika diperlukan agar data aman dari penyadapan.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-purple-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Sistem API Rate-Limiter</p>
+                                        <p class="text-xs text-slate-500">Proteksi server dari serangan DDoS dan spam transaksi ilegal dari robot eksternal.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Arsitektur Gerbang Data</h4>
+                            <div class="bg-slate-900 text-slate-300 font-mono text-[10px] p-4 rounded-lg leading-relaxed">
+                                <span class="text-emerald-400">// Skema Interaksi Aplikasi</span><br>
+                                <span class="text-blue-400">[Smartphone App]</span> --(Secure HTTPS Request)--> <span class="text-purple-400">[RESTful API Gateway]</span><br>
+                                <span class="text-purple-400">[RESTful API Gateway]</span> --(JWT Authentication Check)--> <span class="text-amber-400">[Auth Service]</span><br>
+                                <span class="text-purple-400">[RESTful API Gateway]</span> --(Validated Read/Write)--> <span class="text-teal-400">[Database Koperasi]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 4 CARD -->
+            <div id="phase-4" class="phase-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden print-card transition-all">
+                <div class="p-6 md:p-8 border-b border-slate-100 bg-gradient-to-r from-emerald-50/50 to-transparent">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center space-x-4">
+                            <span class="w-12 h-12 rounded-xl bg-emerald-600 flex items-center justify-center font-bold text-white text-lg shadow-md shadow-emerald-500/20">
+                                04
+                            </span>
+                            <div>
+                                <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold uppercase">Langkah Keempat</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1">Fase 4: Pengembangan Aplikasi Smartphone (Android & iOS)</h3>
+                            </div>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="block text-xs text-slate-400">Estimasi Durasi</span>
+                            <span class="text-sm font-bold text-slate-800">Bulan 5 - 6</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-sm mt-4">
+                        Mulai menulis kode untuk aplikasi smartphone menggunakan kerangka kerja (framework) modern (React Native / Flutter) untuk menciptakan aplikasi native berkecepatan tinggi dengan antarmuka yang sangat anggun.
+                    </p>
+                </div>
+                <div class="p-6 md:p-8 bg-slate-50/40">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Milestone Utama & Tasks</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-emerald-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Pengembangan Antarmuka Native Koperasi</p>
+                                        <p class="text-xs text-slate-500">Portal Keanggotaan Mobile: mutasi saldo simpanan, pengajuan pinjaman digital kilat, riwayat transaksi belanja toko.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-emerald-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Login Biometrik Terintegrasi</p>
+                                        <p class="text-xs text-slate-500">Anggota masuk aplikasi menggunakan Sidik Jari (Fingerprint) atau Pengenalan Wajah (Face ID) tanpa repot mengetik password.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-emerald-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Kasir Toko Mobile / QR Code Scanner</p>
+                                        <p class="text-xs text-slate-500">Kamera smartphone terintegrasi langsung sebagai scanner barcode belanja di toko fisik koperasi secara instan.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Distribusi Aplikasi</h4>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center font-bold text-xs text-slate-700">🤖</div>
+                                    <div>
+                                        <p class="text-xs font-semibold text-slate-900">Google Play Store</p>
+                                        <p class="text-[10px] text-slate-500">Target pasar pengguna smartphone Android (Samsung, Oppo, Vivo, Xiaomi, RealMe).</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded bg-slate-100 flex items-center justify-center font-bold text-xs text-slate-700">🍏</div>
+                                    <div>
+                                        <p class="text-xs font-semibold text-slate-900">Apple App Store</p>
+                                        <p class="text-[10px] text-slate-500">Target pasar pengguna smartphone eksklusif iOS (iPhone 11 sampai model terbaru).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHASE 5 CARD -->
+            <div id="phase-5" class="phase-section bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden print-card transition-all">
+                <div class="p-6 md:p-8 border-b border-slate-100 bg-gradient-to-r from-teal-50/50 to-transparent">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex items-center space-x-4">
+                            <span class="w-12 h-12 rounded-xl bg-teal-600 flex items-center justify-center font-bold text-white text-lg shadow-md shadow-teal-500/20">
+                                05
+                            </span>
+                            <div>
+                                <span class="px-2.5 py-1 rounded-full bg-teal-100 text-teal-700 text-xs font-bold uppercase">Langkah Final</span>
+                                <h3 class="text-xl font-bold text-slate-900 mt-1">Fase 5: Ekosistem Pintar, Syariah, & Pembayaran Digital</h3>
+                            </div>
+                        </div>
+                        <div class="text-left md:text-right">
+                            <span class="block text-xs text-slate-400">Estimasi Durasi</span>
+                            <span class="text-sm font-bold text-slate-800">Bulan 7 - 8</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-500 text-sm mt-4">
+                        Mengintegrasikan gerbang pembayaran resmi untuk mempermudah anggota mengisi saldo / membayar iuran secara online, meluncurkan varian koperasi syariah, serta analitik data cerdas.
+                    </p>
+                </div>
+                <div class="p-6 md:p-8 bg-slate-50/40">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Milestone Utama & Tasks</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-teal-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Integrasi Payment Gateway (QRIS, Virtual Account)</p>
+                                        <p class="text-xs text-slate-500">Sistem pembayaran iuran, setoran simpanan wajib, dan angsuran pinjaman otomatis via QRIS universal dan VA bank.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-teal-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">Fitur Koperasi Syariah Terintegrasi</p>
+                                        <p class="text-xs text-slate-500">Mendukung akad bagi hasil Mudharabah, Musyarakah, dan Murabahah di samping simpanan/pinjaman konvensional.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="text-teal-500 mt-0.5">☐</span>
+                                    <div>
+                                        <p class="text-sm font-semibold text-slate-900">AI-Assisted Credit Scoring</p>
+                                        <p class="text-xs text-slate-500">Analisis kelayakan kredit pinjaman otomatis berdasarkan riwayat tabungan dan transaksi toko anggota dengan kecerdasan buatan.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white border border-slate-200 p-5 rounded-xl">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Matriks Perbandingan Fitur</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-xs text-left text-slate-500">
+                                    <thead class="text-[10px] text-slate-700 uppercase bg-slate-50">
+                                        <tr>
+                                            <th class="py-2 px-3">Fitur Utama</th>
+                                            <th class="py-2 px-3 text-center">Web Portal</th>
+                                            <th class="py-2 px-3 text-center">Mobile App</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-100">
+                                        <tr>
+                                            <td class="py-2 px-3 font-medium text-slate-900">Akuntansi & Admin</td>
+                                            <td class="py-2 px-3 text-center text-emerald-500">✔ Penuh</td>
+                                            <td class="py-2 px-3 text-center text-amber-500">⚠ Ringkas</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 font-medium text-slate-900">Ajukan Pinjaman</td>
+                                            <td class="py-2 px-3 text-center text-emerald-500">✔</td>
+                                            <td class="py-2 px-3 text-center text-emerald-500">✔ Instan</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 font-medium text-slate-900">Scan Barcode Kasir</td>
+                                            <td class="py-2 px-3 text-center text-slate-400">✗ Tidak</td>
+                                            <td class="py-2 px-3 text-center text-emerald-500">✔ Kamera</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 font-medium text-slate-900">Pembayaran VA / QRIS</td>
+                                            <td class="py-2 px-3 text-center text-emerald-500">✔</td>
+                                            <td class="py-2 px-3 text-center text-emerald-500">✔ Instan</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3 font-medium text-slate-900">Biometrik (Sidik Jari)</td>
+                                            <td class="py-2 px-3 text-center text-slate-400">✗ Tidak</td>
+                                            <td class="py-2 px-3 text-center text-emerald-500">✔ Native</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- PRESENTER GUIDE / TIPS PRESENTASI (NO-PRINT) -->
+        <section class="mt-16 bg-gradient-to-tr from-slate-900 to-blue-950 text-white rounded-2xl p-6 md:p-8 shadow-xl no-print">
+            <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                <span>💡</span> Panduan Presentasi Kepada Pengguna / Klien
+            </h3>
+            <p class="text-slate-300 text-sm mb-6">
+                Gunakan poin-poin berikut untuk meyakinkan klien / pengurus koperasi mengenai rencana strategis ini saat rapat presentasi:
+            </p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
+                    <h4 class="font-bold text-sm text-blue-300 mb-2">1. Efisiensi Biaya Berjenjang</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Jelaskan bahwa peluncuran dimulai dengan <strong>PWA (Fase 2)</strong> terlebih dahulu untuk menghemat biaya pengembangan awal secara instan, sembari tim mengumpulkan masukan fitur untuk <strong>Fase 4 (Aplikasi Smartphone)</strong>.
+                    </p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
+                    <h4 class="font-bold text-sm text-amber-300 mb-2">2. Keamanan Tingkat Finansial</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Tekankan bahwa keamanan data tabungan anggota adalah prioritas utama. <strong>Fase 3 (API Gateway)</strong> akan melindungi data dengan enkripsi JWT setara sistem perbankan seluler modern.
+                    </p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-4 rounded-xl">
+                    <h4 class="font-bold text-sm text-emerald-300 mb-2">3. Kemudahan Anggota</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Tunjukkan daya tarik <strong>Fase 4 & 5 (Login Biometrik & QRIS)</strong>. Anggota tidak perlu repot menghafal sandi rumit atau mentransfer manual ke rekening koperasi; semua selesai dalam sekali pindai sidik jari & scan QRIS.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-center">
+        <div class="max-w-7xl mx-auto px-6 space-y-4">
+            <p class="text-sm font-bold tracking-widest text-slate-300 uppercase">
+                METRO KOMUNIKA ASIA @2026 &nbsp;&bull;&nbsp; Design By Andi WIlyam
+            </p>
+            <p class="text-xs text-slate-500">
+                Dokumen roadmap pengembangan sistem koperasi digital MetroCOOP terintegrasi. Hak Cipta dilindungi Undang-Undang.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Active Filter Script (Interactive element) -->
+    <script>
+        function filterPhase(phase) {
+            // Update active button state
+            document.querySelectorAll('.phase-btn').forEach(btn => {
+                btn.className = 'phase-btn px-4 py-2 rounded-lg bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold transition border border-slate-200';
+            });
+            
+            const activeBtn = document.getElementById('btn-' + phase);
+            if (activeBtn) {
+                activeBtn.className = 'phase-btn px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-semibold transition shadow-sm';
+            }
+
+            // Filter sections
+            document.querySelectorAll('.phase-section').forEach(section => {
+                if (phase === 'all') {
+                    section.style.display = 'block';
+                } else {
+                    if (section.id === 'phase-' + phase) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

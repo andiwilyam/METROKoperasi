@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KSP Berkah — Simpan Pinjam & Pembiayaan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    @keyframes slideUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes pulse-soft { 0%,100%{opacity:0.3} 50%{opacity:0.6} }
+    .anim-up { animation: slideUp 0.6s ease forwards; }
+    .anim-pulse { animation: pulse-soft 2s ease-in-out infinite; }
+    .d1 { animation-delay: 0.1s; opacity:0; }
+    .d2 { animation-delay: 0.2s; opacity:0; }
+    .d3 { animation-delay: 0.3s; opacity:0; }
+  </style>
+</head>
+<body class="bg-white text-slate-700">
+
+<nav class="bg-white shadow-sm border-b border-slate-100 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-600 to-amber-700 flex items-center justify-center"><span class="text-white font-black text-lg">K</span></div>
+        <div><span class="text-lg font-bold text-slate-800">KSP <span class="text-amber-600">Berkah</span></span><p class="text-[10px] text-slate-400 -mt-0.5">Simpan Pinjam & Pembiayaan</p></div>
+      </div>
+      <div class="hidden lg:flex items-center gap-1">
+        <a href="#" class="px-3 py-2 text-sm font-medium text-amber-600 bg-amber-50 rounded-lg">Beranda</a>
+        <a href="#simpanan" class="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-lg">Simpanan</a>
+        <a href="#pinjaman" class="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-lg">Pinjaman</a>
+        <a href="#simulasi" class="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-lg">Simulasi</a>
+        <a href="#syarat" class="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-lg">Syarat</a>
+        <a href="#kontak" class="px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 rounded-lg">Kontak</a>
+      </div>
+      <a href="#" class="bg-amber-600 hover:bg-amber-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-sm transition-all">Portal Anggota</a>
+    </div>
+  </div>
+</nav>
+
+<section class="bg-gradient-to-br from-slate-50 via-white to-amber-50 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <div class="space-y-6">
+        <span class="inline-flex items-center gap-2 bg-amber-100 border border-amber-200 rounded-full px-4 py-1.5 text-sm text-amber-800 font-medium"><span class="w-2 h-2 rounded-full bg-amber-500"></span>Wujudkan Mimpi Bersama KSP Berkah</span>
+        <h1 class="text-4xl sm:text-5xl font-black text-slate-900 leading-tight">Solusi <span class="text-amber-600">Simpan Pinjam</span> untuk<br>Masa Depan <span class="text-amber-600">Lebih Baik</span></h1>
+        <p class="text-lg text-slate-500 leading-relaxed max-w-xl">Dengan bunga ringan, proses cepat, dan pelayanan kekeluargaan, KSP Berkah siap membantu Anda mewujudkan rencana keuangan.</p>
+        <div class="flex flex-wrap gap-3"><a href="#" class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-3 rounded-xl text-base font-bold shadow-lg transition-all hover:-translate-y-0.5">Ajukan Pinjaman</a><a href="#" class="border border-slate-200 hover:border-slate-300 text-slate-600 px-6 py-3 rounded-xl text-base font-semibold transition-all">Daftar Anggota</a></div>
+        <div class="flex gap-6 pt-2"><div><span class="text-3xl font-black text-amber-600">1.800+</span><p class="text-xs text-slate-400">Anggota</p></div><div class="w-px h-10 bg-slate-200"></div><div><span class="text-3xl font-black text-amber-600">Rp 6,5 M</span><p class="text-xs text-slate-400">Simpanan</p></div><div class="w-px h-10 bg-slate-200"></div><div><span class="text-3xl font-black text-amber-600">Rp 10 M</span><p class="text-xs text-slate-400">Pinjaman Disalurkan</p></div></div>
+      </div>
+      <div class="hidden lg:block">
+        <div class="bg-white rounded-2xl shadow-xl shadow-amber-100/50 border border-amber-100 p-6">
+          <p class="text-sm font-bold text-slate-800 mb-4 text-center">Simulasi Pinjaman</p>
+          <div class="space-y-4">
+            <div><label class="text-xs text-slate-500 font-medium">Jumlah Pinjaman</label><div class="mt-1 h-10 bg-slate-50 rounded-lg border border-slate-200 flex items-center px-3 text-sm font-semibold text-slate-700">Rp 10.000.000</div></div>
+            <div><label class="text-xs text-slate-500 font-medium">Tenor</label><div class="mt-1 h-10 bg-slate-50 rounded-lg border border-slate-200 flex items-center px-3 text-sm font-semibold text-slate-700">12 Bulan</div></div>
+            <div class="bg-amber-50 rounded-xl p-4"><div class="flex justify-between text-sm"><span class="text-slate-500">Bunga (1,2% flat/bln)</span><span class="font-semibold text-slate-700">Rp 120.000/bln</span></div><div class="flex justify-between text-sm mt-1"><span class="text-slate-500">Angsuran Pokok</span><span class="font-semibold text-slate-700">Rp 833.333/bln</span></div><div class="border-t border-amber-200 mt-2 pt-2 flex justify-between font-bold"><span>Angsuran/bln</span><span class="text-amber-600 text-lg">Rp 953.333</span></div></div>
+            <button class="w-full bg-amber-600 hover:bg-amber-700 text-white py-2.5 rounded-lg text-sm font-semibold">Ajukan Sekarang</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="simpanan" class="py-20 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-14"><span class="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-3 py-1 rounded-full mb-3">Produk Simpanan</span><h2 class="text-3xl font-black text-slate-800">Pilihan <span class="text-amber-600">Simpanan</span></h2></div>
+    <div class="grid md:grid-cols-4 gap-5">
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-4"><svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg></div><h3 class="text-base font-bold text-slate-800">Simpanan Pokok</h3><p class="text-xs text-slate-500 mt-1">Dibayar 1x saat daftar</p><p class="text-2xl font-black text-amber-600 mt-2">Rp 500.000</p></div>
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-4"><svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg></div><h3 class="text-base font-bold text-slate-800">Simpanan Wajib</h3><p class="text-xs text-slate-500 mt-1">Setiap bulan</p><p class="text-2xl font-black text-amber-600 mt-2">Rp 50.000</p></div>
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-4"><svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div><h3 class="text-base font-bold text-slate-800">Simpanan Sukarela</h3><p class="text-xs text-slate-500 mt-1">Setoran bebas</p><p class="text-2xl font-black text-amber-600 mt-2">Min. Rp 20.000</p></div>
+      <div class="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition-all"><div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-4"><svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><h3 class="text-base font-bold text-slate-800">Deposito</h3><p class="text-xs text-slate-500 mt-1">Jangka waktu 3-12 bln</p><p class="text-2xl font-black text-amber-600 mt-2">Mulai Rp 1 Jt</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="pinjaman" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-14"><span class="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-3 py-1 rounded-full mb-3">Produk Pinjaman</span><h2 class="text-3xl font-black text-slate-800">Pilihan <span class="text-amber-600">Pinjaman</span></h2></div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="border border-slate-100 rounded-2xl p-8 hover:shadow-lg transition-all bg-white"><div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mb-4"><svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><h3 class="text-base font-bold text-slate-800">Pinjaman Umum</h3><p class="text-xs text-slate-500 mt-1 max-w-xs">Pinjaman multiguna untuk berbagai kebutuhan anggota.</p>
+        <div class="mt-4 space-y-2 text-sm"><div class="flex justify-between"><span class="text-slate-500">Maksimal</span><span class="font-semibold">Rp 20 Juta</span></div><div class="flex justify-between"><span class="text-slate-500">Bunga</span><span class="font-semibold">1,5% flat/bln</span></div><div class="flex justify-between"><span class="text-slate-500">Tenor</span><span class="font-semibold">12 bulan</span></div></div></div>
+      <div class="border-2 border-amber-500 rounded-2xl p-8 shadow-lg shadow-amber-100/50 bg-white relative"><span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-600 text-white text-xs font-bold px-4 py-1 rounded-full">Populer</span><div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mb-4"><svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></div><h3 class="text-base font-bold text-slate-800">Pinjaman Khusus</h3><p class="text-xs text-slate-500 mt-1 max-w-xs">Pinjaman dengan plafon lebih besar dan bunga lebih ringan.</p><div class="mt-4 space-y-2 text-sm"><div class="flex justify-between"><span class="text-slate-500">Maksimal</span><span class="font-semibold">Rp 50 Juta</span></div><div class="flex justify-between"><span class="text-slate-500">Bunga</span><span class="font-semibold">1,2% flat/bln</span></div><div class="flex justify-between"><span class="text-slate-500">Tenor</span><span class="font-semibold">24 bulan</span></div></div></div>
+      <div class="border border-slate-100 rounded-2xl p-8 hover:shadow-lg transition-all bg-white"><div class="w-14 h-14 rounded-2xl bg-amber-100 flex items-center justify-center mb-4"><svg class="w-7 h-7 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg></div><h3 class="text-base font-bold text-slate-800">Pinjaman Mikro</h3><p class="text-xs text-slate-500 mt-1 max-w-xs">Pinjaman kecil untuk usaha mikro dan kebutuhan darurat.</p><div class="mt-4 space-y-2 text-sm"><div class="flex justify-between"><span class="text-slate-500">Maksimal</span><span class="font-semibold">Rp 5 Juta</span></div><div class="flex justify-between"><span class="text-slate-500">Bunga</span><span class="font-semibold">1% flat/bln</span></div><div class="flex justify-between"><span class="text-slate-500">Tenor</span><span class="font-semibold">6 bulan</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="syarat" class="py-20 bg-slate-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12">
+      <div><span class="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-3 py-1 rounded-full mb-3">Persyaratan</span>
+        <h2 class="text-3xl font-black text-slate-800 mb-6">Syarat Menjadi <span class="text-amber-600">Anggota</span></h2>
+        <div class="space-y-4">
+          <div class="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100"><div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><span class="text-amber-600 font-bold text-sm">1</span></div><div><p class="text-sm font-semibold text-slate-800">Warga Negara Indonesia</p><p class="text-xs text-slate-500">Memiliki KTP yang masih berlaku.</p></div></div>
+          <div class="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100"><div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><span class="text-amber-600 font-bold text-sm">2</span></div><div><p class="text-sm font-semibold text-slate-800">Usia 17-65 Tahun</p><p class="text-xs text-slate-500">Pada saat pendaftaran.</p></div></div>
+          <div class="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100"><div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><span class="text-amber-600 font-bold text-sm">3</span></div><div><p class="text-sm font-semibold text-slate-800">Membayar Simpanan Pokok</p><p class="text-xs text-slate-500">Rp 500.000 dibayar 1 kali.</p></div></div>
+          <div class="flex items-start gap-3 bg-white rounded-xl p-4 border border-slate-100"><div class="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center flex-shrink-0"><span class="text-amber-600 font-bold text-sm">4</span></div><div><p class="text-sm font-semibold text-slate-800">Mengisi Formulir</p><p class="text-xs text-slate-500">Lengkap dan benar.</p></div></div>
+        </div>
+      </div>
+      <div><span class="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-3 py-1 rounded-full mb-3">FAQ</span>
+        <h2 class="text-3xl font-black text-slate-800 mb-6">Pertanyaan <span class="text-amber-600">Umum</span></h2>
+        <div class="space-y-2">
+          <details class="bg-white rounded-xl border border-slate-100 p-4"><summary class="text-sm font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center">Berapa lama proses pengajuan pinjaman?<span class="text-amber-500 text-lg">+</span></summary><p class="text-xs text-slate-500 mt-2">Proses pengajuan pinjaman maksimal 3 hari kerja setelah dokumen lengkap.</p></details>
+          <details class="bg-white rounded-xl border border-slate-100 p-4"><summary class="text-sm font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center">Apa saja dokumen yang diperlukan?<span class="text-amber-500 text-lg">+</span></summary><p class="text-xs text-slate-500 mt-2">KTP, KK, dan slip gaji atau keterangan usaha bagi pinjaman di atas Rp 10 juta.</p></details>
+          <details class="bg-white rounded-xl border border-slate-100 p-4"><summary class="text-sm font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center">Apakah bisa mengajukan pinjaman online?<span class="text-amber-500 text-lg">+</span></summary><p class="text-xs text-slate-500 mt-2">Ya, anggota dapat mengajukan pinjaman melalui Portal Anggota secara online 24 jam.</p></details>
+          <details class="bg-white rounded-xl border border-slate-100 p-4"><summary class="text-sm font-semibold text-slate-800 cursor-pointer list-none flex justify-between items-center">Bagaimana cara cek saldo simpanan?<span class="text-amber-500 text-lg">+</span></summary><p class="text-xs text-slate-500 mt-2">Anggota dapat cek saldo kapan saja melalui Portal Anggota atau datang ke kantor.</p></details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kontak" class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12"><span class="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-3 py-1 rounded-full mb-3">Kontak</span><h2 class="text-3xl font-black text-slate-800">Hubungi <span class="text-amber-600">Kami</span></h2></div>
+    <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div class="text-center p-6 bg-slate-50 rounded-2xl"><div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mx-auto mb-3"><svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div><h3 class="text-sm font-bold text-slate-800">Email</h3><p class="text-sm text-slate-500">info@kspberkah.id</p></div>
+      <div class="text-center p-6 bg-slate-50 rounded-2xl"><div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mx-auto mb-3"><svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg></div><h3 class="text-sm font-bold text-slate-800">Telepon</h3><p class="text-sm text-slate-500">(021) 5555-6666</p></div>
+      <div class="text-center p-6 bg-slate-50 rounded-2xl"><div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mx-auto mb-3"><svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><h3 class="text-sm font-bold text-slate-800">Alamat</h3><p class="text-sm text-slate-500">Jl. Diponegoro No. 78, Bandung</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-slate-900 text-slate-400 py-10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div><div class="flex items-center gap-2 mb-3"><div class="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center"><span class="text-white font-bold text-xs">K</span></div><span class="text-sm font-bold text-white">KSP Berkah</span></div><p class="text-xs leading-relaxed">Koperasi Simpan Pinjam & Pembiayaan — Berizin dan diawasi.</p></div>
+      <div><h4 class="text-sm font-bold text-white mb-3">Menu</h4><ul class="space-y-1.5 text-xs"><li><a href="#" class="hover:text-white transition">Beranda</a></li><li><a href="#simpanan" class="hover:text-white transition">Simpanan</a></li><li><a href="#pinjaman" class="hover:text-white transition">Pinjaman</a></li><li><a href="#syarat" class="hover:text-white transition">Syarat</a></li></ul></div>
+      <div><h4 class="text-sm font-bold text-white mb-3">Layanan</h4><ul class="space-y-1.5 text-xs"><li><a href="#" class="hover:text-white transition">Portal Anggota</a></li><li><a href="#" class="hover:text-white transition">Daftar Anggota</a></li><li><a href="#" class="hover:text-white transition">Simulasi Pinjaman</a></li></ul></div>
+      <div><h4 class="text-sm font-bold text-white mb-3">Ikuti Kami</h4><div class="flex gap-2"><a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-amber-600 flex items-center justify-center text-slate-400 hover:text-white transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="#" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-sky-500 flex items-center justify-center text-slate-400 hover:text-white transition"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a></div></div>
+    </div>
+    <div class="border-t border-slate-800 pt-6 text-xs text-center">&copy; 2026 KSP Berkah. All rights reserved.</div>
+  </div>
+</section>
+
+</body>
+</html>
