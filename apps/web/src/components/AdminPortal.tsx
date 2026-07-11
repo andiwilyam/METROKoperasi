@@ -38,7 +38,6 @@ import AdminAuditTrail from './admin/AdminAuditTrail';
 import AdminPerusahaan from './admin/AdminPerusahaan';
 import AdminPengajuanVentura from './admin/AdminPengajuanVentura';
 import AdminPipelineVentura from './admin/AdminPipelineVentura';
-import AdminLandingCms from './admin/AdminLandingCms';
 import { useDataStore } from '../stores/dataStore';
 
 // Types import
@@ -848,33 +847,6 @@ export default function AdminPortal({
         />
       )}
 
-      {/* LANDING PAGE CMS EDITOR */}
-      {activeMenu === 'landing_cms' && (
-        <AdminLandingCms
-          landingSettings={gl.landingSettings}
-          landingHero={gl.landingHero}
-          landingFeatures={gl.landingFeatures}
-          landingTeam={gl.landingTeam}
-          landingTestimonials={gl.landingTestimonials}
-          landingPricing={gl.landingPricing}
-          landingContact={gl.landingContact}
-          onSaveSettings={gl.saveLandingSettings}
-          onSaveHero={gl.saveLandingHero}
-          onAddFeature={gl.addLandingFeature}
-          onUpdateFeature={gl.updateLandingFeature}
-          onDeleteFeature={gl.deleteLandingFeature}
-          onAddTeam={gl.addLandingTeam}
-          onUpdateTeam={gl.updateLandingTeam}
-          onDeleteTeam={gl.deleteLandingTeam}
-          onAddTestimonial={gl.addLandingTestimonial}
-          onUpdateTestimonial={gl.updateLandingTestimonial}
-          onDeleteTestimonial={gl.deleteLandingTestimonial}
-          onAddPricing={gl.addLandingPricing}
-          onUpdatePricing={gl.updateLandingPricing}
-          onDeletePricing={gl.deleteLandingPricing}
-          onSaveContact={gl.saveLandingContact}
-        />
-      )}
 
       {/* 10. SYSTEM CONFIGURATION & FEATURE TOGGLES */}
       {activeMenu === 'pengaturan' && (
