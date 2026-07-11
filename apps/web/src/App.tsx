@@ -5,6 +5,7 @@ import { useDataStore, useLoadAllData } from './stores/dataStore';
 import LoginScreen from './components/LoginScreen';
 import DashboardApp from './components/DashboardApp';
 import LandingPage from './pages/LandingPage';
+import MetroKspLandingPage from './pages/MetroKspLandingPage';
 
 function AppContent() {
   const user = useAuthStore((s) => s.user);
@@ -16,6 +17,11 @@ function AppContent() {
       loadAllData();
     }
   }, [user]);
+
+  // Landing publik MetroKSP (terisolasi, tidak memengaruhi aplikasi utama)
+  if (location.pathname === '/metroksp') {
+    return <MetroKspLandingPage />;
+  }
 
   // Public landing page at root
   if (location.pathname === '/') {
