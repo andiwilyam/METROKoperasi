@@ -633,7 +633,7 @@ export default function AdminDataMaster({
             <span className="text-slate-400 text-[10px] font-bold uppercase tracking-wider block">{m.label}</span>
             <div className="text-xl font-black text-slate-900">{m.value}</div>
             <div className="w-max px-2.5 py-0.5 rounded-md text-[10px] font-bold bg-slate-50 border border-slate-100 text-slate-500">
-              MetroMitra Core Database
+              MetroCoop Core Database
             </div>
           </div>
         ))}

@@ -286,7 +286,7 @@ export default function AdminToko({
               {/* Receipt Visual Design */}
               <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 font-mono text-[11px] text-slate-600 space-y-3">
                 <div className="text-center border-b border-dashed border-slate-300 pb-2">
-                  <div className="font-bold text-xs text-slate-800">Toko Koperasi MetroMitra</div>
+                  <div className="font-bold text-xs text-slate-800">Toko Koperasi MetroCoop</div>
                   <div>Jl. Pemuda No. 45, Jakarta</div>
                   <div className="text-[10px] text-slate-400 mt-1">Faktur: {lastFaktur || 'FK-PENDING-001'}</div>
                   <div className="text-[10px] text-slate-400">Kasir: {isPaid ? 'Yulianto' : 'Admin Staff'}</div>

@@ -152,7 +152,7 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
               </div>
               <div>
                 <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                  MetroMitra <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">v2.0</span>
+                  MetroCoop <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">v2.0</span>
                 </h1>
                 <p className="text-xs text-slate-400">Sistem Informasi Koperasi Terintegrasi</p>
               </div>
@@ -412,7 +412,7 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
               {/* Footer terms */}
               <div className="px-8 py-4 bg-slate-50 border-t border-slate-100 text-[10px] text-slate-400 text-center">
                 Aplikasi ini dilindungi oleh sertifikat enkripsi SSL. <br />
-                © 2026 MetroMitra v2.0 — Sistem Koperasi Terintegrasi.
+                © 2026 MetroCoop v2.0 — Sistem Koperasi Terintegrasi.
               </div>
             </div>
           </div>

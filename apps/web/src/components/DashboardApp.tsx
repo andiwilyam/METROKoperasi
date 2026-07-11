@@ -189,7 +189,7 @@ export default function DashboardApp() {
           </div>
           <footer className="pt-6 border-t border-slate-200 text-center flex-shrink-0">
             <p className="text-[10px] font-extrabold tracking-widest text-slate-400 uppercase select-none">
-              METRO KOMUNIKA ASIA @2026 &nbsp;&bull;&nbsp; Design By Andi Wilyam
+              METROCOOP \u2022 Koperasi Simpan Pinjam @2026
             </p>
           </footer>
         </main>

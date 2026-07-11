@@ -90,7 +90,7 @@ export default function Sidebar({
               <Building className="w-4 h-4 text-white" />
             </div>
             <div>
-              <span className="font-bold text-white text-sm tracking-wide">MetroMitra</span>
+              <span className="font-bold text-white text-sm tracking-wide">MetroCoop</span>
               <span className="block text-[9px] text-slate-500 font-medium">Koperasi Simpan Pinjam</span>
             </div>
           </div>

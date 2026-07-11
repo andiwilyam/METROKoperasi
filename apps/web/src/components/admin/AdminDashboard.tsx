@@ -107,7 +107,7 @@ export default function AdminDashboard({
               </span>
               <Sparkles className="w-4 h-4 text-amber-400 animate-soft-pulse" />
             </div>
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight">Kesehatan Koperasi Global — {kopInfo?.nama || 'MetroMitra'}</h1>
+            <h1 className="text-xl md:text-2xl font-bold tracking-tight">Kesehatan Koperasi Global — {kopInfo?.nama || 'MetroKSP'}</h1>
             <p className="text-xs text-blue-200 mt-1">Sistem informasi keuangan koperasi &amp; pencatatan transaksi terintegrasi secara profesional.</p>
           </div>
           {role !== 'operator' && (
@@ -302,7 +302,7 @@ export default function AdminDashboard({
               Sertifikasi Standar Mutu Koperasi
             </div>
             <p className="text-[10px] text-blue-700 leading-relaxed">
-              Koperasi {kopInfo?.nama || 'MetroMitra'} telah diaudit dan dinyatakan memenuhi regulasi dan standar mutu dari Dinas Koperasi dan Kementerian Koperasi secara nasional.
+              Koperasi {kopInfo?.nama || 'MetroKSP'} telah diaudit dan dinyatakan memenuhi regulasi dan standar mutu dari Dinas Koperasi dan Kementerian Koperasi secara nasional.
             </p>
           </div>
         </div>

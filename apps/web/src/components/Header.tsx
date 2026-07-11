@@ -112,7 +112,7 @@ export default function Header({
     if (menu.startsWith('pinjaman_')) return ['Pinjaman', 'Back Office'];
     if (menu.startsWith('laporan_') || menu.startsWith('akuntansi_') || menu === 'subledger_piutang') return ['Laporan & Akuntansi', 'Pembukuan'];
     if (menu.startsWith('member_')) return ['Portal Anggota', 'Masyarakat'];
-    return ['Aplikasi', 'MetroMitra'];
+    return ['Aplikasi', 'MetroCoop'];
   };
 
   const breadcrumbs = getBreadcrumbs(activeMenu);

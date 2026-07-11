@@ -27,7 +27,7 @@ export default function MemberPerusahaanPortal() {
           <div className="flex items-center gap-2">
             <Building2 className="w-6 h-6 text-blue-400" />
             <div>
-              <div className="text-sm font-bold text-white">MetroMitra</div>
+              <div className="text-sm font-bold text-white">MetroCoop</div>
               <div className="text-[9px] text-slate-500">Portal Perusahaan</div>
             </div>
           </div>

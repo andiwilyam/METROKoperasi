@@ -27,12 +27,12 @@ import {
 } from './types';
 
 export const defaultKoperasiInfo: KoperasiInfo = {
-  nama: 'Koperasi Simpan Pinjam MetroMitra',
+  nama: 'Koperasi Simpan Pinjam MetroKSP',
   alamat: 'Jl. Pemuda No. 45, Kebayoran Baru',
   kota: 'Jakarta Selatan',
   provinsi: 'DKI Jakarta',
   telp: '(021) 789-0123',
-  email: 'info@metromitra.co.id',
+  email: 'info@metroksp.co.id',
   noBadanHukum: 'AHU-0012345.AH.01.26.TAHUN-2024',
   noIzinUsaha: 'SITU-503/450/KPPT/2024',
   npwp: '01.234.567.8-012.000'
