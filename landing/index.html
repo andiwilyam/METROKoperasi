@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MetroKSP - Koperasi Simpan Pinjam Modern. Simpan aman, pinjam mudah, kelola keuangan anggota terintegrasi.">
+  <title>MetroKSP - Koperasi Simpan Pinjam Terpercaya</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <header class="mk-header" id="mk-sticky">
+    <div class="container mk-nav-wrap">
+      <div class="mk-logo">
+        <a href="index.html">
+          <span class="mk-logo-icon"><i class="fa-solid fa-building-columns"></i></span>
+          <span class="mk-logo-text">Metro<strong>KSP</strong></span>
+        </a>
+      </div>
+      <nav class="mk-nav">
+        <ul>
+          <li><a href="#beranda" class="active">Beranda</a></li>
+          <li><a href="#tentang">Tentang Kami</a></li>
+          <li class="has-drop">
+            <a href="#produk">Produk <i class="fa fa-chevron-down"></i></a>
+            <ul class="mk-dropdown">
+              <li><a href="#simpanan">Simpanan</a></li>
+              <li><a href="#pinjaman">Pinjaman</a></li>
+              <li><a href="#deposito">Deposito</a></li>
+            </ul>
+          </li>
+          <li><a href="#fitur">Fitur Unggulan</a></li>
+          <li><a href="#testimoni">Testimoni</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+      <div class="mk-nav-cta">
+        <a href="#daftar" class="mk-cta-btn">Daftar Anggota <i class="fa fa-arrow-right"></i></a>
+      </div>
+      <button class="mk-toggler" id="mk-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mk-mobile-menu" id="mk-mobile-menu">
+      <ul>
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#tentang">Tentang Kami</a></li>
+        <li><a href="#simpanan">Simpanan</a></li>
+        <li><a href="#pinjaman">Pinjaman</a></li>
+        <li><a href="#deposito">Deposito</a></li>
+        <li><a href="#fitur">Fitur Unggulan</a></li>
+        <li><a href="#testimoni">Testimoni</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+        <li><a href="#daftar" class="mk-mobile-cta">Daftar Anggota</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="mk-hero" id="beranda">
+      <div class="mk-hero-left">
+        <span class="mk-hero-badge">Terdaftar OJK &bull; Sejak 2020 &bull; 10.000+ Anggota</span>
+        <h1>Simpan dengan <span class="mk-highlight">Tenang</span><br>Pinjam dengan <span class="mk-highlight">Mudah</span></h1>
+        <p>MetroKSP hadir sebagai solusi koperasi simpan pinjam modern yang mengutamakan keamanan, transparansi, dan kemudahan akses bagi setiap anggota.</p>
+        <div class="mk-hero-btns">
+          <a href="#daftar" class="mk-btn-primary">Daftar Sekarang</a>
+          <a href="#produk" class="mk-btn-ghost">Lihat Produk</a>
+        </div>
+        <div class="mk-hero-stats">
+          <div class="mk-stat">
+            <strong>Rp 2.5M+</strong>
+            <span>Total Simpanan</span>
+          </div>
+          <div class="mk-stat-divider"></div>
+          <div class="mk-stat">
+            <strong>98%</strong>
+            <span>Kepuasan Anggota</span>
+          </div>
+          <div class="mk-stat-divider"></div>
+          <div class="mk-stat">
+            <strong>24/7</strong>
+            <span>Akses Digital</span>
+          </div>
+        </div>
+      </div>
+      <div class="mk-hero-right">
+        <div class="mk-hero-img-main" style="background-image:url('img/hero-main.jpg');"></div>
+        <div class="mk-hero-img-accent" style="background-image:url('img/hero-accent.jpg');"></div>
+        <div class="mk-float-card">
+          <i class="fa-solid fa-chart-line"></i>
+          <div>
+            <strong>Bunga Kompetitif</strong>
+            <span>Mulai 0.75%/bln</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="mk-trust-bar">
+      <div class="mk-trust-inner">
+        <span><i class="fa fa-shield-alt"></i> Terdaftar & Diawasi OJK</span>
+        <span><i class="fa fa-check-circle"></i> Badan Hukum Resmi</span>
+        <span><i class="fa fa-users"></i> 10.000+ Anggota Aktif</span>
+        <span><i class="fa fa-lock"></i> Enkripsi Bank-Grade</span>
+        <span><i class="fa fa-mobile-alt"></i> Aplikasi Mobile & Web</span>
+        <span><i class="fa fa-clock"></i> Layanan 24 Jam</span>
+      </div>
+    </div>
+
+    <section class="mk-section mk-products-section" id="produk">
+      <div class="container">
+        <div class="mk-section-header text-center">
+          <span class="mk-section-tag">Produk Kami</span>
+          <h2>Solusi Keuangan <span>Terintegrasi</span></h2>
+          <p>Dari tabungan harian hingga pembiayaan usaha — semua dalam satu ekosistem koperasi.</p>
+        </div>
+        <div class="mk-products-grid">
+          <article class="mk-product-card" id="simpanan">
+            <div class="mk-product-icon"><i class="fa-solid fa-piggy-bank"></i></div>
+            <h3>Simpanan</h3>
+            <p class="mk-product-desc">Tabungan harian, simpanan pokok & wajib, serta sukarela dengan bagi hasil transparan setiap periode.</p>
+            <ul class="mk-product-features">
+              <li><i class="fa fa-check"></i> Setor tarik kapan saja</li>
+              <li><i class="fa fa-check"></i> Bagi hasil bulanan</li>
+              <li><i class="fa fa-check"></i> Asuransi jiwa gratis</li>
+            </ul>
+            <a href="#daftar" class="mk-card-link">Mulai Menabung <i class="fa fa-arrow-right"></i></a>
+          </article>
+          <article class="mk-product-card" id="pinjaman">
+            <div class="mk-product-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <h3>Pinjaman</h3>
+            <p class="mk-product-desc">Kredit usaha dan konsumtif dengan bunga rendah, proses cepat, tanpa biaya tersembunyi.</p>
+            <ul class="mk-product-features">
+              <li><i class="fa fa-check"></i> Bunga flat/efektif/anuitas</li>
+              <li><i class="fa fa-check"></i> Cair 1x24 jam</li>
+              <li><i class="fa fa-check"></i> Tenor fleksibel 6-60 bln</li>
+            </ul>
+            <a href="#daftar" class="mk-card-link">Ajukan Pinjaman <i class="fa fa-arrow-right"></i></a>
+          </article>
+          <article class="mk-product-card" id="deposito">
+            <div class="mk-product-icon"><i class="fa-solid fa-landmark"></i></div>
+            <h3>Deposito</h3>
+            <p class="mk-product-desc">Simpanan berjangka dengan imbal hasil stabil untuk mewujudkan cita-cita jangka panjang Anda.</p>
+            <ul class="mk-product-features">
+              <li><i class="fa fa-check"></i> Tenor 3/6/12 bulan</li>
+              <li><i class="fa fa-check"></i> Imbal hasil tetap</li>
+              <li><i class="fa fa-check"></i> Aman & terawas</li>
+            </ul>
+            <a href="#daftar" class="mk-card-link">Buka Deposito <i class="fa fa-arrow-right"></i></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-whyus-section" id="fitur">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-12 col-lg-6">
+            <div class="mk-whyus-img-wrap">
+              <div class="mk-whyus-img-main" style="background-image:url('img/whyus-main.jpg');"></div>
+              <div class="mk-whyus-badge">
+                <strong>5+</strong>
+                <span>Tahun Melayani Anggota</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="mk-whyus-content">
+              <span class="mk-section-tag">Mengapa MetroKSP</span>
+              <h2>Platform Koperasi <span>Modern & Terpercaya</span></h2>
+              <p>Kami menggabungkan keahlian keuangan koperasi tradisional dengan teknologi digital terkini untuk memberikan pengalaman terbaik bagi setiap anggota.</p>
+              <div class="mk-checklist">
+                <div class="mk-check-item">
+                  <i class="fa fa-check-circle"></i>
+                  <div><strong>Auto Jurnal Akuntansi</strong><p>Setiap transaksi otomatis mencatat jurnal debit-kredit — akurat & audit-ready.</p></div>
+                </div>
+                <div class="mk-check-item">
+                  <i class="fa fa-check-circle"></i>
+                  <div><strong>Multi-Portal Terintegrasi</strong><p>Admin back-office, portal anggota, dan portal perusahaan dalam satu sistem.</p></div>
+                </div>
+                <div class="mk-check-item">
+                  <i class="fa fa-check-circle"></i>
+                  <div><strong>Scoping Data Otomatis</strong><p>Anggota hanya melihat data miliknya; admin mengelola seluruh organisasi.</p></div>
+                </div>
+              </div>
+              <a href="#tentang" class="mk-btn-primary mt-30">Pelajari Lebih Lanjut</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-counter-section">
+      <div class="container">
+        <div class="mk-counter-grid">
+          <div class="mk-counter-item">
+            <i class="fa fa-users"></i>
+            <strong class="counter" data-count="10000">0</strong><span>+</span>
+            <p>Anggota Aktif</p>
+          </div>
+          <div class="mk-counter-item">
+            <i class="fa fa-piggy-bank"></i>
+            <strong class="counter" data-count="2500">0</strong><span>M+</span>
+            <p>Total Simpanan (Juta)</p>
+          </div>
+          <div class="mk-counter-item">
+            <i class="fa fa-hand-holding-dollar"></i>
+            <strong class="counter" data-count="500">0</strong><span>+</span>
+            <p>Pinjaman Cair</p>
+          </div>
+          <div class="mk-counter-item">
+            <i class="fa fa-star"></i>
+            <strong class="counter" data-count="48">0</strong><span></span>
+            <p>Rating Kepuasan</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-testimonials-section" id="testimoni">
+      <div class="container">
+        <div class="mk-section-header text-center">
+          <span class="mk-section-tag">Kisah Anggota</span>
+          <h2>Apa Kata <span>Mereka</span></h2>
+        </div>
+        <div class="mk-testi-grid">
+          <article class="mk-testi-card">
+            <div class="mk-testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>"Sejak bergabung MetroKSP, modal warung saya naik 3x. Pinjamannya cair cepat, bunganya masuk akal, dan cicilannya ringan."</p>
+            <div class="mk-testi-author">
+              <div class="mk-testi-avatar" style="background-image:url('img/testi-1.jpg');"></div>
+              <div><strong>Ibu Siti Rahayu</strong><span>Pedagang Warung, Bekasi</span></div>
+            </div>
+          </article>
+          <article class="mk-testi-card">
+            <div class="mk-testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>"Anak saya bisa kuliah berkat tabungan deposito di sini. Pelayanan ramah, tidak berbelit, dan transparan."</p>
+            <div class="mk-testi-author">
+              <div class="mk-testi-avatar" style="background-image:url('img/testi-2.jpg');"></div>
+              <div><strong>Bapak Budi Santoso</strong><span>Guru, Yogyakarta</span></div>
+            </div>
+          </article>
+          <article class="mk-testi-card">
+            <div class="mk-testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p>"Pinjaman usaha cair tepat waktu buat beli mesin baru. Cicilan jelas dari awal, tanpa biaya tersembunyi."</p>
+            <div class="mk-testi-author">
+              <div class="mk-testi-avatar" style="background-image:url('img/testi-3.jpg');"></div>
+              <div><strong>Ibu Rina Wulandari</strong><span>UMKM Kuliner, Jakarta</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-cta-banner" style="background-image:url('img/cta-bg.jpg');" id="daftar">
+      <div class="mk-cta-overlay"></div>
+      <div class="container mk-cta-content">
+        <div class="row align-items-center">
+          <div class="col-12 col-lg-8">
+            <h2>Siap Memulai Perjalanan Keuangan <span>Yang Lebih Baik?</span></h2>
+            <p>Bergabunglah dengan 10.000+ anggota yang sudah merasakan kemudahan & keamanan MetroKSP. Daftar gratis hari ini.</p>
+          </div>
+          <div class="col-12 col-lg-4 text-lg-end">
+            <a href="https://metrocoop.app/register" class="mk-btn-white" target="_blank">Daftar Anggota Gratis</a>
+            <a href="https://play.google.com/store/apps/details?id=com.metroksp" class="mk-btn-outline" target="_blank"><i class="fa-brands fa-google-play"></i> Unduh App</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-section mk-apps-section" id="aplikasi">
+      <div class="container">
+        <div class="mk-section-header text-center">
+          <span class="mk-section-tag">Akses Digital</span>
+          <h2>Kelola Keuangan Kapan Saja, <span>Di Mana Saja</span></h2>
+          <p>Unduh aplikasi mobile MetroKSP atau akses via web untuk setor, tarik, ajukan pinjaman, dan cek saldo real-time.</p>
+        </div>
+        <div class="mk-apps-grid">
+          <div class="mk-app-card">
+            <div class="mk-app-icon"><i class="fa-brands fa-android"></i></div>
+            <h4>Aplikasi Android</h4>
+            <p>Tersedia di Google Play Store. Fitur lengkap: transaksi, pinjaman, notifikasi, & laporan.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.metroksp" class="mk-app-link" target="_blank">Unduh <i class="fa fa-arrow-right"></i></a>
+          </div>
+          <div class="mk-app-card">
+            <div class="mk-app-icon"><i class="fa-brands fa-apple"></i></div>
+            <h4>Aplikasi iOS</h4>
+            <p>Coming soon di App Store. Daftar notifikasi rilis.</p>
+            <a href="#kontak" class="mk-app-link">Daftar Tunggu <i class="fa fa-arrow-right"></i></a>
+          </div>
+          <div class="mk-app-card">
+            <div class="mk-app-icon"><i class="fa fa-globe"></i></div>
+            <h4>Aplikasi Web (PWA)</h4>
+            <p>Akses penuh via browser desktop/mobile tanpa install. Installable sebagai app.</p>
+            <a href="https://metrocoop.app" class="mk-app-link" target="_blank">Buka Web App <i class="fa fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mk-newsletter-section" id="kontak">
+      <div class="container">
+        <div class="mk-newsletter-wrap">
+          <div class="mk-nl-left">
+            <i class="fa fa-envelope"></i>
+            <div>
+              <h3>Tetap Terhubung dengan MetroKSP</h3>
+              <p>Dapatkan tips keuangan, info promo bunga, & update fitur terbaru langsung ke email Anda.</p>
+            </div>
+          </div>
+          <div class="mk-nl-right">
+            <form class="mk-nl-form" action="#" method="post">
+              <input type="email" placeholder="Masukkan alamat email Anda" required>
+              <button type="submit">Berlangganan</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mk-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-6 col-lg-4 mb-50">
+          <div class="mk-footer-brand">
+            <a href="index.html" class="mk-footer-logo">
+              <span class="mk-logo-icon"><i class="fa-solid fa-building-columns"></i></span>
+              <span class="mk-logo-text">Metro<strong>KSP</strong></span>
+            </a>
+            <p>Koperasi Simpan Pinjam modern yang memberdayakan warga & UMKM melalui simpanan aman, pinjaman terukur, & pelayanan manusiawi.</p>
+            <div class="mk-social">
+              <a href="#"><i class="fa-brands fa-facebook"></i></a>
+              <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              <a href="#"><i class="fa-brands fa-youtube"></i></a>
+              <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-2 mb-50">
+          <h5 class="mk-footer-title">Navigasi</h5>
+          <ul class="mk-footer-links">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#tentang">Tentang Kami</a></li>
+            <li><a href="#produk">Produk</a></li>
+            <li><a href="#fitur">Fitur</a></li>
+            <li><a href="#testimoni">Testimoni</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-50">
+          <h5 class="mk-footer-title">Produk</h5>
+          <ul class="mk-footer-links">
+            <li><a href="#simpanan">Simpanan</a></li>
+            <li><a href="#pinjaman">Pinjaman</a></li>
+            <li><a href="#deposito">Deposito</a></li>
+            <li><a href="#aplikasi">Aplikasi Mobile</a></li>
+            <li><a href="#">Syarat & Ketentuan</a></li>
+          </ul>
+        </div>
+        <div class="col-12 col-sm-6 col-lg-3 mb-50">
+          <h5 class="mk-footer-title">Hubungi Kami</h5>
+          <ul class="mk-footer-contact">
+            <li><i class="fa fa-map-marker-alt"></i> Jl. Pemuda No. 45, Kebayoran Baru, Jakarta Selatan</li>
+            <li><i class="fa fa-phone"></i> (021) 789-0123</li>
+            <li><i class="fa fa-envelope"></i> info@metroksp.co.id</li>
+            <li><i class="fa fa-clock"></i> Senin–Jumat 08.00–16.00 WIB</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mk-footer-bottom">
+      <div class="container">
+        <div class="mk-footer-bottom-inner">
+          <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> MetroKSP. All Rights Reserved.</p>
+          <ul>
+            <li><a href="#">Kebijakan Privasi</a></li>
+            <li><a href="#">Syarat Layanan</a></li>
+            <li><a href="#">Kebijakan Cookie</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#beranda" class="mk-back-to-top" aria-label="Kembali ke atas"><i class="fa fa-arrow-up"></i></a>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

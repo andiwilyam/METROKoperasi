@@ -15,7 +15,7 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>MetroMitra</Text>
+      <Text style={styles.title}>MetroCoop</Text>
       <Text style={styles.subtitle}>Koperasi Simpan Pinjam</Text>
       <TextInput
         style={styles.input}
