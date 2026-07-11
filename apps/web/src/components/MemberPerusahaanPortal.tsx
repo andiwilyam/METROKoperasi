@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { Award, FileText, Building2, TrendingUp, LifeBuoy, LogOut, Menu, ChevronLeft } from 'lucide-react';
+import { 
+  Award, FileText, Building2, TrendingUp, LifeBuoy, LogOut, Menu, ChevronLeft,
+  DollarSign, Calendar, Users, Bell, Megaphone, CreditCard
+} from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';
 import { useDataStore } from '../stores/dataStore';
 import MemberPerusahaanDashboard from './member/MemberPerusahaanDashboard';
-import MemberVentura from './member/MemberVentura';
+import MemberPipelineInvestasi from './member/MemberPipelineInvestasi';
+import MemberDividen from './member/MemberDividen';
+import MemberPerusahaanProfil from './member/MemberPerusahaanProfil';
+import MemberPengumuman from './member/MemberPengumuman';
+import MemberPerusahaanTiket from './member/MemberPerusahaanTiket';
 import MemberUploadDokumen from './member/MemberUploadDokumen';
 
 export default function MemberPerusahaanPortal() {
@@ -15,8 +22,12 @@ export default function MemberPerusahaanPortal() {
 
   const menus = [
     { id: 'perusahaan_dashboard', label: 'Dashboard', icon: TrendingUp },
-    { id: 'member_ventura', label: 'Pengajuan Pembiayaan', icon: FileText },
+    { id: 'member_pipeline_investasi', label: 'Pipeline Investasi', icon: FileText },
+    { id: 'member_dividen', label: 'Dividen & Bagi Hasil', icon: DollarSign },
+    { id: 'member_perusahaan_profil', label: 'Profil Perusahaan', icon: Building2 },
+    { id: 'member_pengumuman', label: 'Pengumuman', icon: Megaphone },
     { id: 'member_ventura_dokumen', label: 'Upload Dokumen', icon: Award },
+    { id: 'member_perusahaan_tiket', label: 'Tiket Bantuan', icon: LifeBuoy },
   ];
 
   return (
@@ -34,7 +45,9 @@ export default function MemberPerusahaanPortal() {
         </div>
         <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
           {menus.map((m) => (
-            <button key={m.id} onClick={() => { setActiveMenu(m.id); setSidebarOpen(false); }}
+            <button 
+              key={m.id} 
+              onClick={() => { setActiveMenu(m.id); setSidebarOpen(false); }}
               className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition cursor-pointer ${
                 activeMenu === m.id ? 'bg-blue-600 text-white font-semibold' : 'hover:bg-slate-800 hover:text-white'
               }`}
@@ -45,7 +58,7 @@ export default function MemberPerusahaanPortal() {
           ))}
         </nav>
         <div className="p-3 border-t border-slate-800 space-y-2">
-          <div className="px-3 py-2 text-[10px] text-slate-500 truncate">{session?.namaLengkap}</div>
+          <div className="px-3 py-2 text-[10px] text-slate-500 truncate">{session?.namaLengkap || session?.username}</div>
           <button onClick={logout} className="w-full flex items-center px-3 py-2 text-xs text-slate-400 hover:text-red-400 hover:bg-slate-800 rounded-lg transition cursor-pointer">
             <LogOut className="w-4 h-4 mr-2" /> Keluar
           </button>
@@ -64,14 +77,27 @@ export default function MemberPerusahaanPortal() {
         {/* Content */}
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
           {activeMenu === 'perusahaan_dashboard' && <MemberPerusahaanDashboard session={session} />}
-          {activeMenu === 'member_ventura' && (
-            <MemberVentura investments={gl.investments} onAddInvestment={gl.addInvestment} session={session} />
+          {activeMenu === 'member_pipeline_investasi' && (
+            <MemberPipelineInvestasi session={session} />
+          )}
+          {activeMenu === 'member_dividen' && (
+            <MemberDividen session={session} />
+          )}
+          {activeMenu === 'member_perusahaan_profil' && (
+            <MemberPerusahaanProfil session={session} />
+          )}
+          {activeMenu === 'member_pengumuman' && (
+            <MemberPengumuman session={session} />
           )}
           {activeMenu === 'member_ventura_dokumen' && (
             <MemberUploadDokumen pengajuanList={gl.pengajuanList} session={session} uploadDokumenPengajuan={gl.uploadDokumenPengajuan} />
           )}
+          {activeMenu === 'member_perusahaan_tiket' && (
+            <MemberPerusahaanTiket session={session} />
+          )}
+          
           <footer className="pt-6 mt-8 border-t border-slate-200 text-center">
-            <p className="text-[10px] font-extrabold tracking-widest text-slate-400 uppercase">METRO KOMUNIKA ASIA @2026</p>
+            <p className="text-[10px] font-extrabold tracking-widest text-slate-400 uppercase">METROCOOP @2026</p>
           </footer>
         </main>
       </div>
