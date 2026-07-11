@@ -2,7 +2,10 @@ import { StorageAdapter } from './storage.js';
 
 let authToken: string | null = null;
 let storage: StorageAdapter | null = null;
-let apiBase: string = (typeof process !== 'undefined' && process.env?.EXPO_PUBLIC_API_BASE) || 'http://192.168.137.1:3000';
+// Default ke same-origin (relatif) agar berfungsi di host/IP apa pun saat
+// frontend & backend dihidangkan oleh server yang sama. Untuk React Native /
+// Expo, atur EXPO_PUBLIC_API_BASE ke URL API yang eksplisit.
+let apiBase: string = (typeof process !== 'undefined' && process.env?.EXPO_PUBLIC_API_BASE) || '';
 
 export function initApiClient(adapter: StorageAdapter, base?: string) {
   storage = adapter;
