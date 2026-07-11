@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DollarSign, Calendar, CheckCircle, Clock, X, Coins, AlertCircle, HelpCircle, Download } from 'lucide-react';
 import { useDataStore } from '../../stores/dataStore';
-import { api } from '../../api/client';
 
 export default function MemberDividen({ session }: { session: any }) {
   const { investments, fetchInvestments, addDividen, fetchPengajuan } = useDataStore();

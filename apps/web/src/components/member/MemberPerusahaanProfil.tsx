@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Building2, User, Mail, Phone, MapPin, Calendar, Save, Edit2, AlertCircle } from 'lucide-react';
 import { useDataStore } from '../../stores/dataStore';
-import { useAuthStore } from '../../stores/authStore';
-import { api } from '../../api/client';
 
 export default function MemberPerusahaanProfil({ session }: { session: any }) {
-  const { perusahaan, fetchPerusahaan } = useDataStore();
+  const { perusahaan, fetchPerusahaan, addPerusahaan, updatePerusahaan } = useDataStore();
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState(false);
@@ -66,9 +64,9 @@ export default function MemberPerusahaanProfil({ session }: { session: any }) {
     e.preventDefault();
     try {
       if (profile?.id) {
-        await api.put(`/data/perusahaan/${profile.id}`, formData);
+        await updatePerusahaan(profile.id, formData);
       } else {
-        await api.post('/data/perusahaan', { ...formData, user_id: session.id });
+        await addPerusahaan({ ...formData, user_id: session.id });
       }
       setMessage({ type: 'success', text: 'Profil perusahaan berhasil disimpan' });
       setEditing(false);

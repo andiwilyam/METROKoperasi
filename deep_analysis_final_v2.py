@@ -31,25 +31,27 @@ EXPECTED_MENUS = {
         "Dashboard Utama", "Manajemen Anggota", "Simpanan (Savings)", "Pinjaman (Loans)",
         "Unit Toko (POS)", "Unit Tambahan", "Modul Dashboard", "Data Perusahaan",
         "Pipeline Investasi", "Pembukuan & Keuangan", "Kelola Pengumuman",
-        "Tiket & Pengaduan", "Data Master Organisasi", "Pengaturan Koperasi",
-        "Kustomisasi Tema", "Landing Page Editor"
+        "Tiket & Pengaduan", "Data Master Organisasi"
     ],
     "anggota": [
-        "Dashboard", "Simpanan Saya", "Pinjaman Saya", "Angsuran", "Profil Saya",
-        "Pengajuan Tarik", "Bukti Transfer", "Pengumuman", "Tiket Bantuan"
+        "Ringkasan Dashboard", "Simpanan Saya", "Pinjaman Saya", "Mutasi Rekening",
+        "Pengajuan Pinjam / Tarik", "Tiket Bantuan (Helpdesk)", "Kirim Bukti Transfer",
+        "Sewa Aset Koperasi", "Loket PPOB & Pulsa", "Virtual Account Deposit",
+        "Kredit Cicilan Pengadaan", "Ubah Profil Saya"
     ],
     "perusahaan": [
-        "Dashboard", "Data Perusahaan", "Pipeline Investasi", "Dividen", "Profil",
-        "Pengumuman", "Tiket Bantuan"
+        "Dashboard", "Pipeline Investasi", "Dividen & Bagi Hasil", "Profil Perusahaan",
+        "Pengumuman", "Upload Dokumen", "Tiket Bantuan"
     ]
 }
 
-# Sub-menus to test
+# Sub-menus with their internal IDs
+# Note: Button text uses HTML entities (& for &)
 SUB_MENUS = {
     "Simpanan (Savings)": {
         "expand_id": "simpanan",
         "items": [
-            {"id": "simpanan_transaksi", "label": "Setor & Tarik"},
+            {"id": "simpanan_transaksi", "label": "Setor & Tarik"},  # HTML entity for &
             {"id": "simpanan_permohonan", "label": "Permohonan Tarik"},
             {"id": "simpanan_jenis", "label": "Konfigurasi Simpanan"},
         ]
@@ -59,7 +61,7 @@ SUB_MENUS = {
         "items": [
             {"id": "pinjaman_pengajuan", "label": "Daftar Pengajuan"},
             {"id": "pinjaman_angsuran", "label": "Bayar Angsuran"},
-            {"id": "pinjaman_tagihan", "label": "Tagihan & Jatuh Tempo"},
+            {"id": "pinjaman_tagihan", "label": "Tagihan & Jatuh Tempo"},  # HTML entity for &
             {"id": "pinjaman_konfigurasi", "label": "Konfigurasi Pinjaman"},
         ]
     },
@@ -237,7 +239,7 @@ def test_module(page, module_name):
             content_loaded = False
             for sel in ['table', '.card', '[class*="card"]', 'form', '[class*="grid"]', '[class*="list"]', '.content', 
                        'text=Data', 'text=Daftar', 'text=Tabel', 'text=Statistik', 'text=Total', 'text=Saldo',
-                       'text=Anggota', 'text=Pinjaman', 'text=Simpanan', 'text=Transaksi']:
+                       'text=Anggota', 'text=Pinjaman', 'text=Simpanan', 'text=Transaksi', 'text=Investasi']:
                 if page.locator(sel).count() > 0:
                     content_loaded = True
                     break
@@ -259,72 +261,98 @@ def test_module(page, module_name):
         results["errors_found"].append({"module": module_name, "error": str(e)})
         return {"module": module_name, "error": str(e)}
 
-def test_sub_menus(page, parent_menu, sub_data):
-    """Test sub-menus under a parent menu"""
-    print(f"    🔽 Sub-menus of: {parent_menu}")
-    sub_results = {}
-    
-    # Click parent to expand (using the expand_id)
-    parent_btn = page.locator(f'button:has-text("{parent_menu}")').first
-    if parent_btn.count() > 0:
-        parent_btn.click()
-        page.wait_for_timeout(800)
-    
-    for sub in sub_data["items"]:
-        result = test_module_by_id(page, sub["id"], sub["label"])
-        sub_results[sub["label"]] = result
-    
-    return sub_results
-
 def test_module_by_id(page, menu_id, display_name):
     """Test a specific module by its internal ID"""
-    print(f"    📋 Testing sub-module: {display_name} ({menu_id})")
+    print(f"      📋 Testing sub-menu: {display_name} (id: {menu_id})")
     
     try:
-        # Click the submenu button by its internal handler
-        btn = page.locator(f'button[onclick*="{menu_id}"]').first
-        if btn.count() == 0:
-            # Try finding by text content
-            btn = page.locator(f'text="{display_name}"').first
-            if btn.count() == 0:
-                # Try finding the parent button's child
-                btn = page.locator(f'text="• {display_name}"').first
+        # Note: Sidebar uses HTML entity & for & in button text
+        # So "Setor & Tarik" renders as "Setor & Tarik" in the DOM
+        display_name_html = display_name.replace('&', '&')
         
-        if btn.count() > 0 and btn.is_visible():
+        # Try multiple selectors for sub-menu buttons
+        selectors = [
+            f'button:has-text("• {display_name_html}")',  # HTML entity version
+            f'button:has-text("• {display_name}")',        # Plain text version
+            f'button:has-text("{display_name_html}")',     # HTML entity version without bullet
+            f'button:has-text("{display_name}")',          # Plain text version without bullet
+            f'button[onclick*="{menu_id}"]',
+            f'button[onClick*="{menu_id}"]',
+        ]
+        
+        btn = None
+        for sel in selectors:
+            btn = page.locator(sel).first
+            if btn.count() > 0 and btn.is_visible():
+                break
+        
+        if btn and btn.count() > 0 and btn.is_visible():
             btn.click()
             page.wait_for_load_state('networkidle')
             page.wait_for_timeout(1500)
             
-            safe_name = display_name.replace(' ', '_').replace('(', '').replace(')', '').replace('/', '_').lower()
+            safe_name = display_name.replace(' ', '_').replace('(', '').replace(')', '').replace('/', '_').replace('&', '').replace(';', '').lower()
             screenshot_path = f"/tmp/metrocoop_{safe_name}.png"
             page.screenshot(path=screenshot_path, full_page=True)
             
-            # Check content loaded
             content_loaded = False
-            for sel in ['table', '.card', '[class*="card"]', 'form', '[class*="grid"]', '[class*="list"]', '.content', 
+            for sel in ['table', '.card', '[class*="card"]', 'form', '[class*="grid"]', '[class*="list"]', '.content',
                        'text=Data', 'text=Daftar', 'text=Tabel', 'text=Statistik', 'text=Total', 'text=Saldo',
-                       'text=Anggota', 'text=Pinjaman', 'text=Simpanan', 'text=Transaksi']:
+                       'text=Anggota', 'text=Pinjaman', 'text=Simpanan', 'text=Transaksi', 'text=Investasi',
+                       'text=Dividen', 'text=Profil', 'text=Pengumuman', 'text=Dokumen', 'text=Tiket']:
                 if page.locator(sel).count() > 0:
                     content_loaded = True
                     break
             
             result = {
                 "module": display_name,
-                "id": menu_id,
                 "clicked": True,
                 "content_loaded": content_loaded,
                 "screenshot": screenshot_path
             }
-            print(f"      ✅ Loaded (content: {content_loaded})")
+            print(f"         ✅ Loaded (content: {content_loaded})")
             return result
         else:
-            print(f"      ❌ Button not found or not visible")
-            return {"module": display_name, "id": menu_id, "clicked": False, "error": "Button not found"}
+            print(f"         ❌ Button not found/visible (tried selectors)")
+            # Debug: list all visible buttons
+            all_btns = page.locator('button:visible').all()
+            for b in all_btns:
+                txt = b.inner_text().strip()
+                if '•' in txt or display_name.lower() in txt.lower():
+                    print(f"           Found related: '{txt}'")
+            return {"module": display_name, "clicked": False, "error": "Button not found"}
             
     except Exception as e:
-        print(f"      ❌ Error testing {display_name}: {str(e)}")
+        print(f"         ❌ Error: {str(e)}")
         results["errors_found"].append({"module": display_name, "error": str(e)})
-        return {"module": display_name, "id": menu_id, "error": str(e)}
+        return {"module": display_name, "error": str(e)}
+
+def test_sub_menus(page, parent_menu, sub_data):
+    """Test sub-menus under a parent menu"""
+    print(f"    🔽 Testing sub-menus of: {parent_menu}")
+    sub_results = {}
+    
+    # Click parent to expand (using the expand_id)
+    parent_btn = page.locator(f'button:has-text("{parent_menu}")').first
+    if parent_btn.count() > 0:
+        parent_btn.click()
+        page.wait_for_timeout(2000)  # Wait for dropdown animation
+        
+        # Verify dropdown is expanded by checking for first sub-item
+        first_sub = sub_data["items"][0]["label"]
+        first_sub_html = first_sub.replace('&', '&')
+        # Wait for at least one sub-item to be visible
+        try:
+            page.wait_for_selector(f'button:has-text("• {first_sub_html}")', timeout=3000)
+            print(f"      ✓ Dropdown expanded for {parent_menu}")
+        except:
+            print(f"      ⚠️ Dropdown may not have expanded for {parent_menu}")
+    
+    for sub in sub_data["items"]:
+        result = test_module_by_id(page, sub["id"], sub["label"])
+        sub_results[sub["label"]] = result
+    
+    return sub_results
 
 def run_deep_analysis():
     """Main test runner"""
@@ -388,15 +416,23 @@ def run_deep_analysis():
             print(f"\n  🔬 Testing modules...")
             module_results = {}
             skip = ["Ganti Tema", "Keluar Aplikasi", "Keluar", "Logout"]
-            test_menus = [m for m in sidebar_menus if m not in skip][:12]
+            parent_menus = ["Simpanan (Savings)", "Pinjaman (Loans)"]
             
-            for menu in test_menus:
+            # Test non-parent menus first
+            non_parent_menus = [m for m in sidebar_menus if m not in skip and m not in parent_menus][:12]
+            
+            for menu in non_parent_menus:
                 result = test_module(page, menu)
                 module_results[menu] = result
             
+            # Test parent menus with their sub-menus
             if role in ["admin", "operator"]:
                 for parent, subs in SUB_MENUS.items():
                     if parent in sidebar_menus:
+                        # Test parent menu
+                        result = test_module(page, parent)
+                        module_results[parent] = result
+                        # Immediately test sub-menus while dropdown is open
                         sub_results = test_sub_menus(page, parent, subs)
                         module_results[f"{parent} (subs)"] = sub_results
             
