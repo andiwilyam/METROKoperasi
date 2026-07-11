@@ -332,21 +332,9 @@ def test_sub_menus(page, parent_menu, sub_data):
     print(f"    🔽 Testing sub-menus of: {parent_menu}")
     sub_results = {}
     
-    # Click parent to expand (using the expand_id)
-    parent_btn = page.locator(f'button:has-text("{parent_menu}")').first
-    if parent_btn.count() > 0:
-        parent_btn.click()
-        page.wait_for_timeout(2000)  # Wait for dropdown animation
-        
-        # Verify dropdown is expanded by checking for first sub-item
-        first_sub = sub_data["items"][0]["label"]
-        first_sub_html = first_sub.replace('&', '&')
-        # Wait for at least one sub-item to be visible
-        try:
-            page.wait_for_selector(f'button:has-text("• {first_sub_html}")', timeout=3000)
-            print(f"      ✓ Dropdown expanded for {parent_menu}")
-        except:
-            print(f"      ⚠️ Dropdown may not have expanded for {parent_menu}")
+    # Parent was already clicked by test_module, dropdown should be open
+    # Wait a bit more for dropdown animation
+    page.wait_for_timeout(1000)
     
     for sub in sub_data["items"]:
         result = test_module_by_id(page, sub["id"], sub["label"])

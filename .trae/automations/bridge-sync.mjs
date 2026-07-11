@@ -12,27 +12,20 @@ const ROOT = join(__dirname, '..', '..');
 
 const STATUS_FILE = join(__dirname, 'last-sync-status.json');
 
-interface SyncStatus {
-  lastRun: string;
-  success: boolean;
-  errors: string[];
-  summary: string;
-}
-
-function run(cmd: string, label: string): string {
+function run(cmd, label) {
   console.log(`[${label}] Running: ${cmd}`);
   try {
     const out = execSync(cmd, { cwd: ROOT, encoding: 'utf8', stdio: 'pipe', timeout: 120000 });
     console.log(`[${label}] OK`);
     return out.trim();
-  } catch (e: any) {
+  } catch (e) {
     console.error(`[${label}] FAILED`);
     throw new Error(`[${label}] ${e.stderr || e.message}`);
   }
 }
 
 async function main() {
-  const errors: string[] = [];
+  const errors = [];
   const timestamp = new Date().toISOString();
 
   console.log('=== Bridge Sync Automation ===');
@@ -41,7 +34,7 @@ async function main() {
   // Step 1: npm install
   try {
     run('npm install', 'npm install');
-  } catch (e: any) {
+  } catch (e) {
     errors.push(e.message);
   }
 
@@ -49,7 +42,7 @@ async function main() {
   if (errors.length === 0) {
     try {
       run('npm run typecheck', 'typecheck');
-    } catch (e: any) {
+    } catch (e) {
       errors.push(e.message);
     }
   }
@@ -60,7 +53,7 @@ async function main() {
   const webTypesPath = join(ROOT, 'apps/web/src/types.ts');
   const mobileTypesFile = join(ROOT, 'apps/mobile/src');
 
-  const status: SyncStatus = {
+  const status = {
     lastRun: timestamp,
     success: errors.length === 0,
     errors,
