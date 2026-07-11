@@ -97,13 +97,14 @@ export default function MemberTiket({
                 <label className="block font-semibold text-slate-600 mb-1.5">Kategori Masalah</label>
                 <select
                   value={kategori}
-                  onChange={(e) => setKategori(e.target.value)}
+                  onChange={(e) => setKategori(e.target.value as 'Simpanan' | 'Pinjaman' | 'Toko' | 'Aplikasi' | 'Lainnya')}
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-800 font-semibold"
                 >
                   <option value="Simpanan">Simpanan</option>
                   <option value="Pinjaman">Pinjaman / Kredit</option>
-                  <option value="Toko Koperasi">Toko Koperasi</option>
-                  <option value="Lain-lain">Lain-lain</option>
+                  <option value="Toko">Toko Koperasi</option>
+                  <option value="Aplikasi">Aplikasi</option>
+                  <option value="Lainnya">Lain-lain</option>
                 </select>
               </div>
 
@@ -111,10 +112,11 @@ export default function MemberTiket({
                 <label className="block font-semibold text-slate-600 mb-1.5">Prioritas Keluhan</label>
                 <select
                   value={prioritas}
-                  onChange={(e) => setPrioritas(e.target.value)}
+                  onChange={(e) => setPrioritas(e.target.value as 'Rendah' | 'Sedang' | 'Tinggi')}
                   className="w-full px-3 py-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-800 font-semibold"
                 >
-                  <option value="Biasa">Biasa / Low</option>
+                  <option value="Rendah">Biasa / Low</option>
+                  <option value="Sedang">Sedang / Normal</option>
                   <option value="Tinggi">Tinggi / Urgent</option>
                 </select>
               </div>
