@@ -1,0 +1,1 @@
+!f() { git add -A; if git diff --cached --quiet; then echo "Tidak ada perubahan untuk di-commit."; else git commit -m "$*"; fi; git push; }; f
