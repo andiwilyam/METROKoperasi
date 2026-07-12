@@ -9,3 +9,4 @@ coverage/
 apps/mobile/.expo/
 apps/web/dist/
 .superpowers/
+login.json
