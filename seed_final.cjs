@@ -12,10 +12,10 @@ ON CONFLICT DO NOTHING;
 -- Users (password: admin123 for admin/operator, 123456 for member)
 INSERT INTO users (id, username, nama_lengkap, role, nik, member_id, is_active, password_hash)
 VALUES
-  ('1', 'admin', 'Ahmad Syarif', 'admin', NULL, NULL, true, '$2b$10$iauabWmMn9cwQxCGe/XQIOWK95TudKLuPh4/1SC.7vZizfa1Elyyi'),
-  ('2', 'operator', 'Budi Raharjo', 'operator', NULL, NULL, true, '$2b$10$iauabWmMn9cwQxCGe/XQIOWK95TudKLuPh4/1SC.7vZizfa1Elyyi'),
-  ('3', '1234567890', 'Marmad Tuaian', 'anggota', '1234567890', 'm1', true, '$2b$10$rIuxPVpU83O1TAOJbkTnfub/losSUnek6ZZpJUcPFWTAvH1GP/B8y'),
-  ('4', 'hijau_agri', 'PT Hijau Agri Tech', 'anggota_perusahaan', 'hijau_agri', 'ma1', true, '$2b$10$zliQ6FrCcMW60pAD2Xqk9eDuGCj7atU5cTGbJXZ3ZfrMVvO925AVa')
+  ('1', 'admin', 'Ahmad Syarif', 'admin', NULL, NULL, true, '$2b$10$6awUwNIuzQOyYY7L3shB9OE8AGT6oRV4TBJpu3AOFG9VRmiA5N8Mq'),
+  ('2', 'operator', 'Budi Raharjo', 'operator', NULL, NULL, true, '$2b$10$6awUwNIuzQOyYY7L3shB9OE8AGT6oRV4TBJpu3AOFG9VRmiA5N8Mq'),
+  ('3', '1234567890', 'Marmad Tuaian', 'anggota', '1234567890', 'm1', true, '$2b$10$aEXzzidWaF/C4OvC5rfHUeTt86wBVuXlDzzUSlAf1eorv8ML3vKhC'),
+  ('4', 'hijau_agri', 'PT Hijau Agri Tech', 'anggota_perusahaan', 'hijau_agri', 'ma1', true, '$2b$10$aEXzzidWaF/C4OvC5rfHUeTt86wBVuXlDzzUSlAf1eorv8ML3vKhC')
 ON CONFLICT (id) DO NOTHING;
 
 -- Anggota perusahaan
