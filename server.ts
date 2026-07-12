@@ -195,7 +195,7 @@ Format respons harus berupa JSON.`;
     // Serve React app assets
     app.use('/assets', express.static(path.join(webDistPath, 'assets')));
     // SPA fallback: serve React app for any non-API, non-landing route
-    app.get('*', (req, res) => {
+    app.all('*', (req, res) => {
       if (req.path.startsWith('/api/')) {
         return res.status(404).json({ error: 'API route not found' });
       }
