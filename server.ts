@@ -67,13 +67,10 @@ async function startServer() {
   );
   app.use(express.json({ limit: '10mb' }));
 
-  // Run database migrations
-  try {
-    await runMigrations();
-    console.log('Database ready.');
-  } catch (err) {
-    console.warn('Migration warning (non-fatal):', err);
-  }
+  // Run database migrations (non-blocking for fast healthcheck)
+  runMigrations()
+    .then(() => console.log('Database ready.'))
+    .catch(err => console.warn('Migration warning (non-fatal):', err));
 
   // ==================== PUBLIC AUTH ROUTES ====================
   app.use('/api/auth', authRoutes);
