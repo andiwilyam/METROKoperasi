@@ -7,6 +7,9 @@ set -e
 echo "🚀 MetroCoop starting on Railway..."
 echo "PORT: ${PORT:-3000}"
 echo "NODE_ENV: ${NODE_ENV:-production}"
+echo "PWD: $(pwd)"
+ls -la dist/ 2>&1 | head -5 || echo "dist/ not found"
+ls -la landing/ 2>&1 | head -3 || echo "landing/ not found"
 
 # ---- START HTTP SERVER IMMEDIATELY ----
 # This MUST happen first so /api/health responds within 100s healthcheck window
@@ -14,6 +17,14 @@ echo "🟢 Starting HTTP server NOW..."
 node dist/server.cjs &
 SERVER_PID=$!
 echo "🟢 Server PID: $SERVER_PID"
+
+# Verify server started
+sleep 1
+if ! kill -0 $SERVER_PID 2>/dev/null; then
+  echo "❌ ERROR: Server process died immediately!" >&2
+  exit 1
+fi
+echo "✅ Server process alive"
 
 # ---- DB MIGRATIONS IN BACKGROUND (non-blocking) ----
 (
