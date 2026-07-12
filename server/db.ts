@@ -18,7 +18,12 @@ if (defaults && defaults.parseInt8 !== undefined) {
 }
 
 const pool = process.env.DATABASE_URL
-  ? new pg.Pool({ connectionString: process.env.DATABASE_URL, max: 20, idleTimeoutMillis: 30000 })
+  ? new pg.Pool({ 
+      connectionString: process.env.DATABASE_URL, 
+      max: 20, 
+      idleTimeoutMillis: 30000,
+      ssl: { rejectUnauthorized: false }
+    })
   : new pg.Pool({
       host: process.env.DB_HOST || 'localhost',
       port: parseInt(process.env.DB_PORT || '5432'),
