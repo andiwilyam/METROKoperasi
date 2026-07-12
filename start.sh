@@ -9,24 +9,54 @@ echo "PORT: ${PORT:-3000}"
 echo "NODE_ENV: ${NODE_ENV:-production}"
 echo "PWD: $(pwd)"
 ls -la dist/ 2>&1 | head -5 || echo "dist/ not found"
-ls -la landing/ 2>&1 | head -3 || echo "landing/ not found"
 
 # ---- START HTTP SERVER IMMEDIATELY ----
-# This MUST happen first so /api/health responds within 100s healthcheck window
 echo "🟢 Starting HTTP server NOW..."
-node dist/server.cjs &
-SERVER_PID=$!
-echo "🟢 Server PID: $SERVER_PID"
+node -e "
+const http = require('http');
+const PORT = process.env.PORT || 3000;
+const server = http.createServer((req, res) => {
+  if (req.url === '/api/health') {
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.end(JSON.stringify({status: 'ok', timestamp: new Date().toISOString()}));
+  } else {
+    res.writeHead(404);
+    res.end('Not found');
+  }
+});
+server.listen(PORT, '0.0.0.0', () => {
+  console.log('✅ DEBUG HTTP server listening on', PORT);
+});
+" &
+DEBUG_PID=$!
+echo "🟢 Debug server PID: $DEBUG_PID"
 
-# Verify server started
-sleep 1
-if ! kill -0 $SERVER_PID 2>/dev/null; then
-  echo "❌ ERROR: Server process died immediately!" >&2
+sleep 2
+if ! kill -0 $DEBUG_PID 2>/dev/null; then
+  echo "❌ DEBUG server died!"
   exit 1
 fi
-echo "✅ Server process alive"
+echo "✅ Debug server alive"
 
-# ---- DB MIGRATIONS IN BACKGROUND (non-blocking) ----
+# Now try real server
+echo "🟢 Starting REAL server..."
+node dist/server.cjs &
+SERVER_PID=$!
+echo "🟢 Real server PID: $SERVER_PID"
+
+sleep 2
+if ! kill -0 $SERVER_PID 2>/dev/null; then
+  echo "❌ Real server died! Check server.cjs for errors"
+  # Kill debug server
+  kill $DEBUG_PID 2>/dev/null
+  exit 1
+fi
+echo "✅ Real server alive"
+
+# Kill debug server (real one took over)
+kill $DEBUG_PID 2>/dev/null
+
+# ---- DB MIGRATIONS IN BACKGROUND ----
 (
   echo "📦 [bg] Waiting for database..."
   for i in $(seq 1 30); do
@@ -72,5 +102,5 @@ const seed = fs.readFileSync(path.join(process.cwd(), 'db', 'seed.sql'), 'utf8')
 MIGRATION_PID=$!
 echo "📦 [bg] Migration PID: $MIGRATION_PID"
 
-# Wait for server (this keeps container alive)
+# Wait for real server
 wait $SERVER_PID
