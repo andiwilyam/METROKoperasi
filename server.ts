@@ -29,6 +29,9 @@ async function startServer() {
   const app = express();
   const PORT = parseInt(process.env.PORT || '3000');
 
+  // Trust proxy (Railway sends X-Forwarded-For)
+  app.set('trust proxy', 1);
+
   // Health check (Railway) — MUST return 200 immediately, no DB dependency
   app.get('/api/health', (req, res) => {
     res.status(200).json({
