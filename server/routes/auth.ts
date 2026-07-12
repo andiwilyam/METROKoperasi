@@ -1,10 +1,29 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import { z } from 'zod';
+import rateLimit from 'express-rate-limit';
 import pool from '../db.js';
 import { generateToken } from '../middleware.js';
 
 const router = Router();
+
+// Rate limit: max 10 login attempts per 15 menit per IP
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { error: 'Terlalu banyak percobaan login. Silakan coba lagi dalam 15 menit.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// Rate limit: max 5 register attempts per jam per IP
+const registerLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 5,
+  message: { error: 'Terlalu banyak percobaan registrasi. Silakan coba lagi dalam 1 jam.' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 const LoginSchema = z.object({
   username: z.string().min(1, 'Username wajib diisi'),
@@ -20,7 +39,7 @@ const RegisterSchema = z.object({
   sektorIndustri: z.string().optional(),
 });
 
-router.post('/login', async (req: Request, res: Response) => {
+router.post('/login', loginLimiter, async (req: Request, res: Response) => {
   try {
     const parsed = LoginSchema.safeParse(req.body);
     if (!parsed.success) {
@@ -74,7 +93,7 @@ router.post('/login', async (req: Request, res: Response) => {
 });
 
 // Register new perusahaan member (self-register)
-router.post('/register-perusahaan', async (req: Request, res: Response) => {
+router.post('/register-perusahaan', registerLimiter, async (req: Request, res: Response) => {
   try {
     const parsed = RegisterSchema.safeParse(req.body);
     if (!parsed.success) {
@@ -115,8 +134,8 @@ router.post('/register-perusahaan', async (req: Request, res: Response) => {
   }
 });
 
-// Simple endpoint to hash passwords for seed data
-router.post('/hash-password', async (req: Request, res: Response) => {
+// Simple endpoint to hash passwords for seed data (rate limited)
+router.post('/hash-password', registerLimiter, async (req: Request, res: Response) => {
   try {
     const { password } = req.body;
     const hash = await bcrypt.hash(password || 'admin123', 10);

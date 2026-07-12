@@ -115,7 +115,7 @@ async function startServer() {
         minimumFractionDigits: 0
       }).format(investment.nominalInvestasi);
 
-      const prompt = `Lakukan audit risiko investasi saham (penyertaan modal) koperasi simpan pinjam "MetroMitra" pada investee berikut:
+      const prompt = `Lakukan audit risiko investasi saham (penyertaan modal) koperasi simpan pinjam "MetroCoop" pada investee berikut:
 - Nama Perusahaan: ${investment.namaPerusahaan}
 - Sektor Industri: ${investment.sektorIndustri}
 - Nama Founder: ${investment.namaFounder}
@@ -182,7 +182,7 @@ Format respons harus berupa JSON.`;
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`MetroMitra server running on port ${PORT}`);
+    console.log(`MetroCoop server running on port ${PORT}`);
     console.log(`API: http://localhost:${PORT}/api`);
   });
 }

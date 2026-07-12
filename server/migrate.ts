@@ -3,13 +3,19 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// Compatible with both ESM (tsx/dev) and CJS (esbuild/production)
+let baseDir: string;
+try {
+  baseDir = path.dirname(fileURLToPath(import.meta.url));
+} catch {
+  baseDir = __dirname;
+}
 
 export async function runMigrations() {
   const client = await pool.connect();
   try {
-    const schemaPath = path.join(__dirname, '..', 'db', 'schema.sql');
-    const seedPath = path.join(__dirname, '..', 'db', 'seed.sql');
+    const schemaPath = path.join(baseDir, '..', 'db', 'schema.sql');
+    const seedPath = path.join(baseDir, '..', 'db', 'seed.sql');
 
     // Check if migrations table exists and if schema was applied
     const { rows } = await client.query(
