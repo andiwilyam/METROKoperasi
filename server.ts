@@ -165,7 +165,10 @@ Format respons harus berupa JSON.`;
     }
   });
 
-  // ==================== FRONTEND (Vite integration / static) ====================
+  // ==================== FRONTEND (Static files) ====================
+  const landingPath = path.join(process.cwd(), 'landing');
+  const webDistPath = path.join(process.cwd(), 'apps', 'web', 'dist');
+
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
@@ -174,10 +177,20 @@ Format respons harus berupa JSON.`;
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'apps', 'web', 'dist');
-    app.use(express.static(distPath));
+    // Serve landing page static files (CSS, JS, SVG, etc.)
+    app.use('/assets', express.static(path.join(landingPath, 'assets')));
+    // Serve landing page at root
+    app.get('/', (req, res) => {
+      res.sendFile(path.join(landingPath, 'index.html'));
+    });
+    // Serve React app assets
+    app.use('/assets', express.static(path.join(webDistPath, 'assets')));
+    // SPA fallback: serve React app for any non-API, non-landing route
     app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      if (req.path.startsWith('/api/')) {
+        return res.status(404).json({ error: 'API route not found' });
+      }
+      res.sendFile(path.join(webDistPath, 'index.html'));
     });
   }
 
