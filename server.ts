@@ -29,9 +29,13 @@ async function startServer() {
   const app = express();
   const PORT = parseInt(process.env.PORT || '3000');
 
-  // Health check (Railway)
+  // Health check (Railway) — MUST return 200 immediately, no DB dependency
   app.get('/api/health', (req, res) => {
-    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+    res.status(200).json({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      db: 'initializing...' // don't block on DB
+    });
   });
 
   // Security middleware
