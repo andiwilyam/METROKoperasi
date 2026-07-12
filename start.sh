@@ -40,6 +40,9 @@ echo "✅ Debug server alive"
 
 # Now try real server
 echo "🟢 Starting REAL server..."
+# Kill debug server first
+kill $DEBUG_PID 2>/dev/null
+sleep 1
 node dist/server.cjs &
 SERVER_PID=$!
 echo "🟢 Real server PID: $SERVER_PID"
@@ -52,9 +55,6 @@ if ! kill -0 $SERVER_PID 2>/dev/null; then
   exit 1
 fi
 echo "✅ Real server alive"
-
-# Kill debug server (real one took over)
-kill $DEBUG_PID 2>/dev/null
 
 # ---- DB MIGRATIONS IN BACKGROUND ----
 (
