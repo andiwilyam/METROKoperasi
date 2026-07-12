@@ -19,6 +19,9 @@ RUN npm install
 # Copy source code
 COPY . .
 
+# Make start.sh executable
+RUN chmod +x start.sh
+
 # Build everything (web app + server)
 RUN npm run build:railway
 
