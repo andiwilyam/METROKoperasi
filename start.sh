@@ -64,7 +64,7 @@ echo "✅ Real server alive"
 const {Pool}=require('pg');
 const conn = process.env.DATABASE_URL || process.env.DB_URL;
 if (!conn) { console.error('No DATABASE_URL'); process.exit(1); }
-const p=new Pool({connectionString: conn});
+const p=new Pool({connectionString: conn, family: 4});
 p.query('SELECT 1').then(()=>{console.log('DB OK'); process.exit(0)}).catch(e=>{console.error('DB fail:',e.message); process.exit(1)});
 " 2>&1; then
       echo "✅ [bg] Database connected"
@@ -81,7 +81,7 @@ const fs = require('fs');
 const path = require('path');
 const conn = process.env.DATABASE_URL || process.env.DB_URL;
 if (!conn) { console.log('[bg] No DATABASE_URL, skipping'); process.exit(0); }
-const pool = new Pool({ connectionString: conn, max: 5, idleTimeoutMillis: 10000 });
+const pool = new Pool({ connectionString: conn, max: 5, idleTimeoutMillis: 10000, family: 4 });
 const schema = fs.readFileSync(path.join(process.cwd(), 'db', 'schema.sql'), 'utf8');
 const seed = fs.readFileSync(path.join(process.cwd(), 'db', 'seed.sql'), 'utf8');
 (async () => {
