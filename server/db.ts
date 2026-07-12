@@ -23,7 +23,8 @@ const pool = process.env.DATABASE_URL
       max: 20, 
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 10000,
-      ssl: { rejectUnauthorized: false }
+      ssl: { rejectUnauthorized: false },
+      family: 4  // Force IPv4 for Supabase/Railway compatibility
     })
   : new pg.Pool({
       host: process.env.DB_HOST || 'localhost',
