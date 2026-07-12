@@ -1,23 +1,23 @@
 #!/bin/bash
 # MetroCoop — Startup script for Railway
-# Start HTTP server IMMEDIATELY for healthcheck, then run DB migrations in background
+# Starts HTTP server IMMEDIATELY for healthcheck, DB migrations in background
 
 set -e
 
-# Immediate logging
-echo "🚀 MetroCoop start.sh ENTRYPOINT" >&2
-echo "PORT: ${PORT:-3000}" >&2
-echo "NODE_ENV: ${NODE_ENV:-production}" >&2
+echo "🚀 MetroCoop starting on Railway..."
+echo "PORT: ${PORT:-3000}"
+echo "NODE_ENV: ${NODE_ENV:-production}"
 
 # ---- START HTTP SERVER IMMEDIATELY ----
-# This must happen FIRST so /api/health responds within 100s healthcheck window
-echo "🟢 Starting HTTP server NOW..." >&2
+# This MUST happen first so /api/health responds within 100s healthcheck window
+echo "🟢 Starting HTTP server NOW..."
 node dist/server.cjs &
 SERVER_PID=$!
+echo "🟢 Server PID: $SERVER_PID"
 
 # ---- DB MIGRATIONS IN BACKGROUND (non-blocking) ----
 (
-  echo "📦 [bg] Waiting for database..." >&2
+  echo "📦 [bg] Waiting for database..."
   for i in $(seq 1 30); do
     if node -e "
 const {Pool}=require('pg');
@@ -26,14 +26,14 @@ if (!conn) { console.error('No DATABASE_URL'); process.exit(1); }
 const p=new Pool({connectionString: conn});
 p.query('SELECT 1').then(()=>{console.log('DB OK'); process.exit(0)}).catch(e=>{console.error('DB fail:',e.message); process.exit(1)});
 " 2>&1; then
-      echo "✅ [bg] Database connected" >&2
+      echo "✅ [bg] Database connected"
       break
     fi
-    echo "  [bg] attempt $i/30..." >&2
+    echo "  [bg] attempt $i/30..."
     sleep 2
   done
 
-  echo "📦 [bg] Running migrations (best effort)..." >&2
+  echo "📦 [bg] Running migrations (best effort)..."
   node -e "
 const { Pool } = require('pg');
 const fs = require('fs');
@@ -56,8 +56,10 @@ const seed = fs.readFileSync(path.join(process.cwd(), 'db', 'seed.sql'), 'utf8')
     process.exit(0);
   }
 })();
-" 2>&1 || echo "⚠️ [bg] Migration completed with warnings" >&2
+" 2>&1 || echo "⚠️ [bg] Migration completed with warnings"
 ) &
+MIGRATION_PID=$!
+echo "📦 [bg] Migration PID: $MIGRATION_PID"
 
 # Wait for server (this keeps container alive)
 wait $SERVER_PID
