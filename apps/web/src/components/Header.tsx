@@ -118,20 +118,20 @@ export default function Header({
         <button
           onClick={() => setSidebarOpen(true)}
           aria-label="Buka menu"
-          className="lg:hidden text-slate-600 hover:text-slate-900 p-1.5 rounded-lg hover:bg-slate-100 cursor-pointer"
+          className="lg:hidden mc-muted hover:mc-ink p-1.5 rounded-lg hover:mc-surface-2 cursor-pointer mc-focus"
         >
           <Menu className="w-5.5 h-5.5" />
         </button>
 
         <div className="hidden sm:block">
           {/* Breadcrumbs */}
-          <div className="flex items-center text-[11px] font-medium text-slate-400 space-x-1 mb-0.5">
+          <div className="flex items-center mc-muted text-[11px] font-medium space-x-1 mb-0.5">
             <span>{breadcrumbs[0]}</span>
             <span>/</span>
             <span>{breadcrumbs[1]}</span>
           </div>
           {/* Header Title */}
-          <h2 className="text-sm font-bold text-slate-800 tracking-tight leading-none">
+          <h2 className="text-sm font-bold mc-ink-strong tracking-tight leading-none">
             {formatTitle(activeMenu)}
           </h2>
         </div>
@@ -140,17 +140,17 @@ export default function Header({
       {/* Right side: Calendar date, Notification and Profile */}
       <div className="flex items-center space-x-4">
         
-        {/* Current real-time date */}
-        <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 bg-purple-50/50 border border-purple-100 rounded-lg text-xs font-bold text-purple-800 font-mono animate-fadeIn">
-          <Clock className="w-3.5 h-3.5 text-purple-500 animate-pulse" />
+        {/* Current real-time date — pakai token accent */}
+        <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 mc-surface-2 mc-border rounded-lg text-xs font-bold mc-muted font-mono animate-fadeIn">
+          <Clock className="w-3.5 h-3.5 mc-icon-accent animate-pulse" />
           <span>{formatIndonesianDate(currentTime)}</span>
         </div>
 
         {/* Portal Identifier Badge */}
-        <div className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${
+        <div className={`text-[10px] font-bold px-2.5 py-1 rounded-full mc-border ${
           session.role === 'anggota' 
-            ? 'mc-badge-accent border-amber-200/50' 
-            : 'mc-badge-ok border-blue-200/50'
+            ? 'mc-badge-accent' 
+            : 'mc-badge-ok'
         }`}>
           {session.role === 'admin' && '🔒 Admin'}
           {session.role === 'operator' && '⚙️ Operator'}
@@ -162,12 +162,12 @@ export default function Header({
         <div className="relative">
           <button
             onClick={onNavigateToNotifications}
-            className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-50 transition relative cursor-pointer"
+            className="p-2 mc-muted hover:mc-ink rounded-lg hover:mc-surface-2 transition relative cursor-pointer mc-focus"
             aria-label="Notifikasi & pengaduan"
           >
             <Bell className="w-4.5 h-4.5" />
             {pendingNotificationsCount > 0 && (
-              <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-red-500 border-2 border-white rounded-full flex items-center justify-center text-[8px] font-bold text-white">
+              <span className="absolute top-1.5 right-1.5 w-4 h-4 text-[var(--mc-danger)] border-2 border-[var(--mc-surface)] rounded-full flex items-center justify-center text-[8px] font-bold">
                 {pendingNotificationsCount}
               </span>
             )}
@@ -178,17 +178,17 @@ export default function Header({
         <div className="relative">
           <button
             onClick={() => setShowUserDropdown(!showUserDropdown)}
-            className="flex items-center space-x-2 text-slate-700 hover:text-slate-950 transition cursor-pointer p-1 rounded-lg hover:bg-slate-50"
+            className="flex items-center space-x-2 mc-ink hover:mc-ink-strong transition cursor-pointer p-1 rounded-lg hover:mc-surface-2 mc-focus"
           >
-            {/* Initial circle avatar */}
+            {/* Initial circle avatar — pakai token accent */}
             <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs text-white ${
-              session.role === 'anggota' ? 'bg-amber-500' : 'bg-blue-600'
+              session.role === 'anggota' ? 'bg-[var(--mc-accent)]' : 'bg-[var(--mc-primary)]'
             }`}>
               {session.namaLengkap.charAt(0)}
             </div>
             <div className="hidden md:block text-left">
-              <div className="text-xs font-semibold leading-tight">{session.namaLengkap}</div>
-              <div className="text-[10px] text-slate-400 font-medium capitalize">{session.role}</div>
+              <div className="text-xs font-semibold leading-tight mc-ink-strong">{session.namaLengkap}</div>
+              <div className="text-[10px] mc-muted font-medium capitalize">{session.role}</div>
             </div>
           </button>
 
@@ -197,27 +197,27 @@ export default function Header({
               {/* Overlay clickable backdrop to close dropdown */}
               <div onClick={() => setShowUserDropdown(false)} className="fixed inset-0 z-30" />
 
-              <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-xl shadow-xl z-40 p-1.5 py-2 animate-dropdownFade">
-                <div className="px-3.5 py-2 border-b border-slate-100 mb-1">
-                  <div className="text-xs font-bold text-slate-800">{session.namaLengkap}</div>
-                  <div className="text-[10px] text-slate-400 font-mono mt-0.5">{session.username}</div>
+              <div className="absolute right-0 mt-2 w-56 mc-surface mc-border rounded-xl shadow-xl z-40 p-1.5 py-2 animate-dropdownFade">
+                <div className="px-3.5 py-2 border-b mc-border mb-1">
+                  <div className="text-xs font-bold mc-ink-strong">{session.namaLengkap}</div>
+                  <div className="text-[10px] mc-muted font-mono mt-0.5">{session.username}</div>
                 </div>
 
-                <div className="space-y-0.5 text-xs text-slate-700">
-                  <div className="px-3.5 py-1.5 text-[10px] uppercase font-bold text-slate-400">Portal Akses</div>
+                <div className="space-y-0.5 text-xs mc-muted">
+                  <div className="px-3.5 py-1.5 text-[10px] uppercase font-bold mc-muted">Portal Akses</div>
                   <div className="px-3.5 py-1 flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                    <span className="font-medium text-slate-600">Sesi Aktif Aman</span>
+                    <ShieldCheck className="w-3.5 h-3.5 text-[var(--mc-success)]" />
+                    <span className="font-medium mc-ink">Sesi Aktif Aman</span>
                   </div>
 
-                  <div className="border-t border-slate-100 my-1.5" />
+                  <div className="border-t mc-border my-1.5" />
 
                   <button
                     onClick={() => {
                       setShowUserDropdown(false);
                       onLogout();
                     }}
-                    className="w-full flex items-center text-left px-3.5 py-2 text-xs font-medium text-red-500 hover:bg-red-50 rounded-lg transition cursor-pointer"
+                    className="w-full flex items-center text-left px-3.5 py-2 text-xs font-medium text-[var(--mc-danger)] hover:mc-danger-bg rounded-lg transition cursor-pointer mc-focus"
                   >
                     <LogOut className="w-3.5 h-3.5 mr-2" />
                     Keluar Sesi

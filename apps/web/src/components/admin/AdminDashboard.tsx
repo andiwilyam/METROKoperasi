@@ -96,24 +96,24 @@ export default function AdminDashboard({
   return (
     <div className="space-y-6">
       
-      {/* Top Welcome / Info Row */}
-      <div className="bg-gradient-to-r from-blue-700 via-indigo-700 to-indigo-800 rounded-xl p-6 text-white shadow-md relative overflow-hidden">
+      {/* Top Welcome / Info Row — token semantik */}
+      <div className="mc-surface mc-border rounded-xl p-6 shadow-md relative overflow-hidden" style={{ borderLeft: '4px solid var(--mc-accent)' }}>
         <div className="absolute inset-0 bg-grid-white/[0.05] pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-white/20 text-blue-100 border border-white/10">
+              <span className="text-xs font-semibold px-2 py-0.5 rounded-full mc-badge-accent">
                 Tahun Buku 2026
               </span>
-              <Sparkles className="w-4 h-4 text-amber-400 animate-soft-pulse" />
+              <Sparkles className="w-4 h-4 mc-icon-accent animate-soft-pulse" />
             </div>
-            <h1 className="text-xl md:text-2xl font-bold tracking-tight">Kesehatan Koperasi Global — {kopInfo?.nama || 'MetroKSP'}</h1>
-            <p className="text-xs text-blue-200 mt-1">Sistem informasi keuangan koperasi &amp; pencatatan transaksi terintegrasi secara profesional.</p>
+            <h1 className="text-xl md:text-2xl font-bold tracking-tight mc-ink-strong">Kesehatan Koperasi Global — {kopInfo?.nama || 'MetroKSP'}</h1>
+            <p className="text-xs mc-muted mt-1">Sistem informasi keuangan koperasi & pencatatan transaksi terintegrasi secara profesional.</p>
           </div>
           {role !== 'operator' && (
             <button
               onClick={() => onNavigate('pengaturan')}
-              className="px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-xs font-semibold transition cursor-pointer"
+              className="px-4 py-2 mc-surface-2 mc-border hover:mc-surface-2 hover:bg-[var(--mc-border)] rounded-lg text-xs font-semibold transition cursor-pointer"
             >
               Pengaturan Koperasi
             </button>
@@ -126,17 +126,17 @@ export default function AdminDashboard({
         {/* Anggota Aktif */}
         <div 
           onClick={() => onNavigate('anggota')}
-          className="bg-white border border-slate-200 rounded-xl p-5 hover:border-blue-500 hover:shadow-md transition cursor-pointer flex items-center justify-between group"
+          className="mc-card hover:border-[var(--mc-accent)] hover:shadow-md transition cursor-pointer flex items-center justify-between group"
         >
           <div className="space-y-1">
-            <span className="text-xs font-semibold text-slate-400">Anggota Aktif</span>
-            <div className="text-2xl font-extrabold text-slate-800">{totalAnggota}</div>
-            <span className="text-[10px] text-slate-500 font-medium flex items-center">
-              <TrendingUp className="w-3 h-3 text-emerald-500 mr-1" />
+            <span className="text-xs font-semibold mc-muted">Anggota Aktif</span>
+            <div className="text-2xl font-extrabold mc-ink-strong">{totalAnggota}</div>
+            <span className="text-[10px] mc-muted font-medium flex items-center">
+              <TrendingUp className="w-3 h-3 text-[var(--mc-success)] mr-1" />
               +5 bulan ini
             </span>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-blue-50 group-hover:bg-blue-100 text-blue-600 flex items-center justify-center transition">
+          <div className="w-12 h-12 rounded-xl mc-surface-2 mc-icon-accent group-hover:bg-[var(--mc-sidebar-active)] text-[var(--mc-accent)] flex items-center justify-center transition">
             <Users className="w-6 h-6" />
           </div>
         </div>
@@ -144,17 +144,17 @@ export default function AdminDashboard({
         {/* Total Simpanan */}
         <div 
           onClick={() => onNavigate('simpanan_transaksi')}
-          className="bg-white border border-slate-200 rounded-xl p-5 hover:border-emerald-500 hover:shadow-md transition cursor-pointer flex items-center justify-between group"
+          className="mc-card hover:border-[var(--mc-success)] hover:shadow-md transition cursor-pointer flex items-center justify-between group"
         >
           <div className="space-y-1">
-            <span className="text-xs font-semibold text-slate-400">Total Simpanan</span>
-            <div className="text-2xl font-extrabold text-slate-800">{formatIDR(totalSimpanan)}</div>
-            <span className="text-[10px] text-slate-500 font-medium flex items-center">
-              <TrendingUp className="w-3 h-3 text-emerald-500 mr-1" />
-              Setoran aman &amp; transparan
+            <span className="text-xs font-semibold mc-muted">Total Simpanan</span>
+            <div className="text-2xl font-extrabold mc-ink-strong">{formatIDR(totalSimpanan)}</div>
+            <span className="text-[10px] mc-muted font-medium flex items-center">
+              <TrendingUp className="w-3 h-3 text-[var(--mc-success)] mr-1" />
+              Setoran aman & transparan
             </span>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-emerald-50 group-hover:bg-emerald-100 text-emerald-600 flex items-center justify-center transition">
+          <div className="w-12 h-12 rounded-xl mc-surface-2 text-[var(--mc-success)] group-hover:bg-[var(--mc-success-bg)] flex items-center justify-center transition">
             <PiggyBank className="w-6 h-6" />
           </div>
         </div>
@@ -162,16 +162,16 @@ export default function AdminDashboard({
         {/* Total Pinjaman */}
         <div 
           onClick={() => onNavigate('pinjaman_pengajuan')}
-          className="bg-white border border-slate-200 rounded-xl p-5 hover:border-amber-500 hover:shadow-md transition cursor-pointer flex items-center justify-between group"
+          className="mc-card hover:border-[var(--mc-primary)] hover:shadow-md transition cursor-pointer flex items-center justify-between group"
         >
           <div className="space-y-1">
-            <span className="text-xs font-semibold text-slate-400">Pinjaman Beredar</span>
-            <div className="text-2xl font-extrabold text-slate-800">{formatIDR(totalPinjamanBeredar)}</div>
-            <span className="text-[10px] text-amber-600 font-semibold flex items-center bg-amber-50 px-1.5 py-0.5 rounded">
+            <span className="text-xs font-semibold mc-muted">Pinjaman Beredar</span>
+            <div className="text-2xl font-extrabold mc-ink-strong">{formatIDR(totalPinjamanBeredar)}</div>
+            <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded mc-badge-accent">
               Risiko Terkendali
             </span>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-amber-50 group-hover:bg-amber-100 text-amber-600 flex items-center justify-center transition">
+          <div className="w-12 h-12 rounded-xl mc-surface-2 text-[var(--mc-primary)] group-hover:bg-[var(--mc-sidebar-active)] flex items-center justify-center transition">
             <HandCoins className="w-6 h-6" />
           </div>
         </div>
@@ -179,16 +179,16 @@ export default function AdminDashboard({
         {/* SHU Terkumpul */}
         <div 
           onClick={() => onNavigate('laporan_shu')}
-          className="bg-white border border-slate-200 rounded-xl p-5 hover:border-indigo-500 hover:shadow-md transition cursor-pointer flex items-center justify-between group"
+          className="mc-card hover:border-[var(--mc-accent)] hover:shadow-md transition cursor-pointer flex items-center justify-between group"
         >
           <div className="space-y-1">
-            <span className="text-xs font-semibold text-slate-400">SHU Terkumpul</span>
-            <div className="text-2xl font-extrabold text-slate-800">{formatIDR(shuTerkumpul)}</div>
-            <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${shuTerkumpul >= 0 ? 'text-emerald-600 bg-emerald-50' : 'text-red-600 bg-red-50'}`}>
+            <span className="text-xs font-semibold mc-muted">SHU Terkumpul</span>
+            <div className="text-2xl font-extrabold mc-ink-strong">{formatIDR(shuTerkumpul)}</div>
+            <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${shuTerkumpul >= 0 ? 'mc-badge-ok' : 'mc-btn-danger'}`}>
               {shuTerkumpul >= 0 ? '+ Positif (Laba)' : '- Negatif (Rugi)'}
             </span>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-indigo-50 group-hover:bg-indigo-100 text-indigo-600 flex items-center justify-center transition">
+          <div className="w-12 h-12 rounded-xl mc-surface-2 text-[var(--mc-accent)] group-hover:bg-[var(--mc-sidebar-active)] flex items-center justify-center transition">
             <Landmark className="w-6 h-6" />
           </div>
         </div>
@@ -198,32 +198,32 @@ export default function AdminDashboard({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Chart Column */}
-        <div className="lg:col-span-8 bg-white border border-slate-200 rounded-xl p-5 space-y-4">
+        <div className="lg:col-span-8 mc-card p-5 space-y-4">
           <div className="flex justify-between items-center">
             <div>
-              <h3 className="font-bold text-slate-900 text-sm">Perkembangan Transaksi Global</h3>
-              <p className="text-[11px] text-slate-400">Perbandingan volume Simpanan vs Pinjaman dalam 6 bulan terakhir</p>
+              <h3 className="font-bold mc-ink-strong text-sm">Perkembangan Transaksi Global</h3>
+              <p className="text-[11px] mc-muted">Perbandingan volume Simpanan vs Pinjaman dalam 6 bulan terakhir</p>
             </div>
             <div className="flex gap-4 text-xs">
               <div className="flex items-center gap-1">
-                <span className="w-3 h-3 bg-blue-600 rounded-full" />
-                <span className="text-slate-600">Simpanan</span>
+                <span className="w-3 h-3 rounded-full mc-icon-accent" />
+                <span className="mc-muted">Simpanan</span>
               </div>
               <div className="flex items-center gap-1">
-                <span className="w-3 h-3 bg-amber-500 rounded-full" />
-                <span className="text-slate-600">Pinjaman</span>
+                <span className="w-3 h-3 rounded-full" style={{ backgroundColor: 'var(--mc-primary)' }} />
+                <span className="mc-muted">Pinjaman</span>
               </div>
             </div>
           </div>
 
-          {/* Premium Animated SVG Chart */}
+          {/* Premium Animated SVG Chart — stroke pakai variabel token */}
           <div className="h-64 flex items-end relative pt-6">
             {/* Grid background lines */}
-            <div className="absolute inset-x-0 bottom-0 top-6 border-b border-slate-100 flex flex-col justify-between">
-              <div className="w-full border-t border-slate-100" />
-              <div className="w-full border-t border-slate-100" />
-              <div className="w-full border-t border-slate-100" />
-              <div className="w-full border-t border-slate-100" />
+            <div className="absolute inset-x-0 bottom-0 top-6 border-b mc-border flex flex-col justify-between">
+              <div className="w-full border-t mc-border" />
+              <div className="w-full border-t mc-border" />
+              <div className="w-full border-t mc-border" />
+              <div className="w-full border-t mc-border" />
             </div>
 
             <svg className="w-full h-full absolute inset-0 z-10" viewBox="0 0 600 240">
@@ -231,37 +231,37 @@ export default function AdminDashboard({
               <path 
                 d="M 50,180 L 150,150 L 250,130 L 350,90 L 450,70 L 550,40" 
                 fill="none" 
-                stroke="#2563eb" 
+                stroke="var(--mc-accent)" 
                 strokeWidth="3.5" 
                 strokeLinecap="round"
-                className="transition-all duration-1000"
+                className="transition-transform duration-1000"
               />
-              <circle cx="50" cy="180" r="5" fill="#2563eb" stroke="#fff" strokeWidth="2" />
-              <circle cx="150" cy="150" r="5" fill="#2563eb" stroke="#fff" strokeWidth="2" />
-              <circle cx="250" cy="130" r="5" fill="#2563eb" stroke="#fff" strokeWidth="2" />
-              <circle cx="350" cy="90" r="5" fill="#2563eb" stroke="#fff" strokeWidth="2" />
-              <circle cx="450" cy="70" r="5" fill="#2563eb" stroke="#fff" strokeWidth="2" />
-              <circle cx="550" cy="40" r="5" fill="#2563eb" stroke="#fff" strokeWidth="2" />
+              <circle cx="50" cy="180" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
+              <circle cx="150" cy="150" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
+              <circle cx="250" cy="130" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
+              <circle cx="350" cy="90" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
+              <circle cx="450" cy="70" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
+              <circle cx="550" cy="40" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
 
               {/* Amber Line for Pinjaman */}
               <path 
                 d="M 50,200 L 150,180 L 250,140 L 350,150 L 450,120 L 550,100" 
                 fill="none" 
-                stroke="#f59e0b" 
+                stroke="var(--mc-primary)" 
                 strokeWidth="3.5" 
                 strokeLinecap="round"
-                className="transition-all duration-1000"
+                className="transition-transform duration-1000"
               />
-              <circle cx="50" cy="200" r="5" fill="#f59e0b" stroke="#fff" strokeWidth="2" />
-              <circle cx="150" cy="180" r="5" fill="#f59e0b" stroke="#fff" strokeWidth="2" />
-              <circle cx="250" cy="140" r="5" fill="#f59e0b" stroke="#fff" strokeWidth="2" />
-              <circle cx="350" cy="150" r="5" fill="#f59e0b" stroke="#fff" strokeWidth="2" />
-              <circle cx="450" cy="120" r="5" fill="#f59e0b" stroke="#fff" strokeWidth="2" />
-              <circle cx="550" cy="100" r="5" fill="#f59e0b" stroke="#fff" strokeWidth="2" />
+              <circle cx="50" cy="200" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
+              <circle cx="150" cy="180" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
+              <circle cx="250" cy="140" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
+              <circle cx="350" cy="150" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
+              <circle cx="450" cy="120" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
+              <circle cx="550" cy="100" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
             </svg>
 
             {/* X Axis Labels */}
-            <div className="absolute inset-x-0 -bottom-5 flex justify-between px-6 text-[10px] font-mono text-slate-400 font-semibold">
+            <div className="absolute inset-x-0 -bottom-5 flex justify-between px-6 text-[10px] font-mono mc-muted font-semibold">
               <span>Februari</span>
               <span>Maret</span>
               <span>April</span>
@@ -273,35 +273,35 @@ export default function AdminDashboard({
         </div>
 
         {/* Member list / Certification Column */}
-        <div className="lg:col-span-4 bg-white border border-slate-200 rounded-xl p-5 flex flex-col justify-between space-y-4">
+        <div className="lg:col-span-4 mc-card p-5 flex flex-col justify-between space-y-4">
           <div>
-            <h3 className="font-bold text-slate-900 text-sm">Organisasi Koperasi</h3>
-            <p className="text-[11px] text-slate-400">Informasi ringkas struktur pengurus berwenang</p>
+            <h3 className="font-bold mc-ink-strong text-sm">Organisasi Koperasi</h3>
+            <p className="text-[11px] mc-muted">Informasi ringkas struktur pengurus berwenang</p>
           </div>
 
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3">
+          <div className="mc-surface-2 mc-border rounded-lg p-4 space-y-3">
             {pengurus.length === 0 && (
-              <div className="text-[10px] text-slate-400 italic text-center py-2">Belum ada data pengurus terdaftar.</div>
+              <div className="text-[10px] mc-muted italic text-center py-2">Belum ada data pengurus terdaftar.</div>
             )}
             {[ketua, bendahara, ...otherPengurus].filter(Boolean).slice(0, 4).map((p: any, idx) => (
               <div key={p.id || idx} className="flex items-center space-x-3">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm text-white ${idx === 0 ? 'bg-indigo-600' : idx === 1 ? 'bg-emerald-600' : 'bg-slate-500'}`}>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm text-white ${idx === 0 ? 'mc-btn-primary' : idx === 1 ? 'bg-[var(--mc-success)]' : 'bg-[var(--mc-muted)]'}`}>
                   {(p.nama || '?').charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <div className="text-xs font-bold text-slate-800">{p.nama}</div>
-                  <div className="text-[10px] text-slate-400 font-medium">{p.jabatan}</div>
+                  <div className="text-xs font-bold mc-ink-strong">{p.nama}</div>
+                  <div className="text-[10px] mc-muted font-medium">{p.jabatan}</div>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-blue-50/50 border border-blue-100 rounded-lg p-3.5 space-y-2">
-            <div className="text-xs font-bold text-blue-900 flex items-center gap-1.5">
-              <Award className="w-4 h-4 text-blue-600" />
+          <div className="mc-surface-2 mc-border rounded-lg p-3.5 space-y-2" style={{ borderLeft: '4px solid var(--mc-accent)' }}>
+            <div className="text-xs font-bold mc-ink-strong flex items-center gap-1.5">
+              <Award className="w-4 h-4 mc-icon-accent" />
               Sertifikasi Standar Mutu Koperasi
             </div>
-            <p className="text-[10px] text-blue-700 leading-relaxed">
+            <p className="text-[10px] mc-muted leading-relaxed">
               Koperasi {kopInfo?.nama || 'MetroKSP'} telah diaudit dan dinyatakan memenuhi regulasi dan standar mutu dari Dinas Koperasi dan Kementerian Koperasi secara nasional.
             </p>
           </div>
@@ -312,56 +312,56 @@ export default function AdminDashboard({
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
         
         {/* Toko */}
-        <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center gap-4">
-          <div className="w-10 h-10 rounded-lg bg-blue-600 text-white flex items-center justify-center">
+        <div className="mc-surface-2 mc-border p-4 rounded-xl flex items-center gap-4">
+          <div className="w-10 h-10 rounded-lg mc-btn-primary text-white flex items-center justify-center">
             <ShoppingCart className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Unit Toko POS</div>
-            <div className="text-sm font-extrabold text-slate-800">{formatIDR(totalToko)}</div>
-            <button onClick={() => onNavigate('toko_kasir')} className="text-[10px] font-semibold text-blue-600 hover:underline mt-0.5 flex items-center gap-0.5">
+            <div className="text-[10px] font-semibold mc-muted uppercase tracking-wider">Unit Toko POS</div>
+            <div className="text-sm font-extrabold mc-ink-strong">{formatIDR(totalToko)}</div>
+            <button onClick={() => onNavigate('toko_kasir')} className="text-[10px] font-semibold mc-icon-accent hover:underline mt-0.5 flex items-center gap-0.5">
               Masuk Kasir <ChevronRight className="w-3 h-3" />
             </button>
           </div>
         </div>
 
         {/* Sewa */}
-        <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center gap-4">
-          <div className="w-10 h-10 rounded-lg bg-indigo-600 text-white flex items-center justify-center">
+        <div className="mc-surface-2 mc-border p-4 rounded-xl flex items-center gap-4">
+          <div className="w-10 h-10 rounded-lg bg-[var(--mc-accent)]/20 text-[var(--mc-accent)] flex items-center justify-center">
             <Tv className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Unit Sewa Alat</div>
-            <div className="text-sm font-extrabold text-slate-800">{formatIDR(totalSewa)}</div>
-            <button onClick={() => onNavigate('sewa_dashboard')} className="text-[10px] font-semibold text-indigo-600 hover:underline mt-0.5 flex items-center gap-0.5">
+            <div className="text-[10px] font-semibold mc-muted uppercase tracking-wider">Unit Sewa Alat</div>
+            <div className="text-sm font-extrabold mc-ink-strong">{formatIDR(totalSewa)}</div>
+            <button onClick={() => onNavigate('sewa_dashboard')} className="text-[10px] font-semibold mc-icon-accent hover:underline mt-0.5 flex items-center gap-0.5">
               Urus Sewa <ChevronRight className="w-3 h-3" />
             </button>
           </div>
         </div>
 
         {/* PPOB */}
-        <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center gap-4">
-          <div className="w-10 h-10 rounded-lg bg-amber-500 text-white flex items-center justify-center">
+        <div className="mc-surface-2 mc-border p-4 rounded-xl flex items-center gap-4">
+          <div className="w-10 h-10 rounded-lg bg-[var(--mc-primary)]/20 text-[var(--mc-primary)] flex items-center justify-center">
             <PhoneCall className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">PPOB Pulsa/Listrik</div>
-            <div className="text-sm font-extrabold text-slate-800">{formatIDR(totalPpob)}</div>
-            <button onClick={() => onNavigate('ppob_dashboard')} className="text-[10px] font-semibold text-amber-600 hover:underline mt-0.5 flex items-center gap-0.5">
+            <div className="text-[10px] font-semibold mc-muted uppercase tracking-wider">PPOB Pulsa/Listrik</div>
+            <div className="text-sm font-extrabold mc-ink-strong">{formatIDR(totalPpob)}</div>
+            <button onClick={() => onNavigate('ppob_dashboard')} className="text-[10px] font-semibold text-[var(--mc-primary)] hover:underline mt-0.5 flex items-center gap-0.5">
               Transaksi PPOB <ChevronRight className="w-3 h-3" />
             </button>
           </div>
         </div>
 
         {/* Digital Payment */}
-        <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl flex items-center gap-4">
-          <div className="w-10 h-10 rounded-lg bg-emerald-600 text-white flex items-center justify-center">
+        <div className="mc-surface-2 mc-border p-4 rounded-xl flex items-center gap-4">
+          <div className="w-10 h-10 rounded-lg bg-[var(--mc-success)]/20 text-[var(--mc-success)] flex items-center justify-center">
             <Wallet className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Digital Payment (VA)</div>
-            <div className="text-sm font-extrabold text-slate-800">{formatIDR(totalVA)}</div>
-            <button onClick={() => onNavigate('digipay_dashboard')} className="text-[10px] font-semibold text-emerald-600 hover:underline mt-0.5 flex items-center gap-0.5">
+            <div className="text-[10px] font-semibold mc-muted uppercase tracking-wider">Digital Payment (VA)</div>
+            <div className="text-sm font-extrabold mc-ink-strong">{formatIDR(totalVA)}</div>
+            <button onClick={() => onNavigate('digipay_dashboard')} className="text-[10px] font-semibold text-[var(--mc-success)] hover:underline mt-0.5 flex items-center gap-0.5">
               Layanan VA <ChevronRight className="w-3 h-3" />
             </button>
           </div>
@@ -372,25 +372,25 @@ export default function AdminDashboard({
       {/* Venture Investment Row */}
       {(totalVentureInvested > 0 || pendingVentures > 0 || totalDividends > 0) && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-1">
-          <div className="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-xl p-5 text-white shadow-md">
+          <div className="mc-card p-5 text-white shadow-md" style={{ background: 'linear-gradient(135deg, var(--mc-accent-2), var(--mc-accent))' }}>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-[10px] font-semibold text-purple-200 uppercase tracking-wider">Total Investasi Ventura</span>
-              <TrendingUp className="w-4 h-4 text-purple-200" />
+              <span className="text-[10px] font-semibold text-[var(--mc-on-accent)]/80 uppercase tracking-wider">Total Investasi Ventura</span>
+              <TrendingUp className="w-4 h-4 text-[var(--mc-on-accent)]/80" />
             </div>
-            <div className="text-xl font-extrabold">{formatIDR(totalVentureInvested)}</div>
-            <div className="text-[10px] text-purple-200 mt-1">{activeInvestments.length} Investasi Aktif</div>
+            <div className="text-xl font-extrabold text-[var(--mc-on-accent)]">{formatIDR(totalVentureInvested)}</div>
+            <div className="text-[10px] text-[var(--mc-on-accent)]/80 mt-1">{activeInvestments.length} Investasi Aktif</div>
           </div>
-          <div className="bg-white border border-slate-200 rounded-xl p-4">
-            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Dividen Terkumpul</div>
-            <div className="text-lg font-extrabold text-slate-800">{formatIDR(totalDividends)}</div>
-            <button onClick={() => onNavigate('ventura_dashboard')} className="text-[10px] font-semibold text-blue-600 hover:underline mt-0.5 flex items-center gap-0.5">
+          <div className="mc-card p-4">
+            <div className="text-[10px] font-semibold mc-muted uppercase tracking-wider">Dividen Terkumpul</div>
+            <div className="text-lg font-extrabold mc-ink-strong">{formatIDR(totalDividends)}</div>
+            <button onClick={() => onNavigate('ventura_dashboard')} className="text-[10px] font-semibold mc-icon-accent hover:underline mt-0.5 flex items-center gap-0.5">
               Manajemen Investasi <ChevronRight className="w-3 h-3" />
             </button>
           </div>
-          <div className="bg-white border border-slate-200 rounded-xl p-4">
-            <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Pengajuan Baru</div>
-            <div className="text-lg font-extrabold text-slate-800">{pendingVentures}</div>
-            <button onClick={() => onNavigate('ventura_dashboard')} className="text-[10px] font-semibold text-purple-600 hover:underline mt-0.5 flex items-center gap-0.5">
+          <div className="mc-card p-4">
+            <div className="text-[10px] font-semibold mc-muted uppercase tracking-wider">Pengajuan Baru</div>
+            <div className="text-lg font-extrabold mc-ink-strong">{pendingVentures}</div>
+            <button onClick={() => onNavigate('ventura_dashboard')} className="text-[10px] font-semibold text-[var(--mc-primary)] hover:underline mt-0.5 flex items-center gap-0.5">
               Tinjau Pengajuan <ChevronRight className="w-3 h-3" />
             </button>
           </div>
@@ -398,29 +398,29 @@ export default function AdminDashboard({
       )}
 
       {/* New Loan Requests Pending Approval */}
-      <div className="bg-white border border-slate-200 rounded-xl p-5">
+      <div className="mc-card p-5">
         <div className="flex justify-between items-center mb-4">
           <div>
-            <h3 className="font-bold text-slate-900 text-sm">Permohonan Pinjaman Terbaru</h3>
-            <p className="text-[11px] text-slate-400">Pengajuan pinjaman dari anggota yang membutuhkan verifikasi admin</p>
+            <h3 className="font-bold mc-ink-strong text-sm">Permohonan Pinjaman Terbaru</h3>
+            <p className="text-[11px] mc-muted">Pengajuan pinjaman dari anggota yang membutuhkan verifikasi admin</p>
           </div>
           <button 
             onClick={() => onNavigate('pinjaman_pengajuan')}
-            className="text-xs font-semibold text-blue-600 hover:underline flex items-center"
+            className="text-xs font-semibold mc-icon-accent hover:underline flex items-center"
           >
             Lihat Semua <ChevronRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
         {pendingLoans.length === 0 ? (
-          <div className="text-center py-6 border border-dashed border-slate-200 rounded-lg text-xs text-slate-400">
+          <div className="text-center py-6 border border-dashed mc-border rounded-lg text-xs mc-muted">
             ✅ Tidak ada permohonan pinjaman baru yang tertunda.
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+                <tr className="mc-surface-2 mc-border mc-muted font-semibold">
                   <th className="p-3">Nama Anggota</th>
                   <th className="p-3">Kategori Produk</th>
                   <th className="p-3">Jumlah Pokok</th>
@@ -430,25 +430,25 @@ export default function AdminDashboard({
                   <th className="p-3 text-right">Aksi Tindakan</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y mc-border">
                 {pendingLoans.map((l) => (
-                  <tr key={l.id} className="hover:bg-slate-50/50">
-                    <td className="p-3 font-semibold text-slate-800">{l.anggotaNama}</td>
-                    <td className="p-3 text-slate-600">{l.jenisNama}</td>
-                    <td className="p-3 font-semibold text-slate-900 font-mono">{formatIDR(l.pokok)}</td>
-                    <td className="p-3 font-mono">{l.tenorMonths} bulan</td>
-                    <td className="p-3 font-mono">{l.bungaPersen}% / bln ({l.metodeBunga})</td>
-                    <td className="p-3 font-semibold font-mono text-slate-900">{formatIDR(l.angsuranPerBulan)}</td>
+                  <tr key={l.id} className="hover:mc-surface-2/50">
+                    <td className="p-3 font-semibold mc-ink-strong">{l.anggotaNama}</td>
+                    <td className="p-3 mc-muted">{l.jenisNama}</td>
+                    <td className="p-3 font-semibold mc-ink-strong font-mono">{formatIDR(l.pokok)}</td>
+                    <td className="p-3 font-mono mc-muted">{l.tenorMonths} bulan</td>
+                    <td className="p-3 font-mono mc-muted">{l.bungaPersen}% / bln ({l.metodeBunga})</td>
+                    <td className="p-3 font-semibold font-mono mc-ink-strong">{formatIDR(l.angsuranPerBulan)}</td>
                     <td className="p-3 text-right space-x-2">
                       <button
                         onClick={() => onApproveLoan(l.id)}
-                        className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
+                        className="mc-badge-ok border px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
                       >
-                        Setujui &amp; Cairkan
+                        Setujui & Cairkan
                       </button>
                       <button
                         onClick={() => onRejectLoan(l.id)}
-                        className="bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
+                        className="mc-btn-danger border px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
                       >
                         Tolak
                       </button>

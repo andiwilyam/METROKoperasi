@@ -131,14 +131,29 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
     setError('');
   };
 
+  // Warna aksen per tab via token semantik
+  const getTabActiveStyle = (tab: 'admin' | 'member' | 'perusahaan') => {
+    if (tab === 'admin') return { borderColor: 'var(--mc-accent)', color: 'var(--mc-accent)' };
+    if (tab === 'member') return { borderColor: 'var(--mc-accent)', color: 'var(--mc-accent)' };
+    // perusahaan: pakai aksen ungu via variabel inline (tidak ada token ungu di theme, gunakan default)
+    return { borderColor: '#a855f7', color: '#a855f7' };
+  };
+
+  const getSubmitBtnClass = (tab: 'admin' | 'member' | 'perusahaan') => {
+    const base = 'w-full py-3 px-4 rounded-lg font-semibold text-sm text-white shadow-md flex items-center justify-center gap-2 transition-colors cursor-pointer mc-focus';
+    if (tab === 'admin') return `${base} mc-btn-primary`;
+    if (tab === 'member') return `${base} mc-btn-primary`; // pakai aksen emas
+    return `${base} bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 shadow-purple-500/20`;
+  };
+
   return (
     <div className="relative min-h-screen flex items-center justify-center mc-bg overflow-hidden px-4">
       {/* Dynamic Background Canvas */}
       <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" />
 
-      {/* Decorative Blur Spheres */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-blue-500/10 blur-3xl pointer-events-none animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-amber-500/10 blur-3xl pointer-events-none animate-pulse" />
+      {/* Decorative Blur Spheres — pakai token aksen */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-[var(--mc-accent)]/10 blur-3xl pointer-events-none animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-[var(--mc-primary)]/10 blur-3xl pointer-events-none animate-pulse" />
 
       {/* Login Main Container */}
       <div className="w-full max-w-5xl flex flex-col items-center gap-6 relative z-10 my-8">
@@ -147,12 +162,12 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
           {/* Left column: Presentational Info & branding */}
           <div className="md:col-span-5 text-white flex flex-col justify-center space-y-6">
             <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/30">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-[var(--mc-accent)] to-[var(--mc-accent-2)] flex items-center justify-center shadow-lg shadow-[var(--mc-accent)]/30">
                 <Building className="w-6 h-6 text-white" />
               </div>
               <div>
                 <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-                  MetroCoop <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">v2.0</span>
+                  MetroCoop <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-[var(--mc-accent)]/20 text-[var(--mc-accent)] border border-[var(--mc-accent)]/30">v2.0</span>
                 </h1>
                 <p className="text-xs mc-muted">Sistem Informasi Koperasi Terintegrasi</p>
               </div>
@@ -170,11 +185,11 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
             {/* Quick Stats Grid */}
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="mc-surface-2 backdrop-blur mc-border p-3 rounded-lg">
-                <div className="text-xl font-bold text-blue-400">100%</div>
+                <div className="text-xl font-bold text-[var(--mc-accent)]">100%</div>
                 <div className="text-xs mc-muted">Auto Journaling</div>
               </div>
               <div className="mc-surface-2 backdrop-blur mc-border p-3 rounded-lg">
-                <div className="text-xl font-bold text-amber-400">Multi</div>
+                <div className="text-xl font-bold text-[var(--mc-primary)]">Multi</div>
                 <div className="text-xs mc-muted">Portal Anggota & Admin</div>
               </div>
             </div>
@@ -183,7 +198,7 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
             {import.meta.env.DEV && (
             <div className="mc-surface-2 backdrop-blur mc-border p-4 rounded-xl space-y-2 text-xs">
               <div className="font-semibold text-slate-300 flex items-center gap-1.5 mb-1">
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <Sparkles className="w-3.5 h-3.5 text-[var(--mc-accent)]" />
                 Test Credentials (Klik untuk mengisi otomatis):
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mc-muted">
@@ -192,21 +207,21 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                   className="text-left mc-surface-2 hover:opacity-80 mc-border p-2 rounded-lg cursor-pointer transition-colors"
                 >
                   <div className="font-medium text-slate-200">🔑 Admin / Pengurus</div>
-                  <div>User: <span className="text-blue-400">admin</span> / Pass: <span className="text-blue-400">admin123</span></div>
+                  <div>User: <span className="text-[var(--mc-accent)]">admin</span> / Pass: <span className="text-[var(--mc-accent)]">admin123</span></div>
                 </button>
                 <button 
                   onClick={() => autofillCredentials('operator', 'admin123', 'admin')}
                   className="text-left mc-surface-2 hover:opacity-80 mc-border p-2 rounded-lg cursor-pointer transition-colors"
                 >
                   <div className="font-medium text-slate-200">⚙️ Operator Staff</div>
-                  <div>User: <span className="text-emerald-400">operator</span> / Pass: <span className="text-emerald-400">admin123</span></div>
+                  <div>User: <span className="text-[var(--mc-success)]">operator</span> / Pass: <span className="text-[var(--mc-success)]">admin123</span></div>
                 </button>
                 <button 
                   onClick={() => autofillCredentials('1234567890', '123456', 'member')}
                   className="text-left mc-surface-2 hover:opacity-80 mc-border p-2 rounded-lg cursor-pointer transition-colors sm:col-span-2"
                 >
                   <div className="font-medium text-slate-200">👤 Anggota (Marmad Tuaian)</div>
-                  <div>NIK: <span className="text-amber-400">1234567890</span> / Pass: <span className="text-amber-400">123456</span></div>
+                  <div>NIK: <span className="text-[var(--mc-primary)]">1234567890</span> / Pass: <span className="text-[var(--mc-primary)]">123456</span></div>
                 </button>
               </div>
             </div>
@@ -217,7 +232,7 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
           <div className="md:col-span-7 flex justify-center">
             <div className={`w-full max-w-md mc-card shadow-2xl overflow-hidden ${shake ? 'animate-shake' : ''}`}>
               {/* Tabs for Portal Mode */}
-              <div className="flex border-b border-slate-100 bg-slate-50/50">
+              <div className="flex border-b mc-border mc-surface-2">
                 <button
                   type="button"
                   onClick={() => {
@@ -227,7 +242,7 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                   className={`flex-1 py-4 text-sm font-semibold flex items-center justify-center gap-2 border-b-2 transition-colors ${
                     activeTab === 'admin'
                       ? 'mc-sidebar-active'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      : 'border-transparent mc-muted hover:mc-ink'
                   }`}
                 >
                   <Shield className="w-4 h-4" />
@@ -242,9 +257,9 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                   className={`flex-1 py-4 text-sm font-semibold flex items-center justify-center gap-2 border-b-2 transition-colors ${
                     activeTab === 'member'
                       ? 'border-transparent'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      : 'border-transparent mc-muted hover:mc-ink'
                   }`}
-                  style={activeTab === 'member' ? { borderColor: 'var(--mc-accent)', color: 'var(--mc-accent)' } : undefined}
+                  style={activeTab === 'member' ? getTabActiveStyle('member') : undefined}
                 >
                   <User className="w-4 h-4" />
                   Portal Anggota
@@ -257,9 +272,10 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                   }}
                   className={`flex-1 py-4 text-sm font-semibold flex items-center justify-center gap-2 border-b-2 transition-colors ${
                     activeTab === 'perusahaan'
-                      ? 'border-purple-600 text-purple-600'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      ? ''
+                      : 'border-transparent mc-muted hover:mc-ink'
                   }`}
+                  style={activeTab === 'perusahaan' ? getTabActiveStyle('perusahaan') : undefined}
                 >
                   <Building2 className="w-4 h-4" />
                   Perusahaan
@@ -269,16 +285,16 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
               {/* Login Form Body */}
               <div className="p-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-lg font-bold text-slate-900">
+                  <h3 className="text-lg font-bold mc-ink-strong">
                     {activeTab === 'admin' ? 'Masuk Back Office' : activeTab === 'perusahaan' ? 'Masuk Portal Perusahaan' : 'Masuk Portal Anggota'}
                   </h3>
-                  <p className="text-xs text-slate-500 mt-1 min-h-[1.5rem] flex items-center justify-center">
+                  <p className="text-xs mc-muted mt-1 min-h-[1.5rem] flex items-center justify-center">
                     <span className="typing-caret pb-0.5">{typingText}</span>
                   </p>
                 </div>
 
                 {error && (
-                  <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-xs font-semibold rounded-lg flex items-start gap-2">
+                  <div className="mb-4 p-3 mc-danger-bg mc-border text-[var(--mc-danger)] text-xs font-semibold rounded-lg flex items-start gap-2">
                     <span className="font-bold">❌</span>
                     <span>{error}</span>
                   </div>
@@ -286,20 +302,20 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
 
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <label className="block text-xs font-semibold mc-ink mb-1.5 flex items-center gap-1.5">
                       {activeTab === 'perusahaan' ? (
                         <>
-                          <Building2 className="w-3.5 h-3.5 text-slate-400" />
+                          <Building2 className="w-3.5 h-3.5 mc-muted" />
                           Username Perusahaan
                         </>
                       ) : activeTab === 'admin' ? (
                         <>
-                          <User className="w-3.5 h-3.5 text-slate-400" />
+                          <User className="w-3.5 h-3.5 mc-muted" />
                           Username Admin/Operator
                         </>
                       ) : (
                         <>
-                          <Briefcase className="w-3.5 h-3.5 text-slate-400" />
+                          <Briefcase className="w-3.5 h-3.5 mc-muted" />
                           NIK Anggota (Nomor Induk Kependudukan)
                         </>
                       )}
@@ -309,14 +325,14 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       placeholder={activeTab === 'perusahaan' ? 'Username perusahaan (misal: hijau_agri)' : activeTab === 'admin' ? 'Masukkan username (misal: admin)' : 'Masukkan NIK 10 digit'}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm font-mono text-slate-800 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-0 focus:border-[var(--mc-accent)] transition-colors mc-focus"
+                      className="w-full px-3.5 py-2.5 rounded-lg mc-border text-sm font-mono mc-ink mc-surface focus:mc-surface focus:outline-none focus:ring-2 focus:ring-offset-0 focus:border-[var(--mc-accent)] transition-colors mc-focus"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                      <Key className="w-3.5 h-3.5 text-slate-400" />
+                    <label className="block text-xs font-semibold mc-ink mb-1.5 flex items-center gap-1.5">
+                      <Key className="w-3.5 h-3.5 mc-muted" />
                       Kata Sandi (Password)
                     </label>
                     <div className="relative">
@@ -325,14 +341,14 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••"
-                        className="w-full pl-3.5 pr-10 py-2.5 rounded-lg border border-slate-200 text-sm font-mono text-slate-800 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-offset-0 focus:border-[var(--mc-accent)] transition-colors mc-focus"
+                        className="w-full pl-3.5 pr-10 py-2.5 rounded-lg mc-border text-sm font-mono mc-ink mc-surface focus:mc-surface focus:outline-none focus:ring-2 focus:ring-offset-0 focus:border-[var(--mc-accent)] transition-colors mc-focus"
                         required
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
                         aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
-                        className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer mc-focus"
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 mc-muted hover:mc-ink cursor-pointer mc-focus"
                       >
                         {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                       </button>
@@ -343,11 +359,7 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                     <button
                       type="submit"
                       disabled={isProcessing}
-                      className={`w-full py-3 px-4 rounded-lg font-semibold text-sm text-white shadow-md flex items-center justify-center gap-2 transition-colors cursor-pointer ${
-                        activeTab === 'admin'
-                          ? 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-blue-500/20'
-                          : 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 shadow-amber-500/20'
-                      } ${isProcessing ? 'opacity-80 cursor-not-allowed' : ''}`}
+                      className={`${getSubmitBtnClass(activeTab)} ${isProcessing ? 'opacity-80 cursor-not-allowed' : ''}`}
                     >
                       {isProcessing ? (
                         <>
@@ -366,24 +378,24 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
 
                 {/* Register & quick credentials for Perusahaan */}
                 {activeTab === 'perusahaan' && (
-                  <div className="mt-4 pt-4 border-t border-slate-100 text-center">
+                  <div className="mt-4 pt-4 border-t mc-border text-center">
                     <button
                       type="button"
                       onClick={() => setShowRegister(!showRegister)}
-                      className="text-xs text-purple-600 font-semibold hover:underline cursor-pointer"
+                      className="text-xs font-semibold hover:underline cursor-pointer mc-icon-accent"
                     >
                       {showRegister ? '« Kembali ke Login' : '+ Daftar Perusahaan Baru'}
                     </button>
 
                     {showRegister && (
-                      <div className="mt-3 p-3 bg-purple-50 border border-purple-200 rounded-lg space-y-2 text-left">
-                        <h4 className="text-xs font-bold text-purple-800">Registrasi Perusahaan Baru</h4>
-                        <input value={regForm.namaPerusahaan} onChange={e => setRegForm(f => ({ ...f, namaPerusahaan: e.target.value }))} placeholder="Nama Perusahaan *" className="w-full border p-1.5 rounded text-xs" />
-                        <input value={regForm.username} onChange={e => setRegForm(f => ({ ...f, username: e.target.value }))} placeholder="Username *" className="w-full border p-1.5 rounded text-xs" />
-                        <input type="password" value={regForm.password} onChange={e => setRegForm(f => ({ ...f, password: e.target.value }))} placeholder="Password * (min 6 karakter)" className="w-full border p-1.5 rounded text-xs" />
-                        <input value={regForm.email} onChange={e => setRegForm(f => ({ ...f, email: e.target.value }))} placeholder="Email" className="w-full border p-1.5 rounded text-xs" />
-                        <input value={regForm.telepon} onChange={e => setRegForm(f => ({ ...f, telepon: e.target.value }))} placeholder="Telepon" className="w-full border p-1.5 rounded text-xs" />
-                        <input value={regForm.sektorIndustri} onChange={e => setRegForm(f => ({ ...f, sektorIndustri: e.target.value }))} placeholder="Sektor Industri" className="w-full border p-1.5 rounded text-xs" />
+                      <div className="mt-3 p-3 mc-surface-2 mc-border rounded-lg space-y-2 text-left">
+                        <h4 className="text-xs font-bold mc-ink">Registrasi Perusahaan Baru</h4>
+                        <input value={regForm.namaPerusahaan} onChange={e => setRegForm(f => ({ ...f, namaPerusahaan: e.target.value }))} placeholder="Nama Perusahaan *" className="w-full mc-border mc-surface p-1.5 rounded text-xs mc-ink" />
+                        <input value={regForm.username} onChange={e => setRegForm(f => ({ ...f, username: e.target.value }))} placeholder="Username *" className="w-full mc-border mc-surface p-1.5 rounded text-xs mc-ink" />
+                        <input type="password" value={regForm.password} onChange={e => setRegForm(f => ({ ...f, password: e.target.value }))} placeholder="Password * (min 6 karakter)" className="w-full mc-border mc-surface p-1.5 rounded text-xs mc-ink" />
+                        <input value={regForm.email} onChange={e => setRegForm(f => ({ ...f, email: e.target.value }))} placeholder="Email" className="w-full mc-border mc-surface p-1.5 rounded text-xs mc-ink" />
+                        <input value={regForm.telepon} onChange={e => setRegForm(f => ({ ...f, telepon: e.target.value }))} placeholder="Telepon" className="w-full mc-border mc-surface p-1.5 rounded text-xs mc-ink" />
+                        <input value={regForm.sektorIndustri} onChange={e => setRegForm(f => ({ ...f, sektorIndustri: e.target.value }))} placeholder="Sektor Industri" className="w-full mc-border mc-surface p-1.5 rounded text-xs mc-ink" />
                         <button
                           onClick={async () => {
                             if (!regForm.namaPerusahaan || !regForm.username || !regForm.password) { setError('Nama, username, password wajib diisi!'); return; }
@@ -395,20 +407,19 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                               });
                               if (!res.ok) { const e = await res.json(); throw new Error(e.error); }
                               const data = await res.json();
-                              // Set the token and user in auth store
                               localStorage.setItem('token', data.token);
                               localStorage.setItem('user', JSON.stringify(data.user));
                               window.location.reload();
                             } catch (err: any) { setError(err.message); }
                           }}
-                          className="w-full py-1.5 bg-purple-600 text-white rounded-lg text-xs font-bold hover:bg-purple-700 cursor-pointer"
+                          className="w-full py-1.5 mc-btn-primary rounded-lg text-xs font-bold cursor-pointer"
                         >Daftar Sekarang</button>
                       </div>
                     )}
 
                     {import.meta.env.DEV && (
                     <div className="mt-2 text-[10px] mc-muted">
-                      Test: <button onClick={() => autofillCredentials('hijau_agri', 'perusahaan123', 'perusahaan')} className="text-blue-600 hover:underline cursor-pointer">hijau_agri / perusahaan123</button>
+                      Test: <button onClick={() => autofillCredentials('hijau_agri', 'perusahaan123', 'perusahaan')} className="text-[var(--mc-accent)] hover:underline cursor-pointer">hijau_agri / perusahaan123</button>
                     </div>
                     )}
                   </div>
@@ -416,7 +427,7 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
               </div>
 
               {/* Footer terms */}
-              <div className="px-8 py-4 bg-slate-50 border-t border-slate-100 text-[10px] text-slate-400 text-center">
+              <div className="px-8 py-4 mc-surface-2 mc-border text-[10px] mc-muted text-center">
                 Aplikasi ini dilindungi oleh sertifikat enkripsi SSL. <br />
                 © 2026 MetroCoop v2.0 — Sistem Koperasi Terintegrasi.
               </div>
@@ -426,7 +437,7 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
         </div>
 
         {/* Dynamic global copyright and identity */}
-        <div className="text-[11px] font-bold text-slate-400/90 tracking-widest text-center mt-2 uppercase select-none">
+        <div className="text-[11px] font-bold mc-muted tracking-widest text-center mt-2 uppercase select-none">
           METRO KOMUNIKA ASIA @2026 &nbsp;&bull;&nbsp; Design By Andi WIlyam
         </div>
       </div>

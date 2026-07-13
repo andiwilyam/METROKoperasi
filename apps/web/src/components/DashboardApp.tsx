@@ -16,11 +16,6 @@ export default function DashboardApp() {
 
   const [activeMenu, setActiveMenu] = useState<string>('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
-  const [themePreset, setThemePreset] = useState<string>(() => localStorage.getItem('theme_preset') || 'royal_blue');
-
-  useEffect(() => {
-    localStorage.setItem('theme_preset', themePreset);
-  }, [themePreset]);
 
   const pendingNotificationsCount =
     store.transferReceipts.filter((r: any) => r.status === 'pending').length +
@@ -34,7 +29,6 @@ export default function DashboardApp() {
     activeMenu,
     setActiveMenu,
     session: user,
-    themePreset,
     onSelectThemePreset: setTheme,
   };
 
@@ -159,7 +153,7 @@ export default function DashboardApp() {
   }
 
   return (
-    <div className="min-h-screen font-sans antialiased text-slate-800 mc-bg flex overflow-hidden">
+    <div className="min-h-screen font-sans antialiased mc-bg flex overflow-hidden">
       <Sidebar
         role={user?.role}
         activeMenu={activeMenu}
