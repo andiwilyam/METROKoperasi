@@ -46,22 +46,22 @@ export default function AdminNeracaSaldo({
 
   return (
     <div className="space-y-6">
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-6">
-        <div className="border-b border-slate-100 pb-4 flex items-start justify-between">
+      <div className="mc-card space-y-6">
+        <div className="border-b mc-border pb-4 flex items-start justify-between">
           <div>
-            <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">
-              <Scale className="w-5 h-5 text-indigo-600" />
+            <h3 className="font-extrabold mc-ink-strong text-sm flex items-center gap-1.5">
+              <Scale className="w-5 h-5 mc-icon-accent" style={{ color: 'var(--mc-primary)' }} />
               Neraca Saldo (Trial Balance) Koperasi
             </h3>
-            <p className="text-[11px] text-slate-400">Ringkasan saldo seluruh akun per periode berjalan</p>
+            <p className="text-[11px] mc-muted">Ringkasan saldo seluruh akun per periode berjalan</p>
           </div>
 
           {/* Balance indicator */}
           <div
             className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold ${
               isBalance
-                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                : 'bg-red-50 text-red-700 border border-red-200'
+                ? 'mc-badge-ok'
+                : 'mc-btn-danger'
             }`}
           >
             {isBalance ? (
@@ -81,7 +81,7 @@ export default function AdminNeracaSaldo({
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+              <tr className="mc-surface-2 mc-border mc-muted font-semibold">
                 <th className="p-4">Kode Akun</th>
                 <th className="p-4">Nama Akun</th>
                 <th className="p-4">Kategori</th>
@@ -89,27 +89,27 @@ export default function AdminNeracaSaldo({
                 <th className="p-4 text-right">Kredit</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody className="divide-y mc-border">
               {akunAktif.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="p-8 text-center text-slate-400">
+                  <td colSpan={5} className="p-8 text-center mc-muted">
                     Belum ada akun dengan saldo.
                   </td>
                 </tr>
               ) : (
                 akunAktif.map((a) => (
-                  <tr key={a.kodeAkun} className="hover:bg-slate-50/20">
-                    <td className="p-4 font-mono font-bold text-slate-700">{a.kodeAkun}</td>
-                    <td className="p-4 text-slate-800 font-medium">{a.namaAkun}</td>
-                    <td className="p-4 text-slate-500">
-                      <span className="inline-block px-2 py-0.5 rounded bg-slate-100 text-[10px] uppercase tracking-wide font-semibold text-slate-600">
+                  <tr key={a.kodeAkun} className="hover:mc-surface-2/20">
+                    <td className="p-4 font-mono font-bold mc-ink-strong">{a.kodeAkun}</td>
+                    <td className="p-4 mc-ink font-medium">{a.namaAkun}</td>
+                    <td className="p-4 mc-muted">
+                      <span className="inline-block px-2 py-0.5 rounded mc-surface-2 mc-border text-[10px] uppercase tracking-wide font-semibold">
                         {a.kategori}
                       </span>
                     </td>
-                    <td className="p-4 text-right font-mono text-slate-700">
+                    <td className="p-4 text-right font-mono mc-ink-strong">
                       {a.debit > 0 ? formatIDR(a.debit) : '-'}
                     </td>
-                    <td className="p-4 text-right font-mono text-slate-700">
+                    <td className="p-4 text-right font-mono mc-ink-strong">
                       {a.kredit > 0 ? formatIDR(a.kredit) : '-'}
                     </td>
                   </tr>
@@ -119,14 +119,14 @@ export default function AdminNeracaSaldo({
 
             {/* Total row */}
             <tfoot>
-              <tr className="border-t-2 border-slate-200 bg-slate-50 font-bold text-slate-900">
+              <tr className="border-t-2 mc-border mc-surface font-bold mc-ink-strong">
                 <td className="p-4" colSpan={3}>
                   TOTAL SALDO
                 </td>
-                <td className="p-4 text-right font-mono text-slate-900">
+                <td className="p-4 text-right font-mono mc-ink-strong">
                   {formatIDR(totalDebit)}
                 </td>
-                <td className="p-4 text-right font-mono text-slate-900">
+                <td className="p-4 text-right font-mono mc-ink-strong">
                   {formatIDR(totalKredit)}
                 </td>
               </tr>
@@ -138,8 +138,8 @@ export default function AdminNeracaSaldo({
         <div
           className={`p-4 rounded-xl text-center text-xs font-bold ${
             isBalance
-              ? 'bg-emerald-50 border border-emerald-200 text-emerald-800'
-              : 'bg-red-50 border border-red-200 text-red-800'
+              ? 'mc-badge-ok'
+              : 'mc-btn-danger'
           }`}
         >
           {isBalance

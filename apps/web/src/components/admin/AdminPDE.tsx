@@ -1,3 +1,8 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
 import React, { useEffect } from 'react';
 import { ShieldAlert, TrendingUp, AlertTriangle } from 'lucide-react';
 
@@ -15,36 +20,36 @@ export default function AdminPDE({ laporanPde, fetchLaporanPde }: Props) {
 
   return (
     <div className="space-y-4">
-      <div className="bg-white border rounded-xl p-6 shadow-sm">
-        <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2 mb-4">
-          <ShieldAlert className="w-5 h-5 text-blue-600" /> Laporan Kualitas Aktiva Produktif (PDE)
+      <div className="mc-card">
+        <h3 className="font-bold mc-ink-strong text-sm flex items-center gap-2 mb-4">
+          <ShieldAlert className="w-5 h-5 mc-icon-accent" style={{ color: 'var(--mc-primary)' }} /> Laporan Kualitas Aktiva Produktif (PDE)
         </h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
-            <div className="text-xs text-slate-500">Total Debitur</div>
-            <div className="text-xl font-bold text-blue-700">{d.totalDebitur || 0}</div>
+          <div className="mc-surface-2 mc-border rounded-lg p-4" style={{ borderColor: 'var(--mc-primary)' }}>
+            <div className="text-xs mc-muted">Total Debitur</div>
+            <div className="text-xl font-bold mc-ink-strong">{d.totalDebitur || 0}</div>
           </div>
-          <div className="bg-slate-50 border rounded-lg p-4">
-            <div className="text-xs text-slate-500">Total Piutang</div>
-            <div className="text-lg font-bold text-slate-800">{formatIDR(d.totalPiutang)}</div>
+          <div className="mc-surface-2 mc-border rounded-lg p-4">
+            <div className="text-xs mc-muted">Total Piutang</div>
+            <div className="text-lg font-bold mc-ink-strong">{formatIDR(d.totalPiutang)}</div>
           </div>
-          <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-4">
-            <div className="text-xs text-slate-500">Piutang Lancar</div>
-            <div className="text-lg font-bold text-emerald-700">{formatIDR(d.lancar)}</div>
+          <div className="mc-surface-2 mc-border rounded-lg p-4" style={{ borderColor: 'var(--mc-success)' }}>
+            <div className="text-xs mc-muted">Piutang Lancar</div>
+            <div className="text-lg font-bold" style={{ color: 'var(--mc-success)' }}>{formatIDR(d.lancar)}</div>
           </div>
-          <div className="bg-red-50 border border-red-100 rounded-lg p-4">
-            <div className="text-xs text-slate-500">Piutang Macet</div>
-            <div className="text-lg font-bold text-red-700">{formatIDR(d.macet)}</div>
+          <div className="mc-surface-2 mc-border rounded-lg p-4" style={{ borderColor: 'var(--mc-error)' }}>
+            <div className="text-xs mc-muted">Piutang Macet</div>
+            <div className="text-lg font-bold" style={{ color: 'var(--mc-error)' }}>{formatIDR(d.macet)}</div>
           </div>
         </div>
-        <div className="flex items-center gap-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-          <AlertTriangle className="w-6 h-6 text-amber-600" />
+        <div className="flex items-center gap-3 p-4 mc-surface-2 mc-border rounded-lg" style={{ borderColor: 'var(--mc-accent)', background: 'var(--mc-sidebar-active)' }}>
+          <AlertTriangle className="w-6 h-6" style={{ color: 'var(--mc-accent)' }} />
           <div>
-            <div className="text-xs text-slate-500">Rasio Kredit Bermasalah (NPL)</div>
-            <div className="text-2xl font-bold text-amber-700">{d.npl || '0%'}</div>
+            <div className="text-xs mc-muted">Rasio Kredit Bermasalah (NPL)</div>
+            <div className="text-2xl font-bold mc-ink-strong">{d.npl || '0%'}</div>
           </div>
-          <div className="ml-auto text-xs text-slate-400 max-w-xs text-right">
-            Standar sehat KSP: NPL &lt; 5% sesuai Permenkop No. 2/2024
+          <div className="ml-auto text-xs mc-muted max-w-xs text-right">
+            {'Standar sehat KSP: NPL < 5% sesuai Permenkop No. 2/2024'}
           </div>
         </div>
       </div>

@@ -1,5 +1,10 @@
-import React, { useState, useMemo, useRef } from 'react';
-import { Search, Calendar, Download, BookOpen, Loader2, Inbox } from 'lucide-react';
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import { Search, Calendar, Download, BookOpen, Loader2, Inbox, ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface AdminBukuBesarProps {
   chartOfAccounts: any[];
@@ -88,15 +93,15 @@ export default function AdminBukuBesar({ chartOfAccounts, fetchBukuBesar, bukuBe
 
   return (
     <div className="space-y-4">
-      <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+      <div className="mc-card">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-indigo-600" /> Buku Besar (General Ledger)
+          <h3 className="font-bold mc-ink-strong text-sm flex items-center gap-2">
+            <BookOpen className="w-5 h-5 mc-icon-accent" style={{ color: 'var(--mc-primary)' }} /> Buku Besar (General Ledger)
           </h3>
           {hasResult && (
             <button
               onClick={handleDownload}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700"
+              className="flex items-center gap-1.5 px-3 py-1.5 mc-badge-ok text-white rounded-lg text-xs font-semibold hover:shadow cursor-pointer"
             >
               <Download className="w-3.5 h-3.5" /> Unduh CSV
             </button>
@@ -105,13 +110,13 @@ export default function AdminBukuBesar({ chartOfAccounts, fetchBukuBesar, bukuBe
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           <div className="md:col-span-2">
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">Pilih Akun</label>
+            <label className="block text-[11px] font-semibold mc-muted mb-1">Pilih Akun</label>
             <div className="relative">
-              <BookOpen className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+              <BookOpen className="absolute left-3 top-2.5 w-4 h-4 mc-muted" />
               <select
                 value={coaId}
                 onChange={e => setCoaId(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 border border-slate-200 rounded-lg text-xs bg-white"
+                className="w-full pl-9 pr-3 py-2 mc-border mc-surface-2 rounded-lg text-xs mc-focus focus:ring-[var(--mc-accent)]"
               >
                 <option value="">-- Pilih Akun Detail --</option>
                 {detailAccounts.map(a => (
@@ -124,27 +129,27 @@ export default function AdminBukuBesar({ chartOfAccounts, fetchBukuBesar, bukuBe
           </div>
 
           <div>
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">Tanggal Mulai</label>
+            <label className="block text-[11px] font-semibold mc-muted mb-1">Tanggal Mulai</label>
             <div className="relative">
-              <Calendar className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+              <Calendar className="absolute left-3 top-2.5 w-4 h-4 mc-muted" />
               <input
                 type="date"
                 value={startDate}
                 onChange={e => setStartDate(e.target.value)}
-                className="w-full pl-9 pr-2 py-2 border border-slate-200 rounded-lg text-xs"
+                className="w-full pl-9 pr-2 py-2 mc-border mc-surface-2 rounded-lg text-xs mc-focus focus:ring-[var(--mc-accent)]"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[11px] font-semibold text-slate-500 mb-1">Tanggal Akhir</label>
+            <label className="block text-[11px] font-semibold mc-muted mb-1">Tanggal Akhir</label>
             <div className="relative">
-              <Calendar className="absolute left-3 top-2.5 w-4 h-4 text-slate-400" />
+              <Calendar className="absolute left-3 top-2.5 w-4 h-4 mc-muted" />
               <input
                 type="date"
                 value={endDate}
                 onChange={e => setEndDate(e.target.value)}
-                className="w-full pl-9 pr-2 py-2 border border-slate-200 rounded-lg text-xs"
+                className="w-full pl-9 pr-2 py-2 mc-border mc-surface-2 rounded-lg text-xs mc-focus focus:ring-[var(--mc-accent)]"
               />
             </div>
           </div>
@@ -154,7 +159,7 @@ export default function AdminBukuBesar({ chartOfAccounts, fetchBukuBesar, bukuBe
           <button
             onClick={handleCari}
             disabled={!coaId || loading}
-            className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 text-white rounded-lg text-xs font-semibold hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex items-center gap-1.5 px-4 py-2 mc-btn-primary text-white rounded-lg text-xs font-semibold hover:shadow disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Search className="w-3.5 h-3.5" /> {loading ? 'Memuat...' : 'Tampilkan Buku Besar'}
           </button>
@@ -162,53 +167,53 @@ export default function AdminBukuBesar({ chartOfAccounts, fetchBukuBesar, bukuBe
       </div>
 
       {loading && (
-        <div className="bg-white border border-slate-200 rounded-xl p-12 shadow-sm flex flex-col items-center justify-center text-slate-400">
-          <Loader2 className="w-8 h-8 animate-spin text-indigo-500 mb-3" />
+        <div className="mc-card p-12 flex flex-col items-center justify-center mc-muted">
+          <Loader2 className="w-8 h-8 animate-spin mc-icon-accent" style={{ color: 'var(--mc-accent)' }} mb-3 />
           <p className="text-xs">Memuat data buku besar...</p>
         </div>
       )}
 
       {!loading && !hasResult && (
-        <div className="bg-white border border-slate-200 rounded-xl p-12 shadow-sm flex flex-col items-center justify-center text-slate-400">
+        <div className="mc-card p-12 flex flex-col items-center justify-center mc-muted">
           <Inbox className="w-10 h-10 mb-3" />
-          <p className="text-sm font-semibold text-slate-500">Belum ada data buku besar</p>
-          <p className="text-[11px] mt-1">Pilih akun detail dan klik &quot;Tampilkan Buku Besar&quot; untuk melihat mutasi.</p>
+          <p className="text-sm font-semibold mc-ink-strong">Belum ada data buku besar</p>
+          <p className="text-[11px] mt-1">Pilih akun detail dan klik "Tampilkan Buku Besar" untuk melihat mutasi.</p>
         </div>
       )}
 
       {!loading && hasResult && linesWithSaldo.length === 0 && (
-        <div className="bg-white border border-slate-200 rounded-xl p-12 shadow-sm flex flex-col items-center justify-center text-slate-400">
+        <div className="mc-card p-12 flex flex-col items-center justify-center mc-muted">
           <Inbox className="w-10 h-10 mb-3" />
-          <p className="text-sm font-semibold text-slate-500">Tidak ada transaksi</p>
+          <p className="text-sm font-semibold mc-ink-strong">Tidak ada transaksi</p>
           <p className="text-[11px] mt-1">Tidak ditemukan jurnal pada akun ini untuk periode yang dipilih.</p>
         </div>
       )}
 
       {!loading && hasResult && linesWithSaldo.length > 0 && (
-        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="px-4 py-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2 bg-slate-50">
+        <div className="mc-card overflow-hidden">
+          <div className="px-4 py-3 mc-border flex flex-wrap items-center justify-between gap-2 mc-surface-2">
             <div>
-              <div className="text-sm font-bold text-slate-800 flex items-center gap-2">
-                <span className="font-mono text-indigo-600">{bukuBesar.account.kodeAkun}</span>
+              <div className="text-sm font-bold mc-ink-strong flex items-center gap-2">
+                <span className="font-mono mc-icon-accent" style={{ color: 'var(--mc-primary)' }}>{bukuBesar.account.kodeAkun}</span>
                 {bukuBesar.account.namaAkun}
               </div>
-              <div className="text-[11px] text-slate-400 mt-0.5">
-                Periode: {formatTanggal(startDate)} s.d. {formatTanggal(endDate)} &middot; Saldo Normal:{' '}
-                <span className={`font-semibold ${bukuBesar.account.saldoNormal === 'debit' ? 'text-blue-600' : 'text-amber-600'}`}>
+              <div className="text-[11px] mc-muted mt-0.5">
+                Periode: {formatTanggal(startDate)} s.d. {formatTanggal(endDate)} · Saldo Normal:{' '}
+                <span className={`font-semibold ${bukuBesar.account.saldoNormal === 'debit' ? 'mc-icon-accent' : 'mc-badge-accent'}`} style={{ color: bukuBesar.account.saldoNormal === 'debit' ? 'var(--mc-primary)' : 'var(--mc-accent)' }}>
                   {bukuBesar.account.saldoNormal === 'debit' ? 'Debit' : 'Kredit'}
                 </span>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-[10px] uppercase font-bold text-slate-400">Saldo Akhir</div>
-              <div className="font-mono font-bold text-slate-800 text-sm">{formatIDR(bukuBesar.saldoAkhir)}</div>
+              <div className="text-[10px] uppercase font-bold mc-muted">Saldo Akhir</div>
+              <div className="font-mono font-bold mc-ink-strong text-sm">{formatIDR(bukuBesar.saldoAkhir)}</div>
             </div>
           </div>
 
           <div className="overflow-x-auto" ref={tableRef}>
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+                <tr className="mc-surface-2 mc-border mc-muted font-semibold">
                   <th className="p-3 w-28">Tanggal</th>
                   <th className="p-3 w-32">No Jurnal</th>
                   <th className="p-3">Keterangan</th>
@@ -217,25 +222,25 @@ export default function AdminBukuBesar({ chartOfAccounts, fetchBukuBesar, bukuBe
                   <th className="p-3 text-right w-36">Saldo</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y mc-border">
                 {linesWithSaldo.map((l: any, i: number) => (
-                  <tr key={l.id || i} className="hover:bg-slate-50/40">
-                    <td className="p-3 text-slate-500 whitespace-nowrap">{formatTanggal(l.tanggal)}</td>
-                    <td className="p-3 font-mono font-semibold text-slate-700 whitespace-nowrap">{l.noJurnal}</td>
-                    <td className="p-3 text-slate-800">{l.keterangan}</td>
-                    <td className="p-3 text-right font-mono text-blue-700">{(Number(l.debit) || 0) > 0 ? formatIDR(l.debit) : '-'}</td>
-                    <td className="p-3 text-right font-mono text-amber-700">{(Number(l.kredit) || 0) > 0 ? formatIDR(l.kredit) : '-'}</td>
-                    <td className="p-3 text-right font-mono font-semibold text-slate-800">{formatIDR(l.saldo)}</td>
+                  <tr key={l.id || i} className="hover:mc-surface-2/40">
+                    <td className="p-3 mc-muted whitespace-nowrap">{formatTanggal(l.tanggal)}</td>
+                    <td className="p-3 font-mono font-semibold mc-ink whitespace-nowrap">{l.noJurnal}</td>
+                    <td className="p-3 mc-ink">{l.keterangan}</td>
+                    <td className="p-3 text-right font-mono" style={{ color: 'var(--mc-primary)' }}>{(Number(l.debit) || 0) > 0 ? formatIDR(l.debit) : '-'}</td>
+                    <td className="p-3 text-right font-mono" style={{ color: 'var(--mc-accent)' }}>{(Number(l.kredit) || 0) > 0 ? formatIDR(l.kredit) : '-'}</td>
+                    <td className="p-3 text-right font-mono font-semibold mc-ink-strong">{formatIDR(l.saldo)}</td>
                   </tr>
                 ))}
               </tbody>
               <tfoot>
-                <tr className="bg-slate-50 border-t-2 border-slate-200 font-bold text-slate-800">
+                <tr className="mc-surface-2 mc-border font-bold mc-ink-strong" style={{ borderTopWidth: '2px' }}>
                   <td className="p-3" colSpan={3}>Saldo Akhir</td>
-                  <td className="p-3 text-right font-mono text-blue-700">
+                  <td className="p-3 text-right font-mono" style={{ color: 'var(--mc-primary)' }}>
                     {formatIDR(linesWithSaldo.reduce((s: number, l: any) => s + (Number(l.debit) || 0), 0))}
                   </td>
-                  <td className="p-3 text-right font-mono text-amber-700">
+                  <td className="p-3 text-right font-mono" style={{ color: 'var(--mc-accent)' }}>
                     {formatIDR(linesWithSaldo.reduce((s: number, l: any) => s + (Number(l.kredit) || 0), 0))}
                   </td>
                   <td className="p-3 text-right font-mono">{formatIDR(bukuBesar.saldoAkhir)}</td>

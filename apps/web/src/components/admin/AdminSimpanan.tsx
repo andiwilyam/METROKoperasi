@@ -160,15 +160,15 @@ export default function AdminSimpanan({
       {subView === 'transaksi' && (
         <>
           {/* Action Control Row */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 border border-slate-200 rounded-xl shadow-sm">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mc-card">
             <div className="relative w-full sm:max-w-xs">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4.5 h-4.5 mc-muted" />
               <input
                 type="text"
                 placeholder="Cari nama anggota atau transaksi..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-50 focus:bg-white"
+                className="w-full pl-10 pr-4 py-2 text-xs mc-border mc-surface-2 rounded-lg mc-focus focus:ring-[var(--mc-accent)]"
               />
             </div>
 
@@ -178,7 +178,7 @@ export default function AdminSimpanan({
                   setError('');
                   setShowForm('setor');
                 }}
-                className="flex-1 sm:flex-initial bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer transition shadow-sm"
+                className="flex-1 sm:flex-initial mc-btn-primary px-4 py-2 rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer transition shadow-sm"
               >
                 <ArrowUpRight className="w-4 h-4" />
                 Setor Simpanan
@@ -188,7 +188,7 @@ export default function AdminSimpanan({
                   setError('');
                   setShowForm('tarik');
                 }}
-                className="flex-1 sm:flex-initial bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer transition shadow-sm"
+                className="flex-1 sm:flex-initial mc-btn-danger px-4 py-2 rounded-lg text-xs flex items-center justify-center gap-1.5 cursor-pointer transition shadow-sm"
               >
                 <ArrowDownLeft className="w-4 h-4" />
                 Tarik Tunai
@@ -198,32 +198,32 @@ export default function AdminSimpanan({
 
           {/* Form Modal / Panel */}
           {showForm && (
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-md relative animate-fadeIn">
+            <div className="mc-card relative animate-fadeIn">
               <button
                 onClick={() => setShowForm(null)}
-                className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"
+                className="absolute right-4 top-4 mc-muted hover:mc-ink hover:mc-surface-2 p-1.5 rounded-lg cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
               
-              <h3 className="font-bold text-slate-900 text-sm mb-4 flex items-center gap-2">
+              <h3 className="font-bold mc-ink-strong text-sm mb-4 flex items-center gap-2">
                 {showForm === 'setor' ? '🟢 Setor Dana Simpanan Koperasi' : '🔴 Tarik Tunai Dana Simpanan'}
               </h3>
 
               {error && (
-                <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-600 text-xs font-semibold rounded-lg">
+                <div className="mb-4 p-3 mc-surface-2 mc-border text-red-600 text-xs font-semibold rounded-lg" style={{ borderColor: 'var(--mc-error)' }}>
                   {error}
                 </div>
               )}
 
               <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-4 gap-5 text-xs">
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1.5">Pilih Anggota Koperasi</label>
+                  <label className="block font-semibold mc-ink-strong mb-1.5">Pilih Anggota Koperasi</label>
                   <select
                     value={selectedMemberId}
                     onChange={(e) => setSelectedMemberId(e.target.value)}
                     required
-                    className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 text-slate-800 font-semibold"
+                    className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 mc-ink-strong font-semibold"
                   >
                     <option value="">-- Pilih Anggota --</option>
                     {members.map((m) => (
@@ -235,12 +235,12 @@ export default function AdminSimpanan({
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1.5">Jenis Tabungan</label>
+                  <label className="block font-semibold mc-ink-strong mb-1.5">Jenis Tabungan</label>
                   <select
                     value={selectedTypeId}
                     onChange={(e) => setSelectedTypeId(e.target.value)}
                     required
-                    className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 text-slate-800 font-semibold"
+                    className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 mc-ink-strong font-semibold"
                   >
                     <option value="">-- Pilih Jenis --</option>
                     {savingsTypes.map((t) => (
@@ -252,40 +252,40 @@ export default function AdminSimpanan({
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1.5">Jumlah Nominal (Rp)</label>
+                  <label className="block font-semibold mc-ink-strong mb-1.5">Jumlah Nominal (Rp)</label>
                   <input
                     type="number"
                     value={jumlah}
                     min={1000}
                     onChange={(e) => setJumlah(Number(e.target.value))}
                     required
-                    className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 text-slate-800 font-mono font-semibold"
+                    className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 font-mono font-semibold mc-ink-strong"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-700 mb-1.5">Catatan / Keterangan</label>
+                  <label className="block font-semibold mc-ink-strong mb-1.5">Catatan / Keterangan</label>
                   <input
                     type="text"
                     value={keterangan}
                     onChange={(e) => setKeterangan(e.target.value)}
                     placeholder="Opsional, tulis keterangan tambahan"
-                    className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 text-slate-800"
+                    className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 mc-ink"
                   />
                 </div>
 
-                <div className="md:col-span-4 text-right pt-2 space-x-2 border-t border-slate-100">
+                <div className="md:col-span-4 text-right pt-2 space-x-2 border-t mc-border">
                   <button
                     type="button"
                     onClick={() => setShowForm(null)}
-                    className="px-4 py-2 border border-slate-200 hover:bg-slate-50 rounded-lg text-slate-600 font-semibold cursor-pointer"
+                    className="px-4 py-2 mc-border hover:mc-surface-2 rounded-lg mc-muted font-semibold cursor-pointer"
                   >
                     Batal
                   </button>
                   <button
                     type="submit"
                     className={`px-5 py-2 text-white font-semibold rounded-lg cursor-pointer transition ${
-                      showForm === 'setor' ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-red-600 hover:bg-red-700'
+                      showForm === 'setor' ? 'mc-btn-primary' : 'mc-btn-danger'
                     }`}
                   >
                     {showForm === 'setor' ? 'Proses Setoran Jurnal' : 'Tarik Tunai Sekarang'}
@@ -296,14 +296,14 @@ export default function AdminSimpanan({
           )}
 
           {/* Transactions Table */}
-          <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <div className="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm">
+          <div className="mc-card overflow-hidden">
+            <div className="p-4 border-b mc-border font-bold mc-ink-strong text-sm">
               Mutasi Riwayat Transaksi Buku
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+                  <tr className="mc-surface-2 border-b mc-border mc-muted font-semibold">
                     <th className="p-4">Tanggal Transaksi</th>
                     <th className="p-4">Anggota Koperasi</th>
                     <th className="p-4">Jenis Tabungan</th>
@@ -312,19 +312,19 @@ export default function AdminSimpanan({
                     <th className="p-4">Jenis</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y mc-border">
                   {filteredTrans.map((t) => (
-                    <tr key={t.id} className="hover:bg-slate-50/30">
-                      <td className="p-4 font-mono font-semibold text-slate-500">{t.tanggal}</td>
-                      <td className="p-4 font-bold text-slate-800">{t.anggotaNama}</td>
-                      <td className="p-4 text-slate-600">{t.jenisNama}</td>
-                      <td className="p-4 text-slate-500 italic max-w-xs truncate" title={t.keterangan}>{t.keterangan}</td>
-                      <td className="p-4 font-mono font-extrabold text-slate-900">{formatIDR(t.jumlah)}</td>
+                    <tr key={t.id} className="hover:mc-surface-2/50">
+                      <td className="p-4 font-mono font-semibold mc-muted">{t.tanggal}</td>
+                      <td className="p-4 font-bold mc-ink-strong">{t.anggotaNama}</td>
+                      <td className="p-4 mc-ink">{t.jenisNama}</td>
+                      <td className="p-4 mc-muted italic max-w-xs truncate" title={t.keterangan}>{t.keterangan}</td>
+                      <td className="p-4 font-mono font-extrabold mc-ink-strong">{formatIDR(t.jumlah)}</td>
                       <td className="p-4">
                         <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold border ${
                           t.tipe === 'setor' 
-                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
-                            : 'bg-red-50 text-red-700 border-red-200'
+                            ? 'mc-badge-ok' 
+                            : 'mc-btn-danger'
                         }`}>
                           {t.tipe === 'setor' ? '📥 SETOR' : '📤 TARIK'}
                         </span>
@@ -340,20 +340,20 @@ export default function AdminSimpanan({
 
       {/* 2. PENDING WITHDRAWALS BY MEMBERS APPROVAL */}
       {subView === 'permohonan' && (
-        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm">
+        <div className="mc-card overflow-hidden">
+          <div className="p-4 border-b mc-border font-bold mc-ink-strong text-sm">
             Permohonan Penarikan Anggota (Portal CS)
           </div>
           
           {permohonanList.length === 0 ? (
-            <div className="text-center py-10 text-slate-400 text-xs">
+            <div className="text-center py-10 mc-muted text-xs">
               😴 Tidak ada permohonan tarik simpanan dari portal anggota saat ini.
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+                  <tr className="mc-surface-2 border-b mc-border mc-muted font-semibold">
                     <th className="p-4">Tanggal Pengajuan</th>
                     <th className="p-4">Nama Anggota</th>
                     <th className="p-4">Jenis Tabungan</th>
@@ -362,20 +362,20 @@ export default function AdminSimpanan({
                     <th className="p-4 text-right">Tindakan</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y mc-border">
                   {permohonanList.map((p) => (
-                    <tr key={p.id} className="hover:bg-slate-50/50">
-                      <td className="p-4 font-mono font-semibold text-slate-500">{p.tanggal}</td>
-                      <td className="p-4 font-bold text-slate-800">{p.anggotaNama}</td>
-                      <td className="p-4 text-slate-600">{p.jenisNama}</td>
-                      <td className="p-4 font-mono font-extrabold text-slate-900">{formatIDR(p.jumlah)}</td>
+                    <tr key={p.id} className="hover:mc-surface-2/50">
+                      <td className="p-4 font-mono font-semibold mc-muted">{p.tanggal}</td>
+                      <td className="p-4 font-bold mc-ink-strong">{p.anggotaNama}</td>
+                      <td className="p-4 mc-ink">{p.jenisNama}</td>
+                      <td className="p-4 font-mono font-extrabold mc-ink-strong">{formatIDR(p.jumlah)}</td>
                       <td className="p-4">
                         <span className={`inline-flex px-2 py-0.5 rounded text-[10px] font-bold border ${
                           p.status === 'pengajuan' 
-                            ? 'bg-amber-50 text-amber-700 border-amber-200 animate-pulse' 
+                            ? 'mc-badge-accent animate-pulse' 
                             : p.status === 'disetujui' 
-                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
-                            : 'bg-red-50 text-red-700 border-red-200'
+                            ? 'mc-badge-ok' 
+                            : 'mc-btn-danger'
                         }`}>
                           {p.status === 'pengajuan' ? 'Menunggu Approval' : p.status === 'disetujui' ? 'Disetujui' : 'Ditolak'}
                         </span>
@@ -385,13 +385,13 @@ export default function AdminSimpanan({
                           <>
                             <button
                               onClick={() => onApproveTarik(p.id)}
-                              className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
+                              className="mc-badge-ok px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
                             >
-                              Setujui &amp; Beri Dana
+                              Setujui & Beri Dana
                             </button>
                             <button
                               onClick={() => onRejectTarik(p.id)}
-                              className="bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
+                              className="mc-btn-danger px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
                             >
                               Tolak
                             </button>
@@ -409,51 +409,51 @@ export default function AdminSimpanan({
 
       {/* 3. CONFIGURATION OF SAVINGS TYPES */}
       {subView === 'jenis' && (
-        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm flex justify-between items-center">
+        <div className="mc-card overflow-hidden">
+          <div className="p-4 border-b mc-border font-bold mc-ink-strong text-sm flex justify-between items-center">
             <span className="flex items-center gap-2">
               Konfigurasi Kebijakan Jenis Simpanan
               <button
                 onClick={() => setShowAddType(true)}
-                className="flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] px-2.5 py-1 rounded-lg transition font-bold cursor-pointer"
+                className="flex items-center gap-1 mc-btn-primary text-[11px] px-2.5 py-1 rounded-lg transition font-bold cursor-pointer"
               >
                 <Plus className="w-3 h-3" /> Tambah Jenis Simpanan
               </button>
             </span>
-            <span className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-md flex items-center gap-1">
+            <span className="text-xs mc-badge-accent px-2 py-1 rounded-md flex items-center gap-1">
               <Settings className="w-3.5 h-3.5" /> Regulasi SAK ETAP
             </span>
           </div>
           <div className="p-5">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {savingsTypes.map((st) => (
-                <div key={st.id} className="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2 flex flex-col justify-between">
+                <div key={st.id} className="mc-border rounded-xl p-4 mc-surface-2/50 space-y-2 flex flex-col justify-between">
                   <div className="space-y-2">
-                    <div className="font-bold text-slate-800 text-sm flex justify-between items-start gap-1">
+                    <div className="font-bold mc-ink-strong text-sm flex justify-between items-start gap-1">
                       <span>{st.nama}</span>
                       <button
                         onClick={() => startEditType(st)}
-                        className="p-1 hover:bg-slate-200 rounded-lg text-slate-500 hover:text-blue-600 transition cursor-pointer"
+                        className="p-1 hover:mc-surface-2 rounded-lg mc-muted hover:mc-icon-accent transition cursor-pointer"
                         title="Edit Kebijakan"
                       >
                         <Edit className="w-3.5 h-3.5" />
                       </button>
                     </div>
-                    <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider font-mono">Tipe: {st.tipe}</div>
+                    <div className="text-[10px] mc-muted font-bold uppercase tracking-wider font-mono">Tipe: {st.tipe}</div>
                     
-                    <div className="pt-2 flex justify-between text-xs border-t border-slate-200/50">
-                      <span className="text-slate-500">Min. Setoran</span>
-                      <span className="font-semibold text-slate-800 font-mono">{formatIDR(st.minimalSetoran)}</span>
+                    <div className="pt-2 flex justify-between text-xs border-t mc-border/50">
+                      <span className="mc-muted">Min. Setoran</span>
+                      <span className="font-semibold mc-ink-strong font-mono">{formatIDR(st.minimalSetoran)}</span>
                     </div>
 
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-500">Suku Bunga</span>
-                      <span className="font-semibold text-slate-800 font-mono">{st.bungaPersen}% / thn</span>
+                      <span className="mc-muted">Suku Bunga</span>
+                      <span className="font-semibold mc-ink-strong font-mono">{st.bungaPersen}% / thn</span>
                     </div>
 
                     <div className="flex justify-between text-xs pt-1">
-                      <span className="text-slate-500">Skema Akumulasi</span>
-                      <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">
+                      <span className="mc-muted">Skema Akumulasi</span>
+                      <span className="text-[10px] font-bold mc-badge-accent px-1.5 py-0.5 rounded">
                         Konvensional
                       </span>
                     </div>
@@ -468,15 +468,15 @@ export default function AdminSimpanan({
       {/* Edit Savings Type Modal */}
       {editingType && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div className="p-5 border-b border-slate-200 flex justify-between items-center bg-blue-900 text-white">
-              <h3 className="font-extrabold text-sm flex items-center gap-2">
-                <Settings className="w-4 h-4 text-amber-400" />
+          <div className="mc-surface mc-border rounded-2xl max-w-md w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="p-5 border-b mc-border flex justify-between items-center" style={{ background: 'var(--mc-primary)' }}>
+              <h3 className="font-extrabold text-sm flex items-center gap-2 text-white">
+                <Settings className="w-4 h-4" style={{ color: 'var(--mc-accent)' }} />
                 Ubah Kebijakan Simpanan
               </h3>
               <button 
                 onClick={() => setEditingType(null)}
-                className="hover:bg-blue-800 p-1.5 rounded-lg text-slate-300 hover:text-white transition cursor-pointer"
+                className="hover:bg-slate-700/50 p-1.5 rounded-lg text-slate-300 hover:text-white transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -484,30 +484,30 @@ export default function AdminSimpanan({
 
             <form onSubmit={handleEditSubmit} className="p-6 space-y-4 text-xs">
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Nama Kebijakan Simpanan</label>
+                <label className="block font-semibold mc-ink mb-1">Nama Kebijakan Simpanan</label>
                 <input
                   type="text"
                   required
                   value={editNama}
                   onChange={(e) => setEditNama(e.target.value)}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Minimal Setoran (Rp)</label>
+                <label className="block font-semibold mc-ink mb-1">Minimal Setoran (Rp)</label>
                 <input
                   type="number"
                   required
                   min="0"
                   value={editMinimalSetoran}
                   onChange={(e) => setEditMinimalSetoran(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Suku Bunga Tahunan (%)</label>
+                <label className="block font-semibold mc-ink mb-1">Suku Bunga Tahunan (%)</label>
                 <input
                   type="number"
                   required
@@ -516,22 +516,22 @@ export default function AdminSimpanan({
                   max="100"
                   value={editBungaPersen}
                   onChange={(e) => setEditBungaPersen(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
-                <span className="text-[10px] text-slate-400 mt-1 block">Suku bunga simpanan tabungan per tahun, disesuaikan dengan regulasi bunga pasar.</span>
+                <span className="text-[10px] mc-muted mt-1 block">Suku bunga simpanan tabungan per tahun, disesuaikan dengan regulasi bunga pasar.</span>
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t mc-border">
                 <button
                   type="button"
                   onClick={() => setEditingType(null)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded transition cursor-pointer"
+                  className="px-4 py-2 mc-surface-2 hover:mc-border mc-ink font-bold rounded transition cursor-pointer"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white font-bold rounded shadow-sm hover:shadow transition cursor-pointer"
+                  className="px-4 py-2 text-white font-bold rounded shadow-sm hover:shadow transition cursor-pointer" style={{ background: 'var(--mc-primary)' }}
                 >
                   Simpan Perubahan
                 </button>
@@ -544,15 +544,15 @@ export default function AdminSimpanan({
       {/* Add Savings Type Modal */}
       {showAddType && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div className="p-5 border-b border-slate-200 flex justify-between items-center bg-emerald-900 text-white">
-              <h3 className="font-extrabold text-sm flex items-center gap-2">
-                <Plus className="w-4 h-4 text-emerald-300" />
+          <div className="mc-surface mc-border rounded-2xl max-w-md w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="p-5 border-b mc-border flex justify-between items-center" style={{ background: 'var(--mc-success)' }}>
+              <h3 className="font-extrabold text-sm flex items-center gap-2 text-white">
+                <Plus className="w-4 h-4" style={{ color: 'var(--mc-success)' }} />
                 Tambah Kebijakan Simpanan Baru
               </h3>
               <button 
                 onClick={() => setShowAddType(false)}
-                className="hover:bg-emerald-800 p-1.5 rounded-lg text-slate-300 hover:text-white transition cursor-pointer"
+                className="hover:bg-slate-700/50 p-1.5 rounded-lg text-slate-300 hover:text-white transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -560,23 +560,23 @@ export default function AdminSimpanan({
 
             <form onSubmit={handleAddSubmit} className="p-6 space-y-4 text-xs">
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Nama Kebijakan Simpanan</label>
+                <label className="block font-semibold mc-ink mb-1">Nama Kebijakan Simpanan</label>
                 <input
                   type="text"
                   required
                   placeholder="Contoh: Simpanan Sukarela Berjangka"
                   value={addNama}
                   onChange={(e) => setAddNama(e.target.value)}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Tipe Simpanan</label>
+                <label className="block font-semibold mc-ink mb-1">Tipe Simpanan</label>
                 <select
                   value={addTipe}
                   onChange={(e) => setAddTipe(e.target.value as any)}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong"
                 >
                   <option value="sukarela">Sukarela</option>
                   <option value="wajib">Wajib</option>
@@ -586,19 +586,19 @@ export default function AdminSimpanan({
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Minimal Setoran (Rp)</label>
+                <label className="block font-semibold mc-ink mb-1">Minimal Setoran (Rp)</label>
                 <input
                   type="number"
                   required
                   min="0"
                   value={addMinimalSetoran}
                   onChange={(e) => setAddMinimalSetoran(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Suku Bunga Tahunan (%)</label>
+                <label className="block font-semibold mc-ink mb-1">Suku Bunga Tahunan (%)</label>
                 <input
                   type="number"
                   required
@@ -607,21 +607,21 @@ export default function AdminSimpanan({
                   max="100"
                   value={addBungaPersen}
                   onChange={(e) => setAddBungaPersen(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t mc-border">
                 <button
                   type="button"
                   onClick={() => setShowAddType(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded transition cursor-pointer"
+                  className="px-4 py-2 mc-surface-2 hover:mc-border mc-ink font-bold rounded transition cursor-pointer"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded shadow-sm hover:shadow transition cursor-pointer"
+                  className="px-4 py-2 mc-btn-primary font-bold rounded shadow-sm hover:shadow transition cursor-pointer"
                 >
                   Tambah Kebijakan
                 </button>

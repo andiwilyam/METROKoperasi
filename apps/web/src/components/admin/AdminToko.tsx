@@ -175,16 +175,16 @@ export default function AdminToko({
           
           {/* Left panel: Add items to Cart */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
-              <h3 className="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-                <ShoppingCart className="w-4 h-4 text-blue-600" />
+            <div className="mc-card space-y-4">
+              <h3 className="font-bold mc-ink-strong text-xs flex items-center gap-1.5">
+                <ShoppingCart className="w-4 h-4 mc-icon-accent" />
                 Input Penjualan Kasir POS
               </h3>
 
               {!isPaid ? (
                 <form onSubmit={handleAddToCart} className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
                   <div className="sm:col-span-2">
-                    <label className="block font-semibold text-slate-600 mb-1.5">Pilih Produk Barang</label>
+                    <label className="block font-semibold mc-ink-strong mb-1.5">Pilih Produk Barang</label>
                     <select
                       value={selectedBarangId}
                       onChange={(e) => {
@@ -193,7 +193,7 @@ export default function AdminToko({
                         if (b) setSaleQty(1);
                       }}
                       required
-                      className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 text-slate-800 font-semibold"
+                      className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 mc-ink-strong font-semibold"
                     >
                       <option value="">-- Pilih Barang --</option>
                       {barang.map((b) => (
@@ -205,14 +205,14 @@ export default function AdminToko({
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-600 mb-1.5">Kuantitas (Qty)</label>
+                    <label className="block font-semibold mc-ink-strong mb-1.5">Kuantitas (Qty)</label>
                     <input
                       type="number"
                       value={saleQty}
                       min={1}
                       onChange={(e) => setSaleQty(Number(e.target.value))}
                       required
-                      className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 font-mono font-bold"
+                      className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 font-mono font-bold mc-ink-strong"
                     />
                   </div>
 
@@ -220,20 +220,20 @@ export default function AdminToko({
                     <button
                       type="submit"
                       disabled={!selectedBarangId}
-                      className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white font-semibold px-4 py-2 rounded-lg text-xs cursor-pointer shadow-sm shadow-blue-500/10"
+                      className="mc-btn-primary disabled:opacity-50 text-white font-semibold px-4 py-2 rounded-lg text-xs cursor-pointer shadow-sm"
                     >
                       Masukkan Keranjang
                     </button>
                   </div>
                 </form>
               ) : (
-                <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-xs flex flex-col items-center justify-center text-center space-y-2 py-8 animate-fadeIn">
-                  <CheckCircle className="w-12 h-12 text-emerald-500" />
+                <div className="p-4 mc-surface-2 mc-border rounded-xl mc-badge-ok text-xs flex flex-col items-center justify-center text-center space-y-2 py-8 animate-fadeIn" style={{ borderColor: 'var(--mc-success)' }}>
+                  <CheckCircle className="w-12 h-12" style={{ color: 'var(--mc-success)' }} />
                   <h4 className="font-bold text-sm">Pembayaran Sukses!</h4>
-                  <p className="text-[11px] text-emerald-700">Faktur {lastFaktur} berhasil dibukukan ke jurnal akuntansi.</p>
+                  <p className="text-[11px]" style={{ color: 'var(--mc-success)' }}>Faktur {lastFaktur} berhasil dibukukan ke jurnal akuntansi.</p>
                   <button
                     onClick={handleResetKasir}
-                    className="mt-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-lg"
+                    className="mt-2 mc-btn-primary font-semibold px-4 py-2 rounded-lg"
                   >
                     Buka Transaksi Baru
                   </button>
@@ -242,30 +242,30 @@ export default function AdminToko({
             </div>
 
             {/* Shopping Cart Content */}
-            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
-              <h3 className="font-bold text-slate-800 text-xs">Keranjang Belanja</h3>
+            <div className="mc-card space-y-4">
+              <h3 className="font-bold mc-ink-strong text-xs">Keranjang Belanja</h3>
               
               {cart.length === 0 ? (
-                <div className="text-center py-10 border border-dashed border-slate-200 rounded-lg text-slate-400 text-xs">
+                <div className="text-center py-10 mc-border border-dashed rounded-lg mc-muted text-xs">
                   🛒 Keranjang masih kosong. Pilih barang untuk ditambahkan.
                 </div>
               ) : (
                 <div className="space-y-2">
-                  <div className="divide-y divide-slate-100 text-xs max-h-56 overflow-y-auto">
+                  <div className="divide-y mc-border text-xs max-h-56 overflow-y-auto">
                     {cart.map((item, idx) => (
                       <div key={item.barangId} className="flex justify-between items-center py-2.5">
                         <div>
-                          <div className="font-bold text-slate-800">{item.nama}</div>
-                          <div className="text-[10px] text-slate-400 font-mono mt-0.5">
+                          <div className="font-bold mc-ink-strong">{item.nama}</div>
+                          <div className="text-[10px] mc-muted font-mono mt-0.5">
                             {item.qty} pcs x {formatIDR(item.hargaJual)}
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
-                          <span className="font-mono font-bold text-slate-900">{formatIDR(item.subtotal)}</span>
+                          <span className="font-mono font-bold mc-ink-strong">{formatIDR(item.subtotal)}</span>
                           <button
                             type="button"
                             onClick={() => setCart(cart.filter((_, i) => i !== idx))}
-                            className="text-red-500 hover:text-red-700 p-1 cursor-pointer"
+                            className="text-red-600 hover:text-red-700 p-1 cursor-pointer"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -279,17 +279,17 @@ export default function AdminToko({
           </div>
 
           {/* Right panel: Receipt Checkout Area */}
-          <div className="lg:col-span-5 bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col justify-between">
+          <div className="lg:col-span-5 mc-card flex flex-col justify-between">
             <div className="space-y-4">
-              <h3 className="font-bold text-slate-800 text-xs">Struk &amp; Ringkasan Kasir</h3>
+              <h3 className="font-bold mc-ink-strong text-xs">Struk & Ringkasan Kasir</h3>
               
               {/* Receipt Visual Design */}
-              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 font-mono text-[11px] text-slate-600 space-y-3">
-                <div className="text-center border-b border-dashed border-slate-300 pb-2">
-                  <div className="font-bold text-xs text-slate-800">Toko Koperasi MetroCoop</div>
-                  <div>Jl. Pemuda No. 45, Jakarta</div>
-                  <div className="text-[10px] text-slate-400 mt-1">Faktur: {lastFaktur || 'FK-PENDING-001'}</div>
-                  <div className="text-[10px] text-slate-400">Kasir: {isPaid ? 'Yulianto' : 'Admin Staff'}</div>
+              <div className="mc-surface-2 mc-border rounded-xl p-4 font-mono text-[11px] mc-muted space-y-3">
+                <div className="text-center border-b border-dashed mc-border pb-2">
+                  <div className="font-bold text-xs mc-ink-strong">Toko Koperasi MetroCoop</div>
+                  <div className="mc-muted">Jl. Pemuda No. 45, Jakarta</div>
+                  <div className="text-[10px] mc-muted mt-1">Faktur: {lastFaktur || 'FK-PENDING-001'}</div>
+                  <div className="text-[10px] mc-muted">Kasir: {isPaid ? 'Yulianto' : 'Admin Staff'}</div>
                 </div>
 
                 {/* Items */}
@@ -297,48 +297,48 @@ export default function AdminToko({
                   {cart.map((item) => (
                     <div key={item.barangId} className="flex justify-between">
                       <span className="truncate max-w-[150px]">{item.nama}</span>
-                      <span>{item.qty}x {formatIDR(item.hargaJual)}</span>
+                      <span className="mc-ink">{item.qty}x {formatIDR(item.hargaJual)}</span>
                     </div>
                   ))}
-                  {cart.length === 0 && <div className="text-center text-slate-400 py-4">Belum ada barang</div>}
+                  {cart.length === 0 && <div className="text-center mc-muted py-4">Belum ada barang</div>}
                 </div>
 
                 {/* Totals */}
-                <div className="border-t border-dashed border-slate-300 pt-2 space-y-1 font-bold">
+                <div className="border-t border-dashed mc-border pt-2 space-y-1 font-bold">
                   <div className="flex justify-between">
-                    <span>Subtotal:</span>
-                    <span>{formatIDR(totalBelanja)}</span>
+                    <span className="mc-muted">Subtotal:</span>
+                    <span className="mc-ink-strong">{formatIDR(totalBelanja)}</span>
                   </div>
-                  <div className="flex justify-between text-red-500">
-                    <span>Diskon Koperasi:</span>
-                    <span>-{formatIDR(diskon)}</span>
+                  <div className="flex justify-between" style={{ color: 'var(--mc-error)' }}>
+                    <span className="mc-muted">Diskon Koperasi:</span>
+                    <span className="mc-ink-strong">-{formatIDR(diskon)}</span>
                   </div>
-                  <div className="flex justify-between text-slate-900 border-t border-slate-200 pt-1 text-xs">
+                  <div className="flex justify-between mc-ink-strong border-t mc-border pt-1 text-xs">
                     <span>TOTAL AKHIR:</span>
                     <span>{formatIDR(totalSetelahDiskon)}</span>
                   </div>
                   
                   {metodeBayar === 'Tunai' && (
                     <>
-                      <div className="flex justify-between text-slate-500 font-normal">
+                      <div className="flex justify-between mc-muted font-normal">
                         <span>Bayar Tunai:</span>
-                        <span>{formatIDR(bayarTunai)}</span>
+                        <span className="mc-ink">{formatIDR(bayarTunai)}</span>
                       </div>
-                      <div className="flex justify-between text-slate-500 font-normal">
+                      <div className="flex justify-between mc-muted font-normal">
                         <span>Kembalian:</span>
-                        <span>{formatIDR(kembalian)}</span>
+                        <span className="mc-ink-strong">{formatIDR(kembalian)}</span>
                       </div>
                     </>
                   )}
                   {metodeBayar !== 'Tunai' && (
-                    <div className="flex justify-between text-blue-600">
-                      <span>Metode:</span>
-                      <span>{metodeBayar}</span>
+                    <div className="flex justify-between" style={{ color: 'var(--mc-primary)' }}>
+                      <span className="mc-muted">Metode:</span>
+                      <span className="mc-ink-strong">{metodeBayar}</span>
                     </div>
                   )}
                 </div>
 
-                <div className="text-center border-t border-dashed border-slate-300 pt-2 text-[10px] text-slate-400 leading-tight">
+                <div className="text-center border-t border-dashed mc-border pt-2 text-[10px] mc-muted leading-tight">
                   Terima kasih atas belanja Anda.<br />
                   Partisipasi Anda memajukan Koperasi kita!
                 </div>
@@ -346,14 +346,14 @@ export default function AdminToko({
             </div>
 
             {cart.length > 0 && !isPaid && (
-              <form onSubmit={handleCheckoutSubmit} className="space-y-4 pt-4 mt-4 border-t border-slate-100 text-xs">
+              <form onSubmit={handleCheckoutSubmit} className="space-y-4 pt-4 mt-4 border-t mc-border text-xs">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1.5">Metode Bayar</label>
+                    <label className="block font-semibold mc-ink-strong mb-1.5">Metode Bayar</label>
                     <select
                       value={metodeBayar}
                       onChange={(e) => setMetodeBayar(e.target.value)}
-                      className="w-full px-2.5 py-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-800 font-semibold"
+                      className="w-full px-2.5 py-2 mc-border rounded-lg mc-surface-2 mc-ink-strong font-semibold"
                     >
                       <option value="Tunai">💵 Tunai Cash</option>
                       <option value="Transfer Mandiri">🏦 Transfer Bank</option>
@@ -362,36 +362,36 @@ export default function AdminToko({
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1.5">Beri Diskon (Rp)</label>
+                    <label className="block font-semibold mc-ink-strong mb-1.5">Beri Diskon (Rp)</label>
                     <input
                       type="number"
                       step={1000}
                       value={diskon}
                       onChange={(e) => setDiskon(Number(e.target.value))}
-                      className="w-full px-2.5 py-1.5 border border-slate-200 rounded-lg bg-slate-50 text-slate-800 font-mono font-bold"
+                      className="w-full px-2.5 py-1.5 mc-border rounded-lg mc-surface-2 font-mono font-bold mc-ink-strong"
                     />
                   </div>
                 </div>
 
                 {metodeBayar === 'Tunai' && (
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1.5">Uang Diterima Tunai (Rp)</label>
+                    <label className="block font-semibold mc-ink-strong mb-1.5">Uang Diterima Tunai (Rp)</label>
                     <input
                       type="number"
                       value={bayarTunai}
                       step={5000}
                       onChange={(e) => setBayarTunai(Number(e.target.value))}
                       required
-                      className="w-full px-3 py-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-800 font-mono font-extrabold text-sm"
+                      className="w-full px-3 py-2 mc-border rounded-lg mc-surface-2 font-mono font-extrabold text-sm mc-ink-strong"
                     />
                   </div>
                 )}
 
                 <button
                   type="submit"
-                  className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md cursor-pointer transition text-center"
+                  className="w-full py-3 mc-btn-primary font-semibold rounded-lg shadow-md cursor-pointer transition text-center"
                 >
-                  Proses Bayar &amp; Potong Stok
+                  Proses Bayar & Potong Stok
                 </button>
               </form>
             )}
@@ -402,10 +402,10 @@ export default function AdminToko({
 
       {/* 2. KATALOG BARANG & LOW STOCK ALERTS */}
       {subView === 'barang' && (
-        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm flex justify-between items-center">
+        <div className="mc-card overflow-hidden">
+          <div className="p-4 border-b mc-border font-bold mc-ink-strong text-sm flex justify-between items-center">
             <span>Stok Barang Toko Koperasi</span>
-            <span className="text-xs bg-red-50 text-red-700 border border-red-200 px-2.5 py-0.5 rounded-full font-semibold">
+            <span className="text-xs mc-btn-danger px-2.5 py-0.5 rounded-full font-semibold">
               ⚠️ {barang.filter(x => x.stok <= x.stokMinimum).length} Barang Perlu Restock
             </span>
           </div>
@@ -413,7 +413,7 @@ export default function AdminToko({
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+                <tr className="mc-surface-2 border-b mc-border mc-muted font-semibold">
                   <th className="p-4">Kode Barang</th>
                   <th className="p-4">Nama Barang</th>
                   <th className="p-4">Kategori</th>
@@ -424,28 +424,28 @@ export default function AdminToko({
                   <th className="p-4">Satuan</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y mc-border">
                 {barang.map((b) => {
                   const isLow = b.stok <= b.stokMinimum;
                   return (
-                    <tr key={b.id} className={`hover:bg-slate-50/30 ${isLow ? 'bg-red-50/20' : ''}`}>
-                      <td className="p-4 font-mono font-bold text-slate-500">{b.kode}</td>
-                      <td className="p-4 font-bold text-slate-800">{b.nama}</td>
-                      <td className="p-4 text-slate-500">{categories.find((c) => c.id === b.kategoriId)?.nama || 'Kategori'}</td>
-                      <td className="p-4 font-mono">{formatIDR(b.hargaBeli)}</td>
-                      <td className="p-4 font-mono font-bold text-slate-900">{formatIDR(b.hargaJual)}</td>
+                    <tr key={b.id} className={`hover:mc-surface-2/50 ${isLow ? 'mc-surface-2/20' : ''}`} style={{ backgroundColor: isLow ? 'var(--mc-error-transparent)' : 'transparent' }}>
+                      <td className="p-4 font-mono font-bold mc-muted">{b.kode}</td>
+                      <td className="p-4 font-bold mc-ink-strong">{b.nama}</td>
+                      <td className="p-4 mc-ink">{categories.find((c) => c.id === b.kategoriId)?.nama || 'Kategori'}</td>
+                      <td className="p-4 font-mono mc-ink">{formatIDR(b.hargaBeli)}</td>
+                      <td className="p-4 font-mono font-bold mc-ink-strong">{formatIDR(b.hargaJual)}</td>
                       <td className="p-4">
-                        <span className={`font-mono font-extrabold ${isLow ? 'text-red-600' : 'text-slate-800'}`}>
+                        <span className={`font-mono font-extrabold ${isLow ? 'text-red-600' : 'mc-ink-strong'}`}>
                           {b.stok}
                         </span>
                         {isLow && (
-                          <span className="ml-2 text-[9px] font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded border border-red-200">
+                          <span className="ml-2 text-[9px] font-bold mc-btn-danger px-1.5 py-0.5 rounded border">
                             LOW STOCK
                           </span>
                         )}
                       </td>
-                      <td className="p-4 font-mono text-slate-400">{b.stokMinimum}</td>
-                      <td className="p-4 text-slate-500 font-semibold">{b.satuan}</td>
+                      <td className="p-4 font-mono mc-muted">{b.stokMinimum}</td>
+                      <td className="p-4 mc-ink font-semibold">{b.satuan}</td>
                     </tr>
                   );
                 })}
@@ -459,20 +459,20 @@ export default function AdminToko({
       {subView === 'supplier' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Purchase Order Restock Form */}
-          <div className="lg:col-span-5 bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
-            <h3 className="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-              <Package className="w-4 h-4 text-indigo-600" />
+          <div className="lg:col-span-5 mc-card space-y-4">
+            <h3 className="font-bold mc-ink-strong text-xs flex items-center gap-1.5">
+              <Package className="w-4 h-4" style={{ color: 'var(--mc-primary)' }} />
               Catat Pembelian Restock Barang
             </h3>
 
             <form onSubmit={handlePurchaseSubmit} className="space-y-4 text-xs">
               <div>
-                <label className="block font-semibold text-slate-600 mb-1.5">Pilih Supplier Resmi</label>
+                <label className="block font-semibold mc-ink-strong mb-1.5">Pilih Supplier Resmi</label>
                 <select
                   value={selectedSupplierId}
                   onChange={(e) => setSelectedSupplierId(e.target.value)}
                   required
-                  className="w-full px-3 py-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-800 font-semibold"
+                  className="w-full px-3 py-2 mc-border rounded-lg mc-surface-2 mc-ink-strong font-semibold"
                 >
                   <option value="">-- Pilih Supplier --</option>
                   {suppliers.map((s) => (
@@ -482,7 +482,7 @@ export default function AdminToko({
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1.5">Pilih Barang Restock</label>
+                <label className="block font-semibold mc-ink-strong mb-1.5">Pilih Barang Restock</label>
                 <select
                   value={purchaseBarangId}
                   onChange={(e) => {
@@ -491,7 +491,7 @@ export default function AdminToko({
                     if (b) setPurchasePrice(b.hargaBeli);
                   }}
                   required
-                  className="w-full px-3 py-2 border border-slate-200 rounded-lg bg-slate-50 text-slate-800 font-semibold"
+                  className="w-full px-3 py-2 mc-border rounded-lg mc-surface-2 mc-ink-strong font-semibold"
                 >
                   <option value="">-- Pilih Barang --</option>
                   {barang.map((b) => (
@@ -502,51 +502,51 @@ export default function AdminToko({
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block font-semibold text-slate-600 mb-1.5">Jumlah Qty Beli</label>
+                  <label className="block font-semibold mc-ink-strong mb-1.5">Jumlah Qty Beli</label>
                   <input
                     type="number"
                     value={purchaseQty}
                     min={1}
                     onChange={(e) => setPurchaseQty(Number(e.target.value))}
                     required
-                    className="w-full px-3 py-2 border border-slate-200 rounded-lg bg-slate-50 font-mono font-bold"
+                    className="w-full px-3 py-2 mc-border rounded-lg mc-surface-2 font-mono font-bold mc-ink-strong"
                   />
                 </div>
 
                 <div>
-                  <label className="block font-semibold text-slate-600 mb-1.5">Harga Beli per Pcs (Rp)</label>
+                  <label className="block font-semibold mc-ink-strong mb-1.5">Harga Beli per Pcs (Rp)</label>
                   <input
                     type="number"
                     value={purchasePrice}
                     step={1000}
                     onChange={(e) => setPurchasePrice(Number(e.target.value))}
                     required
-                    className="w-full px-3 py-2 border border-slate-200 rounded-lg bg-slate-50 font-mono font-bold"
+                    className="w-full px-3 py-2 mc-border rounded-lg mc-surface-2 font-mono font-bold mc-ink-strong"
                   />
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow cursor-pointer transition text-center"
+                className="w-full py-2.5 font-semibold rounded-lg shadow cursor-pointer transition text-center" style={{ background: 'var(--mc-primary)' }}
               >
-                Proses &amp; Catat Restock
+                Proses & Catat Restock
               </button>
             </form>
           </div>
 
           {/* Supplier Directory list */}
-          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <div className="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm">
+          <div className="lg:col-span-7 mc-card overflow-hidden">
+            <div className="p-4 border-b mc-border font-bold mc-ink-strong text-sm">
               Direktori Supplier Rekanan Koperasi
             </div>
-            <div className="divide-y divide-slate-100 text-xs">
+            <div className="divide-y mc-border text-xs">
               {suppliers.map((s) => (
                 <div key={s.id} className="p-4 space-y-1">
-                  <div className="font-bold text-slate-800 text-sm">{s.nama}</div>
-                  <div className="text-slate-500">Kontak Person: <span className="font-semibold text-slate-700">{s.kontak}</span></div>
-                  <div className="text-slate-400 font-mono">{s.noHp}</div>
-                  <div className="text-slate-400">{s.alamat}</div>
+                  <div className="font-bold mc-ink-strong text-sm">{s.nama}</div>
+                  <div className="mc-ink">Kontak Person: <span className="font-semibold mc-ink-strong">{s.kontak}</span></div>
+                  <div className="mc-muted font-mono">{s.noHp}</div>
+                  <div className="mc-muted">{s.alamat}</div>
                 </div>
               ))}
             </div>
@@ -558,26 +558,26 @@ export default function AdminToko({
       {subView === 'laporan' && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Laba Rugi / Sales summary card */}
-          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
-            <h3 className="font-bold text-slate-800 text-xs">Laporan Penjualan Toko Terakhir</h3>
+          <div className="lg:col-span-7 mc-card space-y-4">
+            <h3 className="font-bold mc-ink-strong text-xs">Laporan Penjualan Toko Terakhir</h3>
             
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="bg-slate-50 text-slate-500 font-semibold border-b border-slate-200">
+                  <tr className="mc-surface-2 mc-muted font-semibold border-b mc-border">
                     <th className="p-3">Faktur</th>
                     <th className="p-3">Tanggal</th>
                     <th className="p-3">Metode</th>
                     <th className="p-3 text-right">Total Transaksi</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y mc-border">
                   {penjualanList.map((p) => (
                     <tr key={p.id}>
-                      <td className="p-3 font-mono font-bold text-slate-600">{p.noFaktur}</td>
-                      <td className="p-3 text-slate-500">{p.tanggal}</td>
-                      <td className="p-3 font-semibold text-slate-600">{p.metodeBayar}</td>
-                      <td className="p-3 text-right font-mono font-bold text-slate-900">{formatIDR(p.total)}</td>
+                      <td className="p-3 font-mono font-bold mc-muted">{p.noFaktur}</td>
+                      <td className="p-3 mc-muted">{p.tanggal}</td>
+                      <td className="p-3 font-semibold mc-ink">{p.metodeBayar}</td>
+                      <td className="p-3 text-right font-mono font-bold mc-ink-strong">{formatIDR(p.total)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -586,32 +586,32 @@ export default function AdminToko({
           </div>
 
           {/* Toko Default Accounting Accounts Settings */}
-          <div className="lg:col-span-5 bg-white border border-slate-200 rounded-xl p-5 shadow-sm space-y-4">
-            <h3 className="font-bold text-slate-800 text-xs flex items-center gap-1.5">
-              <Settings className="w-4 h-4 text-slate-500" />
+          <div className="lg:col-span-5 mc-card space-y-4">
+            <h3 className="font-bold mc-ink-strong text-xs flex items-center gap-1.5">
+              <Settings className="w-4 h-4 mc-muted" />
               Pemetaan Akun Akuntansi Toko (COA)
             </h3>
             
-            <p className="text-[11px] text-slate-400 leading-relaxed">
+            <p className="text-[11px] mc-muted leading-relaxed">
               Konfigurasi nomor akun pembukuan otomatis (auto-journal COA) ketika terjadi penjualan kasir atau pembelian supplier di Unit Toko.
             </p>
 
             <div className="space-y-2.5 text-xs">
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                <span className="font-medium text-slate-600">Akun Kas Toko (Cash)</span>
-                <span className="font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">1101 (Kas Kecil)</span>
+              <div className="flex justify-between items-center py-1.5 border-b mc-border">
+                <span className="font-medium mc-ink">Akun Kas Toko (Cash)</span>
+                <span className="font-mono font-bold mc-badge-accent px-2 py-0.5 rounded">1101 (Kas Kecil)</span>
               </div>
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                <span className="font-medium text-slate-600">Akun Persediaan Barang</span>
-                <span className="font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">1103 (Persediaan)</span>
+              <div className="flex justify-between items-center py-1.5 border-b mc-border">
+                <span className="font-medium mc-ink">Akun Persediaan Barang</span>
+                <span className="font-mono font-bold mc-badge-accent px-2 py-0.5 rounded">1103 (Persediaan)</span>
               </div>
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                <span className="font-medium text-slate-600">Pendapatan Penjualan</span>
-                <span className="font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">4101 (Hasil Penjualan)</span>
+              <div className="flex justify-between items-center py-1.5 border-b mc-border">
+                <span className="font-medium mc-ink">Pendapatan Penjualan</span>
+                <span className="font-mono font-bold mc-badge-accent px-2 py-0.5 rounded">4101 (Hasil Penjualan)</span>
               </div>
               <div className="flex justify-between items-center py-1.5">
-                <span className="font-medium text-slate-600">Beban Pokok (HPP)</span>
-                <span className="font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">5106 (HPP Pembukuan)</span>
+                <span className="font-medium mc-ink">Beban Pokok (HPP)</span>
+                <span className="font-mono font-bold mc-badge-accent px-2 py-0.5 rounded">5106 (HPP Pembukuan)</span>
               </div>
             </div>
           </div>

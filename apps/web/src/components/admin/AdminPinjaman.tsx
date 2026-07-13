@@ -183,15 +183,15 @@ export default function AdminPinjaman({
       {/* 1. PENGAJUAN VIEW & SIMULATION CREATOR */}
       {subView === 'pengajuan' && (
         <>
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 border border-slate-200 rounded-xl shadow-sm">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mc-card">
             <div className="relative w-full sm:max-w-xs">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-slate-400" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4.5 h-4.5 mc-muted" />
               <input
                 type="text"
                 placeholder="Cari pengajuan pinjaman..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 text-xs border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-slate-50 focus:bg-white"
+                className="w-full pl-10 pr-4 py-2 text-xs mc-border mc-surface-2 rounded-lg mc-focus focus:ring-[var(--mc-accent)]"
               />
             </div>
 
@@ -199,25 +199,25 @@ export default function AdminPinjaman({
               onClick={() => {
                 setShowSimModal(true);
               }}
-              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg text-xs flex items-center justify-center gap-2 cursor-pointer transition shadow-sm shadow-blue-500/10"
+              className="w-full sm:w-auto mc-btn-primary px-4 py-2 rounded-lg text-xs flex items-center justify-center gap-2 cursor-pointer transition shadow-sm"
             >
               <Calculator className="w-4 h-4" />
-              Simulasi &amp; Buat Pengajuan Baru
+              Simulasi & Buat Pengajuan Baru
             </button>
           </div>
 
           {/* Simulation & Creation Modal */}
           {showSimModal && (
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-md relative animate-fadeIn">
+            <div className="mc-card relative animate-fadeIn">
               <button
                 onClick={() => setShowSimModal(false)}
-                className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 p-1.5 rounded-lg hover:bg-slate-50 cursor-pointer"
+                className="absolute right-4 top-4 mc-muted hover:mc-ink hover:mc-surface-2 p-1.5 rounded-lg cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <h3 className="font-bold text-slate-900 text-sm mb-4 flex items-center gap-2">
-                <Calculator className="w-5 h-5 text-blue-600" />
+              <h3 className="font-bold mc-ink-strong text-sm mb-4 flex items-center gap-2">
+                <Calculator className="w-5 h-5 mc-icon-accent" />
                 Simulasi Perhitungan Pinjaman Koperasi
               </h3>
 
@@ -226,12 +226,12 @@ export default function AdminPinjaman({
                 {/* Inputs Column */}
                 <div className="lg:col-span-5 space-y-4">
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1.5">Pilih Anggota</label>
+                    <label className="block font-semibold mc-ink-strong mb-1.5">Pilih Anggota</label>
                     <select
                       value={selectedMemberId}
                       onChange={(e) => setSelectedMemberId(e.target.value)}
                       required
-                      className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 font-semibold"
+                      className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 font-semibold mc-ink-strong"
                     >
                       <option value="">-- Pilih Anggota --</option>
                       {members.map((m) => (
@@ -243,12 +243,12 @@ export default function AdminPinjaman({
                   </div>
 
                   <div>
-                    <label className="block font-semibold text-slate-700 mb-1.5">Pilih Kategori Pinjaman</label>
+                    <label className="block font-semibold mc-ink-strong mb-1.5">Pilih Kategori Pinjaman</label>
                     <select
                       value={selectedTypeId}
                       onChange={(e) => setSelectedTypeId(e.target.value)}
                       required
-                      className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 font-semibold"
+                      className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 font-semibold mc-ink-strong"
                     >
                       <option value="">-- Pilih Kategori --</option>
                       {loanTypes.map((t) => (
@@ -261,18 +261,18 @@ export default function AdminPinjaman({
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1.5">Besar Pokok (Rp)</label>
+                      <label className="block font-semibold mc-ink-strong mb-1.5">Besar Pokok (Rp)</label>
                       <input
                         type="number"
                         value={pokok}
                         step={500000}
                         onChange={(e) => setPokok(Number(e.target.value))}
                         required
-                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 font-mono font-bold"
+                        className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 font-mono font-bold mc-ink-strong"
                       />
                     </div>
                     <div>
-                      <label className="block font-semibold text-slate-700 mb-1.5">Tenor (Bulan)</label>
+                      <label className="block font-semibold mc-ink-strong mb-1.5">Tenor (Bulan)</label>
                       <input
                         type="number"
                         value={tenor}
@@ -280,24 +280,24 @@ export default function AdminPinjaman({
                         max={36}
                         onChange={(e) => setTenor(Number(e.target.value))}
                         required
-                        className="w-full px-3 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 bg-slate-50 font-mono font-bold"
+                        className="w-full px-3 py-2 mc-border rounded-lg mc-focus focus:ring-[var(--mc-accent)] mc-surface-2 font-mono font-bold mc-ink-strong"
                       />
                     </div>
                   </div>
 
                   {activeType && (
-                    <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-lg space-y-1.5">
+                    <div className="mc-surface-2 mc-border p-3.5 rounded-lg space-y-1.5">
                       <div className="flex justify-between">
-                        <span className="text-slate-500">Metode Angsuran:</span>
-                        <span className="font-bold text-slate-700 capitalize">{activeType.metodeBunga}</span>
+                        <span className="mc-muted">Metode Angsuran:</span>
+                        <span className="font-bold mc-ink-strong capitalize">{activeType.metodeBunga}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-500">Biaya Administrasi:</span>
-                        <span className="font-mono font-bold text-slate-700">{formatIDR(activeType.biayaAdmin)}</span>
+                        <span className="mc-muted">Biaya Administrasi:</span>
+                        <span className="font-mono font-bold mc-ink-strong">{formatIDR(activeType.biayaAdmin)}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-slate-500">Plafon Maksimum:</span>
-                        <span className="font-mono font-bold text-slate-700">{formatIDR(activeType.maksPlafon)}</span>
+                        <span className="mc-muted">Plafon Maksimum:</span>
+                        <span className="font-mono font-bold mc-ink-strong">{formatIDR(activeType.maksPlafon)}</span>
                       </div>
                     </div>
                   )}
@@ -306,13 +306,13 @@ export default function AdminPinjaman({
                     <button
                       type="button"
                       onClick={() => setShowSimModal(false)}
-                      className="px-4 py-2 border border-slate-200 hover:bg-slate-50 rounded-lg font-semibold text-slate-600"
+                      className="px-4 py-2 mc-border hover:mc-surface-2 rounded-lg font-semibold mc-ink"
                     >
                       Batal
                     </button>
                     <button
                       type="submit"
-                      className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm"
+                      className="px-5 py-2 mc-btn-primary font-semibold rounded-lg shadow-sm"
                     >
                       Ajukan Sekarang
                     </button>
@@ -320,35 +320,35 @@ export default function AdminPinjaman({
                 </div>
 
                 {/* Simulation Outputs Column */}
-                <div className="lg:col-span-7 border-l border-slate-200 pl-6 flex flex-col justify-between">
+                <div className="lg:col-span-7 border-l mc-border pl-6 flex flex-col justify-between">
                   <div>
-                    <h4 className="font-bold text-slate-800 text-xs mb-3 flex items-center gap-1.5">
-                      <Receipt className="w-4 h-4 text-blue-500" />
+                    <h4 className="font-bold mc-ink-strong text-xs mb-3 flex items-center gap-1.5">
+                      <Receipt className="w-4 h-4 mc-icon-accent" />
                       Rencana Tabel Angsuran Bulanan (Proyeksi)
                     </h4>
                     
                     {simulationSchedule.length === 0 ? (
-                      <div className="text-center py-12 text-slate-400">
+                      <div className="text-center py-12 mc-muted">
                         Select a category and adjust numbers to view projection.
                       </div>
                     ) : (
-                      <div className="max-h-56 overflow-y-auto border border-slate-100 rounded-lg">
+                      <div className="max-h-56 overflow-y-auto mc-border rounded-lg">
                         <table className="w-full text-left text-[11px]">
                           <thead>
-                            <tr className="bg-slate-100 font-semibold text-slate-600 border-b border-slate-200 sticky top-0">
+                            <tr className="mc-surface-2 font-semibold mc-muted border-b mc-border sticky top-0">
                               <th className="p-2">Bulan Ke-</th>
                               <th className="p-2">Pokok Dibayar</th>
                               <th className="p-2">Margin Jasa</th>
                               <th className="p-2">Total Setoran</th>
                             </tr>
                           </thead>
-                          <tbody className="divide-y divide-slate-100 font-mono">
+                          <tbody className="divide-y mc-border font-mono">
                             {simulationSchedule.map((row) => (
-                              <tr key={row.bulan} className="hover:bg-slate-50/50">
-                                <td className="p-2 text-slate-500 font-bold"># {row.bulan}</td>
-                                <td className="p-2 text-slate-700">{formatIDR(row.pokok)}</td>
-                                <td className="p-2 text-amber-600">{formatIDR(row.bunga)}</td>
-                                <td className="p-2 text-slate-900 font-bold">{formatIDR(row.total)}</td>
+                              <tr key={row.bulan} className="hover:mc-surface-2/50">
+                                <td className="p-2 mc-muted font-bold"># {row.bulan}</td>
+                                <td className="p-2 mc-ink">{formatIDR(row.pokok)}</td>
+                                <td className="p-2" style={{ color: 'var(--mc-accent)' }}>{formatIDR(row.bunga)}</td>
+                                <td className="p-2 mc-ink-strong font-bold">{formatIDR(row.total)}</td>
                               </tr>
                             ))}
                           </tbody>
@@ -358,12 +358,12 @@ export default function AdminPinjaman({
                   </div>
 
                   {simulationSchedule.length > 0 && (
-                    <div className="bg-blue-50 border border-blue-100 p-4 rounded-xl flex items-center justify-between mt-4">
+                    <div className="mc-surface-2 mc-border rounded-xl flex items-center justify-between mt-4" style={{ borderColor: 'var(--mc-accent)' }}>
                       <div>
-                        <div className="text-[10px] uppercase tracking-wider text-blue-600 font-bold">Rata-rata Angsuran</div>
-                        <div className="text-lg font-extrabold text-blue-900 font-mono">{formatIDR(simulatedAngsuranPerBulan)} / bulan</div>
+                        <div className="text-[10px] uppercase tracking-wider font-bold" style={{ color: 'var(--mc-accent)' }}>Rata-rata Angsuran</div>
+                        <div className="text-lg font-extrabold font-mono" style={{ color: 'var(--mc-primary)' }}>{formatIDR(simulatedAngsuranPerBulan)} / bulan</div>
                       </div>
-                      <span className="text-[10px] text-blue-700 bg-white/80 border border-blue-200 px-2 py-1 rounded-full font-semibold">
+                      <span className="text-[10px] font-semibold px-2 py-1 rounded-full mc-badge-accent">
                         Sesuai Kebijakan
                       </span>
                     </div>
@@ -375,14 +375,14 @@ export default function AdminPinjaman({
           )}
 
           {/* List of Loans Requested or Disbursed */}
-          <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-            <div className="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm">
-              Berkas Pengajuan &amp; Pinjaman Aktif
+          <div className="mc-card overflow-hidden">
+            <div className="p-4 border-b mc-border font-bold mc-ink-strong text-sm">
+              Berkas Pengajuan & Pinjaman Aktif
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+                  <tr className="mc-surface-2 border-b mc-border mc-muted font-semibold">
                     <th className="p-4">No Pinjaman</th>
                     <th className="p-4">Anggota</th>
                     <th className="p-4">Jenis Pinjaman</th>
@@ -394,29 +394,29 @@ export default function AdminPinjaman({
                     <th className="p-4 text-right">Tindakan</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y mc-border">
                   {loans.map((l) => (
-                    <tr key={l.id} className="hover:bg-slate-50/30">
-                      <td className="p-4 font-mono font-bold text-slate-600">{l.noPinjaman || 'PROPOSAL'}</td>
-                      <td className="p-4 font-bold text-slate-800">{l.anggotaNama}</td>
-                      <td className="p-4 text-slate-600">{l.jenisNama}</td>
-                      <td className="p-4 font-mono font-bold text-slate-900">{formatIDR(l.pokok)}</td>
+                    <tr key={l.id} className="hover:mc-surface-2/50">
+                      <td className="p-4 font-mono font-bold mc-muted">{l.noPinjaman || 'PROPOSAL'}</td>
+                      <td className="p-4 font-bold mc-ink-strong">{l.anggotaNama}</td>
+                      <td className="p-4 mc-ink">{l.jenisNama}</td>
+                      <td className="p-4 font-mono font-bold mc-ink-strong">{formatIDR(l.pokok)}</td>
                       <td className="p-4 font-mono">{l.tenorMonths} bln</td>
-                      <td className="p-4 font-mono font-semibold text-slate-900">{formatIDR(l.angsuranPerBulan)}</td>
-                      <td className="p-4 font-mono font-bold text-slate-900 text-amber-600">
+                      <td className="p-4 font-mono font-semibold mc-ink-strong">{formatIDR(l.angsuranPerBulan)}</td>
+                      <td className="p-4 font-mono font-bold mc-ink-strong" style={{ color: 'var(--mc-accent)' }}>
                         {l.status === 'dicairkan' ? formatIDR(l.sisaPokok) : '-'}
                       </td>
                       <td className="p-4">
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded text-[10px] font-bold border ${
                           l.status === 'pengajuan' 
-                            ? 'bg-amber-50 text-amber-700 border-amber-200' 
+                            ? 'mc-badge-accent' 
                             : l.status === 'disetujui' 
-                            ? 'bg-blue-50 text-blue-700 border-blue-200' 
+                            ? 'mc-badge-accent' 
                             : l.status === 'dicairkan' 
-                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200 animate-soft-pulse' 
+                            ? 'mc-badge-ok animate-soft-pulse' 
                             : l.status === 'lunas' 
-                            ? 'bg-slate-50 text-slate-600 border-slate-200 line-through' 
-                            : 'bg-red-50 text-red-700 border-red-200'
+                            ? 'mc-muted line-through' 
+                            : 'mc-btn-danger'
                         }`}>
                           {l.status === 'pengajuan' && 'Draft Pengajuan'}
                           {l.status === 'disetujui' && 'Sudah Disetujui'}
@@ -430,13 +430,13 @@ export default function AdminPinjaman({
                           <>
                             <button
                               onClick={() => onApproveLoan(l.id)}
-                              className="bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
+                              className="mc-badge-ok px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
                             >
                               Approve
                             </button>
                             <button
                               onClick={() => onRejectLoan(l.id)}
-                              className="bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
+                              className="mc-btn-danger px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition"
                             >
                               Tolak
                             </button>
@@ -454,19 +454,19 @@ export default function AdminPinjaman({
 
       {/* 2. BAYAR ANGSURAN */}
       {subView === 'angsuran' && (
-        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm">
+        <div className="mc-card overflow-hidden">
+          <div className="p-4 border-b mc-border font-bold mc-ink-strong text-sm">
             Loket Pembayaran Angsuran Bulanan (Staff Kasir)
           </div>
-          <div className="p-4 bg-slate-50 border-b border-slate-200 text-xs text-slate-500 flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 text-blue-500" />
+          <div className="p-4 mc-surface-2 border-b mc-border text-xs mc-muted flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 mc-icon-accent" />
             <span>Pilih jadwal angsuran yang belum dibayar di bawah untuk mencatat pelunasan tunai/transfer.</span>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold">
+                <tr className="mc-surface-2 border-b mc-border mc-muted font-semibold">
                   <th className="p-4">Nama Anggota</th>
                   <th className="p-4">Angsuran Ke-</th>
                   <th className="p-4">Batas Jatuh Tempo</th>
@@ -477,20 +477,20 @@ export default function AdminPinjaman({
                   <th className="p-4 text-right">Aksi Kasir</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y mc-border">
                 {schedules.map((s) => (
-                  <tr key={s.id} className="hover:bg-slate-50/50">
-                    <td className="p-4 font-bold text-slate-800">{s.anggotaNama}</td>
-                    <td className="p-4 font-mono font-bold text-slate-500">Angsuran # {s.angsuranKe}</td>
-                    <td className="p-4 font-mono text-slate-500">{s.tanggalJatuhTempo}</td>
-                    <td className="p-4 font-mono text-slate-600">{formatIDR(s.pokokBayar)}</td>
-                    <td className="p-4 font-mono text-amber-600">{formatIDR(s.bungaBayar)}</td>
-                    <td className="p-4 font-mono font-extrabold text-slate-900">{formatIDR(s.totalBayar)}</td>
+                  <tr key={s.id} className="hover:mc-surface-2/50">
+                    <td className="p-4 font-bold mc-ink-strong">{s.anggotaNama}</td>
+                    <td className="p-4 font-mono font-bold mc-muted">Angsuran # {s.angsuranKe}</td>
+                    <td className="p-4 font-mono mc-muted">{s.tanggalJatuhTempo}</td>
+                    <td className="p-4 font-mono mc-ink">{formatIDR(s.pokokBayar)}</td>
+                    <td className="p-4 font-mono" style={{ color: 'var(--mc-accent)' }}>{formatIDR(s.bungaBayar)}</td>
+                    <td className="p-4 font-mono font-extrabold mc-ink-strong">{formatIDR(s.totalBayar)}</td>
                     <td className="p-4">
                       <span className={`inline-flex px-2 py-0.5 rounded text-[10px] font-bold border ${
                         s.status === 'lunas' 
-                          ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
-                          : 'bg-amber-50 text-amber-700 border-amber-200'
+                          ? 'mc-badge-ok' 
+                          : 'mc-badge-accent'
                       }`}>
                         {s.status === 'lunas' ? 'Lunas Dibayar' : 'Belum Bayar'}
                       </span>
@@ -503,12 +503,12 @@ export default function AdminPinjaman({
                               onRecordAngsuran(s.id, 0);
                             }
                           }}
-                          className="bg-emerald-600 hover:bg-emerald-700 text-white px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition shadow-sm"
+                          className="mc-btn-primary px-2.5 py-1 rounded font-semibold text-[10px] cursor-pointer transition shadow-sm"
                         >
                           ✔ Terima Pembayaran
                         </button>
                       ) : (
-                        <span className="text-[10px] font-mono text-slate-400 font-semibold italic">Lunas ({s.tanggalBayar})</span>
+                        <span className="text-[10px] font-mono mc-muted font-semibold italic">Lunas ({s.tanggalBayar})</span>
                       )}
                     </td>
                   </tr>
@@ -528,34 +528,34 @@ export default function AdminPinjaman({
           .sort((a, b) => b.lateDays - a.lateDays);
         const totalOverdue = overdue.reduce((sum, s) => sum + (s.totalBayar || 0), 0);
         return (
-          <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
-            <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 p-4 rounded-xl text-amber-900">
-              <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+          <div className="mc-card p-5 space-y-4">
+            <div className="flex items-start gap-3 mc-surface-2 mc-border p-4 rounded-xl" style={{ borderColor: 'var(--mc-accent)', background: 'var(--mc-sidebar-active)' }}>
+              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: 'var(--mc-accent)' }} />
               <div>
-                <h4 className="font-bold text-xs">Peringatan Jatuh Tempo &amp; Risiko Tunggakan</h4>
-                <p className="text-[11px] text-amber-800 leading-relaxed mt-1">
+                <h4 className="font-bold text-xs mc-ink-strong">Peringatan Jatuh Tempo & Risiko Tunggakan</h4>
+                <p className="text-[11px] leading-relaxed mt-1" style={{ color: 'var(--mc-ink)' }}>
                   Sistem mendeteksi <b>{overdue.length}</b> jadwal pembayaran pinjaman yang belum diselesaikan walaupun telah melewati batas tanggal jatuh tempo (total <b>{formatIDR(totalOverdue)}</b>). Pengingat SMS / WA otomatis dapat diatur dari modul email di pengaturan.
                 </p>
               </div>
             </div>
 
-            <div className="border border-slate-100 rounded-lg overflow-hidden text-xs">
-              <div className="bg-slate-50 px-4 py-3 font-bold text-slate-700 border-b border-slate-200">
+            <div className="mc-border rounded-lg overflow-hidden text-xs">
+              <div className="mc-surface-2 px-4 py-3 font-bold mc-ink-strong border-b mc-border">
                 Daftar Keterlambatan Pembayaran Aktif ({overdue.length})
               </div>
               <div className="p-4 space-y-3">
                 {overdue.length === 0 && (
-                  <div className="text-center text-slate-400 italic py-6">Tidak ada tunggakan aktif. Semua angsuran tepat waktu.</div>
+                  <div className="text-center mc-muted italic py-6">Tidak ada tunggakan aktif. Semua angsuran tepat waktu.</div>
                 )}
                 {overdue.map((s, idx) => (
-                  <div key={s.id} className={`flex justify-between items-center py-2 ${idx < overdue.length - 1 ? 'border-b border-slate-100' : ''}`}>
+                  <div key={s.id} className={`flex justify-between items-center py-2 ${idx < overdue.length - 1 ? 'border-b mc-border' : ''}`}>
                     <div>
-                      <div className="font-bold text-slate-800">{s.anggotaNama}</div>
-                      <div className="text-[10px] text-slate-400">Angsuran Ke-{s.angsuranKe} (Jatuh tempo: {s.tanggalJatuhTempo})</div>
+                      <div className="font-bold mc-ink-strong">{s.anggotaNama}</div>
+                      <div className="text-[10px] mc-muted">Angsuran Ke-{s.angsuranKe} (Jatuh tempo: {s.tanggalJatuhTempo})</div>
                     </div>
                     <div className="text-right">
-                      <div className="font-mono font-bold text-red-600">{formatIDR(s.totalBayar)}</div>
-                      <div className="text-[9px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded inline-block mt-0.5">Terlambat {s.lateDays} Hari</div>
+                      <div className="font-mono font-bold" style={{ color: 'var(--mc-error)' }}>{formatIDR(s.totalBayar)}</div>
+                      <div className="text-[9px] font-bold mc-badge-accent px-1.5 py-0.5 rounded inline-block mt-0.5">Terlambat {s.lateDays} Hari</div>
                     </div>
                   </div>
                 ))}
@@ -567,56 +567,56 @@ export default function AdminPinjaman({
 
       {/* 4. CONFIGURATION OF LOAN TYPES */}
       {subView === 'jenis' && (
-        <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-          <div className="p-4 border-b border-slate-200 font-bold text-slate-800 text-sm flex justify-between items-center">
+        <div className="mc-card overflow-hidden">
+          <div className="p-4 border-b mc-border font-bold mc-ink-strong text-sm flex justify-between items-center">
             <span className="flex items-center gap-2">
-              Konfigurasi Kebijakan Suku Bunga &amp; Jenis Pinjaman
+              Konfigurasi Kebijakan Suku Bunga & Jenis Pinjaman
               <button
                 onClick={() => setShowAddType(true)}
-                className="flex items-center gap-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] px-2.5 py-1 rounded-lg transition font-bold cursor-pointer"
+                className="flex items-center gap-1 mc-btn-primary text-[11px] px-2.5 py-1 rounded-lg transition font-bold cursor-pointer"
               >
                 <Plus className="w-3 h-3" /> Tambah Jenis Pinjaman
               </button>
             </span>
-            <span className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-md flex items-center gap-1">
+            <span className="text-xs mc-badge-accent px-2 py-1 rounded-md flex items-center gap-1">
               <Settings className="w-3.5 h-3.5" /> Regulasi OJK / Koperasi
             </span>
           </div>
           <div className="p-5">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {loanTypes.map((lt) => (
-                <div key={lt.id} className="border border-slate-200 rounded-xl p-4 bg-slate-50/50 space-y-2 flex flex-col justify-between">
+                <div key={lt.id} className="mc-border rounded-xl p-4 mc-surface-2/50 space-y-2 flex flex-col justify-between">
                   <div className="space-y-2">
-                    <div className="font-bold text-slate-800 text-sm flex justify-between items-start gap-1">
+                    <div className="font-bold mc-ink-strong text-sm flex justify-between items-start gap-1">
                       <span>{lt.nama}</span>
                       <button
                         onClick={() => startEditType(lt)}
-                        className="p-1 hover:bg-slate-200 rounded-lg text-slate-500 hover:text-blue-600 transition cursor-pointer"
+                        className="p-1 hover:mc-surface-2 rounded-lg mc-muted hover:mc-icon-accent transition cursor-pointer"
                         title="Edit Kebijakan Pinjaman"
                       >
                         <Edit className="w-3.5 h-3.5" />
                       </button>
                     </div>
-                    <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider font-mono">Bunga/Margin: {lt.bungaPersen}% / bln</div>
+                    <div className="text-[10px] mc-muted font-bold uppercase tracking-wider font-mono">Bunga/Margin: {lt.bungaPersen}% / bln</div>
                     
-                    <div className="pt-2 flex justify-between text-xs border-t border-slate-200/50">
-                      <span className="text-slate-500">Maks. Plafon</span>
-                      <span className="font-semibold text-slate-800 font-mono">{formatIDR(lt.maksPlafon)}</span>
+                    <div className="pt-2 flex justify-between text-xs border-t mc-border/50">
+                      <span className="mc-muted">Maks. Plafon</span>
+                      <span className="font-semibold mc-ink-strong font-mono">{formatIDR(lt.maksPlafon)}</span>
                     </div>
 
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-500">Maks. Tenor</span>
-                      <span className="font-semibold text-slate-800 font-mono">{lt.maksTenor} Bulan</span>
+                      <span className="mc-muted">Maks. Tenor</span>
+                      <span className="font-semibold mc-ink-strong font-mono">{lt.maksTenor} Bulan</span>
                     </div>
 
                     <div className="flex justify-between text-xs">
-                      <span className="text-slate-500">Metode</span>
-                      <span className="font-bold text-slate-800 capitalize">{lt.metodeBunga}</span>
+                      <span className="mc-muted">Metode</span>
+                      <span className="font-bold mc-ink-strong capitalize">{lt.metodeBunga}</span>
                     </div>
 
                     <div className="flex justify-between text-xs pt-1">
-                      <span className="text-slate-500">Skema Angsuran</span>
-                      <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded">
+                      <span className="mc-muted">Skema Angsuran</span>
+                      <span className="text-[10px] font-bold mc-badge-accent px-1.5 py-0.5 rounded">
                         Konvensional
                       </span>
                     </div>
@@ -631,15 +631,15 @@ export default function AdminPinjaman({
       {/* Edit Loan Type Modal */}
       {editingType && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div className="p-5 border-b border-slate-200 flex justify-between items-center bg-blue-900 text-white">
-              <h3 className="font-extrabold text-sm flex items-center gap-2">
-                <Settings className="w-4 h-4 text-amber-400" />
+          <div className="mc-surface mc-border rounded-2xl max-w-md w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="p-5 border-b mc-border flex justify-between items-center" style={{ background: 'var(--mc-primary)' }}>
+              <h3 className="font-extrabold text-sm flex items-center gap-2 text-white">
+                <Settings className="w-4 h-4" style={{ color: 'var(--mc-accent)' }} />
                 Ubah Kebijakan Pinjaman
               </h3>
               <button 
                 onClick={() => setEditingType(null)}
-                className="hover:bg-blue-800 p-1.5 rounded-lg text-slate-300 hover:text-white transition cursor-pointer"
+                className="hover:bg-slate-700/50 p-1.5 rounded-lg text-slate-300 hover:text-white transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -647,18 +647,18 @@ export default function AdminPinjaman({
 
             <form onSubmit={handleEditSubmit} className="p-6 space-y-4 text-xs">
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Nama Kebijakan Pinjaman</label>
+                <label className="block font-semibold mc-ink mb-1">Nama Kebijakan Pinjaman</label>
                 <input
                   type="text"
                   required
                   value={editNama}
                   onChange={(e) => setEditNama(e.target.value)}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Suku Bunga Bulanan (%)</label>
+                <label className="block font-semibold mc-ink mb-1">Suku Bunga Bulanan (%)</label>
                 <input
                   type="number"
                   required
@@ -667,24 +667,24 @@ export default function AdminPinjaman({
                   max="100"
                   value={editBungaPersen}
                   onChange={(e) => setEditBungaPersen(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Maksimal Plafon Pinjaman (Rp)</label>
+                <label className="block font-semibold mc-ink mb-1">Maksimal Plafon Pinjaman (Rp)</label>
                 <input
                   type="number"
                   required
                   min="0"
                   value={editMaksPlafon}
                   onChange={(e) => setEditMaksPlafon(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Maksimal Tenor (Bulan)</label>
+                <label className="block font-semibold mc-ink mb-1">Maksimal Tenor (Bulan)</label>
                 <input
                   type="number"
                   required
@@ -692,16 +692,16 @@ export default function AdminPinjaman({
                   max="120"
                   value={editMaksTenor}
                   onChange={(e) => setEditMaksTenor(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Metode Bunga</label>
+                <label className="block font-semibold mc-ink mb-1">Metode Bunga</label>
                 <select
                   value={editMetodeBunga}
                   onChange={(e) => setEditMetodeBunga(e.target.value as 'flat' | 'efektif' | 'anuitas')}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong"
                 >
                   <option value="flat">Flat</option>
                   <option value="efektif">Menurun (Efektif)</option>
@@ -709,17 +709,17 @@ export default function AdminPinjaman({
                 </select>
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t mc-border">
                 <button
                   type="button"
                   onClick={() => setEditingType(null)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded transition cursor-pointer"
+                  className="px-4 py-2 mc-surface-2 hover:mc-border mc-ink font-bold rounded transition cursor-pointer"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-900 hover:bg-blue-800 text-white font-bold rounded shadow-sm hover:shadow transition cursor-pointer"
+                  className="px-4 py-2 text-white font-bold rounded shadow-sm hover:shadow transition cursor-pointer" style={{ background: 'var(--mc-primary)' }}
                 >
                   Simpan Perubahan
                 </button>
@@ -732,15 +732,15 @@ export default function AdminPinjaman({
       {/* Add Loan Type Modal */}
       {showAddType && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-100 overflow-hidden animate-in fade-in zoom-in-95 duration-150">
-            <div className="p-5 border-b border-slate-200 flex justify-between items-center bg-emerald-900 text-white">
-              <h3 className="font-extrabold text-sm flex items-center gap-2">
-                <Plus className="w-4 h-4 text-emerald-300" />
+          <div className="mc-surface mc-border rounded-2xl max-w-md w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="p-5 border-b mc-border flex justify-between items-center" style={{ background: 'var(--mc-success)' }}>
+              <h3 className="font-extrabold text-sm flex items-center gap-2 text-white">
+                <Plus className="w-4 h-4" style={{ color: 'var(--mc-success)' }} />
                 Tambah Kebijakan Pinjaman Baru
               </h3>
               <button 
                 onClick={() => setShowAddType(false)}
-                className="hover:bg-emerald-800 p-1.5 rounded-lg text-slate-300 hover:text-white transition cursor-pointer"
+                className="hover:bg-slate-700/50 p-1.5 rounded-lg text-slate-300 hover:text-white transition cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -748,19 +748,19 @@ export default function AdminPinjaman({
 
             <form onSubmit={handleAddSubmit} className="p-6 space-y-4 text-xs">
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Nama Kebijakan Pinjaman</label>
+                <label className="block font-semibold mc-ink mb-1">Nama Kebijakan Pinjaman</label>
                 <input
                   type="text"
                   required
                   placeholder="Contoh: Pinjaman Motor Syariah"
                   value={addNama}
                   onChange={(e) => setAddNama(e.target.value)}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Suku Bunga Bulanan (%)</label>
+                <label className="block font-semibold mc-ink mb-1">Suku Bunga Bulanan (%)</label>
                 <input
                   type="number"
                   required
@@ -769,24 +769,24 @@ export default function AdminPinjaman({
                   max="100"
                   value={addBungaPersen}
                   onChange={(e) => setAddBungaPersen(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Maksimal Plafon Pinjaman (Rp)</label>
+                <label className="block font-semibold mc-ink mb-1">Maksimal Plafon Pinjaman (Rp)</label>
                 <input
                   type="number"
                   required
                   min="0"
                   value={addMaksPlafon}
                   onChange={(e) => setAddMaksPlafon(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Maksimal Tenor (Bulan)</label>
+                <label className="block font-semibold mc-ink mb-1">Maksimal Tenor (Bulan)</label>
                 <input
                   type="number"
                   required
@@ -794,16 +794,16 @@ export default function AdminPinjaman({
                   max="120"
                   value={addMaksTenor}
                   onChange={(e) => setAddMaksTenor(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Metode Bunga</label>
+                <label className="block font-semibold mc-ink mb-1">Metode Bunga</label>
                 <select
                   value={addMetodeBunga}
                   onChange={(e) => setAddMetodeBunga(e.target.value as 'flat' | 'efektif' | 'anuitas')}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong"
                 >
                   <option value="flat">Flat</option>
                   <option value="efektif">Menurun (Efektif)</option>
@@ -812,28 +812,28 @@ export default function AdminPinjaman({
               </div>
 
               <div>
-                <label className="block font-semibold text-slate-600 mb-1">Biaya Admin (Rp)</label>
+                <label className="block font-semibold mc-ink mb-1">Biaya Admin (Rp)</label>
                 <input
                   type="number"
                   required
                   min="0"
                   value={addBiayaAdmin}
                   onChange={(e) => setAddBiayaAdmin(Number(e.target.value))}
-                  className="w-full border border-slate-200 p-2 rounded bg-slate-50 focus:bg-white text-slate-800 font-mono"
+                  className="w-full mc-border p-2 rounded mc-surface-2 mc-focus focus:bg-[var(--mc-surface)] mc-ink-strong font-mono"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-4 border-t border-slate-100">
+              <div className="flex justify-end gap-2 pt-4 border-t mc-border">
                 <button
                   type="button"
                   onClick={() => setShowAddType(false)}
-                  className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold rounded transition cursor-pointer"
+                  className="px-4 py-2 mc-surface-2 hover:mc-border mc-ink font-bold rounded transition cursor-pointer"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded shadow-sm hover:shadow transition cursor-pointer"
+                  className="px-4 py-2 mc-btn-primary font-bold rounded shadow-sm hover:shadow transition cursor-pointer"
                 >
                   Tambah Kebijakan
                 </button>
