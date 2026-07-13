@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuthStore } from '../stores/authStore';
 import { useDataStore } from '../stores/dataStore';
 import Sidebar from './Sidebar';
@@ -7,15 +7,39 @@ import AdminPortal from './AdminPortal';
 import MemberPortal from './MemberPortal';
 import MemberPerusahaanPortal from './MemberPerusahaanPortal';
 import { useTheme } from '../theme/ThemeProvider';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 export default function DashboardApp() {
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
   const store = useDataStore();
   const { setTheme } = useTheme();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-  const [activeMenu, setActiveMenu] = useState<string>('dashboard');
+  // Initialize activeMenu from URL or default to 'dashboard'
+  const initialMenu = searchParams.get('menu') || 'dashboard';
+  const [activeMenu, setActiveMenuState] = useState<string>(initialMenu);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
+
+  // Sync activeMenu to URL whenever it changes
+  const setActiveMenu = (menu: string) => {
+    setActiveMenuState(menu);
+    setSearchParams({ menu }, { replace: true });
+  };
+
+  // Accessibility
+  const mainRef = React.useRef<HTMLMainElement>(null);
+  const [liveAnnouncement, setLiveAnnouncement] = useState<string>('');
+
+  // Announce navigation changes to screen readers
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.focus();
+      setLiveAnnouncement(`Navigasi ke ${activeMenu}`);
+      setTimeout(() => setLiveAnnouncement(''), 1000);
+    }
+  }, [activeMenu]);
 
   const pendingNotificationsCount =
     store.transferReceipts.filter((r: any) => r.status === 'pending').length +
@@ -24,6 +48,8 @@ export default function DashboardApp() {
 
   const isAdmin = user?.role === 'admin' || user?.role === 'operator' || user?.role === 'superadmin';
   const isPerusahaan = user?.role === 'anggota_perusahaan';
+
+  // ... rest of the component
 
   const commonProps = {
     activeMenu,
@@ -154,6 +180,23 @@ export default function DashboardApp() {
 
   return (
     <div className="min-h-screen font-sans antialiased mc-bg flex overflow-hidden">
+      {/* Skip Link for Accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 px-4 py-2 bg-primary text-white rounded-md font-medium"
+      >
+        Skip to main content
+      </a>
+
+      {/* Live Region for Screen Readers */}
+      <div
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {liveAnnouncement}
+      </div>
+
       <Sidebar
         role={user?.role}
         activeMenu={activeMenu}
@@ -172,7 +215,12 @@ export default function DashboardApp() {
           pendingNotificationsCount={pendingNotificationsCount}
           onNavigateToNotifications={() => setActiveMenu(isAdmin ? 'tiket_admin' : 'member_bantuan')}
         />
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 w-full flex flex-col justify-between">
+        <main
+          ref={mainRef}
+          id="main-content"
+          tabIndex={-1}
+          className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 w-full flex flex-col justify-between focus:outline-none"
+        >
           <div className="space-y-6 flex-1 pb-8">
             {isAdmin ? (
               <AdminPortal {...adminProps as any} />

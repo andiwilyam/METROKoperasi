@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Users, PiggyBank, HandCoins, Landmark, ChevronRight, TrendingUp, Sparkles, Building, Calendar, ShoppingCart, Tv, PhoneCall, Wallet, Award } from 'lucide-react';
 import { Anggota, SimpananTransaksi, Pinjaman, UserSession, KoperasiInfo, JournalEntry, Pengurus } from '../../types';
 
@@ -23,6 +23,35 @@ interface AdminDashboardProps {
   ppobTransactions?: any[];
   vaTransactions?: any[];
   investments?: any[];
+}
+
+function formatIDR(num: number) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  }).format(num);
+}
+
+function getMonthKey(dateStr: string): string {
+  const d = new Date(dateStr);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function getLast6Months(): string[] {
+  const months: string[] = [];
+  const now = new Date();
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    months.push(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`);
+  }
+  return months;
+}
+
+function getMonthLabel(monthKey: string): string {
+  const [year, month] = monthKey.split('-').map(Number);
+  const date = new Date(year, month - 1, 1);
+  return date.toLocaleDateString('id-ID', { month: 'short' });
 }
 
 export default function AdminDashboard({
@@ -83,6 +112,53 @@ export default function AdminDashboard({
   const ketua = pengurus.find((p) => p.jabatan?.toLowerCase().includes('ketua'));
   const bendahara = pengurus.find((p) => p.jabatan?.toLowerCase().includes('bendahara'));
   const otherPengurus = pengurus.filter((p) => p !== ketua && p !== bendahara);
+
+  // REAL CHART DATA from savingsTrans and loans (last 6 months)
+  const monthlySimpanan = useMemo(() => {
+    const map = new Map<string, number>();
+    getLast6Months().forEach(m => map.set(m, 0));
+    savingsTrans.forEach(t => {
+      if (t.tipe === 'setor') {
+        const key = getMonthKey(t.tanggal);
+        if (map.has(key)) map.set(key, (map.get(key) || 0) + t.jumlah);
+      }
+    });
+    return Array.from(map.entries());
+  }, [savingsTrans]);
+
+  const monthlyPinjaman = useMemo(() => {
+    const map = new Map<string, number>();
+    getLast6Months().forEach(m => map.set(m, 0));
+    loans.forEach(l => {
+      if (l.status === 'dicairkan' && l.tanggalCair) {
+        const key = getMonthKey(l.tanggalCair);
+        if (map.has(key)) map.set(key, (map.get(key) || 0) + l.pokok);
+      }
+    });
+    return Array.from(map.entries());
+  }, [loans]);
+
+  // Build SVG path from data points
+  function buildPath(data: [string, number][], maxVal: number, height: number = 180, topPadding: number = 30): string {
+    const points = data.map(([_, val], i) => {
+      const x = 50 + (i * 100);
+      const y = topPadding + height - (val / (maxVal || 1)) * height;
+      return `${i === 0 ? 'M' : 'L'} ${x},${y}`;
+    });
+    return points.join(' ');
+  }
+
+  function buildCircles(data: [string, number][], maxVal: number, height: number = 180, topPadding: number = 30, color: string = "currentColor") {
+    return data.map(([_, val], i) => {
+      const x = 50 + (i * 100);
+      const y = topPadding + height - (val / (maxVal || 1)) * height;
+      return <circle key={i} cx={x} cy={y} r={5} fill={color} stroke="#fff" strokeWidth={2} />;
+    });
+  }
+
+  const maxSimpanan = Math.max(...monthlySimpanan.map(([_, v]) => v), 1);
+  const maxPinjaman = Math.max(...monthlyPinjaman.map(([_, v]) => v), 1);
+  const maxVal = Math.max(maxSimpanan, maxPinjaman);
 
   // Format currency helpers
   const formatIDR = (num: number) => {
@@ -216,7 +292,7 @@ export default function AdminDashboard({
             </div>
           </div>
 
-          {/* Premium Animated SVG Chart — stroke pakai variabel token */}
+          {/* Premium Animated SVG Chart — real data from transactions */}
           <div className="h-64 flex items-end relative pt-6">
             {/* Grid background lines */}
             <div className="absolute inset-x-0 bottom-0 top-6 border-b mc-border flex flex-col justify-between">
@@ -227,47 +303,32 @@ export default function AdminDashboard({
             </div>
 
             <svg className="w-full h-full absolute inset-0 z-10" viewBox="0 0 600 240">
-              {/* Blue Line for Simpanan */}
+              {/* Blue Line for Simpanan (real data) */}
               <path 
-                d="M 50,180 L 150,150 L 250,130 L 350,90 L 450,70 L 550,40" 
+                d={buildPath(monthlySimpanan, maxVal)}
                 fill="none" 
                 stroke="var(--mc-accent)" 
                 strokeWidth="3.5" 
                 strokeLinecap="round"
                 className="transition-transform duration-1000"
               />
-              <circle cx="50" cy="180" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
-              <circle cx="150" cy="150" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
-              <circle cx="250" cy="130" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
-              <circle cx="350" cy="90" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
-              <circle cx="450" cy="70" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
-              <circle cx="550" cy="40" r="5" fill="var(--mc-accent)" stroke="#fff" strokeWidth="2" />
+              {buildCircles(monthlySimpanan, maxVal)}
 
-              {/* Amber Line for Pinjaman */}
+              {/* Amber Line for Pinjaman (real data) */}
               <path 
-                d="M 50,200 L 150,180 L 250,140 L 350,150 L 450,120 L 550,100" 
+                d={buildPath(monthlyPinjaman, maxVal)}
                 fill="none" 
                 stroke="var(--mc-primary)" 
                 strokeWidth="3.5" 
                 strokeLinecap="round"
                 className="transition-transform duration-1000"
               />
-              <circle cx="50" cy="200" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
-              <circle cx="150" cy="180" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
-              <circle cx="250" cy="140" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
-              <circle cx="350" cy="150" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
-              <circle cx="450" cy="120" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
-              <circle cx="550" cy="100" r="5" fill="var(--mc-primary)" stroke="#fff" strokeWidth="2" />
+              {buildCircles(monthlyPinjaman, maxVal, 180, 30, 'var(--mc-primary)')}
             </svg>
 
             {/* X Axis Labels */}
             <div className="absolute inset-x-0 -bottom-5 flex justify-between px-6 text-[10px] font-mono mc-muted font-semibold">
-              <span>Februari</span>
-              <span>Maret</span>
-              <span>April</span>
-              <span>Mei</span>
-              <span>Juni</span>
-              <span>Juli</span>
+              {getLast6Months().map((m, i) => <span key={i}>{getMonthLabel(m)}</span>)}
             </div>
           </div>
         </div>
