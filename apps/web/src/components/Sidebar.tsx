@@ -73,13 +73,13 @@ export default function Sidebar({
       {isOpen && (
         <div 
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 z-40 bg-slate-900/60 backdrop-blur-sm lg:hidden transition-opacity duration-300"
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden transition-opacity duration-300"
         />
       )}
 
       {/* Sidebar Container */}
       <aside 
-        className={`fixed lg:sticky lg:top-0 h-screen shrink-0 inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 border-r border-slate-800 flex flex-col transform lg:translate-x-0 transition-transform duration-300 ease-in-out ${
+        className={`fixed lg:sticky lg:top-0 h-screen shrink-0 inset-y-0 left-0 z-50 w-64 mc-sidebar border-r mc-border flex flex-col transform lg:translate-x-0 transition-transform duration-300 ease-in-out ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -91,11 +91,12 @@ export default function Sidebar({
             </div>
             <div>
               <span className="font-bold text-white text-sm tracking-wide">MetroCoop</span>
-              <span className="block text-[9px] text-slate-500 font-medium">Koperasi Simpan Pinjam</span>
+              <span className="block text-[9px] mc-sidebar-muted font-medium">Koperasi Simpan Pinjam</span>
             </div>
           </div>
           <button 
             onClick={() => setIsOpen(false)}
+            aria-label="Tutup menu"
             className="lg:hidden text-slate-400 hover:text-white p-1 rounded-md"
           >
             <ChevronDown className="w-5 h-5 rotate-90" />
@@ -110,15 +111,15 @@ export default function Sidebar({
             <>
               {/* Main Core Section */}
               <div className="space-y-1">
-                <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 px-3 mb-2">MANAJEMEN UTAMA</p>
+                <p className="text-[10px] uppercase tracking-wider font-semibold mc-sidebar-muted px-3 mb-2">MANAJEMEN UTAMA</p>
                 
                 {/* Dashboard */}
                 <button
                   onClick={() => handleMenuClick('dashboard')}
                   className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                     activeMenu === 'dashboard' 
-                      ? 'bg-blue-600 text-white font-semibold' 
-                      : 'hover:bg-slate-800 hover:text-white'
+                      ? 'mc-sidebar-active' 
+                      : 'mc-sidebar-item'
                   }`}
                 >
                   <LayoutDashboard className="w-4 h-4 mr-3" />
@@ -131,8 +132,8 @@ export default function Sidebar({
                     onClick={() => handleMenuClick('anggota')}
                     className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                       activeMenu === 'anggota' 
-                        ? 'bg-blue-600 text-white font-semibold' 
-                        : 'hover:bg-slate-800 hover:text-white'
+                        ? 'mc-sidebar-active' 
+                        : 'mc-sidebar-item'
                     }`}
                   >
                     <Users className="w-4 h-4 mr-3" />
@@ -145,31 +146,31 @@ export default function Sidebar({
                   <div className="space-y-0.5">
                     <button
                       onClick={() => toggleSub('simpanan')}
-                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg hover:bg-slate-800 hover:text-white transition"
+                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg mc-sidebar-item transition"
                     >
                       <span className="flex items-center">
-                        <PiggyBank className="w-4 h-4 mr-3 text-slate-400" />
+                        <PiggyBank className="w-4 h-4 mr-3 mc-icon-accent" />
                         Simpanan (Savings)
                       </span>
-                      {openSub.simpanan ? <ChevronDown className="w-3.5 h-3.5 text-slate-500" /> : <ChevronRight className="w-3.5 h-3.5 text-slate-500" />}
+                      {openSub.simpanan ? <ChevronDown className="w-3.5 h-3.5 mc-sidebar-muted" /> : <ChevronRight className="w-3.5 h-3.5 mc-sidebar-muted" />}
                     </button>
                     {openSub.simpanan && (
                       <div className="pl-7 space-y-0.5 mt-0.5">
                         <button 
                           onClick={() => handleMenuClick('simpanan_transaksi')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'simpanan_transaksi' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'simpanan_transaksi' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Setor &amp; Tarik
                         </button>
                         <button 
                           onClick={() => handleMenuClick('simpanan_permohonan')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'simpanan_permohonan' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'simpanan_permohonan' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Permohonan Tarik
                         </button>
                         <button 
                           onClick={() => handleMenuClick('simpanan_jenis')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'simpanan_jenis' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'simpanan_jenis' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Konfigurasi Simpanan
                         </button>
@@ -183,37 +184,37 @@ export default function Sidebar({
                   <div className="space-y-0.5">
                     <button
                       onClick={() => toggleSub('pinjaman')}
-                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg hover:bg-slate-800 hover:text-white transition"
+                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg mc-sidebar-item transition"
                     >
                       <span className="flex items-center">
-                        <HandCoins className="w-4 h-4 mr-3 text-slate-400" />
+                        <HandCoins className="w-4 h-4 mr-3 mc-icon-accent" />
                         Pinjaman (Loans)
                       </span>
-                      {openSub.pinjaman ? <ChevronDown className="w-3.5 h-3.5 text-slate-500" /> : <ChevronRight className="w-3.5 h-3.5 text-slate-500" />}
+                      {openSub.pinjaman ? <ChevronDown className="w-3.5 h-3.5 mc-sidebar-muted" /> : <ChevronRight className="w-3.5 h-3.5 mc-sidebar-muted" />}
                     </button>
                     {openSub.pinjaman && (
                       <div className="pl-7 space-y-0.5 mt-0.5">
                         <button 
                           onClick={() => handleMenuClick('pinjaman_pengajuan')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'pinjaman_pengajuan' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'pinjaman_pengajuan' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Daftar Pengajuan
                         </button>
                         <button 
                           onClick={() => handleMenuClick('pinjaman_angsuran')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'pinjaman_angsuran' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'pinjaman_angsuran' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Bayar Angsuran
                         </button>
                         <button 
                           onClick={() => handleMenuClick('pinjaman_tagihan')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'pinjaman_tagihan' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'pinjaman_tagihan' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Tagihan &amp; Jatuh Tempo
                         </button>
                         <button 
                           onClick={() => handleMenuClick('pinjaman_konfigurasi')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'pinjaman_konfigurasi' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'pinjaman_konfigurasi' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Konfigurasi Pinjaman
                         </button>
@@ -225,45 +226,45 @@ export default function Sidebar({
 
               {/* Unit Bisnis / Commercial Section */}
               <div className="space-y-1">
-                <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 px-3 mb-2">Unit Usaha (Business)</p>
+                <p className="text-[10px] uppercase tracking-wider font-semibold mc-sidebar-muted px-3 mb-2">Unit Usaha (Business)</p>
                 
                 {/* Toko Dropdown */}
                 {isEnabled('toko') && (
                   <div className="space-y-0.5">
                     <button
                       onClick={() => toggleSub('toko')}
-                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg hover:bg-slate-800 hover:text-white transition"
+                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg mc-sidebar-item transition"
                     >
                       <span className="flex items-center">
-                        <Store className="w-4 h-4 mr-3 text-slate-400" />
+                        <Store className="w-4 h-4 mr-3 mc-icon-accent" />
                         Unit Toko (POS)
                       </span>
-                      {openSub.toko ? <ChevronDown className="w-3.5 h-3.5 text-slate-500" /> : <ChevronRight className="w-3.5 h-3.5 text-slate-500" />}
+                      {openSub.toko ? <ChevronDown className="w-3.5 h-3.5 mc-sidebar-muted" /> : <ChevronRight className="w-3.5 h-3.5 mc-sidebar-muted" />}
                     </button>
                     {openSub.toko && (
                       <div className="pl-7 space-y-0.5 mt-0.5">
                         <button 
                           onClick={() => handleMenuClick('toko_kasir')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'toko_kasir' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'toko_kasir' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           <ShoppingCart className="w-3 h-3" />
                           • Kasir POS Utama
                         </button>
                         <button 
                           onClick={() => handleMenuClick('toko_barang')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'toko_barang' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'toko_barang' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Katalog Barang
                         </button>
                         <button 
                           onClick={() => handleMenuClick('toko_supplier')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'toko_supplier' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'toko_supplier' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Supplier &amp; Pembelian
                         </button>
                         <button 
                           onClick={() => handleMenuClick('toko_laporan')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'toko_laporan' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === 'toko_laporan' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           • Laporan Toko
                         </button>
@@ -276,20 +277,20 @@ export default function Sidebar({
                 <div className="space-y-0.5">
                   <button
                     onClick={() => toggleSub('unitLain')}
-                    className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg hover:bg-slate-800 hover:text-white transition"
+                    className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg mc-sidebar-item transition"
                   >
                     <span className="flex items-center">
-                      <Key className="w-4 h-4 mr-3 text-slate-400" />
+                      <Key className="w-4 h-4 mr-3 mc-icon-accent" />
                       Unit Tambahan
                     </span>
-                    {openSub.unitLain ? <ChevronDown className="w-3.5 h-3.5 text-slate-500" /> : <ChevronRight className="w-3.5 h-3.5 text-slate-500" />}
+                    {openSub.unitLain ? <ChevronDown className="w-3.5 h-3.5 mc-sidebar-muted" /> : <ChevronRight className="w-3.5 h-3.5 mc-sidebar-muted" />}
                   </button>
                   {openSub.unitLain && (
                     <div className="pl-7 space-y-0.5 mt-0.5">
                       {isEnabled('sewa') && (
                         <button 
                           onClick={() => handleMenuClick('sewa_dashboard')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'sewa_dashboard' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'sewa_dashboard' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           <Tv className="w-3 h-3" />
                           • Sewa Aset &amp; Rental
@@ -298,7 +299,7 @@ export default function Sidebar({
                       {isEnabled('ppob') && (
                         <button 
                           onClick={() => handleMenuClick('ppob_dashboard')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'ppob_dashboard' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'ppob_dashboard' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           <PhoneCall className="w-3 h-3" />
                           • PPOB &amp; Pulsa
@@ -307,7 +308,7 @@ export default function Sidebar({
                       {isEnabled('digitalPayment') && (
                         <button 
                           onClick={() => handleMenuClick('digipay_dashboard')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'digipay_dashboard' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'digipay_dashboard' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           <Wallet className="w-3 h-3" />
                           • Digital Payment
@@ -316,7 +317,7 @@ export default function Sidebar({
                       {isEnabled('pembiayaan') && (
                         <button 
                           onClick={() => handleMenuClick('pembiayaan_dashboard')}
-                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'pembiayaan_dashboard' ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                          className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition flex items-center gap-1.5 ${activeMenu === 'pembiayaan_dashboard' ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                         >
                           <Award className="w-3 h-3" />
                           • Kredit &amp; Pembiayaan
@@ -330,15 +331,15 @@ export default function Sidebar({
               {/* Manajemen Investasi & Penyertaan Modal Section */}
               {isEnabled('ventura') && (
                 <div className="space-y-1">
-                  <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 px-3 mb-2">Manajemen Investasi &amp; Penyertaan Modal</p>
+                  <p className="text-[10px] uppercase tracking-wider font-semibold mc-sidebar-muted px-3 mb-2">Manajemen Investasi &amp; Penyertaan Modal</p>
                   
                   {/* Dashboard Investasi */}
                   <button
                     onClick={() => handleMenuClick('ventura_analytics')}
                     className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                       activeMenu === 'ventura_analytics' 
-                        ? 'bg-blue-600 text-white font-semibold' 
-                        : 'hover:bg-slate-800 hover:text-white'
+                        ? 'mc-sidebar-active' 
+                        : 'mc-sidebar-item'
                     }`}
                   >
                     <LineChart className="w-4 h-4 mr-3" />
@@ -350,8 +351,8 @@ export default function Sidebar({
                     onClick={() => handleMenuClick('ventura_perusahaan')}
                     className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                       activeMenu === 'ventura_perusahaan' 
-                        ? 'bg-blue-600 text-white font-semibold' 
-                        : 'hover:bg-slate-800 hover:text-white'
+                        ? 'mc-sidebar-active' 
+                        : 'mc-sidebar-item'
                     }`}
                   >
                     <Building2 className="w-4 h-4 mr-3" />
@@ -363,8 +364,8 @@ export default function Sidebar({
                     onClick={() => handleMenuClick('ventura_pipeline')}
                     className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                       activeMenu === 'ventura_pipeline' 
-                        ? 'bg-blue-600 text-white font-semibold' 
-                        : 'hover:bg-slate-800 hover:text-white'
+                        ? 'mc-sidebar-active' 
+                        : 'mc-sidebar-item'
                     }`}
                   >
                     <GitMerge className="w-4 h-4 mr-3" />
@@ -375,20 +376,20 @@ export default function Sidebar({
 
               {/* Finance & Reports Section */}
               <div className="space-y-1">
-                <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 px-3 mb-2">Akuntansi &amp; Laporan</p>
+                <p className="text-[10px] uppercase tracking-wider font-semibold mc-sidebar-muted px-3 mb-2">Akuntansi &amp; Laporan</p>
                 
                 {/* Laporan Keuangan */}
                 {isEnabled('laporan') && (
                   <div className="space-y-0.5">
                     <button
                       onClick={() => toggleSub('laporan')}
-                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg hover:bg-slate-800 hover:text-white transition"
+                      className="w-full flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg mc-sidebar-item transition"
                     >
                       <span className="flex items-center">
-                        <FileText className="w-4 h-4 mr-3 text-slate-400" />
+                        <FileText className="w-4 h-4 mr-3 mc-icon-accent" />
                         Pembukuan &amp; Keuangan
                       </span>
-                      {openSub.laporan ? <ChevronDown className="w-3.5 h-3.5 text-slate-500" /> : <ChevronRight className="w-3.5 h-3.5 text-slate-500" />}
+                      {openSub.laporan ? <ChevronDown className="w-3.5 h-3.5 mc-sidebar-muted" /> : <ChevronRight className="w-3.5 h-3.5 mc-sidebar-muted" />}
                     </button>
                     {openSub.laporan && (
                       <div className="pl-7 space-y-0.5 mt-0.5">
@@ -410,7 +411,7 @@ export default function Sidebar({
                           <button
                             key={item.id}
                             onClick={() => handleMenuClick(item.id)}
-                            className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === item.id ? 'text-blue-400 font-semibold bg-slate-800' : 'text-slate-400 hover:text-white'}`}
+                            className={`w-full text-left px-3 py-1.5 text-[11px] rounded-md transition ${activeMenu === item.id ? 'mc-sidebar-active' : 'mc-sidebar-muted mc-sidebar-item'}`}
                           >
                             • {item.label}
                           </button>
@@ -426,8 +427,8 @@ export default function Sidebar({
                     onClick={() => handleMenuClick('pengumuman_admin')}
                     className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                       activeMenu === 'pengumuman_admin' 
-                        ? 'bg-blue-600 text-white font-semibold' 
-                        : 'hover:bg-slate-800 hover:text-white'
+                        ? 'mc-sidebar-active' 
+                        : 'mc-sidebar-item'
                     }`}
                   >
                     <Settings className="w-4 h-4 mr-3" />
@@ -440,8 +441,8 @@ export default function Sidebar({
                   onClick={() => handleMenuClick('tiket_admin')}
                   className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                     activeMenu === 'tiket_admin' 
-                      ? 'bg-blue-600 text-white font-semibold' 
-                      : 'hover:bg-slate-800 hover:text-white'
+                      ? 'mc-sidebar-active' 
+                      : 'mc-sidebar-item'
                   }`}
                 >
                   <LifeBuoy className="w-4 h-4 mr-3" />
@@ -455,8 +456,8 @@ export default function Sidebar({
                   onClick={() => handleMenuClick('data_master')}
                   className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                     activeMenu === 'data_master' 
-                      ? 'bg-blue-600 text-white font-semibold' 
-                      : 'hover:bg-slate-800 hover:text-white'
+                      ? 'mc-sidebar-active' 
+                      : 'mc-sidebar-item'
                   }`}
                 >
                   <Building className="w-4 h-4 mr-3" />
@@ -468,8 +469,8 @@ export default function Sidebar({
                       onClick={() => handleMenuClick('pengaturan')}
                       className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                         activeMenu === 'pengaturan' 
-                          ? 'bg-blue-600 text-white font-semibold' 
-                          : 'hover:bg-slate-800 hover:text-white'
+                          ? 'mc-sidebar-active' 
+                          : 'mc-sidebar-item'
                       }`}
                     >
                       <Settings className="w-4 h-4 mr-3" />
@@ -479,8 +480,8 @@ export default function Sidebar({
                       onClick={() => handleMenuClick('tema_tampilan')}
                       className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                         activeMenu === 'tema_tampilan' 
-                          ? 'bg-blue-600 text-white font-semibold' 
-                          : 'hover:bg-slate-800 hover:text-white'
+                          ? 'mc-sidebar-active' 
+                          : 'mc-sidebar-item'
                       }`}
                     >
                       <Palette className="w-4 h-4 mr-3" />
@@ -490,8 +491,8 @@ export default function Sidebar({
                       onClick={() => handleMenuClick('landing_cms')}
                       className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                         activeMenu === 'landing_cms' 
-                          ? 'bg-blue-600 text-white font-semibold' 
-                          : 'hover:bg-slate-800 hover:text-white'
+                          ? 'mc-sidebar-active' 
+                          : 'mc-sidebar-item'
                       }`}
                     >
                       <Globe className="w-4 h-4 mr-3" />
@@ -504,14 +505,14 @@ export default function Sidebar({
           ) : (
             /* ANGGOTA PORTAL MENU */
             <div className="space-y-1">
-              <p className="text-[10px] uppercase tracking-wider font-semibold text-slate-500 px-3 mb-2">Member Portal</p>
+              <p className="text-[10px] uppercase tracking-wider font-semibold mc-sidebar-muted px-3 mb-2">Member Portal</p>
               
               <button
                 onClick={() => handleMenuClick('member_dashboard')}
                 className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                   activeMenu === 'member_dashboard' 
-                    ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                    : 'hover:bg-slate-800 hover:text-white'
+                    ? 'mc-sidebar-active' 
+                    : 'mc-sidebar-item'
                 }`}
               >
                 <LayoutDashboard className="w-4 h-4 mr-3" />
@@ -522,8 +523,8 @@ export default function Sidebar({
                 onClick={() => handleMenuClick('member_simpanan')}
                 className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                   activeMenu === 'member_simpanan' 
-                    ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                    : 'hover:bg-slate-800 hover:text-white'
+                    ? 'mc-sidebar-active' 
+                    : 'mc-sidebar-item'
                 }`}
               >
                 <PiggyBank className="w-4 h-4 mr-3" />
@@ -534,8 +535,8 @@ export default function Sidebar({
                 onClick={() => handleMenuClick('member_pinjaman')}
                 className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                   activeMenu === 'member_pinjaman' 
-                    ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                    : 'hover:bg-slate-800 hover:text-white'
+                    ? 'mc-sidebar-active' 
+                    : 'mc-sidebar-item'
                 }`}
               >
                 <HandCoins className="w-4 h-4 mr-3" />
@@ -546,8 +547,8 @@ export default function Sidebar({
                 onClick={() => handleMenuClick('member_mutasi')}
                 className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                   activeMenu === 'member_mutasi' 
-                    ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                    : 'hover:bg-slate-800 hover:text-white'
+                    ? 'mc-sidebar-active' 
+                    : 'mc-sidebar-item'
                 }`}
               >
                 <FileText className="w-4 h-4 mr-3" />
@@ -558,8 +559,8 @@ export default function Sidebar({
                 onClick={() => handleMenuClick('member_pengajuan')}
                 className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                   activeMenu === 'member_pengajuan' 
-                    ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                    : 'hover:bg-slate-800 hover:text-white'
+                    ? 'mc-sidebar-active' 
+                    : 'mc-sidebar-item'
                 }`}
               >
                 <FileCheck className="w-4 h-4 mr-3" />
@@ -570,8 +571,8 @@ export default function Sidebar({
                 onClick={() => handleMenuClick('member_tiket')}
                 className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                   activeMenu === 'member_tiket' 
-                    ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                    : 'hover:bg-slate-800 hover:text-white'
+                    ? 'mc-sidebar-active' 
+                    : 'mc-sidebar-item'
                 }`}
               >
                 <LifeBuoy className="w-4 h-4 mr-3" />
@@ -582,8 +583,8 @@ export default function Sidebar({
                 onClick={() => handleMenuClick('member_bukti')}
                 className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                   activeMenu === 'member_bukti' 
-                    ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                    : 'hover:bg-slate-800 hover:text-white'
+                    ? 'mc-sidebar-active' 
+                    : 'mc-sidebar-item'
                 }`}
               >
                 <FileCheck className="w-4 h-4 mr-3" />
@@ -595,8 +596,8 @@ export default function Sidebar({
                   onClick={() => handleMenuClick('member_ventura')}
                   className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                     activeMenu === 'member_ventura' 
-                      ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                      : 'hover:bg-slate-800 hover:text-white'
+                      ? 'mc-sidebar-active' 
+                      : 'mc-sidebar-item'
                   }`}
                 >
                   <Award className="w-4 h-4 mr-3" />
@@ -607,8 +608,8 @@ export default function Sidebar({
                   onClick={() => handleMenuClick('member_ventura_dokumen')}
                   className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                     activeMenu === 'member_ventura_dokumen' 
-                      ? 'bg-blue-600 text-white font-semibold' 
-                      : 'hover:bg-slate-800 hover:text-white'
+                      ? 'mc-sidebar-active' 
+                      : 'mc-sidebar-item'
                   }`}
                 >
                   <FileCheck className="w-4 h-4 mr-3" />
@@ -622,8 +623,8 @@ export default function Sidebar({
                   onClick={() => handleMenuClick('member_sewa')}
                   className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                     activeMenu === 'member_sewa' 
-                      ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                      : 'hover:bg-slate-800 hover:text-white'
+                      ? 'mc-sidebar-active' 
+                      : 'mc-sidebar-item'
                   }`}
                 >
                   <Tv className="w-4 h-4 mr-3" />
@@ -636,8 +637,8 @@ export default function Sidebar({
                   onClick={() => handleMenuClick('member_ppob')}
                   className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                     activeMenu === 'member_ppob' 
-                      ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                      : 'hover:bg-slate-800 hover:text-white'
+                      ? 'mc-sidebar-active' 
+                      : 'mc-sidebar-item'
                   }`}
                 >
                   <PhoneCall className="w-4 h-4 mr-3" />
@@ -650,8 +651,8 @@ export default function Sidebar({
                   onClick={() => handleMenuClick('member_digipay')}
                   className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                     activeMenu === 'member_digipay' 
-                      ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                      : 'hover:bg-slate-800 hover:text-white'
+                      ? 'mc-sidebar-active' 
+                      : 'mc-sidebar-item'
                   }`}
                 >
                   <Wallet className="w-4 h-4 mr-3" />
@@ -664,8 +665,8 @@ export default function Sidebar({
                   onClick={() => handleMenuClick('member_cicilan')}
                   className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                     activeMenu === 'member_cicilan' 
-                      ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                      : 'hover:bg-slate-800 hover:text-white'
+                      ? 'mc-sidebar-active' 
+                      : 'mc-sidebar-item'
                   }`}
                 >
                   <ShoppingCart className="w-4 h-4 mr-3" />
@@ -677,8 +678,8 @@ export default function Sidebar({
                 onClick={() => handleMenuClick('member_profil')}
                 className={`w-full flex items-center px-3 py-2 text-xs font-medium rounded-lg transition ${
                   activeMenu === 'member_profil' 
-                    ? 'bg-amber-600 text-white font-semibold shadow-md shadow-amber-500/10' 
-                    : 'hover:bg-slate-800 hover:text-white'
+                    ? 'mc-sidebar-active' 
+                    : 'mc-sidebar-item'
                 }`}
               >
                 <User className="w-4 h-4 mr-3" />
@@ -691,8 +692,8 @@ export default function Sidebar({
         {/* Footer Area with theme switcher & Logout */}
         <div className="p-4 border-t border-slate-800 space-y-2">
           {/* Theme switcher */}
-          <div className="flex items-center justify-between px-3 py-2 bg-slate-800/50 rounded-lg text-xs">
-            <span className="text-slate-400 font-medium">Tampilan Mode</span>
+          <div className="flex items-center justify-between px-3 py-2 mc-surface-2 rounded-lg text-xs">
+            <span className="mc-sidebar-muted font-medium">Tampilan Mode</span>
             <button
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-1.5 rounded-md hover:bg-slate-700 text-slate-300 transition"
@@ -705,7 +706,7 @@ export default function Sidebar({
           {/* Logout button */}
           <button
             onClick={onLogout}
-            className="w-full flex items-center px-3 py-2 text-xs font-medium text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition cursor-pointer"
+            className="w-full flex items-center px-3 py-2 text-xs font-medium mc-btn-danger rounded-lg transition cursor-pointer"
           >
             <LogOut className="w-4 h-4 mr-3" />
             Keluar Aplikasi

@@ -35,18 +35,11 @@ export default function Header({
   }, []);
 
   const formatIndonesianDate = (date: Date) => {
-    const months = [
-      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-    ];
-    const day = date.getDate();
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const seconds = String(date.getSeconds()).padStart(2, '0');
-    
-    return `${day} ${month} ${year}, ${hours}:${minutes}:${seconds} WIB`;
+    return new Intl.DateTimeFormat('id-ID', {
+      day: 'numeric', month: 'long', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false, timeZone: 'Asia/Jakarta',
+    }).format(date) + ' WIB';
   };
 
   // Capitalize and format active menu name into human-readable breadcrumb / title
@@ -118,12 +111,13 @@ export default function Header({
   const breadcrumbs = getBreadcrumbs(activeMenu);
 
   return (
-    <header className="h-16 border-b border-slate-200 bg-white sticky top-0 z-30 px-6 flex items-center justify-between shadow-sm">
+    <header className="h-16 mc-surface mc-border sticky top-0 z-30 px-6 flex items-center justify-between shadow-sm">
       
       {/* Left side: Toggler & breadcrumbs */}
       <div className="flex items-center space-x-4">
         <button
           onClick={() => setSidebarOpen(true)}
+          aria-label="Buka menu"
           className="lg:hidden text-slate-600 hover:text-slate-900 p-1.5 rounded-lg hover:bg-slate-100 cursor-pointer"
         >
           <Menu className="w-5.5 h-5.5" />
@@ -155,8 +149,8 @@ export default function Header({
         {/* Portal Identifier Badge */}
         <div className={`text-[10px] font-bold px-2.5 py-1 rounded-full border ${
           session.role === 'anggota' 
-            ? 'bg-amber-50 text-amber-600 border-amber-200/50' 
-            : 'bg-blue-50 text-blue-600 border-blue-200/50'
+            ? 'mc-badge-accent border-amber-200/50' 
+            : 'mc-badge-ok border-blue-200/50'
         }`}>
           {session.role === 'admin' && '🔒 Admin'}
           {session.role === 'operator' && '⚙️ Operator'}
@@ -169,7 +163,7 @@ export default function Header({
           <button
             onClick={onNavigateToNotifications}
             className="p-2 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-50 transition relative cursor-pointer"
-            title="Pengaduan & Notifikasi"
+            aria-label="Notifikasi & pengaduan"
           >
             <Bell className="w-4.5 h-4.5" />
             {pendingNotificationsCount > 0 && (

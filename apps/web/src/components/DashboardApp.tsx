@@ -6,15 +6,16 @@ import Header from './Header';
 import AdminPortal from './AdminPortal';
 import MemberPortal from './MemberPortal';
 import MemberPerusahaanPortal from './MemberPerusahaanPortal';
+import { useTheme } from '../theme/ThemeProvider';
 
 export default function DashboardApp() {
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
   const store = useDataStore();
+  const { setTheme } = useTheme();
 
   const [activeMenu, setActiveMenu] = useState<string>('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(true);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [themePreset, setThemePreset] = useState<string>(() => localStorage.getItem('theme_preset') || 'royal_blue');
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function DashboardApp() {
     setActiveMenu,
     session: user,
     themePreset,
-    onSelectThemePreset: setThemePreset,
+    onSelectThemePreset: setTheme,
   };
 
   const adminProps = {
@@ -158,7 +159,7 @@ export default function DashboardApp() {
   }
 
   return (
-    <div className="min-h-screen font-sans antialiased text-slate-800 bg-slate-50 flex overflow-hidden">
+    <div className="min-h-screen font-sans antialiased text-slate-800 mc-bg flex overflow-hidden">
       <Sidebar
         role={user?.role}
         activeMenu={activeMenu}
@@ -167,8 +168,6 @@ export default function DashboardApp() {
         onLogout={logout}
         isOpen={sidebarOpen}
         setIsOpen={setSidebarOpen}
-        theme={theme}
-        setTheme={setTheme}
       />
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         <Header
@@ -187,8 +186,8 @@ export default function DashboardApp() {
               <MemberPortal {...memberProps as any} />
             )}
           </div>
-          <footer className="pt-6 border-t border-slate-200 text-center flex-shrink-0">
-            <p className="text-[10px] font-extrabold tracking-widest text-slate-400 uppercase select-none">
+          <footer className="pt-6 border-t mc-border text-center flex-shrink-0">
+            <p className="text-[10px] font-extrabold tracking-widest mc-muted uppercase select-none">
               METROCOOP \u2022 Koperasi Simpan Pinjam @2026
             </p>
           </footer>

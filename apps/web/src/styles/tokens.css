@@ -1,0 +1,139 @@
+/* MetroCoop — Design Tokens "Editorial Luxe"
+   Semua preset memakai variabel semantik; ganti tema = ganti blok [data-theme].
+   Kelas .mc-* di bawah membaca variabel agar komponen tidak hardcode warna. */
+
+:root,
+[data-theme="heritage-light"] {
+  --mc-bg: #f6f1e9;
+  --mc-surface: #fffdf9;
+  --mc-surface-2: #fbf7ef;
+  --mc-border: #e8dfcd;
+  --mc-ink: #2c2820;
+  --mc-ink-strong: #23201b;
+  --mc-muted: #5a5246;
+  --mc-sidebar: #fbf7ef;
+  --mc-sidebar-ink: #23201b;
+  --mc-sidebar-muted: #8a8068;
+  --mc-sidebar-active: rgba(200, 162, 75, 0.14);
+  --mc-primary: #9a7422;
+  --mc-accent: #c8a24b;
+  --mc-accent-2: #a8802f;
+  --mc-on-accent: #fffdf9;
+  --mc-success: #1f6f54;
+  --mc-success-bg: rgba(31, 111, 84, 0.12);
+  --mc-danger: #a8443a;
+  --mc-danger-bg: rgba(180, 60, 50, 0.10);
+  --mc-ring: rgba(154, 116, 34, 0.45);
+}
+
+[data-theme="midnight-heritage"] {
+  --mc-bg: #0c1322;
+  --mc-surface: #111c30;
+  --mc-surface-2: #0e1828;
+  --mc-border: rgba(255, 255, 255, 0.07);
+  --mc-ink: #dde3ee;
+  --mc-ink-strong: #f0e6cf;
+  --mc-muted: #9aa6bd;
+  --mc-sidebar: #0a1120;
+  --mc-sidebar-ink: #f0e6cf;
+  --mc-sidebar-muted: #7e8aa3;
+  --mc-sidebar-active: rgba(201, 162, 75, 0.16);
+  --mc-primary: #e0b973;
+  --mc-accent: #c8a24b;
+  --mc-accent-2: #a8802f;
+  --mc-on-accent: #16110a;
+  --mc-success: #6ee7b7;
+  --mc-success-bg: rgba(31, 111, 84, 0.22);
+  --mc-danger: #fca5a5;
+  --mc-danger-bg: rgba(239, 68, 68, 0.16);
+  --mc-ring: rgba(224, 185, 115, 0.5);
+}
+
+[data-theme="royal-blue"] {
+  --mc-bg: #f8fafc;
+  --mc-surface: #ffffff;
+  --mc-surface-2: #f1f5f9;
+  --mc-border: #e2e8f0;
+  --mc-ink: #334155;
+  --mc-ink-strong: #0f172a;
+  --mc-muted: #64748b;
+  --mc-sidebar: #0f172a;
+  --mc-sidebar-ink: #e2e8f0;
+  --mc-sidebar-muted: #94a3b8;
+  --mc-sidebar-active: rgba(37, 99, 235, 0.18);
+  --mc-primary: #2563eb;
+  --mc-accent: #d97706;
+  --mc-accent-2: #b45309;
+  --mc-on-accent: #ffffff;
+  --mc-success: #16a34a;
+  --mc-success-bg: rgba(22, 163, 74, 0.12);
+  --mc-danger: #dc2626;
+  --mc-danger-bg: rgba(239, 68, 68, 0.12);
+  --mc-ring: rgba(37, 99, 235, 0.45);
+}
+
+[data-theme="teal-ocean"] {
+  --mc-bg: #f0fdfa;
+  --mc-surface: #ffffff;
+  --mc-surface-2: #ecfeff;
+  --mc-border: #cbd5e1;
+  --mc-ink: #334155;
+  --mc-ink-strong: #042f2e;
+  --mc-muted: #5e7591;
+  --mc-sidebar: #042f2e;
+  --mc-sidebar-ink: #ccfbf1;
+  --mc-sidebar-muted: #5eead4;
+  --mc-sidebar-active: rgba(13, 148, 136, 0.20);
+  --mc-primary: #0d9488;
+  --mc-accent: #0891b2;
+  --mc-accent-2: #0e7490;
+  --mc-on-accent: #ffffff;
+  --mc-success: #0f766e;
+  --mc-success-bg: rgba(13, 148, 136, 0.12);
+  --mc-danger: #dc2626;
+  --mc-danger-bg: rgba(239, 68, 68, 0.12);
+  --mc-ring: rgba(13, 148, 136, 0.45);
+}
+
+/* ---- Utilitas semantik (ganti Tailwind hardcode) ---- */
+.mc-bg { background-color: var(--mc-bg); color: var(--mc-ink); }
+.mc-surface { background-color: var(--mc-surface); }
+.mc-card {
+  background-color: var(--mc-surface);
+  border: 1px solid var(--mc-border);
+  border-radius: 0.9rem;
+}
+.mc-border { border-color: var(--mc-border); }
+.mc-ink { color: var(--mc-ink); }
+.mc-ink-strong { color: var(--mc-ink-strong); }
+.mc-muted { color: var(--mc-muted); }
+
+.mc-sidebar { background-color: var(--mc-sidebar); color: var(--mc-sidebar-ink); }
+.mc-sidebar-muted { color: var(--mc-sidebar-muted); }
+.mc-sidebar-item:hover { background-color: rgba(128, 128, 128, 0.08); color: var(--mc-sidebar-ink); }
+.mc-sidebar-active { background-color: var(--mc-sidebar-active); color: var(--mc-primary); font-weight: 600; }
+
+.mc-btn-primary {
+  background-color: var(--mc-accent);
+  color: var(--mc-on-accent);
+  font-weight: 600;
+}
+.mc-btn-primary:hover { background-color: var(--mc-accent-2); }
+.mc-btn-danger { background-color: var(--mc-danger-bg); color: var(--mc-danger); font-weight: 600; }
+.mc-btn-danger:hover { filter: brightness(0.97); }
+
+.mc-badge-ok { background-color: var(--mc-success-bg); color: var(--mc-success); }
+.mc-badge-accent { background-color: var(--mc-sidebar-active); color: var(--mc-primary); }
+.mc-icon-accent { color: var(--mc-accent); }
+
+/* Fokus terlihat jelas (perbaikan aksesibilitas) */
+.mc-focus:focus-visible,
+.mc-btn-primary:focus-visible,
+.mc-btn-danger:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--mc-ring);
+  outline-offset: 2px;
+}
