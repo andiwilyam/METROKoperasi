@@ -662,3 +662,12 @@ INSERT INTO landing_features (id, icon_name, title, description, sort_order) VAL
 ('lf5', 'Smartphone', 'PPOB & Digital Payment', 'Layanan pembayaran pulsa, listrik, PDAM, BPJS, Virtual Account, dan top-up digital.', 5),
 ('lf6', 'TrendingUp', 'Ventura & AI Audit', 'Kelola investasi ventura, dividen perusahaan, dan audit risiko berbasis AI Google Gemini.', 6)
 ON CONFLICT (id) DO NOTHING;
+
+-- ============================================================
+-- Migration: align existing Railway DB columns to current schema
+-- ============================================================
+DO $$ BEGIN
+  IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='perusahaan' AND column_name='nama_perusahaan') THEN
+    ALTER TABLE perusahaan RENAME COLUMN nama_perusahaan TO nama;
+  END IF;
+END $$;
