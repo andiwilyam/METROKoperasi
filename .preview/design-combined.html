@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MetroCoop — Gabungan "Editorial Luxe"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: #07090d; color: #e5e7eb; -webkit-font-smoothing: antialaxed; }
+  .head { max-width: 1500px; margin: 0 auto; padding: 38px 28px 6px; }
+  .head h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 28px; color: #fff; }
+  .head p { color: #9aa3b2; font-size: 13.5px; margin-top: 8px; max-width: 760px; line-height: 1.65; }
+  .head .meta { font-family:'Fraunces',serif; font-style: italic; color: #6b7280; font-size: 12px; margin-top: 12px; }
+
+  .grid { max-width: 1500px; margin: 0 auto; padding: 22px 28px 70px; display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  @media (max-width: 1080px){ .grid { grid-template-columns: 1fr; } }
+
+  .frame { border-radius: 22px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); }
+  .ftag { padding: 16px 20px; display:flex; justify-content:space-between; align-items:center; }
+  .ftag .n { font-family:'Fraunces',serif; font-size: 18px; font-weight:600; }
+  .ftag .s { font-size: 11px; opacity:.7; margin-top:2px; }
+  .ftag .p { font-size:10px; font-weight:700; padding:4px 10px; border-radius:999px; text-transform:uppercase; letter-spacing:.08em; }
+
+  /* shell */
+  .shell { display: grid; grid-template-columns: 188px 1fr; }
+  .side { padding: 18px 14px; }
+  .sb-brand { display:flex; align-items:center; gap:9px; font-weight:700; font-size:14px; padding: 4px 8px 16px; letter-spacing:.02em; }
+  .sb-logo { width:30px; height:30px; border-radius:9px; display:grid; place-items:center; font-size:13px; }
+  .nav { display:flex; flex-direction:column; gap:3px; }
+  .nav a { display:flex; align-items:center; gap:9px; font-size:12px; font-weight:500; padding:9px 11px; border-radius:10px; text-decoration:none; opacity:.8; }
+  .nav a .dot { width:15px; height:15px; border-radius:5px; opacity:.7; }
+  .nav a.active { font-weight:600; }
+  .main { padding: 16px 18px 26px; min-width:0; }
+  .top { display:flex; align-items:center; gap:12px; padding:12px 14px; border-radius:14px; margin-bottom:16px; }
+  .top .crumb { font-size:11px; opacity:.6; }
+  .top h2 { font-family:'Fraunces',serif; font-size:16px; font-weight:600; margin-top:2px; }
+  .top .badge { margin-left:auto; font-size:10px; font-weight:700; padding:4px 10px; border-radius:999px; }
+  .top .av { width:30px; height:30px; border-radius:50%; display:grid; place-items:center; font-size:12px; font-weight:700; }
+
+  .kpis { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; }
+  .kpi { border-radius:14px; padding:14px; }
+  .kpi .l { font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; opacity:.65; }
+  .kpi .v { font-size:20px; font-weight:700; margin-top:6px; font-variant-numeric:tabular-nums; }
+  .kpi .d { font-size:10px; margin-top:4px; opacity:.8; }
+  .panel { border-radius:14px; padding:16px; margin-bottom:14px; }
+  .panel h3 { font-family:'Fraunces',serif; font-size:14px; font-weight:600; }
+  .panel .h { font-size:10px; opacity:.6; margin:2px 0 12px; }
+  .bars { display:flex; align-items:flex-end; gap:8px; height:84px; }
+  .bars i { flex:1; border-radius:6px 6px 0 0; display:block; }
+  table { width:100%; border-collapse:collapse; font-size:11px; }
+  th { text-align:left; font-size:9px; text-transform:uppercase; letter-spacing:.05em; opacity:.55; padding:8px 6px; }
+  td { padding:9px 6px; }
+  .st { font-size:9px; font-weight:700; padding:3px 8px; border-radius:999px; }
+  .btns { display:flex; gap:6px; }
+  .b { font-size:10px; font-weight:600; padding:5px 11px; border-radius:8px; border:0; cursor:pointer; }
+  .b.ok { color:#fff; }
+  .b.no { }
+
+  /* ===== VARIANT L — HERITAGE LIGHT ===== */
+  .L .ftag { background:#efe7d8; color:#2b2521; } .L .ftag .p { background:rgba(200,162,75,.18); color:#9a7422; }
+  .L .shell { background:#f6f1e9; color:#2c2820; }
+  .L .side { background:#fbf7ef; border-right:1px solid #e8dfcd; }
+  .L .sb-brand { color:#23201b; } .L .sb-logo { background:linear-gradient(135deg,#c8a24b,#e3c98f); color:#2a2008; }
+  .L .nav a { color:#5a5246; } .L .nav a .dot { background:#d9cdb4; }
+  .L .nav a.active { background:rgba(200,162,75,.14); color:#9a7422; } .L .nav a.active .dot { background:#c8a24b; }
+  .L .top { background:#fffdf9; border:1px solid #e8dfcd; } .L .top h2 { color:#23201b; } .L .top .badge { background:rgba(200,162,75,.16); color:#9a7422; } .L .top .av { background:#e3c98f; color:#2a2008; }
+  .L .kpi { background:#fffdf9; border:1px solid #e8dfcd; } .L .kpi .v { color:#1f1b15; }
+  .L .panel { background:#fffdf9; border:1px solid #e8dfcd; } .L .panel h3 { color:#23201b; }
+  .L .bars i { background:linear-gradient(180deg,#c8a24b,#a8802f); }
+  .L td { border-top:1px solid #ece3d2; }
+  .L .st { background:rgba(31,111,84,.12); color:#1f6f54; }
+  .L .b.ok { background:linear-gradient(135deg,#c8a24b,#a8802f); } .L .b.no { background:rgba(180,60,50,.1); color:#a8443a; }
+
+  /* ===== VARIANT D — MIDNIGHT HERITAGE ===== */
+  .D .ftag { background:#0f1626; color:#e9d8a6; } .D .ftag .p { background:rgba(201,162,75,.18); color:#e0b973; }
+  .D .shell { background:#0c1322; color:#dde3ee; }
+  .D .side { background:#0a1120; border-right:1px solid rgba(201,162,75,.14); }
+  .D .sb-brand { color:#f0e6cf; } .D .sb-logo { background:linear-gradient(135deg,#c8a24b,#e9d8a6); color:#16110a; }
+  .D .nav a { color:#9aa6bd; } .D .nav a .dot { background:#33405c; }
+  .D .nav a.active { background:rgba(201,162,75,.16); color:#e9d8a6; } .D .nav a.active .dot { background:#c8a24b; }
+  .D .top { background:#111c30; border:1px solid rgba(201,162,75,.14); } .D .top h2 { color:#f0e6cf; } .D .top .badge { background:rgba(201,162,75,.16); color:#e0b973; } .D .top .av { background:linear-gradient(135deg,#c8a24b,#a8802f); color:#16110a; }
+  .D .kpi { background:#111c30; border:1px solid rgba(255,255,255,.06); } .D .kpi .v { color:#f3e8c8; }
+  .D .panel { background:#111c30; border:1px solid rgba(255,255,255,.06); } .D .panel h3 { color:#e9d8a6; }
+  .D .bars i { background:linear-gradient(180deg,#e0b973,#a8802f); }
+  .D td { border-top:1px solid rgba(255,255,255,.07); }
+  .D .st { background:rgba(31,111,84,.22); color:#6ee7b7; }
+  .D .b.ok { background:linear-gradient(135deg,#c8a24b,#a8802f); } .D .b.no { background:rgba(239,68,68,.16); color:#fca5a5; }
+</style>
+</head>
+<body>
+<div class="head">
+  <h1>Dua Varian Gabungan "Editorial Luxe"</h1>
+  <p>Bahasa mewah yang sama untuk keduanya: heading serif (Fraunces), aksen emas champagne, garis rambut tipis, dan tombol berkonras jelas (ramah operasional). Bedanya hanya basis terang vs gelap. Keduanya menyelesaikan temuan aksesibilitas sebelumnya: fokus tombol jelas, status kontras, dan tetap enak di layar kecil.</p>
+  <div class="meta">Mockup gabungan — bukan implementasi final</div>
+</div>
+
+<div class="grid">
+  <!-- L -->
+  <div class="frame L">
+    <div class="ftag"><div><div class="n">Heritage Light</div><div class="s">Krem + emas · terang · elegan ramah</div></div><div class="p">Variant L</div></div>
+    <div class="shell">
+      <div class="side">
+        <div class="sb-brand"><div class="sb-logo">M</div>MetroCoop</div>
+        <div class="nav">
+          <a class="active" href="#"><span class="dot"></span>Dashboard</a>
+          <a href="#"><span class="dot"></span>Anggota</a>
+          <a href="#"><span class="dot"></span>Simpanan</a>
+          <a href="#"><span class="dot"></span>Pinjaman</a>
+          <a href="#"><span class="dot"></span>Akuntansi</a>
+        </div>
+      </div>
+      <div class="main">
+        <div class="top"><div><div class="crumb">Aplikasi / MetroCoop</div><h2>Kesehatan Koperasi Global</h2></div><div class="badge">ADMIN</div><div class="av">A</div></div>
+        <div class="kpis">
+          <div class="kpi"><div class="l">Anggota Aktif</div><div class="v">1.284</div><div class="d">▲ 5 bulan ini</div></div>
+          <div class="kpi"><div class="l">Total Simpanan</div><div class="v">Rp 8,4 M</div><div class="d">▲ aman & transparan</div></div>
+          <div class="kpi"><div class="l">Pinjaman Beredar</div><div class="v">Rp 5,1 M</div><div class="d">● risiko terkendali</div></div>
+          <div class="kpi"><div class="l">SHU Terkumpul</div><div class="v">Rp 642 Jt</div><div class="d">▲ positif (laba)</div></div>
+        </div>
+        <div class="panel"><h3>Perkembangan Transaksi</h3><div class="h">Simpanan vs Pinjaman · 6 bulan</div>
+          <div class="bars"><i style="height:46%"></i><i style="height:58%"></i><i style="height:50%"></i><i style="height:72%"></i><i style="height:64%"></i><i style="height:88%"></i></div></div>
+        <div class="panel"><h3>Permohonan Pinjaman Terbaru</h3>
+          <table><tr><th>Anggota</th><th>Pokok</th><th>Status</th><th>Aksi</th></tr>
+          <tr><td>Budi Santoso</td><td>Rp 12 Jt</td><td><span class="st">Baru</span></td><td><div class="btns"><button class="b ok">Setujui</button><button class="b no">Tolak</button></div></td></tr>
+          <tr><td>Siti Aminah</td><td>Rp 8 Jt</td><td><span class="st">Baru</span></td><td><div class="btns"><button class="b ok">Setujui</button><button class="b no">Tolak</button></div></td></tr>
+          </table></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- D -->
+  <div class="frame D">
+    <div class="ftag"><div><div class="n">Midnight Heritage</div><div class="s">Navy + emas · gelap · mewah privat</div></div><div class="p">Variant D</div></div>
+    <div class="shell">
+      <div class="side">
+        <div class="sb-brand"><div class="sb-logo">M</div>MetroCoop</div>
+        <div class="nav">
+          <a class="active" href="#"><span class="dot"></span>Dashboard</a>
+          <a href="#"><span class="dot"></span>Anggota</a>
+          <a href="#"><span class="dot"></span>Simpanan</a>
+          <a href="#"><span class="dot"></span>Pinjaman</a>
+          <a href="#"><span class="dot"></span>Akuntansi</a>
+        </div>
+      </div>
+      <div class="main">
+        <div class="top"><div><div class="crumb">Aplikasi / MetroCoop</div><h2>Kesehatan Koperasi Global</h2></div><div class="badge">ADMIN</div><div class="av">A</div></div>
+        <div class="kpis">
+          <div class="kpi"><div class="l">Anggota Aktif</div><div class="v">1.284</div><div class="d">▲ 5 bulan ini</div></div>
+          <div class="kpi"><div class="l">Total Simpanan</div><div class="v">Rp 8,4 M</div><div class="d">▲ aman & transparan</div></div>
+          <div class="kpi"><div class="l">Pinjaman Beredar</div><div class="v">Rp 5,1 M</div><div class="d">● risiko terkendali</div></div>
+          <div class="kpi"><div class="l">SHU Terkumpul</div><div class="v">Rp 642 Jt</div><div class="d">▲ positif (laba)</div></div>
+        </div>
+        <div class="panel"><h3>Perkembangan Transaksi</h3><div class="h">Simpanan vs Pinjaman · 6 bulan</div>
+          <div class="bars"><i style="height:46%"></i><i style="height:58%"></i><i style="height:50%"></i><i style="height:72%"></i><i style="height:64%"></i><i style="height:88%"></i></div></div>
+        <div class="panel"><h3>Permohonan Pinjaman Terbaru</h3>
+          <table><tr><th>Anggota</th><th>Pokok</th><th>Status</th><th>Aksi</th></tr>
+          <tr><td>Budi Santoso</td><td>Rp 12 Jt</td><td><span class="st">Baru</span></td><td><div class="btns"><button class="b ok">Setujui</button><button class="b no">Tolak</button></div></td></tr>
+          <tr><td>Siti Aminah</td><td>Rp 8 Jt</td><td><span class="st">Baru</span></td><td><div class="btns"><button class="b ok">Setujui</button><button class="b no">Tolak</button></div></td></tr>
+          </table></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

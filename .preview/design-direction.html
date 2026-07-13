@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MetroCoop — Arah Visual "Mewah & Elegan"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root { --ui: 'Inter', system-ui, sans-serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--ui); background: #0b0c10; color: #e5e7eb; -webkit-font-smoothing: antialiased; }
+
+  .page-head {
+    max-width: 1500px; margin: 0 auto; padding: 40px 28px 8px;
+  }
+  .page-head h1 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 30px; color: #fff; letter-spacing: -.01em; }
+  .page-head p { color: #9ca3af; font-size: 14px; margin-top: 8px; max-width: 720px; line-height: 1.6; }
+  .page-head .meta { margin-top: 14px; font-size: 12px; color: #6b7280; font-family: 'Fraunces', serif; font-style: italic; }
+
+  .grid { max-width: 1500px; margin: 0 auto; padding: 24px 28px 80px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 1100px) { .grid { grid-template-columns: 1fr; } }
+
+  .col { border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,255,255,.08); }
+  .tag { padding: 18px 22px; display: flex; justify-content: space-between; align-items: flex-start; }
+  .tag .name { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 600; }
+  .tag .sub { font-size: 11px; opacity: .65; margin-top: 3px; letter-spacing: .02em; }
+  .tag .pill { font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: .08em; }
+
+  /* ---------- shared mock internals ---------- */
+  .mock { padding: 18px 22px 28px; }
+  .topbar { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; margin-bottom: 16px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .02em; }
+  .brand .logo { width: 30px; height: 30px; border-radius: 9px; display: grid; place-items: center; font-size: 14px; }
+  .role { margin-left: auto; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 999px; }
+  .avatar { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; }
+
+  .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .kpi { border-radius: 14px; padding: 14px; }
+  .kpi .lab { font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+  .kpi .val { font-size: 20px; font-weight: 700; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .kpi .delta { font-size: 10px; margin-top: 4px; opacity: .8; }
+
+  .panel { border-radius: 14px; padding: 16px; margin-bottom: 14px; }
+  .panel h3 { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+  .panel .hint { font-size: 10px; opacity: .6; margin-bottom: 12px; }
+  .bars { display: flex; align-items: flex-end; gap: 8px; height: 90px; }
+  .bars .b { flex: 1; border-radius: 6px 6px 0 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  th { text-align: left; font-size: 9px; text-transform: uppercase; letter-spacing: .05em; opacity: .6; padding: 8px 6px; }
+  td { padding: 9px 6px; border-top: 1px solid rgba(128,128,128,.15); }
+  .badge { font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 999px; }
+  .btnrow { display: flex; gap: 6px; }
+  .btn { font-size: 10px; font-weight: 600; padding: 5px 10px; border-radius: 8px; border: 0; cursor: pointer; }
+
+  /* ================= DIRECTION A — MIDNIGHT GOLD ================= */
+  .A .tag { background: #0f1626; color: #e9d8a6; }
+  .A .tag .pill { background: rgba(201,162,75,.16); color: #e0b973; }
+  .A .body { background: #0b1120; color: #cfd6e4; }
+  .A .topbar { background: #111a2e; border: 1px solid rgba(201,162,75,.18); }
+  .A .brand .logo { background: linear-gradient(135deg,#c8a24b,#e9d8a6); color: #1a1407; }
+  .A .role { background: rgba(201,162,75,.14); color: #e0b973; }
+  .A .avatar { background: linear-gradient(135deg,#c8a24b,#a8802f); color: #111; }
+  .A .kpi { background: #111a2e; border: 1px solid rgba(201,162,75,.16); }
+  .A .kpi .val { color: #f3e8c8; }
+  .A .panel { background: #111a2e; border: 1px solid rgba(255,255,255,.05); }
+  .A .panel h3 { color: #e9d8a6; }
+  .A .bars .b { background: linear-gradient(180deg,#e0b973,#a8802f); }
+  .A .badge { background: rgba(201,162,75,.16); color: #e0b973; }
+  .A .btn.ok { background: linear-gradient(135deg,#16a34a,#0f7a37); color: #fff; }
+  .A .btn.no { background: rgba(239,68,68,.14); color: #fca5a5; }
+
+  /* ================= DIRECTION B — WARM EDITORIAL ================= */
+  .B .tag { background: #efe7d8; color: #2b2521; }
+  .B .tag .pill { background: rgba(31,111,84,.12); color: #1f6f54; }
+  .B .body { background: #f7f3ec; color: #3b352d; }
+  .B .topbar { background: #fffdf9; border: 1px solid #e7ddca; }
+  .B .brand .logo { background: #1f6f54; color: #fff; }
+  .B .role { background: rgba(31,111,84,.1); color: #1f6f54; }
+  .B .avatar { background: #d9a441; color: #fff; }
+  .B .kpi { background: #fffdf9; border: 1px solid #e7ddca; }
+  .B .kpi .val { color: #201b16; font-family: 'Fraunces', serif; }
+  .B .panel { background: #fffdf9; border: 1px solid #e7ddca; }
+  .B .panel h3 { color: #2b2521; font-family: 'Fraunces', serif; }
+  .B .bars .b { background: linear-gradient(180deg,#1f6f54,#3f8f72); }
+  .B .badge { background: rgba(31,111,84,.12); color: #1f6f54; }
+  .B .btn.ok { background: #1f6f54; color: #fff; }
+  .B .btn.no { background: rgba(180,60,50,.1); color: #a8443a; }
+  .B .body { font-family: 'Inter', sans-serif; }
+
+  /* ================= DIRECTION C — SCULPTED LIGHT ================= */
+  .C .tag { background: #eef1f8; color: #1e293b; }
+  .C .tag .pill { background: rgba(29,78,216,.12); color: #1d4ed8; }
+  .C .body { background: #f4f6fb; color: #334155; }
+  .C .topbar { background: rgba(255,255,255,.7); backdrop-filter: blur(10px); border: 1px solid #e2e8f0; }
+  .C .brand .logo { background: linear-gradient(135deg,#1d4ed8,#4f7bf0); color: #fff; }
+  .C .role { background: rgba(29,78,216,.1); color: #1d4ed8; }
+  .C .avatar { background: #c7d2fe; color: #1e3a8a; }
+  .C .kpi { background: rgba(255,255,255,.75); backdrop-filter: blur(10px); border: 1px solid #e6ebf5; box-shadow: 0 10px 30px -18px rgba(30,58,138,.4); }
+  .C .kpi .val { color: #0f172a; }
+  .C .panel { background: rgba(255,255,255,.75); backdrop-filter: blur(10px); border: 1px solid #e6ebf5; box-shadow: 0 10px 30px -20px rgba(30,58,138,.4); }
+  .C .panel h3 { color: #1e293b; }
+  .C .bars .b { background: linear-gradient(180deg,#4f7bf0,#1d4ed8); }
+  .C .badge { background: rgba(29,78,216,.1); color: #1d4ed8; }
+  .C .btn.ok { background: #1d4ed8; color: #fff; }
+  .C .btn.no { background: rgba(239,68,68,.12); color: #dc2626; }
+
+  .notes { max-width: 1500px; margin: 0 auto; padding: 0 28px 70px; color: #9ca3af; font-size: 12.5px; line-height: 1.7; }
+  .notes b { color: #d1d5db; }
+</style>
+</head>
+<body>
+  <div class="page-head">
+    <h1>Tiga Arah Visual "Mewah & Elegan"</h1>
+    <p>Ketiganya memakai hierarki &amp; data dashboard Anda yang sebenarnya (KPI, grafik, tabel persetujuan). Perbedaannya ada pada palet, tipografi, dan "rasa" kemewahan — dari privat-banking gelap, editorial hangat, hingga fintech terang yang lembut. Pilih yang paling mewakili brand MetroCoop menurut Anda.</p>
+    <div class="meta">Mockup perbandingan — bukan implementasi final</div>
+  </div>
+
+  <div class="grid">
+    <!-- A -->
+    <div class="col A">
+      <div class="tag">
+        <div><div class="name">Midnight Gold</div><div class="sub">Private-banking · gelap · aksen emas</div></div>
+        <div class="pill">Direction A</div>
+      </div>
+      <div class="body mock">
+        <div class="topbar">
+          <div class="brand"><div class="logo">M</div>MetroCoop</div>
+          <div class="role">ADMIN</div>
+          <div class="avatar">A</div>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><div class="lab">Anggota Aktif</div><div class="val">1.284</div><div class="delta">▲ 5 bulan ini</div></div>
+          <div class="kpi"><div class="lab">Total Simpanan</div><div class="val">Rp 8,4 M</div><div class="delta">▲ aman &amp; transparan</div></div>
+          <div class="kpi"><div class="lab">Pinjaman Beredar</div><div class="val">Rp 5,1 M</div><div class="delta">● risiko terkendali</div></div>
+          <div class="kpi"><div class="lab">SHU Terkumpul</div><div class="val">Rp 642 Jt</div><div class="delta">▲ positif (laba)</div></div>
+        </div>
+        <div class="panel">
+          <h3>Perkembangan Transaksi</h3>
+          <div class="hint">Simpanan vs Pinjaman · 6 bulan</div>
+          <div class="bars">
+            <div class="b" style="height:45%"></div><div class="b" style="height:58%"></div>
+            <div class="b" style="height:50%"></div><div class="b" style="height:72%"></div>
+            <div class="b" style="height:64%"></div><div class="b" style="height:88%"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Permohonan Pinjaman Terbaru</h3>
+          <table>
+            <tr><th>Anggota</th><th>Pokok</th><th>Aksi</th></tr>
+            <tr><td>Budi Santoso</td><td>Rp 12 Jt</td><td><div class="btnrow"><button class="btn ok">Setujui</button><button class="btn no">Tolak</button></div></td></tr>
+            <tr><td>Siti Aminah</td><td>Rp 8 Jt</td><td><div class="btnrow"><button class="btn ok">Setujui</button><button class="btn no">Tolak</button></div></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- B -->
+    <div class="col B">
+      <div class="tag">
+        <div><div class="name">Warm Editorial</div><div class="sub">Terang · serif · emas &amp; hijau</div></div>
+        <div class="pill">Direction B</div>
+      </div>
+      <div class="body mock">
+        <div class="topbar">
+          <div class="brand"><div class="logo">M</div>MetroCoop</div>
+          <div class="role">ADMIN</div>
+          <div class="avatar">A</div>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><div class="lab">Anggota Aktif</div><div class="val">1.284</div><div class="delta">▲ 5 bulan ini</div></div>
+          <div class="kpi"><div class="lab">Total Simpanan</div><div class="val">Rp 8,4 M</div><div class="delta">▲ aman &amp; transparan</div></div>
+          <div class="kpi"><div class="lab">Pinjaman Beredar</div><div class="val">Rp 5,1 M</div><div class="delta">● risiko terkendali</div></div>
+          <div class="kpi"><div class="lab">SHU Terkumpul</div><div class="val">Rp 642 Jt</div><div class="delta">▲ positif (laba)</div></div>
+        </div>
+        <div class="panel">
+          <h3>Perkembangan Transaksi</h3>
+          <div class="hint">Simpanan vs Pinjaman · 6 bulan</div>
+          <div class="bars">
+            <div class="b" style="height:45%"></div><div class="b" style="height:58%"></div>
+            <div class="b" style="height:50%"></div><div class="b" style="height:72%"></div>
+            <div class="b" style="height:64%"></div><div class="b" style="height:88%"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Permohonan Pinjaman Terbaru</h3>
+          <table>
+            <tr><th>Anggota</th><th>Pokok</th><th>Aksi</th></tr>
+            <tr><td>Budi Santoso</td><td>Rp 12 Jt</td><td><div class="btnrow"><button class="btn ok">Setujui</button><button class="btn no">Tolak</button></div></td></tr>
+            <tr><td>Siti Aminah</td><td>Rp 8 Jt</td><td><div class="btnrow"><button class="btn ok">Setujui</button><button class="btn no">Tolak</button></div></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- C -->
+    <div class="col C">
+      <div class="tag">
+        <div><div class="name">Sculpted Light</div><div class="sub">Fintech · kaca · biru lembut</div></div>
+        <div class="pill">Direction C</div>
+      </div>
+      <div class="body mock">
+        <div class="topbar">
+          <div class="brand"><div class="logo">M</div>MetroCoop</div>
+          <div class="role">ADMIN</div>
+          <div class="avatar">A</div>
+        </div>
+        <div class="kpis">
+          <div class="kpi"><div class="lab">Anggota Aktif</div><div class="val">1.284</div><div class="delta">▲ 5 bulan ini</div></div>
+          <div class="kpi"><div class="lab">Total Simpanan</div><div class="val">Rp 8,4 M</div><div class="delta">▲ aman &amp; transparan</div></div>
+          <div class="kpi"><div class="lab">Pinjaman Beredar</div><div class="val">Rp 5,1 M</div><div class="delta">● risiko terkendali</div></div>
+          <div class="kpi"><div class="lab">SHU Terkumpul</div><div class="val">Rp 642 Jt</div><div class="delta">▲ positif (laba)</div></div>
+        </div>
+        <div class="panel">
+          <h3>Perkembangan Transaksi</h3>
+          <div class="hint">Simpanan vs Pinjaman · 6 bulan</div>
+          <div class="bars">
+            <div class="b" style="height:45%"></div><div class="b" style="height:58%"></div>
+            <div class="b" style="height:50%"></div><div class="b" style="height:72%"></div>
+            <div class="b" style="height:64%"></div><div class="b" style="height:88%"></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Permohonan Pinjaman Terbaru</h3>
+          <table>
+            <tr><th>Anggota</th><th>Pokok</th><th>Aksi</th></tr>
+            <tr><td>Budi Santoso</td><td>Rp 12 Jt</td><td><div class="btnrow"><button class="btn ok">Setujui</button><button class="btn no">Tolak</button></div></td></tr>
+            <tr><td>Siti Aminah</td><td>Rp 8 Jt</td><td><div class="btnrow"><button class="btn ok">Setujui</button><button class="btn no">Tolak</button></div></td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="notes">
+    <b>A — Midnight Gold:</b> Kesan bank privat / wealth-management. Paling "mewah" secara konvensional, kontras tinggi, enak di ruangan redup. Risiko: mata lelah di operasional siang hari &amp; butuh kontras teks ekstra hati-hati.<br><br>
+    <b>B — Warm Editorial:</b> Paling "elegan &amp; ramah" — kertas krem, serif Fraunces, napas lega. Cocok brand koperasi yang hangat &amp; kekeluargaan. Risiko: bisa terasa kurang "tekno" untuk generasi muda.<br><br>
+    <b>C — Sculpted Light:</b> Paling "user-friendly &amp; fleksibel" — fintech modern, glass, biru tenang, bayangan lembut. Paling aman untuk operasional staf harian &amp; layar kecil. Risiko: kemewahan paling subtle, bisa terlihat seperti SaaS biasa.
+  </div>
+</body>
+</html>
