@@ -161,8 +161,8 @@ async function insertRows(table, columns, rows, batch = 200, onConflict = null) 
     ]);
     await insertRows('jenis_pinjaman', ['id','nama','bunga_persen','metode_bunga','maks_tenor','maks_plafon','biaya_admin'], [
       { id:'jp1', nama:'Pinjaman Umum Multiguna (Flat)', bunga_persen:1.0, metode_bunga:'flat', maks_tenor:24, maks_plafon:50000000, biaya_admin:50000 },
-      { id:'jp2', nama:'Pinjaman KPR Syariah (Efektif)', bunga_persen:0.75, metode_bunga:'efektif', maks_tenor:120, maks_plafon:500000000, biaya_admin:100000 },
-      { id:'jp3', nama:'Pinjaman Ventura/UMKM', bunga_persen:1.2, metode_bunga:'anuitas', maks_tenor:36, maks_plafon:200000000, biaya_admin:75000 }
+      { id:'jp2', nama:'Pinjaman KPR Syariah (Efektif)', bunga_persen:0.75, metode_bunga:'effective', maks_tenor:120, maks_plafon:500000000, biaya_admin:100000 },
+      { id:'jp3', nama:'Pinjaman Ventura/UMKM (Anuitas)', bunga_persen:1.2, metode_bunga:'annuitet', maks_tenor:36, maks_plafon:200000000, biaya_admin:75000 }
     ]);
     await insertRows('sumber_bayar', ['id','nama','tipe','no_rekening','akun_coa'], [
       { id:'sb1', nama:'Kas Kecil Tunai', tipe:'Tunai', no_rekening:'', akun_coa:'1101' },
@@ -345,7 +345,7 @@ async function insertRows(table, columns, rows, batch = 200, onConflict = null) 
         items.push({ kode: br.kode, nama: br.nama, qty, harga: br.harga_jual, subtotal: sub });
       }
       const diskon = chance(0.3) ? Math.round(total * 0.05) : 0;
-      penjualanRows.push({ id:pjId2(), no_faktur:'FJ-'+fmt(rdate(D(2025,1,1), today)).replace(/-/g,'')+'-'+String(i+1).padStart(3,'0'), tanggal:rdate(D(2025,1,1), today), items, total:total-diskon, metode_bayar:pick(['Tunai','Transfer Bank','E-Wallet','QRIS']), diskon });
+      penjualanRows.push({ id:pjId2(), no_faktur:'FJ-'+fmt(rdate(D(2025,1,1), today)).replace(/-/g,'')+'-'+String(i+1).padStart(3,'0'), tanggal:rdate(D(2025,1,1), today), items:JSON.stringify(items), total:total-diskon, metode_bayar:pick(['Tunai','Transfer Bank','E-Wallet','QRIS']), diskon });
     }
     for (let i = 0; i < 15; i++) {
       const sp = pick(['sp1','sp2','sp3','sp4','sp5','sp6']);
@@ -357,7 +357,7 @@ async function insertRows(table, columns, rows, batch = 200, onConflict = null) 
         total += sub;
         items.push({ kode: br.kode, nama: br.nama, qty, harga: br.harga_beli, subtotal: sub });
       }
-      pembelianRows.push({ id:pbId(), no_invoice:'INV-'+String(i+1).padStart(3,'0'), tanggal:rdate(D(2025,1,1), today), supplier_id:sp, supplier_nama:sp, items, total, status:pick(['pesan','diterima','batal']) });
+      pembelianRows.push({ id:pbId(), no_invoice:'INV-'+String(i+1).padStart(3,'0'), tanggal:rdate(D(2025,1,1), today), supplier_id:sp, supplier_nama:sp, items:JSON.stringify(items), total, status:pick(['pesan','diterima','batal']) });
     }
     await insertRows('penjualan', ['id','no_faktur','tanggal','items','total','metode_bayar','diskon'], penjualanRows);
     await insertRows('pembelian', ['id','no_invoice','tanggal','supplier_id','supplier_nama','items','total','status'], pembelianRows);
@@ -456,51 +456,75 @@ async function insertRows(table, columns, rows, batch = 200, onConflict = null) 
 
     // ===== Ventura & Pembiayaan AI =====
     console.log('▶ Ventura & Pembiayaan AI...');
-    const perusahaanList = [
-      ['PT Hijau Agri Tech','Pertanian & IoT (Agrotech)','Dr. Fahmi Idris','Jl. Industri Hijau No. 88, Bandung','Bandung','Jawa Barat',2019,'01.222.333.4-555.000'],
-      ['PT Cahaya Energi Surya','Energi Terbarukan (Solar)','Ir. Bambang Sutrisno','Jl. Matahari No. 12, Surabaya','Surabaya','Jawa Timur',2018,'02.333.444.5-666.000'],
-      ['PT Nusantara Fintech','Teknologi Keuangan','Rina Marlina, S.Kom','Jl. Digital No. 5, Jakarta Selatan','Jakarta','DKI Jakarta',2020,'03.444.555.6-777.000'],
-      ['PT Boga Rasa Nusantara','F&B / Kuliner','Chef Junaedi','Jl. Rasa No. 30, Yogyakarta','Yogyakarta','DI Yogyakarta',2017,'04.555.666.7-888.000'],
-      ['PT Sehat Medika Digital','HealthTech','Dr. Anindya Putri','Jl. Sehat No. 8, Tangerang','Tangerang','Banten',2021,'05.666.777.8-999.000'],
-      ['PT Logistik Cepat Indonesia','Logistik & Supply Chain','Hendra Kusuma','Jl. Raya Industri No. 50, Bekasi','Bekasi','Jawa Barat',2016,'06.777.888.9-111.000'],
-      ['PT Edukasi Cerdas','EdTech','Siti Nurhaliza, M.Pd','Jl. Pendidikan No. 20, Semarang','Semarang','Jawa Tengah',2019,'07.888.999.0-222.000'],
-      ['PT Eco Fashion Indonesia','Fashion Berkelanjutan','Maya Sari, S.Ds','Jl. Mode No. 15, Bandung','Bandung','Jawa Barat',2020,'08.999.000.1-333.000']
+    const companyDefs = [
+      { id:'pr1', nama:'PT Hijau Agri Tech', founder:'Dr. Fahmi Idris', sektor:'Agrikultur & IoT' },
+      { id:'pr2', nama:'PT Cahaya Energi Surya', founder:'Ir. Bambang Sutrisno', sektor:'Energi Terbarukan' },
+      { id:'pr3', nama:'PT Nusantara Fintech', founder:'Rina Marlina, S.Kom', sektor:'Teknologi Keuangan' },
+      { id:'pr4', nama:'PT Boga Rasa Nusantara', founder:'Chef Junaedi', sektor:'F&B / Kuliner' },
+      { id:'pr5', nama:'PT Sehat Medika Digital', founder:'Dr. Anindya Putri', sektor:'HealthTech' },
+      { id:'pr6', nama:'PT Logistik Cepat Indonesia', founder:'Hendra Kusuma', sektor:'Logistik & Supply Chain' },
+      { id:'pr7', nama:'PT Edukasi Cerdas', founder:'Siti Nurhaliza, M.Pd', sektor:'EdTech' },
+      { id:'pr8', nama:'PT Eco Fashion Indonesia', founder:'Maya Sari, S.Ds', sektor:'Fashion Berkelanjutan' }
     ];
-    const slug = (s) => s.toLowerCase().replace(/[^a-z]/g,'').slice(0,12);
-    const perusahaanRows = perusahaanList.map((p, i) => ({ id:'pr'+(i+1), kode_perusahaan:'P-' + String(i+1).padStart(3,'0'), nama:p[0], alamat:p[3], kota:p[4], provinsi:p[5], sektor_industri:p[1], tahun_berdiri:p[6], no_akte_pendirian:'AHU-'+rnd(1000,9999), npwp:p[7], no_izin_usaha:'SIU-'+rnd(1000,9999), nama_direktur:p[2], kontak_direktur:phone(), email_perusahaan:'info@'+slug(p[0])+'.co.id', telepon:phone(), website:'https://www.'+slug(p[0])+'.co.id', deskripsi:'Perusahaan di sektor '+p[1]+' dengan prospek pertumbuhan positif.', status:'aktif' }));
-    await insertRows('perusahaan', ['id','kode_perusahaan','nama','alamat','kota','provinsi','sektor_industri','tahun_berdiri','no_akte_pendirian','npwp','no_izin_usaha','nama_direktur','kontak_direktur','email_perusahaan','telepon','website','deskripsi','status'], perusahaanRows);
+    const JENIS_PEMB = ['modal_kerja','investasi','ventura','konsumtif','multiguna','modal_ventura'];
+    const STATUS_PEMB = ['pengajuan','disetujui','dicairkan','lunas','ditolak'];
 
-    // pengajuan_pembiayaan (1 perusahaan/anggota)
+    // pengajuan_pembiayaan: 8 primer (1 per perusahaan) + 4 ekstra
     const pengajuanRows = [];
+    const ppId = (n) => 'pp' + String(n).padStart(3,'0');
     for (let i = 0; i < 12; i++) {
-      const pr = pick(perusahaanRows);
+      const def = companyDefs[i % companyDefs.length];
       const a = pick(anggotaRows);
-      const jenis = pick(['Modal Kerja','Investasi Mesin Baru','Ekspansi Cabang','R&D Produk Baru','Digitalisasi Sistem','Pembelian Inventori']);
-      const pokok = Math.round(rnd(50000000, 180000000) / 1000000) * 1000000;
-      const tenor = pick([12, 18, 24, 36]);
-      const statusP = pick(['pengajuan','dianalisis','disetujui','dicairkan','ditolak']);
       const tgl = rdate(D(2024,1,1), D(2026,6,1));
       const no = 'PJ-' + fmt(tgl).replace(/-/g,'') + '-' + String(i+1).padStart(3,'0');
       pengajuanRows.push({
-        id:'pp' + String(i+1).padStart(3,'0'),
-        perusahaan_id:pr.id,
-        anggota_id:a.id,
-        anggota_nama:a.nama,
-        no_pengajuan:no,
-        tanggal_pengajuan:tgl,
-        jenis_pembiayaan:jenis,
-        pokok_pengajuan:pokok,
-        tenor_bulan:tenor,
-        tujuan_pembiayaan:'Pembiayaan untuk ' + pr.nama + ' (' + jenis + ')',
+        id: ppId(i+1),
+        anggota_id: a.id,
+        anggota_nama: a.nama,
+        no_pengajuan: no,
+        jenis_pembiayaan: pick(JENIS_PEMB),
+        pokok_pengajuan: Math.round(rnd(50000000, 180000000) / 1000000) * 1000000,
+        tenor_bulan: pick([12, 18, 24, 36]),
+        tujuan_pembiayaan:'Pembiayaan untuk ' + def.nama + ' (' + pick(JENIS_PEMB) + ')',
         bunga_diharapkan:pick([1.0,1.2,1.5]),
-        status_pengajuan:statusP,
-        skor_akhir:null,
-        status_kelayakan:null,
-        rekomendasi:'',
-        created_at:new Date(tgl.getTime())
+        status_pengajuan: pick(STATUS_PEMB),
+        created_by:'1',
+        created_at:new Date(tgl.getTime()),
+        perusahaan_id:null,
+        companyId:def.id
       });
     }
-    await insertRows('pengajuan_pembiayaan', ['id','perusahaan_id','anggota_id','anggota_nama','no_pengajuan','tanggal_pengajuan','jenis_pembiayaan','pokok_pengajuan','tenor_bulan','tujuan_pembiayaan','bunga_diharapkan','status_pengajuan','skor_akhir','status_kelayakan','rekomendasi','created_at'], pengajuanRows);
+    await insertRows('pengajuan_pembiayaan', ['id','anggota_id','anggota_nama','no_pengajuan','jenis_pembiayaan','pokok_pengajuan','tenor_bulan','tujuan_pembiayaan','bunga_diharapkan','status_pengajuan','created_by','created_at','perusahaan_id'], pengajuanRows);
+
+    // perusahaan (venture): tiap perusahaan mengacu pada pengajuan primer
+    const perusahaanRows = companyDefs.map((d, i) => {
+      const a = pick(anggotaRows);
+      const tglInv = rdate(D(2024,1,1), D(2026,5,1));
+      return {
+        id:d.id,
+        nama_perusahaan:d.nama,
+        nama_founder:d.founder,
+        sektor_industri:d.sektor,
+        nominal_investasi:Math.round(rnd(50000000, 300000000) / 1000000) * 1000000,
+        persentase_saham:Math.round(rnd(5, 30) * 100) / 100,
+        estimasi_dividen:Math.round(rnd(8, 22) * 100) / 100,
+        tanggal_investasi:tglInv,
+        tenor_tahun:pick([2,3,5]),
+        status:pick(['pengajuan','disetujui','dicairkan','selesai','ditolak']),
+        deskripsi_bisnis:'Perusahaan di sektor ' + d.sektor + ' dengan prospek pertumbuhan positif.',
+        kontak_founder:phone(),
+        prospektus_url:'/prospektus/' + d.id + '.pdf',
+        pengaju_anggota_id:a.id,
+        pengaju_anggota_nama:a.nama,
+        pengajuan_id:ppId(i+1)
+      };
+    });
+    await insertRows('perusahaan', ['id','nama_perusahaan','nama_founder','sektor_industri','nominal_investasi','persentase_saham','estimasi_dividen','tanggal_investasi','tenor_tahun','status','deskripsi_bisnis','kontak_founder','prospektus_url','pengaju_anggota_id','pengaju_anggota_nama','pengajuan_id'], perusahaanRows);
+
+    // tutup referensi melingkar: pengajuan -> perusahaan
+    for (const p of pengajuanRows) {
+      await client.query('UPDATE pengajuan_pembiayaan SET perusahaan_id=$1 WHERE id=$2', [p.companyId, p.id]);
+    }
 
     // hasil_skoring (1 per pengajuan) + sync pengajuan
     const skoringRows = [];
@@ -528,13 +552,11 @@ async function insertRows(table, columns, rows, batch = 200, onConflict = null) 
         rekomendasi_tenor:p.tenor_bulan,
         rekomendasi_bunga:pick([1.0,1.2,1.5]),
         syarat_khusus:layak === 'Layak dengan Syarat' ? 'Menyertakan agunan tambahan dan laporan keuangan triwulanan.' : 'Tidak ada syarat khusus.',
-        ai_analisis_json:{ ringkasan:'Analisis AI terhadap pengajuan ' + p.no_pengajuan, model:'gemini-2.0-flash', skor }
+        ai_analisis_json:{ ringkasan:'Analisis AI terhadap pengajuan ' + p.no_pengajuan, model:'gemini-2.0-flash', skor },
+        created_at:new Date()
       });
     }
-    await insertRows('hasil_skoring', ['id','pengajuan_id','skor_keseluruhan','status_kelayakan','skor_character','skor_capacity','skor_capital','skor_collateral','skor_condition','rasio_likuiditas','rasio_solvabilitas','rasio_profitabilitas','rasio_bopo','bmpk_persen','bmpk_status','collateral_coverage','rekomendasi_plafon','rekomendasi_tenor','rekomendasi_bunga','syarat_khusus','ai_analisis_json'], skoringRows);
-    for (const s of skoringRows) {
-      await client.query('UPDATE pengajuan_pembiayaan SET skor_akhir=$1, status_kelayakan=$2 WHERE id=$3', [s.skor_keseluruhan, s.status_kelayakan, s.pengajuan_id]);
-    }
+    await insertRows('hasil_skoring', ['id','pengajuan_id','skor_keseluruhan','status_kelayakan','skor_character','skor_capacity','skor_capital','skor_collateral','skor_condition','rasio_likuiditas','rasio_solvabilitas','rasio_profitabilitas','rasio_bopo','bmpk_persen','bmpk_status','collateral_coverage','rekomendasi_plafon','rekomendasi_tenor','rekomendasi_bunga','syarat_khusus','ai_analisis_json','created_at'], skoringRows);
 
     // dokumen_pengajuan
     const dokRows = [];
@@ -565,29 +587,30 @@ async function insertRows(table, columns, rows, batch = 200, onConflict = null) 
       const vid = viId();
       viRows.push({
         id:vid,
-        nama_perusahaan:pr.nama,
+        nama_perusahaan:pr.nama_perusahaan,
         sektor_industri:pr.sektor_industri,
-        nama_founder:pr.nama_direktur,
+        nama_founder:pr.nama_founder,
         nominal_investasi:nominal,
         persentase_saham:Math.round(rnd(5, 25) * 100) / 100,
         estimasi_dividen:Math.round(rnd(8, 20) * 100) / 100,
         tanggal_investasi:rdate(D(2024,1,1), D(2026,5,1)),
         tenor_tahun:pick([2,3,5]),
         status:'dicairkan',
-        deskripsi_bisnis:'Investasi ventura pada ' + pr.nama,
-        kontak_founder:pr.kontak_direktur,
-        prospektus_url:'/prospektus/' + pr.kode_perusahaan + '.pdf',
+        deskripsi_bisnis:'Investasi ventura pada ' + pr.nama_perusahaan,
+        kontak_founder:pr.kontak_founder,
+        prospektus_url:'/prospektus/' + pr.id + '.pdf',
         pengaju_anggota_id:a.id,
         pengaju_anggota_nama:a.nama,
         pengajuan_id:p.id,
-        perusahaan_id_fk:pr.id
+        perusahaan_id_fk:pr.id,
+        perusahaan_id:pr.id
       });
       const divCount = rnd(1, 3);
       for (let d = 0; d < divCount; d++) {
         vdRows.push({ id:vdId(), investment_id:vid, tanggal:rdate(D(2024,6,1), today), nominal_dividen:Math.round(nominal * (rnd(2,8)/100) / 1000) * 1000, keterangan:'Dividen triwulanan ' + pr.nama });
       }
     }
-    await insertRows('venture_investments', ['id','nama_perusahaan','sektor_industri','nama_founder','nominal_investasi','persentase_saham','estimasi_dividen','tanggal_investasi','tenor_tahun','status','deskripsi_bisnis','kontak_founder','prospektus_url','pengaju_anggota_id','pengaju_anggota_nama','pengajuan_id','perusahaan_id_fk'], viRows);
+    await insertRows('venture_investments', ['id','nama_perusahaan','sektor_industri','nama_founder','nominal_investasi','persentase_saham','estimasi_dividen','tanggal_investasi','tenor_tahun','status','deskripsi_bisnis','kontak_founder','prospektus_url','pengaju_anggota_id','pengaju_anggota_nama','pengajuan_id','perusahaan_id_fk','perusahaan_id'], viRows);
     await insertRows('venture_dividends', ['id','investment_id','tanggal','nominal_dividen','keterangan'], vdRows);
 
     // ===== Akuntansi: COA, periods, journals =====
@@ -644,7 +667,7 @@ async function insertRows(table, columns, rows, batch = 200, onConflict = null) 
     const jrn = (tgl, ket, sumber, dtls) => {
       const d = Math.round(dtls.reduce((s,x)=>s+(x.debit||0),0));
       const k = Math.round(dtls.reduce((s,x)=>s+(x.kredit||0),0));
-      jrRows.push({ id:jrId(), no_jurnal:'JU-' + fmt(tgl).replace(/-/g,'') + '-' + String(jrRows.length+1).padStart(4,'0'), tanggal:tgl, keterangan:ket, sumber, debit:d, kredit:k, details:dtls });
+      jrRows.push({ id:jrId(), no_jurnal:'JU-' + fmt(tgl).replace(/-/g,'') + '-' + String(jrRows.length+1).padStart(4,'0'), tanggal:tgl, keterangan:ket, sumber, debit:d, kredit:k, details:JSON.stringify(dtls) });
     };
     jrn(D(2024,1,1), 'Saldo awal pembukuan koperasi', 'opening', [
       { kode_akun:'3100', nama_akun:'Simpanan Pokok Anggota', debit:0, kredit:40000000 },
@@ -712,9 +735,9 @@ async function insertRows(table, columns, rows, batch = 200, onConflict = null) 
       { id:'ts3', name:'Hendra Wijaya', position:'Pengusaha UMKM', content:'Pembiayaan ventura berbasis AI cepat dan transparan.', avatar_url:'', rating:4, sort_order:3 }
     ]);
     await insertRows('landing_pricing', ['id','plan_name','price_label','price_amount','description','is_popular','features','cta_text','cta_link','sort_order'], [
-      { id:'pr1', plan_name:'Paket Starter', price_label:'Gratis', price_amount:'0', description:'Untuk koperasi pemula.', is_popular:false, features:['Anggota & Simpanan','Pinjaman Dasar'], cta_text:'Mulai', cta_link:'#', sort_order:1 },
-      { id:'pr2', plan_name:'Paket Pro', price_label:'Rp 299rb/bln', price_amount:'299000', description:'Untuk koperasi berkembang.', is_popular:true, features:['Semua modul','POS & PPOB','Akuntansi'], cta_text:'Pilih Pro', cta_link:'#', sort_order:2 },
-      { id:'pr3', plan_name:'Paket Enterprise', price_label:'Kustom', price_amount:'Kustom', description:'Untuk koperasi besar.', is_popular:false, features:['Ventura AI','Multi-cabang','Prioritas'], cta_text:'Hubungi', cta_link:'#', sort_order:3 }
+      { id:'pr1', plan_name:'Paket Starter', price_label:'Gratis', price_amount:'0', description:'Untuk koperasi pemula.', is_popular:false, features:JSON.stringify(['Anggota & Simpanan','Pinjaman Dasar']), cta_text:'Mulai', cta_link:'#', sort_order:1 },
+      { id:'pr2', plan_name:'Paket Pro', price_label:'Rp 299rb/bln', price_amount:'299000', description:'Untuk koperasi berkembang.', is_popular:true, features:JSON.stringify(['Semua modul','POS & PPOB','Akuntansi']), cta_text:'Pilih Pro', cta_link:'#', sort_order:2 },
+      { id:'pr3', plan_name:'Paket Enterprise', price_label:'Kustom', price_amount:'Kustom', description:'Untuk koperasi besar.', is_popular:false, features:JSON.stringify(['Ventura AI','Multi-cabang','Prioritas']), cta_text:'Hubungi', cta_link:'#', sort_order:3 }
     ]);
     await insertRows('landing_contact', ['id','email','phone','whatsapp','address','office_hours','map_embed_url','footer_description','social_facebook','social_twitter','social_instagram','social_youtube'], [
       { id:'contact_main', email:'info@metromitra.co.id', phone:'(021) 789-0123', whatsapp:'6281234567890', address:'Jl. Pemuda No. 45, Kebayoran Baru, Jakarta Selatan', office_hours:'Senin-Jumat 08:00-17:00', map_embed_url:'', footer_description:'Koperasi simpan pinjam digital terpercaya.', social_facebook:'', social_twitter:'', social_instagram:'', social_youtube:'' }
