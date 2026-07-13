@@ -555,7 +555,7 @@ export default function AdminPortal({
       {activeMenu === 'tema_tampilan' && (
         <AdminTema
           currentTheme={themePreset}
-          onSelectTheme={onSelectThemePreset}
+          onSelectThemePreset={onSelectThemePreset}
         />
       )}
 
