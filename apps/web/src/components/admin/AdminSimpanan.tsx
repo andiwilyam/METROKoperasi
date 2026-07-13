@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { Search, Plus, ArrowUpRight, ArrowDownLeft, X, Sparkles, Edit, Settings } from 'lucide-react';
-import { Anggota, JenisSimpanan, SimpananTransaksi, PermohonanTarik } from '../../types';
+import { Anggota, JenisSimpanan, SimpananTransaksi, PermohonanTarik } from '@metrocoop/shared/types';
 
 interface AdminSimpananProps {
   members: Anggota[];

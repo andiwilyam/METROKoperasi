@@ -9,7 +9,7 @@ import {
   DollarSign, ArrowRightLeft, Sparkles, CheckCircle, X, Plus, Search,
   AlertTriangle, Loader2, Calendar, RefreshCw, ShieldCheck
 } from 'lucide-react';
-import { CicilanTransaksi, Anggota, Barang } from '../../types';
+import { Anggota, Barang } from '@metrocoop/shared/types';
 
 interface AdminCicilanDashboardProps {
   cicilanList: CicilanTransaksi[];

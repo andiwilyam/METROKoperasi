@@ -4,8 +4,8 @@
  */
 
 import React, { useState } from 'react';
-import { Search, UserPlus, Shield, Sparkles, X, Calendar, Settings, AlertTriangle } from 'lucide-react';
-import { Anggota, Pengurus, UserSession } from '../../types';
+import { Search, UserPlus, Shield, Sparkles, X, Calendar, Settings, AlertTriangle, UserPlus as UserPlusIcon, X as XIcon, Edit, Plus } from 'lucide-react';
+import { Anggota, Pengurus, UserSession } from '@metrocoop/shared/types';
 
 interface AdminAnggotaProps {
   members: Anggota[];

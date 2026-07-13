@@ -9,7 +9,7 @@ import {
   Sparkles, FileText, DollarSign, Building2, ChevronRight, ChevronDown, Eye, Trash2, Edit,
   Loader2, Plus, X, Scale, Percent, BarChart3, Calendar
 } from 'lucide-react';
-import { Perusahaan, VenturaPengajuan } from '../../types';
+import { Perusahaan, VenturaPengajuan } from '@metrocoop/shared/types';
 
 interface AdminPipelineVenturaProps {
   pipeline: VenturaPengajuan[];

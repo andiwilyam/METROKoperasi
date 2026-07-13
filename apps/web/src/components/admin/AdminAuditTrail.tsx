@@ -5,9 +5,10 @@
 
 import React, { useEffect, useMemo } from 'react';
 import { ScrollText, Clock, RotateCcw, FileText, CheckCircle } from 'lucide-react';
+import { JournalEntry } from '@metrocoop/shared/types';
 
 interface AdminAuditTrailProps {
-  journals: any[];
+  journals: JournalEntry[];
   fetchJournals: () => Promise<void>;
 }
 

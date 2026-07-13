@@ -9,7 +9,7 @@ import {
   Trash2, Edit, CheckCircle, FileText, Info, AlertTriangle, RefreshCw,
   BarChart3, Sparkles, DollarSign, Scale, TrendingUp, User, Award
 } from 'lucide-react';
-import { Perusahaan, Anggota, VenturaPengajuan } from '../../types';
+import { Perusahaan, Anggota, VenturaPengajuan } from '@metrocoop/shared/types';
 
 interface AdminVenturaProps {
   pengajuanList: VenturaPengajuan[];

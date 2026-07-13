@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { Search, Calculator, Check, AlertCircle, Calendar, Receipt, Sparkles, X, Edit, Settings, Plus } from 'lucide-react';
-import { Anggota, JenisPinjaman, Pinjaman, Angsuran } from '../../types';
+import { Anggota, JenisPinjaman, Pinjaman, Angsuran } from '@metrocoop/shared/types';
 
 interface AdminPinjamanProps {
   members: Anggota[];

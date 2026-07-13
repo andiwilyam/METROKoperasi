@@ -5,11 +5,12 @@
 
 import React, { useEffect } from 'react';
 import { Wallet, ArrowDownCircle, ArrowUpCircle } from 'lucide-react';
+import { JournalEntry } from '@metrocoop/shared/types';
 
 interface Props {
   laporanLabarugi: any;
   fetchLaporanLabarugi: (s?: string, e?: string) => Promise<void>;
-  journals: any[];
+  journals: JournalEntry[];
 }
 
 const formatIDR = (n: number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(n || 0);

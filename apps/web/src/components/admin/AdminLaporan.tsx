@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { FileText, Landmark, Key, Award, Sparkles, Scale, Percent } from 'lucide-react';
-import { Anggota, Pinjaman, JournalEntry } from '../../types';
+import { Anggota, Pinjaman, JournalEntry } from '@metrocoop/shared/types';
 
 interface AdminLaporanProps {
   members: Anggota[];

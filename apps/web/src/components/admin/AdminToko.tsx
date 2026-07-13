@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { Search, ShoppingCart, Trash2, CheckCircle, Package, Users, AlertTriangle, Settings, Sparkles, DollarSign } from 'lucide-react';
-import { Barang, KategoriBarang, Supplier, Penjualan, Pembelian } from '../../types';
+import { Barang, KategoriBarang, Supplier, Penjualan, Pembelian } from '@metrocoop/shared/types';
 
 interface AdminTokoProps {
   barang: Barang[];
