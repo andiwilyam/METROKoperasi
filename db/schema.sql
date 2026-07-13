@@ -670,4 +670,10 @@ DO $$ BEGIN
   IF EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='perusahaan' AND column_name='nama_perusahaan') THEN
     ALTER TABLE perusahaan RENAME COLUMN nama_perusahaan TO nama;
   END IF;
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='pengajuan_pembiayaan' AND column_name='skor_akhir') THEN
+    ALTER TABLE pengajuan_pembiayaan ADD COLUMN skor_akhir NUMERIC(5,2) DEFAULT NULL;
+  END IF;
+  IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='pengajuan_pembiayaan' AND column_name='status_kelayakan') THEN
+    ALTER TABLE pengajuan_pembiayaan ADD COLUMN status_kelayakan VARCHAR(30) DEFAULT NULL;
+  END IF;
 END $$;
