@@ -580,7 +580,7 @@ router.get('/venture', async (req: AuthRequest, res: Response) => {
   try {
     if (!requireStaff(req, res)) return;
     const investments = await pool.query(`
-      SELECT vi.*, pn.nama_perusahaan as perusahaan_nama_ref, pn.sektor_industri as perusahaan_sektor_ref, pp.no_pengajuan as pengajuan_ref, pp.status_pengajuan as pengajuan_status_ref
+      SELECT vi.*, pn.nama as perusahaan_nama_ref, pn.sektor_industri as perusahaan_sektor_ref, pp.no_pengajuan as pengajuan_ref, pp.status_pengajuan as pengajuan_status_ref
       FROM venture_investments vi
       LEFT JOIN perusahaan pn ON vi.perusahaan_id_fk = pn.id
       LEFT JOIN pengajuan_pembiayaan pp ON vi.pengajuan_id = pp.id
@@ -695,7 +695,7 @@ router.get('/venture/pipeline', async (req: AuthRequest, res: Response) => {
         'pengajuan' as tipe_item, pp.skor_akhir as skor, pp.status_kelayakan as kelayakan
       FROM pengajuan_pembiayaan pp
       LEFT JOIN perusahaan pn ON pp.perusahaan_id = pn.id
-      ORDER BY pp.tanggal_pengajuan DESC
+      ORDER BY pp.created_at DESC
     `);
     const venture = await pool.query(`
       SELECT vi.*, pn.nama as perusahaan_nama, pn.sektor_industri as perusahaan_sektor,
@@ -784,7 +784,7 @@ router.get('/my-venture-data', async (req: AuthRequest, res: Response) => {
     const pengajuan = await pool.query(`
       SELECT pp.*, pn.nama as perusahaan_nama FROM pengajuan_pembiayaan pp
       LEFT JOIN perusahaan pn ON pp.perusahaan_id = pn.id
-      WHERE pp.created_by = $1 OR pp.anggota_id = $2 ORDER BY pp.tanggal_pengajuan DESC`, [userId, memberId]);
+      WHERE pp.created_by = $1 OR pp.anggota_id = $2 ORDER BY pp.created_at DESC`, [userId, memberId]);
 
     // Get ventures
     const venture = await pool.query(`
@@ -819,14 +819,13 @@ router.post('/perusahaan', adminOnly, async (req: AuthRequest, res: Response) =>
             noAktePendirian, npwp, noIzinUsaha, namaDirektur, kontakDirektur,
             emailPerusahaan, telepon, website, deskripsi, status } = req.body;
     const id = 'p_' + genId();
-    const kode = kodePerusahaan || ('P-' + Date.now().toString().slice(-6));
     const result = await pool.query(
       `INSERT INTO perusahaan (id, kode_perusahaan, nama, alamat, kota, provinsi, sektor_industri, tahun_berdiri, no_akte_pendirian, npwp, no_izin_usaha, nama_direktur, kontak_direktur, email_perusahaan, telepon, website, deskripsi, status)
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) RETURNING *`,
-      [id, kode, nama, alamat || '', kota || '', provinsi || '', sektorIndustri || '',
-       tahunBerdiri || null, noAktePendirian || '', npwp || '', noIzinUsaha || '',
-       namaDirektur || '', kontakDirektur || '', emailPerusahaan || '', telepon || '', website || '',
-       deskripsi || '', status || 'aktif']
+      [id, kodePerusahaan || '', nama || '', alamat || '', kota || '', provinsi || '',
+       sektorIndustri || '', Number(tahunBerdiri) || null, noAktePendirian || '', npwp || '', noIzinUsaha || '',
+       namaDirektur || '', kontakDirektur || '', emailPerusahaan || '', telepon || '', website || '', deskripsi || '',
+       status || 'pending']
     );
     return res.json(result.rows[0]);
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
@@ -837,17 +836,14 @@ router.put('/perusahaan/:id', adminOnly, async (req: AuthRequest, res: Response)
     const { kodePerusahaan, nama, alamat, kota, provinsi, sektorIndustri, tahunBerdiri,
             noAktePendirian, npwp, noIzinUsaha, namaDirektur, kontakDirektur,
             emailPerusahaan, telepon, website, deskripsi, status } = req.body;
-    // If kodePerusahaan is empty/undefined, preserve existing
-    const existing = await pool.query('SELECT kode_perusahaan FROM perusahaan WHERE id=$1', [req.params.id]);
-    const finalKode = kodePerusahaan || existing.rows[0]?.kode_perusahaan || ('P-' + Date.now().toString().slice(-6));
     await pool.query(
       `UPDATE perusahaan SET kode_perusahaan=$1, nama=$2, alamat=$3, kota=$4, provinsi=$5, sektor_industri=$6,
-       tahun_berdiri=$7, no_akte_pendirian=$8, npwp=$9, no_izin_usaha=$10, nama_direktur=$11,
-       kontak_direktur=$12, email_perusahaan=$13, telepon=$14, website=$15, deskripsi=$16, status=$17 WHERE id=$18`,
-      [finalKode, nama, alamat || '', kota || '', provinsi || '', sektorIndustri || '',
-       tahunBerdiri || null, noAktePendirian || '', npwp || '', noIzinUsaha || '',
-       namaDirektur || '', kontakDirektur || '', emailPerusahaan || '', telepon || '', website || '',
-       deskripsi || '', status || 'aktif', req.params.id]
+       tahun_berdiri=$7, no_akte_pendirian=$8, npwp=$9, no_izin_usaha=$10, nama_direktur=$11, kontak_direktur=$12,
+       email_perusahaan=$13, telepon=$14, website=$15, deskripsi=$16, status=$17 WHERE id=$18`,
+      [kodePerusahaan || '', nama || '', alamat || '', kota || '', provinsi || '',
+       sektorIndustri || '', Number(tahunBerdiri) || null, noAktePendirian || '', npwp || '', noIzinUsaha || '',
+       namaDirektur || '', kontakDirektur || '', emailPerusahaan || '', telepon || '', website || '', deskripsi || '',
+       status || 'pending', req.params.id]
     );
     return res.json({ success: true });
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
@@ -867,12 +863,18 @@ router.get('/pengajuan', async (req: AuthRequest, res: Response) => {
   try {
     if (!requireStaff(req, res)) return;
     const result = await pool.query(`
-      SELECT pp.*, pn.nama as perusahaan_nama, pn.sektor_industri as perusahaan_sektor,
-        a.nama as anggota_nama
+      SELECT pp.*, 
+             pn.nama as perusahaan_nama, 
+             pn.sektor_industri as sektor_industri,
+             pp.pokok_pengajuan as pokok_pinjaman,
+             pp.status_pengajuan as status,
+             pp.created_at as tanggal_pengajuan,
+             a.nama as anggota_nama,
+             pp.skor_akhir as skor_akhir
       FROM pengajuan_pembiayaan pp
       LEFT JOIN perusahaan pn ON pp.perusahaan_id = pn.id
       LEFT JOIN anggota a ON pp.anggota_id = a.id
-      ORDER BY pp.tanggal_pengajuan DESC
+      ORDER BY pp.created_at DESC
     `);
     return res.json(result.rows);
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
@@ -882,8 +884,16 @@ router.get('/pengajuan', async (req: AuthRequest, res: Response) => {
 router.get('/pengajuan/:id', async (req: AuthRequest, res: Response) => {
   try {
     const pengajuan = await pool.query(`
-      SELECT pp.*, pn.nama as perusahaan_nama, pn.sektor_industri as perusahaan_sektor,
-        a.nama as anggota_nama
+      SELECT pp.*, 
+             pn.nama as perusahaan_nama, 
+             pn.sektor_industri as sektor_industri,
+             pp.pokok_pengajuan as pokok_pinjaman,
+             pp.status_pengajuan as status,
+             pp.created_at as tanggal_pengajuan,
+             pp.tujuan_pembiayaan as tujuan,
+             pp.bunga_diharapkan as bunga_persen,
+             a.nama as anggota_nama,
+             pp.skor_akhir as skor_akhir
       FROM pengajuan_pembiayaan pp
       LEFT JOIN perusahaan pn ON pp.perusahaan_id = pn.id
       LEFT JOIN anggota a ON pp.anggota_id = a.id
@@ -897,7 +907,7 @@ router.get('/pengajuan/:id', async (req: AuthRequest, res: Response) => {
     return res.json({
       ...pengajuan.rows[0],
       dokumen: dokumen.rows,
-      hasilSkoring: skoring.rows[0] || null
+      hasilAnalisis: skoring.rows[0] || null
     });
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });

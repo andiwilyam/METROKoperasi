@@ -223,7 +223,7 @@ export default function AdminPengajuanVentura({
                 <label className="block font-semibold text-slate-600 mb-1">Perusahaan *</label>
                 <select required value={form.perusahaanId} onChange={e => setForm(f => ({ ...f, perusahaanId: e.target.value }))} className="w-full border border-slate-200 p-2.5 rounded-lg bg-slate-50 focus:bg-white text-slate-800">
                   <option value="">Pilih Perusahaan</option>
-                  {perusahaan.map((pr: any) => <option key={pr.id} value={pr.id}>{pr.nama}</option>)}
+                  {perusahaan.map((pr: any) => <option key={pr.id} value={pr.id}>{pr.nama || '-'}</option>)}
                 </select>
               </div>
               <div>
