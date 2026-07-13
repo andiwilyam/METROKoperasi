@@ -1,4 +1,4 @@
--- MetroMitra Database Schema
+﻿-- MetroMitra Database Schema
 -- PostgreSQL 16
 
 CREATE TABLE IF NOT EXISTS koperasi_info (
@@ -727,55 +727,55 @@ UPDATE perusahaan SET
   kode_perusahaan = 'P-001', nama_direktur = nama_founder, kontak_direktur = kontak_founder, telepon = kontak_founder,
   alamat = 'Jl. Industri Hijau No. 88', kota = 'Bandung', provinsi = 'Jawa Barat', tahun_berdiri = 2019,
   npwp = '12.345.678.9-012.000', no_izin_usaha = '503/450/KPPT/2019', no_akte_pendirian = 'AHU-0098765.AH.01.01.TAHUN-2019',
-  email_perusahaan = 'info@hijauagritech.co.id', website = 'https://hijauagritech.co.id', status = 'aktif',
+  email_perusahaan = 'info@hijauagritech.co.id', website = 'https://hijauagritech.co.id',
   deskripsi = 'Perusahaan rintisan pengembang solusi otomatisasi pertanian hidroponik berbasis IoT untuk efisiensi air dan pupuk.'
   WHERE id = 'pr1';
 UPDATE perusahaan SET
   kode_perusahaan = 'P-002', nama_direktur = nama_founder, kontak_direktur = kontak_founder, telepon = kontak_founder,
   alamat = 'Jl. Energi Surya No. 12', kota = 'Surabaya', provinsi = 'Jawa Timur', tahun_berdiri = 2018,
   npwp = '98.765.432.1-012.000', no_izin_usaha = '503/450/KPPT/2018', no_akte_pendirian = 'AHU-0034567.AH.01.01.TAHUN-2018',
-  email_perusahaan = 'info@cahayaenergi.co.id', website = 'https://cahayaenergi.co.id', status = 'aktif',
+  email_perusahaan = 'info@cahayaenergi.co.id', website = 'https://cahayaenergi.co.id',
   deskripsi = 'Pengembang dan operator pembangkit listrik tenaga surya rooftop untuk industri dan komersial.'
   WHERE id = 'pr2';
 UPDATE perusahaan SET
   kode_perusahaan = 'P-003', nama_direktur = nama_founder, kontak_direktur = kontak_founder, telepon = kontak_founder,
   alamat = 'Jl. Fintech Tower Lt. 15', kota = 'Jakarta Selatan', provinsi = 'DKI Jakarta', tahun_berdiri = 2020,
   npwp = '56.789.012.3-456.000', no_izin_usaha = '503/450/KPPT/2020', no_akte_pendirian = 'AHU-0078901.AH.01.01.TAHUN-2020',
-  email_perusahaan = 'hello@nusantarafintech.id', website = 'https://nusantarafintech.id', status = 'aktif',
+  email_perusahaan = 'hello@nusantarafintech.id', website = 'https://nusantarafintech.id',
   deskripsi = 'Platform teknologi finansial untuk UMKM dengan layanan pembayaran dan pendanaan rantai pasok.'
   WHERE id = 'pr3';
 UPDATE perusahaan SET
   kode_perusahaan = 'P-004', nama_direktur = nama_founder, kontak_direktur = kontak_founder, telepon = kontak_founder,
   alamat = 'Jl. Kuliner Raya No. 45', kota = 'Yogyakarta', provinsi = 'DI Yogyakarta', tahun_berdiri = 2021,
   npwp = '34.567.890.1-234.000', no_izin_usaha = '503/450/KPPT/2021', no_akte_pendirian = 'AHU-0056789.AH.01.01.TAHUN-2021',
-  email_perusahaan = 'info@bogarasa.co.id', website = 'https://bogarasa.co.id', status = 'aktif',
+  email_perusahaan = 'info@bogarasa.co.id', website = 'https://bogarasa.co.id',
   deskripsi = 'Waralaba kedai soto kelapa tradisional dengan sistem rantai pasok bumbu terpusat.'
   WHERE id = 'pr4';
 UPDATE perusahaan SET
   kode_perusahaan = 'P-005', nama_direktur = nama_founder, kontak_direktur = kontak_founder, telepon = kontak_founder,
   alamat = 'Jl. Medika Digital No. 7', kota = 'Semarang', provinsi = 'Jawa Tengah', tahun_berdiri = 2019,
   npwp = '01.234.567.8-012.000', no_izin_usaha = '503/450/KPPT/2019', no_akte_pendirian = 'AHU-0012345.AH.01.01.TAHUN-2019',
-  email_perusahaan = 'care@sehatmedika.id', website = 'https://sehatmedika.id', status = 'aktif',
+  email_perusahaan = 'care@sehatmedika.id', website = 'https://sehatmedika.id',
   deskripsi = 'Klinik digital dan telemedicine dengan platform konsultasi kesehatan berbasis AI.'
   WHERE id = 'pr5';
 UPDATE perusahaan SET
   kode_perusahaan = 'P-006', nama_direktur = nama_founder, kontak_direktur = kontak_founder, telepon = kontak_founder,
   alamat = 'Jl. Logistik Industri Kav. 9', kota = 'Bekasi', provinsi = 'Jawa Barat', tahun_berdiri = 2017,
   npwp = '11.222.333.4-012.000', no_izin_usaha = '503/450/KPPT/2017', no_akte_pendirian = 'AHU-0099887.AH.01.01.TAHUN-2017',
-  email_perusahaan = 'corp@logistikcepat.id', website = 'https://logistikcepat.id', status = 'nonaktif',
+  email_perusahaan = 'corp@logistikcepat.id', website = 'https://logistikcepat.id',
   deskripsi = 'Penyedia jasa logistik dan kurir cepat untuk e-commerce dengan armada terintegrasi.'
   WHERE id = 'pr6';
 UPDATE perusahaan SET
   kode_perusahaan = 'P-007', nama_direktur = nama_founder, kontak_direktur = kontak_founder, telepon = kontak_founder,
   alamat = 'Jl. Pendidikan No. 12', kota = 'Malang', provinsi = 'Jawa Timur', tahun_berdiri = 2021,
   npwp = '45.678.901.2-345.000', no_izin_usaha = '503/450/KPPT/2021', no_akte_pendirian = 'AHU-0056781.AH.01.01.TAHUN-2021',
-  email_perusahaan = 'hello@edukasicerdas.id', website = 'https://edukasicerdas.id', status = 'aktif',
+  email_perusahaan = 'hello@edukasicerdas.id', website = 'https://edukasicerdas.id',
   deskripsi = 'Pengembang aplikasi pembelajaran interaktif bertenaga AI untuk jenjang pendidikan dasar.'
   WHERE id = 'pr7';
 UPDATE perusahaan SET
   kode_perusahaan = 'P-008', nama_direktur = nama_founder, kontak_direktur = kontak_founder, telepon = kontak_founder,
   alamat = 'Jl. Fashion Eco No. 21', kota = 'Denpasar', provinsi = 'Bali', tahun_berdiri = 2020,
   npwp = '67.890.123.4-567.000', no_izin_usaha = '503/450/KPPT/2020', no_akte_pendirian = 'AHU-0078123.AH.01.01.TAHUN-2020',
-  email_perusahaan = 'hi@ecofashion.id', website = 'https://ecofashion.id', status = 'aktif',
+  email_perusahaan = 'hi@ecofashion.id', website = 'https://ecofashion.id',
   deskripsi = 'Brand fashion berkelanjutan dengan material daur ulang dan rantai pasok ramah lingkungan.'
   WHERE id = 'pr8';

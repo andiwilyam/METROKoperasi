@@ -14,6 +14,11 @@ const STATUS_STYLES: Record<string, string> = {
   approved: 'bg-blue-50 text-blue-700 border-blue-200',
   rejected: 'bg-red-50 text-red-700 border-red-200',
   nonaktif: 'bg-slate-100 text-slate-600 border-slate-200',
+  pengajuan: 'bg-amber-50 text-amber-700 border-amber-200',
+  disetujui: 'bg-blue-50 text-blue-700 border-blue-200',
+  dicairkan: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  selesai: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+  ditolak: 'bg-red-50 text-red-700 border-red-200',
 };
 
 const STATUS_LABEL: Record<string, string> = {
@@ -22,6 +27,11 @@ const STATUS_LABEL: Record<string, string> = {
   approved: 'DISETUJUI',
   rejected: 'DITOLAK',
   nonaktif: 'NONAKTIF',
+  pengajuan: 'PENGAJUAN',
+  disetujui: 'DISETUJUI',
+  dicairkan: 'DICAIRKAN',
+  selesai: 'SELESAI',
+  ditolak: 'DITOLAK',
 };
 
 const emptyForm = {
