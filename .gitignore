@@ -11,3 +11,4 @@ apps/web/dist/
 .superpowers/
 login.json
 login_member.json
+diag_*.cjs

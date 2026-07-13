@@ -580,8 +580,7 @@ router.get('/venture', async (req: AuthRequest, res: Response) => {
   try {
     if (!requireStaff(req, res)) return;
     const investments = await pool.query(`
-      SELECT vi.*, pn.nama as perusahaan_nama_ref, pn.sektor_industri as perusahaan_sektor_ref,
-        pp.no_pengajuan as pengajuan_ref, pp.status_pengajuan as pengajuan_status_ref
+      SELECT vi.*, pn.nama_perusahaan as perusahaan_nama_ref, pn.sektor_industri as perusahaan_sektor_ref, pp.no_pengajuan as pengajuan_ref, pp.status_pengajuan as pengajuan_status_ref
       FROM venture_investments vi
       LEFT JOIN perusahaan pn ON vi.perusahaan_id_fk = pn.id
       LEFT JOIN pengajuan_pembiayaan pp ON vi.pengajuan_id = pp.id
@@ -590,7 +589,7 @@ router.get('/venture', async (req: AuthRequest, res: Response) => {
     const dividends = await pool.query('SELECT * FROM venture_dividends ORDER BY tanggal DESC');
     const result = investments.rows.map((inv: any) => ({
       ...inv,
-      dividendhistory: dividends.rows.filter((d: any) => d.investment_id === inv.id),
+      dividendHistory: dividends.rows.filter((d: any) => d.investment_id === inv.id),
     }));
     return res.json(result);
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
