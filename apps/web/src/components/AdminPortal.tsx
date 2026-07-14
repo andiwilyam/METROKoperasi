@@ -458,12 +458,14 @@ export default function AdminPortal({
           assets={sewaAssets}
           transactions={sewaTransactions}
           members={members}
+          perusahaan={gl.perusahaan}
           onAddAsset={onAddSewaAsset}
           onUpdateAsset={onUpdateSewaAsset}
           onDeleteAsset={onDeleteSewaAsset}
           onApproveSewa={onApproveSewa}
           onRejectSewa={onRejectSewa}
           onFinishSewa={onFinishSewa}
+          fetchSewa={gl.fetchSewaAssets}
         />
       )}
 
@@ -505,6 +507,15 @@ export default function AdminPortal({
           onUpdateStatus={onUpdateStatus}
           onRecordBagiHasil={onRecordBagiHasil}
           onUpdateInvestment={gl.updateVentureInvestment}
+          pengajuanList={gl.pengajuanList}
+          perusahaan={gl.perusahaan}
+          members={members}
+          fetchPengajuan={gl.fetchPengajuan}
+          fetchInvestments={gl.fetchInvestments}
+          createPengajuan={gl.createPengajuan}
+          updateStatusPengajuan={gl.updateStatusPengajuan}
+          runAIScoring={gl.runAIScoring}
+          fetchDokumenTemplates={gl.fetchDokumenTemplates}
         />
       )}
 
@@ -520,7 +531,9 @@ export default function AdminPortal({
       {activeMenu === 'ventura_analytics' && (
         <AdminVentureDashboard
           investments={investments}
+          perusahaanList={gl.perusahaan}
           onNavigate={setActiveMenu}
+          fetchPerusahaan={gl.fetchPerusahaan}
         />
       )}
 

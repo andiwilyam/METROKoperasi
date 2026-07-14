@@ -594,8 +594,8 @@ router.get('/venture', async (req: AuthRequest, res: Response) => {
     `);
     const dividends = await pool.query('SELECT * FROM venture_dividends ORDER BY tanggal DESC');
     const result = investments.rows.map((inv: any) => ({
-      ...inv,
-      dividendHistory: dividends.rows.filter((d: any) => d.investment_id === inv.id),
+      ...mapRow(inv),
+      dividendHistory: dividends.rows.filter((d: any) => d.investment_id === inv.id).map(mapRow),
     }));
     return res.json(result);
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
@@ -711,8 +711,8 @@ router.get('/venture/pipeline', async (req: AuthRequest, res: Response) => {
       ORDER BY vi.tanggal_investasi DESC
     `);
     return res.json({
-      pengajuan: pengajuan.rows,
-      venture: venture.rows,
+      pengajuan: mapRows(pengajuan.rows),
+      venture: mapRows(venture.rows),
       total: pengajuan.rows.length + venture.rows.length
     });
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
@@ -798,7 +798,7 @@ router.get('/my-venture-data', async (req: AuthRequest, res: Response) => {
       LEFT JOIN perusahaan pn ON vi.perusahaan_id_fk = pn.id
       WHERE vi.pengajuan_id IS NOT NULL ORDER BY vi.tanggal_investasi DESC`);
 
-    return res.json({ anggota: anggota.rows[0], pengajuan: pengajuan.rows, venture: venture.rows });
+    return res.json({ anggota: mapRow(anggota.rows[0]), pengajuan: mapRows(pengajuan.rows), venture: mapRows(venture.rows) });
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
