@@ -195,8 +195,8 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
               </div>
             </div>
 
-            {/* Helper credentials — hanya tampil di build development */}
-            {import.meta.env.DEV && (
+            {/* Helper credentials */}
+
             <div className="mc-surface-2 backdrop-blur mc-border p-4 rounded-xl space-y-2 text-xs">
               <div className="font-semibold text-slate-300 flex items-center gap-1.5 mb-1">
                 <Sparkles className="w-3.5 h-3.5 text-[var(--mc-accent)]" />
@@ -226,7 +226,6 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                 </button>
               </div>
             </div>
-            )}
           </div>
 
           {/* Right column: Login Form Box */}
