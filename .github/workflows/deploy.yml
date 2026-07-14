@@ -1,0 +1,77 @@
+name: Deploy to Railway
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy to Railway
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: |
+          curl -fsSL https://railway.app/install.sh | bash
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
+
+      - name: Login to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway login --token $RAILWAY_TOKEN
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          railway up --service metrocoop-app --environment production
+
+      - name: Wait for deployment healthcheck
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          for i in {1..30}; do
+            STATUS=$(railway status --service metrocoop-app --environment production --json 2>/dev/null | jq -r '.[0].status')
+            if [[ "$STATUS" == "SUCCESS" ]]; then
+              echo "✅ Deployment SUCCESS"
+              exit 0
+            elif [[ "$STATUS" == "FAILED" ]]; then
+              echo "❌ Deployment FAILED"
+              exit 1
+            fi
+            echo "⏳ Waiting for deployment... ($i/30)"
+            sleep 10
+          done
+          echo "❌ Timeout waiting for deployment"
+          exit 1
+
+      - name: Verify health endpoint
+        run: |
+          URL="https://metrocoop-app-production.up.railway.app/api/health"
+          for i in {1..10}; do
+            if curl -sf "$URL" | grep -q '"status":"ok"'; then
+              echo "✅ Health check passed"
+              exit 0
+            fi
+            echo "⏳ Health check retry $i/10..."
+            sleep 5
+          done
+          echo "❌ Health check failed"
+          exit 1
+
+      - name: Post deployment summary
+        if: always()
+        run: |
+          echo "## Railway Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow**: ${{ github.workflow }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Triggered by**: ${{ github.event.workflow_run.html_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **App URL**: https://metrocoop-app-production.up.railway.app" >> $GITHUB_STEP_SUMMARY
+          echo "- **Health**: https://metrocoop-app-production.up.railway.app/api/health" >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,212 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: '20'
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: metromitra_test
+
+jobs:
+  typecheck-build:
+    name: TypeCheck + Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeCheck (shared + web)
+        run: npm run typecheck
+
+      - name: Build for Railway
+        run: npm run build:railway
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: |
+            apps/web/dist
+            dist/server.cjs
+            dist/server.cjs.map
+          retention-days: 1
+
+  e2e-test:
+    name: E2E Tests (Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: typecheck-build
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd="pg_isready -U ${{ env.POSTGRES_USER }} -d ${{ env.POSTGRES_DB }}"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: |
+            apps/web/dist
+            dist/server.cjs
+            dist/server.cjs.map
+
+      - name: Wait for Postgres
+        run: |
+          for i in {1..30}; do
+            pg_isready -h localhost -p 5432 -U postgres -d metromitra_test && break
+            sleep 2
+          done
+
+      - name: Run DB migrations
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/metromitra_test
+        run: npm run db:migrate
+
+      - name: Run DB seed
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/metromitra_test
+        run: npm run db:seed
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Start server (background)
+        env:
+          PORT: 3000
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/metromitra_test
+          JWT_SECRET: test-secret-key-for-ci-only
+          NODE_ENV: production
+        run: |
+          node dist/server.cjs &
+          sleep 5
+
+      - name: Run Playwright E2E tests
+        env:
+          BASE_URL: http://localhost:3000
+        run: npx playwright test --project=chromium
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  ci-success:
+    name: CI Summary
+    runs-on: ubuntu-latest
+    needs: [typecheck-build, e2e-test]
+    if: always()
+    steps:
+      - name: Check CI status
+        run: |
+          if [[ "${{ needs.typecheck-build.result }}" == "success" && "${{ needs.e2e-test.result }}" == "success" ]]; then
+            echo "✅ All CI jobs passed"
+            exit 0
+          else
+            echo "❌ Some CI jobs failed"
+            exit 1
+          fi
+
+  deploy-railway:
+    name: Deploy to Railway (Production)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [typecheck-build, e2e-test]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.typecheck-build.result == 'success' && needs.e2e-test.result == 'success'
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: |
+          curl -fsSL https://railway.app/install.sh | bash
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
+
+      - name: Login to Railway
+        run: railway login --token $RAILWAY_TOKEN
+
+      - name: Deploy to Railway
+        run: |
+          railway up --service metrocoop-app --environment production
+
+      - name: Wait for Deployment Healthcheck
+        run: |
+          for i in {1..30}; do
+            STATUS=$(railway status --service metrocoop-app --environment production --json 2>/dev/null | jq -r '.[0].status')
+            if [[ "$STATUS" == "SUCCESS" ]]; then
+              echo "✅ Deployment SUCCESS"
+              exit 0
+            elif [[ "$STATUS" == "FAILED" ]]; then
+              echo "❌ Deployment FAILED"
+              exit 1
+            fi
+            echo "⏳ Waiting for deployment... ($i/30)"
+            sleep 10
+          done
+          echo "❌ Timeout waiting for deployment"
+          exit 1
+
+      - name: Verify Health Endpoint
+        run: |
+          URL="https://metrocoop-app-production.up.railway.app/api/health"
+          for i in {1..10}; do
+            if curl -sf "$URL" | grep -q '"status":"ok"'; then
+              echo "✅ Health check passed"
+              exit 0
+            fi
+            echo "⏳ Health check retry $i/10..."
+            sleep 5
+          done
+          echo "❌ Health check failed"
+          exit 1
+
+      - name: Post Deployment Summary
+        if: always()
+        run: |
+          echo "## Railway Production Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Workflow**: ${{ github.workflow }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trigger**: Push to main" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **App URL**: https://metrocoop-app-production.up.railway.app" >> $GITHUB_STEP_SUMMARY
+          echo "- **Health**: https://metrocoop-app-production.up.railway.app/api/health" >> $GITHUB_STEP_SUMMARY

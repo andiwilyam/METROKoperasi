@@ -1,0 +1,256 @@
+name: Deploy Preview (PR)
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to deploy'
+        required: true
+        type: string
+
+env:
+  NODE_VERSION: '20'
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: metromitra_test
+
+jobs:
+  typecheck-build:
+    name: TypeCheck + Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: TypeCheck (shared + web)
+        run: npm run typecheck
+
+      - name: Build for Railway
+        run: npm run build:railway
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: |
+            apps/web/dist
+            dist/server.cjs
+            dist/server.cjs.map
+          retention-days: 1
+
+  e2e-test:
+    name: E2E Tests (Playwright)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: typecheck-build
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: ${{ env.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_DB: ${{ env.POSTGRES_DB }}
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd="pg_isready -U ${{ env.POSTGRES_USER }} -d ${{ env.POSTGRES_DB }}"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: |
+            apps/web/dist
+            dist/server.cjs
+            dist/server.cjs.map
+
+      - name: Wait for Postgres
+        run: |
+          for i in {1..30}; do
+            pg_isready -h localhost -p 5432 -U postgres -d metromitra_test && break
+            sleep 2
+          done
+
+      - name: Run DB migrations
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/metromitra_test
+        run: npm run db:migrate
+
+      - name: Run DB seed
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/metromitra_test
+        run: npm run db:seed
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Start server (background)
+        env:
+          PORT: 3000
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/metromitra_test
+          JWT_SECRET: test-secret-key-for-ci-only
+          NODE_ENV: production
+        run: |
+          node dist/server.cjs &
+          sleep 5
+
+      - name: Run Playwright E2E tests
+        env:
+          BASE_URL: http://localhost:3000
+        run: npx playwright test --project=chromium
+
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  deploy-preview:
+    name: Deploy Preview to Railway
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [typecheck-build, e2e-test]
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      PR_NUMBER: ${{ github.event.number }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Railway CLI
+        run: |
+          curl -fsSL https://railway.app/install.sh | bash
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
+
+      - name: Login to Railway
+        run: railway login --token $RAILWAY_TOKEN
+
+      - name: Create/Update Preview Environment
+        id: preview-env
+        run: |
+          ENV_NAME="preview-pr-${PR_NUMBER}"
+          echo "environment=$ENV_NAME" >> $GITHUB_OUTPUT
+          
+          # Check if environment exists
+          if railway environment list --json | jq -e ".[] | select(.name == \"$ENV_NAME\")" > /dev/null; then
+            echo "Environment $ENV_NAME exists"
+          else
+            echo "Creating environment $ENV_NAME"
+            railway environment create $ENV_NAME
+          fi
+
+      - name: Deploy to Preview Environment
+        run: |
+          railway up --service metrocoop-app --environment preview-pr-${PR_NUMBER}
+
+      - name: Wait for Deployment
+        run: |
+          for i in {1..30}; do
+            STATUS=$(railway status --service metrocoop-app --environment preview-pr-${PR_NUMBER} --json 2>/dev/null | jq -r '.[0].status')
+            if [[ "$STATUS" == "SUCCESS" ]]; then
+              echo "✅ Preview deployment SUCCESS"
+              exit 0
+            elif [[ "$STATUS" == "FAILED" ]]; then
+              echo "❌ Preview deployment FAILED"
+              exit 1
+            fi
+            echo "⏳ Waiting... ($i/30)"
+            sleep 10
+          done
+          echo "❌ Timeout"
+          exit 1
+
+      - name: Get Preview URL
+        id: preview-url
+        run: |
+          # Railway doesn't have a direct CLI command for preview URLs yet
+          # Use the standard preview pattern
+          PREVIEW_URL="https://metrocoop-app-production.up.railway.app"
+          echo "url=$PREVIEW_URL" >> $GITHUB_OUTPUT
+
+      - name: Comment on PR with Preview URL
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = '${{ steps.preview-url.outputs.url }}';
+            const pr = ${{ github.event.number }};
+            const body = `## 🚀 Preview Deployment Ready
+            - **PR**: #${pr}
+            - **Environment**: preview-pr-${pr}
+            - **URL**: ${url}
+            - **Status**: ${{ job.status }}
+            `;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr,
+              body
+            });
+
+      - name: Post deployment summary
+        if: always()
+        run: |
+          echo "## Preview Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **PR**: #${PR_NUMBER}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Environment**: preview-pr-${PR_NUMBER}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **URL**: ${{ steps.preview-url.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+
+  cleanup-preview:
+    name: Cleanup Preview Environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: deploy-preview
+    if: github.event_name == 'pull_request' && (github.event.action == 'closed' || github.event.pull_request.merged == true)
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      PR_NUMBER: ${{ github.event.number }}
+    steps:
+      - name: Install Railway CLI
+        run: |
+          curl -fsSL https://railway.app/install.sh | bash
+          echo "$HOME/.railway/bin" >> $GITHUB_PATH
+
+      - name: Login to Railway
+        run: railway login --token $RAILWAY_TOKEN
+
+      - name: Delete Preview Environment
+        run: |
+          ENV_NAME="preview-pr-${PR_NUMBER}"
+          if railway environment list --json | jq -e ".[] | select(.name == \"$ENV_NAME\")" > /dev/null; then
+            echo "Deleting environment $ENV_NAME"
+            railway environment delete $ENV_NAME --yes
+          else
+            echo "Environment $ENV_NAME not found, skipping"
+          fi
