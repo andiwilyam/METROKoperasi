@@ -6,6 +6,8 @@ import {
 interface AdminVentureDashboardProps {
   investments: any[];
   onNavigate: (menu: string) => void;
+  perusahaanList?: any[];
+  fetchPerusahaan?: () => Promise<void>;
 }
 
 const formatIDR = (num: number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);

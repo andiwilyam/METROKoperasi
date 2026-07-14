@@ -17,6 +17,15 @@ interface AdminVenturaProps {
   onUpdateStatus: (id: string, newStatus: string) => void;
   onRecordBagiHasil: (investmentId: string, item: any) => void;
   onUpdateInvestment: (id: string, data: any) => void;
+  pengajuanList?: any[];
+  perusahaan?: any[];
+  members?: Anggota[];
+  fetchPengajuan?: () => Promise<void>;
+  fetchInvestments?: () => Promise<void>;
+  createPengajuan?: (data: any) => Promise<any>;
+  updateStatusPengajuan?: (id: string, status: string) => Promise<void>;
+  runAIScoring?: (id: string) => Promise<any>;
+  fetchDokumenTemplates?: (id: string) => Promise<any>;
 }
 
 const STATUS_STYLES: Record<string, string> = {
