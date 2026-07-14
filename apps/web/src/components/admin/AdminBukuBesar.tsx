@@ -5,11 +5,29 @@
 
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Search, Calendar, Download, BookOpen, Loader2, Inbox, ArrowLeft, ArrowRight } from 'lucide-react';
+import { ChartOfAccount } from '@metrocoop/shared/types';
+
+interface BukuBesarLine {
+  id: string;
+  tanggal: string;
+  noJurnal: string;
+  keterangan: string;
+  sumber: string;
+  debit: number;
+  kredit: number;
+  saldoBerjalan: number;
+}
+
+interface BukuBesarData {
+  account: ChartOfAccount;
+  lines: BukuBesarLine[];
+  saldoAkhir: number;
+}
 
 interface AdminBukuBesarProps {
-  chartOfAccounts: any[];
+  chartOfAccounts: ChartOfAccount[];
   fetchBukuBesar: (coaId: string, startDate?: string, endDate?: string) => Promise<void>;
-  bukuBesar: any; // { account: {...}, lines: [...], saldoAkhir: number }
+  bukuBesar: BukuBesarData | null;
 }
 
 const todayStr = () => new Date().toISOString().slice(0, 10);

@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { Search, ShoppingCart, Tag, AlertTriangle, ShieldCheck } from 'lucide-react';
-import { Barang, KategoriBarang } from '../../types';
+import { Barang, KategoriBarang } from '@metrocoop/shared/types';
 
 interface MemberTokoProps {
   barang: Barang[];

@@ -9,17 +9,14 @@ import {
   Trash2, Edit, CheckCircle, FileText, Info, AlertTriangle, RefreshCw,
   BarChart3, Sparkles, DollarSign, Scale, TrendingUp, User, Award
 } from 'lucide-react';
-import { Perusahaan, Anggota, VenturaPengajuan } from '@metrocoop/shared/types';
+import { Anggota } from '@metrocoop/shared/types';
 
 interface AdminVenturaProps {
-  pengajuanList: VenturaPengajuan[];
-  perusahaan: Perusahaan[];
-  members: Anggota[];
-  fetchPengajuan: () => Promise<void>;
-  createPengajuan: (data: any) => Promise<any>;
-  updateStatusPengajuan: (id: string, status: string) => Promise<void>;
-  runAIScoring: (id: string) => Promise<any>;
-  fetchDokumenTemplates: () => Promise<any[]>;
+  investments: any[];
+  onAddInvestment: (newInv: any) => void;
+  onUpdateStatus: (id: string, newStatus: string) => void;
+  onRecordBagiHasil: (investmentId: string, item: any) => void;
+  onUpdateInvestment: (id: string, data: any) => void;
 }
 
 const STATUS_STYLES: Record<string, string> = {

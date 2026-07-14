@@ -9,10 +9,10 @@ import {
   DollarSign, ArrowRightLeft, Sparkles, CheckCircle, X, Plus, Search,
   AlertTriangle, Loader2, Heart, Droplets, Coins
 } from 'lucide-react';
-import { PPOBTransaction, Anggota } from '../../types';
+import { Anggota } from '@metrocoop/shared/types';
 
 interface AdminPPOBDashboardProps {
-  ppobTransactions: PPOBTransaction[];
+  ppobTransactions: any[];
   members: Anggota[];
   onSimulatePPOB: (anggotaId: string, produkId: string, nominal: number) => void;
   fetchPPOB: () => Promise<void>;

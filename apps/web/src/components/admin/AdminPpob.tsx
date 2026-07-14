@@ -1,14 +1,9 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState } from 'react';
 import { 
   Tv, Search, Percent, Smartphone, Zap, Droplet, Heart, CheckCircle2,
   AlertCircle, ShieldAlert, TrendingUp, DollarSign, FileText, Settings, ToggleLeft, X
 } from 'lucide-react';
-import { PpobLayanan, PpobTransaksi } from '../../types';
+import { PpobLayanan, PpobTransaksi } from '@metrocoop/shared/types';
 
 interface AdminPpobProps {
   services: PpobLayanan[];

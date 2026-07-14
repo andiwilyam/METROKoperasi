@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { 
   CreditCard, Landmark, ArrowRight, Wallet, CheckCircle, Info, Sparkles, HelpCircle, Copy, Check, X
 } from 'lucide-react';
-import { VirtualAccount, VATransaksi, UserSession, Anggota } from '../../types';
+import { VirtualAccount, VATransaksi, UserSession, Anggota } from '@metrocoop/shared/types';
 
 interface MemberDigipayProps {
   session: UserSession;

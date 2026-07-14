@@ -8,12 +8,12 @@ import {
   Home, Search, FileText, DollarSign, Calendar, AlertTriangle, CheckCircle, 
   XCircle, AlertCircle, Sparkles, Building2, Users, ShieldCheck, RefreshCw
 } from 'lucide-react';
-import { SewaTransaksi, Anggota, Perusahaan } from '@metrocoop/shared/types';
+import { Anggota } from '@metrocoop/shared/types';
 
 interface AdminSewaProps {
-  sewaList: SewaTransaksi[];
+  sewaList: any[];
   members: Anggota[];
-  perusahaan: Perusahaan[];
+  perusahaan: any[];
   onSimulateSewa: (anggotaId: string, perusahaanId: string, dp: number, tenor: number) => void;
   fetchSewa: () => Promise<void>;
 }

@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { 
   ShoppingBag, Search, Calendar, Coins, Percent, Plus, X, Eye, Calculator, Info, CheckCircle, Wallet
 } from 'lucide-react';
-import { CicilanBarang, CicilanAngsuran, UserSession, Anggota } from '../../types';
+import { CicilanBarang, CicilanAngsuran, UserSession, Anggota } from '@metrocoop/shared/types';
 
 interface MemberCicilanProps {
   session: UserSession;

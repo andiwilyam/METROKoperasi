@@ -6,8 +6,17 @@
 import React, { useEffect, useMemo } from 'react';
 import { Scale, CheckCircle, AlertCircle } from 'lucide-react';
 
+interface NeracaSaldoItem {
+  kodeAkun: string;
+  namaAkun: string;
+  kategori: 'ASET' | 'KEWAJIBAN' | 'EKUITAS' | 'PENDAPATAN' | 'BEBAN' | 'SHU';
+  saldoNormal: 'debit' | 'kredit';
+  debit: number;
+  kredit: number;
+}
+
 interface AdminNeracaSaldoProps {
-  neracaSaldo: any[];
+  neracaSaldo: NeracaSaldoItem[];
   fetchNeracaSaldo: () => Promise<void>;
 }
 

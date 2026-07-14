@@ -1,11 +1,6 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState } from 'react';
 import { Megaphone, Tag, Users, Calendar, Plus, Trash2, Edit, CheckCircle, Info, ToggleLeft, ToggleRight } from 'lucide-react';
-import { Pengumuman } from '../../types';
+import { Pengumuman } from '@metrocoop/shared/types';
 
 interface AdminPengumumanProps {
   announcements: Pengumuman[];

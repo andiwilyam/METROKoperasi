@@ -7,7 +7,15 @@ import React, { useEffect } from 'react';
 import { ShieldAlert, TrendingUp, AlertTriangle } from 'lucide-react';
 
 interface Props {
-  laporanPde: any;
+  laporanPde: {
+    totalDebitur?: number;
+    totalPiutang?: number;
+    lancar?: number;
+    macet?: number;
+    npl?: string;
+    tanggalLaporan?: string;
+    dataPde?: any[];
+  } | null;
   fetchLaporanPde: () => Promise<void>;
 }
 
@@ -31,7 +39,7 @@ export default function AdminPDE({ laporanPde, fetchLaporanPde }: Props) {
           </div>
           <div className="mc-surface-2 mc-border rounded-lg p-4">
             <div className="text-xs mc-muted">Total Piutang</div>
-            <div className="text-lg font-bold mc-ink-strong">{formatIDR(d.totalPiutang)}</div>
+            <div className="text-lg font-bold mc-ink-strong">{formatIDR(d.totalPiutang || 0)}</div>
           </div>
           <div className="mc-surface-2 mc-border rounded-lg p-4" style={{ borderColor: 'var(--mc-success)' }}>
             <div className="text-xs mc-muted">Piutang Lancar</div>

@@ -1,18 +1,11 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useEffect, useMemo } from 'react';
 import { 
   Building2, TrendingUp, DollarSign, CreditCard, CheckCircle, XCircle, 
   AlertTriangle, Search, FileText, Sparkles, BarChart3, Percent, Scale
 } from 'lucide-react';
-import { Perusahaan } from '../../types';
-
 interface AdminVentureDashboardProps {
-  perusahaanList: Perusahaan[];
-  fetchPerusahaan: () => Promise<void>;
+  investments: any[];
+  onNavigate: (menu: string) => void;
 }
 
 const formatIDR = (num: number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);

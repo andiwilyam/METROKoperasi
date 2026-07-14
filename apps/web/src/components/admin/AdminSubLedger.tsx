@@ -6,8 +6,16 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Users, AlertTriangle, CheckCircle, XCircle, Search, RefreshCw } from 'lucide-react';
 
+interface SubLedgerPiutangItem {
+  anggotaId: string;
+  anggotaNama: string;
+  totalPiutang: number;
+  kolektibilitas: 'Lancar' | 'Kurang Lancar' | 'Diragukan' | 'Macet';
+  status: 'normal' | 'perhatian' | 'bermasalah';
+}
+
 interface AdminSubLedgerProps {
-  subLedgerPiutang: any[];
+  subLedgerPiutang: SubLedgerPiutangItem[];
   fetchSubLedgerPiutang: () => Promise<void>;
 }
 

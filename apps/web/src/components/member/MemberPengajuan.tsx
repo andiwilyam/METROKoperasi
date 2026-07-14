@@ -10,7 +10,7 @@ import MemberSimpanan from './MemberSimpanan';
 import { 
   Anggota, JenisPinjaman, JenisSimpanan, Pinjaman, Angsuran, 
   UserSession, PermohonanTarik, BuktiTransfer 
-} from '../../types';
+} from '@metrocoop/shared/types';
 
 interface MemberPengajuanProps {
   session: UserSession;

@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { 
   Building2, Search, Calendar, Coins, Plus, X, Clock, HelpCircle, CheckCircle, Info
 } from 'lucide-react';
-import { SewaAsset, SewaTransaksi, UserSession, Anggota } from '../../types';
+import { SewaAsset, SewaTransaksi, UserSession, Anggota } from '@metrocoop/shared/types';
 
 interface MemberSewaProps {
   session: UserSession;

@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { FileText, Printer, Calculator, Sparkles, TrendingUp } from 'lucide-react';
-import { Anggota, SimpananTransaksi, UserSession } from '../../types';
+import { Anggota, SimpananTransaksi, UserSession } from '@metrocoop/shared/types';
 
 interface MemberLaporanProps {
   session: UserSession;

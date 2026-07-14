@@ -9,7 +9,7 @@ import {
   DollarSign, Activity, Landmark, Plus, X, Sparkles, CheckCircle,
   RefreshCw, ChevronRight, ChevronDown, Eye, Trash2, Edit
 } from 'lucide-react';
-import { VirtualAccount, VATransaksi, Anggota } from '../../types';
+import { VirtualAccount, VATransaksi, Anggota } from '@metrocoop/shared/types';
 
 interface AdminDigipayProps {
   virtualAccounts: VirtualAccount[];

@@ -6,8 +6,19 @@
 import React, { useEffect } from 'react';
 import { Percent, TrendingUp, Activity, Gauge } from 'lucide-react';
 
+interface LaporanRasio {
+  car?: number;
+  npl?: number;
+  roa?: number;
+  roe?: number;
+  bopo?: number;
+  ldr?: number;
+  likuiditas?: number;
+  tanggalLaporan?: string;
+}
+
 interface Props {
-  laporanRasio: any;
+  laporanRasio: LaporanRasio | null;
   fetchLaporanRasio: () => Promise<void>;
 }
 

@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 import { 
   Tv, Phone, Zap, Droplet, Heart, Wallet, CheckCircle2, AlertCircle, Sparkles, X, Info
 } from 'lucide-react';
-import { PpobLayanan, PpobTransaksi, UserSession, Anggota } from '../../types';
+import { PpobLayanan, PpobTransaksi, UserSession, Anggota } from '@metrocoop/shared/types';
 
 interface MemberPpobProps {
   session: UserSession;

@@ -9,16 +9,10 @@ import { Anggota, Pengurus, UserSession } from '@metrocoop/shared/types';
 
 interface AdminAnggotaProps {
   members: Anggota[];
-  pengurus: Pengurus[];
-  onApproveMember: (id: string) => void;
-  onRejectMember: (id: string) => void;
-  onAddPengurus: (p: Omit<Pengurus, 'id'>) => void;
-  onDeletePengurus: (id: string) => void;
-  onActivateMember: (id: string) => void;
-  onDeactivateMember: (id: string) => void;
-  onLoginAsMember: (id: string) => void;
-  session: UserSession;
-  subView: 'anggota' | 'pengurus' | 'pengajuan';
+  onAddMember: (newMember: any) => void;
+  onUpdateMember: (updatedMember: any) => void;
+  onDeleteMember: (id: string) => void;
+  [key: string]: any;
 }
 
 export default function AdminAnggota({
@@ -137,7 +131,7 @@ export default function AdminAnggota({
                         {formatIDR(m.saldoSimpananPokok + m.saldoSimpananWajib + m.saldoSimpananSukarela)}
                       </td>
                       <td className="p-4 font-mono mc-muted">{formatIDR(m.penghasilan)}</td>
-                      <td className="p-4 font-mono mc-muted">{m.tanggalGabung}</td>
+                      <td className="p-4 font-mono mc-muted">{m.tanggalDaftar}</td>
                       <td className="p-4 text-right space-x-2">
                         {m.statusKeanggotaan === 'aktif' && (
                           <button
@@ -223,7 +217,7 @@ export default function AdminAnggota({
                     </div>
                     <div className="flex justify-between text-xs">
                       <span className="mc-muted">Alamat</span>
-                      <span className="font-semibold mc-ink-strong truncate max-w-[100px]">{p.alamat}</span>
+                      <span className="font-semibold mc-ink-strong truncate max-w-[100px]">{p.nik}</span>
                     </div>
                   </div>
                 ))}

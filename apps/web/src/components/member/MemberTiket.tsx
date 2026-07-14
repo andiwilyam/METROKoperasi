@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { LifeBuoy, Send, CheckCircle, Clock, X } from 'lucide-react';
-import { TiketBantuan, UserSession, Anggota } from '../../types';
+import { TiketBantuan, UserSession, Anggota } from '@metrocoop/shared/types';
 
 interface MemberTiketProps {
   session: UserSession;

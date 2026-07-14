@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { User, Mail, Phone, MapPin, Briefcase, DollarSign, Shield, CheckCircle } from 'lucide-react';
-import { Anggota, UserSession } from '../../types';
+import { Anggota, UserSession } from '@metrocoop/shared/types';
 
 interface MemberProfilProps {
   session: UserSession;

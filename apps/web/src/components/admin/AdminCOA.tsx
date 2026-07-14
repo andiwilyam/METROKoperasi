@@ -5,7 +5,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { Search, Plus, Edit3, EyeOff, FolderOpen, FileText, ChevronRight, ChevronDown, Check, X } from 'lucide-react';
-import { ChartOfAccount } from '../../types';
+import { ChartOfAccount } from '@metrocoop/shared/types';
 
 interface AdminCOAProps {
   chartOfAccounts: ChartOfAccount[];

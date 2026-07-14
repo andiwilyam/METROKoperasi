@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { Landmark, ArrowUpRight, ArrowDownLeft, ShieldCheck, Sparkles, BookOpen, Clock, Calendar, Megaphone, Tag, TrendingUp } from 'lucide-react';
-import { Anggota, Pinjaman, SimpananTransaksi, UserSession, Pengumuman } from '../../types';
+import { Anggota, Pinjaman, SimpananTransaksi, UserSession, Pengumuman } from '@metrocoop/shared/types';
 
 interface MemberDashboardProps {
   session: UserSession;

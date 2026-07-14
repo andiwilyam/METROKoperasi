@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { ArrowUpRight, ArrowDownLeft, Upload, FileText, CheckCircle, AlertTriangle, X } from 'lucide-react';
-import { Anggota, JenisSimpanan, SimpananTransaksi, UserSession, PermohonanTarik, BuktiTransfer } from '../../types';
+import { Anggota, JenisSimpanan, SimpananTransaksi, UserSession, PermohonanTarik, BuktiTransfer } from '@metrocoop/shared/types';
 
 interface MemberSimpananProps {
   session: UserSession;

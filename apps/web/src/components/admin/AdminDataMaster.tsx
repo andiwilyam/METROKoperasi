@@ -9,7 +9,7 @@ import {
   X, AlertCircle, Search, Filter, Coins, ShieldAlert, CreditCard, 
   Calendar, Key, MapPin, Phone, Settings2, Info
 } from 'lucide-react';
-import { Pengurus, Karyawan, AsetBarang, SumberBayar, UserSession, Anggota, UserRole } from '../../types';
+import { Pengurus, Karyawan, AsetBarang, SumberBayar, UserSession, Anggota, UserRole } from '@metrocoop/shared/types';
 
 interface AdminDataMasterProps {
   pengurusList: Pengurus[];

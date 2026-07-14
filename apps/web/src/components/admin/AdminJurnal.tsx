@@ -5,10 +5,11 @@
 
 import React, { useState, useMemo } from 'react';
 import { Plus, Trash2, Check, X, RotateCcw, FileText } from 'lucide-react';
+import { ChartOfAccount, JournalEntry } from '@metrocoop/shared/types';
 
 interface AdminJurnalProps {
-  chartOfAccounts: any[];
-  journals: any[];
+  chartOfAccounts: ChartOfAccount[];
+  journals: JournalEntry[];
   createManualJurnal: (data: any) => Promise<any>;
   approveJurnal: (id: string, notes?: string) => Promise<void>;
   reverseJurnal: (id: string) => Promise<any>;
@@ -93,7 +94,7 @@ export default function AdminJurnal({
       const acc = chartOfAccounts.find(a => a.id === r.coa);
       return {
         coa: r.coa,
-        namaAkun: acc?.namaAkun || acc?.nama || '',
+        namaAkun: acc?.namaAkun || '',
         kodeAkun: acc?.kodeAkun || '',
         debit: Number(r.debit) || 0,
         kredit: Number(r.kredit) || 0,

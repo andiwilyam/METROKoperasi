@@ -530,3 +530,38 @@ export interface LandingPageData {
   pricing: LandingPricing[];
   contact: LandingContact;
 }
+
+export interface Perusahaan {
+  id: string;
+  kodePerusahaan: string;
+  nama: string;
+  sektorIndustri: string;
+  namaDirektur: string;
+  alamat: string;
+  kota: string;
+  provinsi: string;
+  tahunBerdiri: string;
+  noAktePendirian: string;
+  npwp: string;
+  plafonDisetujui?: number;
+  outstanding?: number;
+  status: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface VenturaPengajuan {
+  id: string;
+  perusahaanId: string;
+  perusahaanNama: string;
+  sektorIndustri: string;
+  tahap: string;
+  plafonDiajukan: number;
+  plafonDisetujui?: number;
+  tenorBulan: number;
+  status: string;
+  hasilSkoring?: any;
+  dokumen?: { id: string; nama: string; status: string; url?: string }[];
+  createdAt: string;
+  updatedAt?: string;
+}

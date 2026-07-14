@@ -12,7 +12,7 @@ import {
 import { Anggota, Barang } from '@metrocoop/shared/types';
 
 interface AdminCicilanDashboardProps {
-  cicilanList: CicilanTransaksi[];
+  cicilanList: any[];
   members: Anggota[];
   barangList: Barang[];
   onSimulateCicilan: (anggotaId: string, barangId: string, dp: number, tenor: number) => void;

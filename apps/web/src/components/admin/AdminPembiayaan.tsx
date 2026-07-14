@@ -1,14 +1,9 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState } from 'react';
 import { 
   ShoppingBag, Search, Plus, Calendar, Coins, Percent, Eye, FileText, Check, X,
   Calculator, Info, CheckCircle2, TrendingUp, HelpCircle
 } from 'lucide-react';
-import { CicilanBarang, CicilanAngsuran, Anggota } from '../../types';
+import { CicilanBarang, CicilanAngsuran, Anggota } from '@metrocoop/shared/types';
 
 interface AdminPembiayaanProps {
   contracts: CicilanBarang[];

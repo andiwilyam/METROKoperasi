@@ -9,7 +9,7 @@ import {
   User, CheckCircle2, AlertCircle, X, ShieldCheck, HelpCircle,
   FileText, ArrowUpRight, Check
 } from 'lucide-react';
-import { VentureInvestment, UserSession } from '../../types';
+import { VentureInvestment, UserSession } from '@metrocoop/shared/types';
 
 interface MemberVenturaProps {
   investments: VentureInvestment[];

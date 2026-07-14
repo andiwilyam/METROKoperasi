@@ -9,14 +9,15 @@ import {
   Sparkles, FileText, DollarSign, Building2, ChevronRight, ChevronDown, Eye, Trash2, Edit,
   Loader2, Plus, X, Scale, Percent, BarChart3, Calendar
 } from 'lucide-react';
-import { Perusahaan, VenturaPengajuan } from '@metrocoop/shared/types';
-
 interface AdminPipelineVenturaProps {
-  pipeline: VenturaPengajuan[];
-  perusahaan: Perusahaan[];
-  fetchPipeline: () => Promise<void>;
-  updateStage: (id: string, stage: string) => Promise<void>;
-  runAIScoring: (id: string) => Promise<any>;
+  pengajuanList: any[];
+  ventureInvestments: any[];
+  perusahaan: any[];
+  fetchPengajuan: () => Promise<void>;
+  fetchInvestments: () => Promise<void>;
+  onConvertToVenture: (pengajuanId: string) => Promise<any>;
+  onUploadDokumen: (id: string, dokumenId: string, fileName: string) => Promise<void>;
+  onValidasiDokumen: (id: string, dokumenId: string) => Promise<void>;
 }
 
 const STAGE_LABEL: Record<string, string> = {
