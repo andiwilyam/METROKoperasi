@@ -282,6 +282,12 @@ export default function AdminPortal({
           onAddMember={onAddMember}
           onUpdateMember={onUpdateMember}
           onDeleteMember={onDeleteMember}
+          pengurus={[]}
+          onActivateMember={() => {}}
+          onDeactivateMember={() => {}}
+          onLoginAsMember={() => {}}
+          session={session}
+          subView="anggota"
         />
       )}
 
