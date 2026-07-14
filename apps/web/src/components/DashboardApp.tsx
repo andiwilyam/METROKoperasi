@@ -13,7 +13,7 @@ export default function DashboardApp() {
   const user = useAuthStore((s) => s.user);
   const logout = useAuthStore((s) => s.logout);
   const store = useDataStore();
-  const { setTheme } = useTheme();
+  const { theme: currentTheme, setTheme } = useTheme();
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ export default function DashboardApp() {
   };
 
   // Accessibility
-  const mainRef = React.useRef<HTMLMainElement>(null);
+  const mainRef = React.useRef<HTMLElement>(null);
   const [liveAnnouncement, setLiveAnnouncement] = useState<string>('');
 
   // Announce navigation changes to screen readers
@@ -205,6 +205,8 @@ export default function DashboardApp() {
         onLogout={logout}
         isOpen={sidebarOpen}
         setIsOpen={setSidebarOpen}
+        theme={currentTheme as any}
+        setTheme={setTheme as any}
       />
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         <Header

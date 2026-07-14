@@ -195,7 +195,7 @@ export default function AdminJurnal({
                           <option value="">-- Pilih Akun --</option>
                           {chartOfAccounts.map(a => (
                             <option key={a.id} value={a.id}>
-                              {a.kodeAkun || ''} - {a.namaAkun || a.nama}
+                              {a.kodeAkun || ''} - {a.namaAkun}
                             </option>
                           ))}
                         </select>

@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/// <reference types="vite/client" />
 import React, { useState, useEffect, useRef } from 'react';
 import { Shield, User, Eye, EyeOff, Key, Sparkles, Building, Building2, Briefcase } from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';

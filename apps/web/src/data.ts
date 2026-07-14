@@ -367,6 +367,7 @@ export const initialJournals: JournalEntry[] = [
   {
     id: 'j1',
     noJurnal: 'JRN-20260704-001',
+  status: 'disetujui',
     tanggal: '2026-07-04',
     keterangan: 'Pencatatan Simpanan Pokok Anggota Marmad Tuaian',
     sumber: 'Simpanan',
@@ -380,6 +381,7 @@ export const initialJournals: JournalEntry[] = [
   {
     id: 'j2',
     noJurnal: 'JRN-20260704-002',
+  status: 'disetujui',
     tanggal: '2026-07-04',
     keterangan: 'Setoran Wajib Bulanan Tunai - Ahmad Kanh',
     sumber: 'Simpanan',
@@ -393,6 +395,7 @@ export const initialJournals: JournalEntry[] = [
   {
     id: 'j3',
     noJurnal: 'JRN-20260704-003',
+  status: 'disetujui',
     tanggal: '2026-07-04',
     keterangan: 'POS Penjualan Toko - Faktur FK-20260704-005',
     sumber: 'Toko',

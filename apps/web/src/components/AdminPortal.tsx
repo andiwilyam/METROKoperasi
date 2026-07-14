@@ -108,7 +108,7 @@ interface AdminPortalProps {
   onSelectThemePreset: (presetId: string) => void;
   investments: VentureInvestment[];
   onAddInvestment: (newInv: Omit<VentureInvestment, 'id' | 'dividendHistory'>) => void;
-  onUpdateStatus: (id: string, newStatus: VentureInvestment['status']) => void;
+  onUpdateStatus: (id: string, newStatus: string) => void;
   onRecordBagiHasil: (investmentId: string, item: Omit<VentureDividend, 'id'>) => void;
 
   // --- NEW BUSINESS MODULES ---

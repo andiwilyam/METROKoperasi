@@ -4,11 +4,13 @@
  */
 
 import React, { useState, useMemo } from 'react';
-import { 
+import {
   TrendingUp, Search, ArrowRightLeft, CheckCircle, XCircle, AlertTriangle,
   Sparkles, FileText, DollarSign, Building2, ChevronRight, ChevronDown, Eye, Trash2, Edit,
   Loader2, Plus, X, Scale, Percent, BarChart3, Calendar
 } from 'lucide-react';
+import { VenturaPengajuan } from '@metrocoop/shared/types';
+
 interface AdminPipelineVenturaProps {
   pengajuanList: any[];
   ventureInvestments: any[];
@@ -17,7 +19,7 @@ interface AdminPipelineVenturaProps {
   fetchInvestments: () => Promise<void>;
   onConvertToVenture: (pengajuanId: string) => Promise<any>;
   onUploadDokumen: (id: string, dokumenId: string, fileName: string) => Promise<void>;
-  onValidasiDokumen: (id: string, dokumenId: string) => Promise<void>;
+  onValidasiDokumen: (id: string, dokumenId: string, status: string) => Promise<void>;
 }
 
 const STAGE_LABEL: Record<string, string> = {
@@ -45,19 +47,18 @@ const STAGE_ORDER = ['prospek', 'kualifikasi', 'analisis', 'komite', 'disetujui'
 const formatIDR = (num: number) =>
   new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);
 
-export default function AdminPipelineVentura({
-  pipeline,
-  perusahaan,
-  fetchPipeline,
-  updateStage,
-  runAIScoring
-}: AdminPipelineVenturaProps) {
+export default function AdminPipelineVentura(props: AdminPipelineVenturaProps) {
+  const pipeline = (props as any).pipeline || props.pengajuanList || [];
+  const perusahaan = props.perusahaan || [];
+  const fetchPipeline = (props as any).fetchPipeline || props.fetchPengajuan;
+  const updateStage = (props as any).updateStage;
+  const runAIScoring = (props as any).runAIScoring;
   const [search, setSearch] = useState('');
-  const [detail, setDetail] = useState<VenturaPengajuan | null>(null);
+  const [detail, setDetail] = useState<any>(null);
   const [aiLoading, setAiLoading] = useState(false);
 
   const filtered = useMemo(() =>
-    pipeline.filter((p) =>
+    pipeline.filter((p: any) =>
       p.noPengajuan?.toLowerCase().includes(search.toLowerCase()) ||
       p.perusahaanNama?.toLowerCase().includes(search.toLowerCase())
     ), [pipeline, search]
@@ -65,16 +66,28 @@ export default function AdminPipelineVentura({
 
   // Group by stage
   const grouped = useMemo(() => {
-    const groups: Record<string, VenturaPengajuan[]> = {};
+    const groups: Record<string, any[]> = {};
     STAGE_ORDER.forEach(s => groups[s] = []);
-    filtered.forEach(p => {
+    filtered.forEach((p: any) => {
       if (groups[p.status]) groups[p.status].push(p);
       else groups[p.status] = [p];
     });
     return groups;
   }, [filtered]);
 
-  const totalPipeline = pipeline.reduce((s, p) => s + (p.pokokPinjaman || 0), 0);
+  const totalPipeline = pipeline.reduce((s: number, p: any) => s + (p.pokokPinjaman || 0), 0);
+
+  const handleRunAI = async (id: string) => {
+    if (runAIScoring) {
+      setAiLoading(true);
+      try { await runAIScoring(id); } catch { alert('Gagal menjalankan AI Scoring.'); }
+      setAiLoading(false);
+    }
+  };
+
+  const handleUpdateStage = async (id: string, stage: string) => {
+    if (updateStage) await updateStage(id, stage);
+  };
 
   return (
     <div className="space-y-6">
@@ -282,16 +295,6 @@ export default function AdminPipelineVentura({
         </div>
       )}
 
-      <script>
-        {`window.handleRunAI = async (id) => {
-          const { runAIScoring } = await import('../../services/ventura');
-          await runAIScoring(id);
-        };
-        window.handleUpdateStage = async (id, stage) => {
-          const { updateStage } = await import('../../services/ventura');
-          await updateStage(id, stage);
-        };`}
-      </script>
     </div>
   );
 }

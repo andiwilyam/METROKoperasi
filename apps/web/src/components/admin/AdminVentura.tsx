@@ -4,10 +4,10 @@
  */
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { 
+import {
   Building2, Search, Plus, Calendar, Coins, Percent, AlertCircle, X, Check,
   Trash2, Edit, CheckCircle, FileText, Info, AlertTriangle, RefreshCw,
-  BarChart3, Sparkles, DollarSign, Scale, TrendingUp, User, Award
+  BarChart3, Sparkles, DollarSign, Scale, TrendingUp, User, Award, ShieldCheck
 } from 'lucide-react';
 import { Anggota } from '@metrocoop/shared/types';
 
@@ -46,18 +46,17 @@ const STATUS_LABEL: Record<string, string> = {
 const formatIDR = (num: number) =>
   new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);
 
-export default function AdminVentura({
-  pengajuanList,
-  perusahaan,
-  members,
-  fetchPengajuan,
-  createPengajuan,
-  updateStatusPengajuan,
-  runAIScoring,
-  fetchDokumenTemplates
-}: AdminVenturaProps) {
+export default function AdminVentura(props: AdminVenturaProps) {
+  const pengajuanList = (props as any).pengajuanList || [];
+  const perusahaan = (props as any).perusahaan || [];
+  const members = (props as any).members || [];
+  const fetchPengajuan = (props as any).fetchPengajuan;
+  const createPengajuan = (props as any).createPengajuan;
+  const updateStatusPengajuan = (props as any).updateStatusPengajuan;
+  const runAIScoring = (props as any).runAIScoring;
+  const fetchDokumenTemplates = (props as any).fetchDokumenTemplates;
   const [search, setSearch] = useState('');
-  const [detail, setDetail] = useState<VenturaPengajuan | null>(null);
+  const [detail, setDetail] = useState<any>(null);
   const [showCreate, setShowCreate] = useState(false);
   const [dokumenTemplates, setDokumenTemplates] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState<string>('LEGALITAS');
@@ -75,18 +74,18 @@ export default function AdminVentura({
   }, []);
 
   const filtered = useMemo(() => 
-    pengajuanList.filter((p) =>
+    pengajuanList.filter((p: any) =>
       p.noPengajuan?.toLowerCase().includes(search.toLowerCase()) ||
       p.perusahaanNama?.toLowerCase().includes(search.toLowerCase())
     ), [pengajuanList, search]
   );
 
   const total = pengajuanList.length;
-  const countLayak = pengajuanList.filter((p) => p.status === 'layak').length;
-  const countTidakLayak = pengajuanList.filter((p) => p.status === 'tidak_layak' || p.status === 'ditolak').length;
-  const countPending = pengajuanList.filter((p) => ['draft', 'dokumen_lengkap', 'proses_analisis', 'selesai_skoring'].includes(p.status)).length;
-  const totalNominal = pengajuanList.reduce((s, p) => s + (p.pokokPinjaman || 0), 0);
-  const totalDicairkan = pengajuanList.filter((p) => p.status === 'dicairkan').reduce((s, p) => s + (p.pokokPinjaman || 0), 0);
+  const countLayak = pengajuanList.filter((p: any) => p.status === 'layak').length;
+  const countTidakLayak = pengajuanList.filter((p: any) => p.status === 'tidak_layak' || p.status === 'ditolak').length;
+  const countPending = pengajuanList.filter((p: any) => ['draft', 'dokumen_lengkap', 'proses_analisis', 'selesai_skoring'].includes(p.status)).length;
+  const totalNominal = pengajuanList.reduce((s: number, p: any) => s + (p.pokokPinjaman || 0), 0);
+  const totalDicairkan = pengajuanList.filter((p: any) => p.status === 'dicairkan').reduce((s: number, p: any) => s + (p.pokokPinjaman || 0), 0);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -217,7 +216,7 @@ export default function AdminVentura({
                 </tr>
               </thead>
               <tbody className="divide-y mc-border">
-                {filtered.map((p) => (
+                {filtered.map((p: any) => (
                   <tr key={p.id} className="hover:mc-surface-2/50 cursor-pointer" onClick={() => setDetail(p)}>
                     <td className="p-4 font-mono font-bold mc-muted">{p.noPengajuan || '—'}</td>
                     <td className="p-4">

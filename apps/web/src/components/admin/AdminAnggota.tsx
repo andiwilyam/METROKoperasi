@@ -194,7 +194,7 @@ export default function AdminAnggota({
               <div className="text-center py-10 mc-muted text-xs">Belum ada pengurus terdaftar.</div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {pengurus.map((p) => (
+                {pengurus.map((p: any) => (
                   <div key={p.id} className="mc-surface-2 mc-border rounded-xl p-4 space-y-2 hover:shadow-md transition">
                     <div className="font-bold mc-ink-strong text-sm flex justify-between items-start gap-1">
                       <span>{p.nama}</span>

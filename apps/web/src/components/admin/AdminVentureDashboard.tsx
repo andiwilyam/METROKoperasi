@@ -10,17 +10,19 @@ interface AdminVentureDashboardProps {
 
 const formatIDR = (num: number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);
 
-export default function AdminVentureDashboard({ perusahaanList, fetchPerusahaan }: AdminVentureDashboardProps) {
-  useEffect(() => { fetchPerusahaan(); }, [fetchPerusahaan]);
+export default function AdminVentureDashboard(props: AdminVentureDashboardProps) {
+  const perusahaanList = (props as any).perusahaanList || (props as any).investments || [];
+  const fetchPerusahaan = (props as any).fetchPerusahaan;
+  useEffect(() => { if (fetchPerusahaan) fetchPerusahaan(); }, [fetchPerusahaan]);
 
   const stats = useMemo(() => {
     const list = perusahaanList || [];
     const total = list.length;
-    const layak = list.filter(p => p.status === 'layak').length;
-    const tidakLayak = list.filter(p => ['tidak_layak', 'ditolak'].includes(p.status)).length;
-    const dalamProses = list.filter(p => ['draft', 'proses_analisis', 'selesai_skoring'].includes(p.status)).length;
-    const totalPlafon = list.reduce((s, p) => s + (p.plafonDisetujui || 0), 0);
-    const totalOutstanding = list.reduce((s, p) => s + (p.outstanding || 0), 0);
+    const layak = list.filter((p: any) => p.status === 'layak').length;
+    const tidakLayak = list.filter((p: any) => ['tidak_layak', 'ditolak'].includes(p.status)).length;
+    const dalamProses = list.filter((p: any) => ['draft', 'proses_analisis', 'selesai_skoring'].includes(p.status)).length;
+    const totalPlafon = list.reduce((s: number, p: any) => s + (p.plafonDisetujui || 0), 0);
+    const totalOutstanding = list.reduce((s: number, p: any) => s + (p.outstanding || 0), 0);
     return { total, layak, tidakLayak, dalamProses, totalPlafon, totalOutstanding };
   }, [perusahaanList]);
 
@@ -118,7 +120,7 @@ export default function AdminVentureDashboard({ perusahaanList, fetchPerusahaan 
                 </tr>
               </thead>
               <tbody className="divide-y mc-border">
-                {perusahaanList.map((p) => (
+                {perusahaanList.map((p: any) => (
                   <tr key={p.id} className="hover:mc-surface-2/20 transition">
                     <td className="p-4 font-extrabold mc-ink-strong">{p.nama}</td>
                     <td className="p-4 mc-ink">{p.sektorIndustri}</td>

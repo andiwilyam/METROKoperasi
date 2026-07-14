@@ -167,6 +167,7 @@ export interface JournalEntry {
   sumber: string;
   debit: number;
   kredit: number;
+  status: string;
   details: {
     coa: string;
     namaAkun: string;

@@ -9,9 +9,12 @@ import { Users, AlertTriangle, CheckCircle, XCircle, Search, RefreshCw } from 'l
 interface SubLedgerPiutangItem {
   anggotaId: string;
   anggotaNama: string;
-  totalPiutang: number;
+  noPinjaman: string;
+  pokokPiutang: number;
+  sisaPokok: number;
   kolektibilitas: 'Lancar' | 'Kurang Lancar' | 'Diragukan' | 'Macet';
-  status: 'normal' | 'perhatian' | 'bermasalah';
+  status: string;
+  tunggakanHari: number;
 }
 
 interface AdminSubLedgerProps {

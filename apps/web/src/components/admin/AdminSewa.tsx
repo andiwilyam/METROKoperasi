@@ -1,21 +1,24 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useEffect, useMemo } from 'react';
-import { 
-  Home, Search, FileText, DollarSign, Calendar, AlertTriangle, CheckCircle, 
+import {
+  Home, Search, FileText, DollarSign, Calendar, AlertTriangle, CheckCircle,
   XCircle, AlertCircle, Sparkles, Building2, Users, ShieldCheck, RefreshCw
 } from 'lucide-react';
 import { Anggota } from '@metrocoop/shared/types';
 
 interface AdminSewaProps {
-  sewaList: any[];
-  members: Anggota[];
-  perusahaan: any[];
-  onSimulateSewa: (anggotaId: string, perusahaanId: string, dp: number, tenor: number) => void;
-  fetchSewa: () => Promise<void>;
+  sewaList?: any[];
+  members?: Anggota[];
+  perusahaan?: any[];
+  onSimulateSewa?: (anggotaId: string, perusahaanId: string, dp: number, tenor: number) => void;
+  fetchSewa?: () => Promise<void>;
+  assets?: any[];
+  transactions?: any[];
+  onAddAsset?: (newAsset: Omit<any, 'id'>) => void;
+  onUpdateAsset?: (updated: any) => void;
+  onDeleteAsset?: (id: string) => void;
+  onApproveSewa?: (id: string) => void;
+  onRejectSewa?: (id: string) => void;
+  onFinishSewa?: (id: string, denda: number) => void;
 }
 
 const STATUS_STYLE: Record<string, string> = {
@@ -38,14 +41,19 @@ const STATUS_LABEL: Record<string, string> = {
 
 const formatIDR = (num: number) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num);
 
-export default function AdminSewa({ sewaList, members, perusahaan, onSimulateSewa, fetchSewa }: AdminSewaProps) {
+export default function AdminSewa(props: AdminSewaProps) {
+  const sewaList = props.sewaList || props.assets || [];
+  const members = props.members || [];
+  const perusahaan = props.perusahaan || [];
+  const onSimulateSewa = props.onSimulateSewa || (() => {});
+  const fetchSewa = props.fetchSewa || (() => {});
+
   const [activeTab, setActiveTab] = useState<'daftar' | 'simulasi'>('daftar');
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => { fetchSewa(); }, [fetchSewa]);
 
-  // Simulasi state
   const [selAnggotaId, setSelAnggotaId] = useState('');
   const [selPerusahaanId, setSelPerusahaanId] = useState('');
   const [dp, setDp] = useState(5000000);
@@ -61,19 +69,19 @@ export default function AdminSewa({ sewaList, members, perusahaan, onSimulateSew
   };
 
   const filtered = useMemo(() =>
-    sewaList.filter(t =>
-      t.anggotaNama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      t.perusahaanNama.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      t.noKontrak.toLowerCase().includes(searchTerm.toLowerCase())
+    sewaList.filter((t: any) =>
+      (t.anggotaNama || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (t.perusahaanNama || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (t.noKontrak || '').toLowerCase().includes(searchTerm.toLowerCase())
     ), [sewaList, searchTerm]
   );
 
   const totalSewa = sewaList.length;
-  const aktif = sewaList.filter(t => ['dicairkan', 'berjalan'].includes(t.status)).length;
-  const lunasCount = sewaList.filter(t => t.status === 'lunas').length;
+  const aktif = sewaList.filter((t: any) => ['dicairkan', 'berjalan'].includes(t.status)).length;
+  const lunasCount = sewaList.filter((t: any) => t.status === 'lunas').length;
   const totalSisa = sewaList
-    .filter(t => ['dicairkan', 'berjalan'].includes(t.status))
-    .reduce((s, t) => s + (t.sisaPokok || 0), 0);
+    .filter((t: any) => ['dicairkan', 'berjalan'].includes(t.status))
+    .reduce((s: number, t: any) => s + (t.sisaPokok || 0), 0);
 
   return (
     <div className="space-y-6">
@@ -145,7 +153,6 @@ export default function AdminSewa({ sewaList, members, perusahaan, onSimulateSew
           </div>
         </div>
 
-        {/* TAB: DAFTAR */}
         {activeTab === 'daftar' && (
           <div className="overflow-x-auto text-xs">
             {filtered.length === 0 ? (
@@ -164,7 +171,7 @@ export default function AdminSewa({ sewaList, members, perusahaan, onSimulateSew
                   </tr>
                 </thead>
                 <tbody className="divide-y mc-border">
-                  {filtered.map((t) => (
+                  {filtered.map((t: any) => (
                     <tr key={t.id} className="hover:mc-surface-2/20 transition">
                       <td className="p-4 font-mono font-bold mc-muted">{t.noKontrak}</td>
                       <td className="p-4 font-extrabold mc-ink-strong">{t.anggotaNama}</td>
@@ -196,7 +203,6 @@ export default function AdminSewa({ sewaList, members, perusahaan, onSimulateSew
           </div>
         )}
 
-        {/* TAB: SIMULASI */}
         {activeTab === 'simulasi' && (
           <div className="p-6 max-w-lg mx-auto space-y-6">
             <div className="mc-surface-2 mc-border p-4 rounded-xl mc-muted text-xs leading-relaxed" style={{ borderColor: 'var(--mc-accent)', background: 'var(--mc-sidebar-active)' }}>
@@ -212,7 +218,7 @@ export default function AdminSewa({ sewaList, members, perusahaan, onSimulateSew
                 <label className="block font-semibold mc-ink mb-1">Pilih Anggota</label>
                 <select required value={selAnggotaId} onChange={e => setSelAnggotaId(e.target.value)} className="w-full mc-border mc-surface-2 p-2.5 rounded-xl mc-focus focus:ring-[var(--mc-accent)] mc-ink-strong">
                   <option value="">-- Pilih Anggota --</option>
-                  {members.map(m => <option key={m.id} value={m.id}>{m.nama} - [{m.id.toUpperCase()}]</option>)}
+                  {members.map((m: Anggota) => <option key={m.id} value={m.id}>{m.nama} - [{m.id.toUpperCase()}]</option>)}
                 </select>
               </div>
 
@@ -220,7 +226,7 @@ export default function AdminSewa({ sewaList, members, perusahaan, onSimulateSew
                 <label className="block font-semibold mc-ink mb-1">Pilih Perusahaan / Aset</label>
                 <select required value={selPerusahaanId} onChange={e => setSelPerusahaanId(e.target.value)} className="w-full mc-border mc-surface-2 p-2.5 rounded-xl mc-focus focus:ring-[var(--mc-accent)] mc-ink-strong">
                   <option value="">-- Pilih Perusahaan --</option>
-                  {perusahaan.map(p => <option key={p.id} value={p.id}>{p.nama}</option>)}
+                  {perusahaan.map((p: any) => <option key={p.id} value={p.id}>{p.nama}</option>)}
                 </select>
               </div>
 

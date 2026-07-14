@@ -43,11 +43,11 @@ export default function AdminPDE({ laporanPde, fetchLaporanPde }: Props) {
           </div>
           <div className="mc-surface-2 mc-border rounded-lg p-4" style={{ borderColor: 'var(--mc-success)' }}>
             <div className="text-xs mc-muted">Piutang Lancar</div>
-            <div className="text-lg font-bold" style={{ color: 'var(--mc-success)' }}>{formatIDR(d.lancar)}</div>
+            <div className="text-lg font-bold" style={{ color: 'var(--mc-success)' }}>{formatIDR(d.lancar || 0)}</div>
           </div>
           <div className="mc-surface-2 mc-border rounded-lg p-4" style={{ borderColor: 'var(--mc-error)' }}>
             <div className="text-xs mc-muted">Piutang Macet</div>
-            <div className="text-lg font-bold" style={{ color: 'var(--mc-error)' }}>{formatIDR(d.macet)}</div>
+            <div className="text-lg font-bold" style={{ color: 'var(--mc-error)' }}>{formatIDR(d.macet || 0)}</div>
           </div>
         </div>
         <div className="flex items-center gap-3 p-4 mc-surface-2 mc-border rounded-lg" style={{ borderColor: 'var(--mc-accent)', background: 'var(--mc-sidebar-active)' }}>
