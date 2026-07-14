@@ -417,11 +417,9 @@ export default function LoginScreen({ onLogin: _onLogin, users: _users }: { onLo
                       </div>
                     )}
 
-                    {import.meta.env.DEV && (
                     <div className="mt-2 text-[10px] mc-muted">
                       Test: <button onClick={() => autofillCredentials('hijau_agri', 'perusahaan123', 'perusahaan')} className="text-[var(--mc-accent)] hover:underline cursor-pointer">hijau_agri / perusahaan123</button>
                     </div>
-                    )}
                   </div>
                 )}
               </div>
