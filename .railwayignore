@@ -1,0 +1,11 @@
+node_modules/
+apps/mobile/node_modules/
+apps/web/node_modules/
+apps/web/dist/
+node_modules/.vite/
+node_modules/.playwright-*/
+apps/web/test-results/
+dist/
+build/
+.env*
+*.log
