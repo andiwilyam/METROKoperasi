@@ -13,6 +13,12 @@ router.use(authMiddleware);
 // Helper: generate unique IDs
 const genId = () => Math.random().toString(36).substr(2, 9);
 
+// Helper: convert snake_case object keys to camelCase
+const toCamel = (s: string) => s.replace(/_([a-z])/g, (_, l) => l.toUpperCase());
+const mapRow = <T extends Record<string, any>>(row: T) =>
+  Object.fromEntries(Object.entries(row).map(([k, v]) => [toCamel(k), v])) as any;
+const mapRows = <T extends Record<string, any>>(rows: T[]) => rows.map(mapRow as any) as any[];
+
 // ==================== DATA SCOPING (role-based) ====================
 // Staff (admin/operator/superadmin) boleh melihat seluruh data.
 // Anggota biasa / anggota perusahaan hanya boleh melihat data miliknya sendiri.
@@ -81,7 +87,7 @@ router.get('/anggota', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM anggota WHERE id=$1 ORDER BY nama ASC' : 'SELECT * FROM anggota ORDER BY nama ASC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -97,7 +103,7 @@ router.post('/anggota', adminOnly, async (req: AuthRequest, res: Response) => {
        RETURNING *`,
       [id, nik, nama, noKtp || '', noHp || '', email || '', alamat || '', pekerjaan || '', penghasilan || 0]
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -113,7 +119,7 @@ router.put('/anggota/:id', adminOnly, async (req: AuthRequest, res: Response) =>
       [nik, nama, noKtp || '', noHp || '', email || '', alamat || '', pekerjaan || '', penghasilan || 0, statusKeanggotaan || 'aktif', id]
     );
     if (result.rows.length === 0) return res.status(404).json({ error: 'Anggota tidak ditemukan' });
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -136,7 +142,7 @@ router.get('/jenis-simpanan', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM jenis_simpanan ORDER BY id');
     jenisSimpananCache = result.rows;
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -167,7 +173,7 @@ router.get('/simpanan-transaksi', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM simpanan_transaksi WHERE anggota_id=$1 ORDER BY tanggal DESC' : 'SELECT * FROM simpanan_transaksi ORDER BY tanggal DESC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -229,7 +235,7 @@ router.get('/permohonan-tarik', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM permohonan_tarik WHERE anggota_id=$1 ORDER BY tanggal DESC' : 'SELECT * FROM permohonan_tarik ORDER BY tanggal DESC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) {
     return res.status(500).json({ error: err.message });
   }
@@ -279,7 +285,7 @@ router.put('/permohonan-tarik/:id/:action', adminOnly, async (req: AuthRequest, 
 router.get('/jenis-pinjaman', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM jenis_pinjaman ORDER BY id');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -306,7 +312,7 @@ router.get('/pinjaman', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM pinjaman WHERE anggota_id=$1 ORDER BY tanggal_pengajuan DESC' : 'SELECT * FROM pinjaman ORDER BY tanggal_pengajuan DESC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -323,7 +329,7 @@ router.post('/pinjaman', async (req: AuthRequest, res: Response) => {
        VALUES ($1,$2,$3,$4,$5,'',$6,$7,$8,$9,$10,$11,$12,'pengajuan',CURRENT_DATE) RETURNING *`,
       [id, anggotaId, anggotaNama, jenisPinjamanId, jenisNama, pokok, tenorMonths, bungaPersen, metodeBunga, angsuranPerBulan || 0, biayaAdmin || 0, pokok]
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -390,7 +396,7 @@ router.get('/angsuran', async (req: AuthRequest, res: Response) => {
        ORDER BY a.tanggal_jatuh_tempo`,
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -435,7 +441,7 @@ router.get('/jurnal', async (req: AuthRequest, res: Response) => {
   try {
     if (!requireStaff(req, res)) return;
     const result = await pool.query('SELECT * FROM journal_entries ORDER BY tanggal DESC');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -444,7 +450,7 @@ router.get('/jurnal', async (req: AuthRequest, res: Response) => {
 router.get('/barang', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM barang ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -459,14 +465,14 @@ router.put('/barang/:id/stock', adminOnly, async (req: AuthRequest, res: Respons
 router.get('/kategori-barang', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM kategori_barang ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
 router.get('/supplier', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM supplier ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -476,7 +482,7 @@ router.get('/penjualan', async (req: AuthRequest, res: Response) => {
   try {
     if (!requireStaff(req, res)) return;
     const result = await pool.query('SELECT * FROM penjualan ORDER BY tanggal DESC');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -538,7 +544,7 @@ router.get('/pembelian', async (req: AuthRequest, res: Response) => {
   try {
     if (!requireStaff(req, res)) return;
     const result = await pool.query('SELECT * FROM pembelian ORDER BY tanggal DESC');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -604,7 +610,7 @@ router.post('/venture', async (req: AuthRequest, res: Response) => {
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,'pengajuan',$10,$11,$12,$13,$14,$15,$16) RETURNING *`,
       [id, namaPerusahaan, sektorIndustri, namaFounder, nominalInvestasi, persentaseSaham, estimasiDividen, tanggalInvestasi, tenorTahun, deskripsiBisnis, kontakFounder, prospektusUrl || '', pengajuAnggotaId || null, pengajuAnggotaNama || '', pengajuanId || null, perusahaanIdFk || null]
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -801,7 +807,7 @@ router.get('/my-venture-data', async (req: AuthRequest, res: Response) => {
 router.get('/perusahaan', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM perusahaan ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -809,7 +815,7 @@ router.get('/perusahaan/:id', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM perusahaan WHERE id=$1', [req.params.id]);
     if (result.rows.length === 0) return res.status(404).json({ error: 'Perusahaan tidak ditemukan' });
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -827,7 +833,7 @@ router.post('/perusahaan', adminOnly, async (req: AuthRequest, res: Response) =>
        namaDirektur || '', kontakDirektur || '', emailPerusahaan || '', telepon || '', website || '', deskripsi || '',
        status || 'pending']
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -876,7 +882,7 @@ router.get('/pengajuan', async (req: AuthRequest, res: Response) => {
       LEFT JOIN anggota a ON pp.anggota_id = a.id
       ORDER BY pp.created_at DESC
     `);
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -936,7 +942,7 @@ router.post('/pengajuan', async (req: AuthRequest, res: Response) => {
       );
     }
 
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1079,7 +1085,7 @@ router.post('/pengajuan/:id/analisis-ai', adminOnly, async (req: AuthRequest, re
 router.get('/dokumen-templates', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query("SELECT * FROM dokumen_pengajuan WHERE pengajuan_id = '' OR pengajuan_id IS NULL ORDER BY kelompok, kode_dokumen");
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1088,7 +1094,7 @@ router.get('/dokumen-templates', async (req: AuthRequest, res: Response) => {
 router.get('/pengumuman', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM pengumuman ORDER BY tanggal_mulai DESC');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1101,7 +1107,7 @@ router.post('/pengumuman', adminOnly, async (req: AuthRequest, res: Response) =>
        VALUES ($1,$2,$3,$4,$5,$6,$7,'aktif') RETURNING *`,
       [id, judul, konten || '', tipe || 'pengumuman', target || 'semua', tanggalMulai || null, tanggalSelesai || null]
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1131,7 +1137,7 @@ router.get('/tiket', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM tiket_bantuan WHERE anggota_id=$1 ORDER BY tanggal DESC' : 'SELECT * FROM tiket_bantuan ORDER BY tanggal DESC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1149,7 +1155,7 @@ router.post('/tiket', async (req: AuthRequest, res: Response) => {
     if (member.rows.length > 0) {
       await pool.query('UPDATE tiket_bantuan SET anggota_nama=$1 WHERE id=$2', [member.rows[0].nama, id]);
     }
-    return res.json({ ...result.rows[0], anggotaNama: member.rows[0]?.nama || '' });
+    return res.json({ ...mapRow(result.rows[0]), anggotaNama: member.rows[0]?.nama || '' });
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1173,7 +1179,7 @@ router.get('/bukti-transfer', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM bukti_transfer WHERE anggota_id=$1 ORDER BY tanggal DESC' : 'SELECT * FROM bukti_transfer ORDER BY tanggal DESC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1186,7 +1192,7 @@ router.post('/bukti-transfer', async (req: AuthRequest, res: Response) => {
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,'pending') RETURNING *`,
       [id, anggotaId, anggotaNama, jenisSimpananId, jenisNama || '', jumlah, bankPengirim || '', noRef || '', keterangan || '']
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1236,7 +1242,7 @@ router.put('/bukti-transfer/:id/:action', adminOnly, async (req: AuthRequest, re
 router.get('/feature-toggles', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query("SELECT * FROM feature_toggles WHERE id='main'");
-    if (result.rows.length > 0) return res.json(result.rows[0]);
+    if (result.rows.length > 0) return res.json(mapRow(result.rows[0]));
     return res.json({});
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
@@ -1260,7 +1266,7 @@ router.put('/feature-toggles', adminOnly, async (req: AuthRequest, res: Response
 router.get('/sewa-assets', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM sewa_assets ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1273,7 +1279,7 @@ router.post('/sewa-assets', adminOnly, async (req: AuthRequest, res: Response) =
        VALUES ($1,$2,$3,$4,'Tersedia',$5) RETURNING *`,
       [id, nama, kategori || '', biayaSewaPerHari || 0, deskripsi || '']
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1302,7 +1308,7 @@ router.get('/sewa-transaksi', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM sewa_transactions WHERE anggota_id=$1 ORDER BY tanggal_mulai DESC' : 'SELECT * FROM sewa_transactions ORDER BY tanggal_mulai DESC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1315,7 +1321,7 @@ router.post('/sewa-transaksi', async (req: AuthRequest, res: Response) => {
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,'pengajuan') RETURNING *`,
       [id, anggotaId, anggotaNama, asetId, asetNama, tanggalMulai, tanggalSelesai, jumlahHari, totalBiaya]
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1360,7 +1366,7 @@ router.put('/sewa-transaksi/:id/:action', adminOnly, async (req: AuthRequest, re
 router.get('/ppob-layanan', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM ppob_layanan ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1390,7 +1396,7 @@ router.get('/ppob-transaksi', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM ppob_transactions WHERE anggota_id=$1 ORDER BY tanggal DESC' : 'SELECT * FROM ppob_transactions ORDER BY tanggal DESC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1434,7 +1440,7 @@ router.get('/virtual-accounts', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM virtual_accounts WHERE anggota_id=$1 ORDER BY anggota_nama' : 'SELECT * FROM virtual_accounts ORDER BY anggota_nama',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1450,7 +1456,7 @@ router.post('/virtual-accounts', adminOnly, async (req: AuthRequest, res: Respon
        VALUES ($1,$2,$3,$4,$5,'Setoran Sukarela Tambahan','aktif') RETURNING *`,
       [id, anggotaId, am.rows[0].nama, bank, bankCode + '0812' + Math.floor(100000 + Math.random() * 900000)]
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1461,7 +1467,7 @@ router.get('/va-transaksi', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM va_transactions WHERE anggota_id=$1 ORDER BY tanggal DESC' : 'SELECT * FROM va_transactions ORDER BY tanggal DESC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1505,7 +1511,7 @@ router.get('/cicilan-barang', async (req: AuthRequest, res: Response) => {
       mid ? 'SELECT * FROM cicilan_barang WHERE anggota_id=$1 ORDER BY tanggal_pengajuan DESC' : 'SELECT * FROM cicilan_barang ORDER BY tanggal_pengajuan DESC',
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1518,7 +1524,7 @@ router.post('/cicilan-barang', async (req: AuthRequest, res: Response) => {
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,'pengajuan',CURRENT_DATE) RETURNING *`,
       [id, anggotaId, anggotaNama, barangNama, totalHarga, dp, pokokPembiayaan, tenorMonths, bungaPersen, angsuranPerBulan, pokokPembiayaan]
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1585,7 +1591,7 @@ router.get('/cicilan-angsuran', async (req: AuthRequest, res: Response) => {
        ORDER BY ca.tanggal_jatuh_tempo`,
       mid ? [mid] : []
     );
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1622,35 +1628,35 @@ router.post('/cicilan-angsuran/:id/pay', adminOnly, async (req: AuthRequest, res
 router.get('/koperasi-info', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM koperasi_info WHERE id=1');
-    return res.json(result.rows[0] || {});
+    return res.json(mapRow(result.rows[0]) || {});
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
 router.get('/pengurus', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM pengurus ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
 router.get('/karyawan', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM karyawan ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
 router.get('/aset-barang', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM aset_barang ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
 router.get('/sumber-bayar', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM sumber_bayar ORDER BY nama');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1787,7 +1793,7 @@ router.delete('/sumber-bayar/:id', adminOnly, async (req: AuthRequest, res: Resp
 router.get('/users', adminOnly, async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT id, username, nama_lengkap, role, nik, member_id, is_active FROM users ORDER BY username');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1809,7 +1815,7 @@ router.post('/users', adminOnly, async (req: AuthRequest, res: Response) => {
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING id, username, nama_lengkap, role, nik, member_id, is_active`,
       [id, username, namaLengkap, role || 'operator', nik || null, memberId || null, isActive !== undefined ? isActive : true, passwordHash]
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1854,7 +1860,7 @@ router.delete('/users/:id', adminOnly, async (req: AuthRequest, res: Response) =
 router.get('/coa', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM chart_of_accounts ORDER BY kode_akun');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1867,7 +1873,7 @@ router.post('/coa', adminOnly, async (req: AuthRequest, res: Response) => {
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING *`,
       [id, kodeAkun, namaAkun, kategori, subKategori || '', saldoNormal, level || 3, parentId || null, isHeader || false]
     );
-    return res.json(result.rows[0]);
+    return res.json(mapRow(result.rows[0]));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1878,7 +1884,7 @@ router.put('/coa/:id', adminOnly, async (req: AuthRequest, res: Response) => {
       `UPDATE chart_of_accounts SET kode_akun=$1, nama_akun=$2, kategori=$3, sub_kategori=$4, saldo_normal=$5, is_active=$6, is_header=$7 WHERE id=$8 RETURNING *`,
       [kodeAkun, namaAkun, kategori, subKategori, saldoNormal, isActive !== undefined ? isActive : true, isHeader || false, req.params.id]
     );
-    return res.json(result.rows[0] || { success: true });
+    return res.json(mapRow(result.rows[0]) || { success: true });
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1893,7 +1899,7 @@ router.delete('/coa/:id', adminOnly, async (req: AuthRequest, res: Response) => 
 router.get('/periods', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query('SELECT * FROM accounting_periods ORDER BY tahun DESC, bulan DESC');
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -1929,7 +1935,7 @@ router.get('/jurnal/manual', async (req: AuthRequest, res: Response) => {
     if (sumber) { query += ` AND je.sumber = $${paramIdx++}`; params.push(sumber); }
     query += ' ORDER BY je.tanggal DESC, je.id DESC';
     const result = await pool.query(query, params);
-    return res.json(result.rows);
+    return res.json(mapRows(result.rows));
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 
@@ -2161,7 +2167,7 @@ router.get('/laporan/pde', async (req: AuthRequest, res: Response) => {
         COALESCE(SUM(p.sisa_pokok) FILTER (WHERE p.status = 'dicairkan' AND p.sisa_pokok > p.pokok * 0.95), 0) as macet
       FROM pinjaman p
     `);
-    const d = result.rows[0];
+    const d = mapRow(result.rows[0]);
     const npl = d.total_piutang > 0 ? (parseFloat(d.macet) / parseFloat(d.total_piutang) * 100).toFixed(2) : '0';
     return res.json({
       totalDebitur: parseInt(d.total_debitur), totalPiutang: parseFloat(d.total_piutang),
@@ -2263,7 +2269,7 @@ router.post('/tutupbuku', adminOnly, async (req: AuthRequest, res: Response) => 
 router.get('/landing-settings', async (req: AuthRequest, res: Response) => {
   try {
     const result = await pool.query("SELECT * FROM landing_settings WHERE id='landing_main'");
-    return res.json(result.rows[0] || {});
+    return res.json(mapRow(result.rows[0]) || {});
   } catch (err: any) { return res.status(500).json({ error: err.message }); }
 });
 router.put('/landing-settings', adminOnly, async (req: AuthRequest, res: Response) => {
