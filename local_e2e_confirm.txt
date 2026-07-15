@@ -1,0 +1,59 @@
+﻿
+Running 19 tests using 1 worker
+
+[1/19] [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as admin
+[2/19] [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as operator
+[3/19] [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as anggota
+[4/19] [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as perusahaan
+[5/19] [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › admin role › should display all core sidebar menus
+[chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › admin role › should display all core sidebar menus
+  ✓ Optional menu found: Unit Tambahan
+
+  ✓ Optional menu found: Modul Dashboard
+
+  ✓ Optional menu found: Data Perusahaan
+
+  ✓ Optional menu found: Pipeline Investasi
+
+  ✓ Optional menu found: Pembukuan & Keuangan
+
+  ✓ Optional menu found: Kelola Pengumuman
+
+[6/19] [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › admin role › should load content for each main menu
+[7/19] [chromium] › tests\e2e\sidebar.spec.ts:235:9 › Sidebar Navigation › admin role › should expand and load Simpanan sub-menus
+[8/19] [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › admin role › should expand and load Pinjaman sub-menus
+[9/19] [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › operator role › should display all core sidebar menus
+[chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › operator role › should display all core sidebar menus
+  ✓ Optional menu found: Unit Tambahan
+
+  ✓ Optional menu found: Modul Dashboard
+
+  ✓ Optional menu found: Data Perusahaan
+
+  ✓ Optional menu found: Pipeline Investasi
+
+  ✓ Optional menu found: Pembukuan & Keuangan
+
+  ✓ Optional menu found: Kelola Pengumuman
+
+[10/19] [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › operator role › should load content for each main menu
+[11/19] [chromium] › tests\e2e\sidebar.spec.ts:235:9 › Sidebar Navigation › operator role › should expand and load Simpanan sub-menus
+[12/19] [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › operator role › should expand and load Pinjaman sub-menus
+[13/19] [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › anggota role › should display all core sidebar menus
+[chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › anggota role › should display all core sidebar menus
+  ✓ Optional menu found: Sewa Aset Koperasi
+
+  ✓ Optional menu found: Loket PPOB & Pulsa
+
+  ✓ Optional menu found: Virtual Account Deposit
+
+  ✓ Optional menu found: Kredit Cicilan Pengadaan
+
+[14/19] [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › anggota role › should load content for each main menu
+[15/19] [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › perusahaan role › should display all core sidebar menus
+[16/19] [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › perusahaan role › should load content for each main menu
+[17/19] [chromium] › tests\e2e\smoke.spec.ts:25:3 › Smoke Tests - Critical Paths › admin can access dashboard and key modules
+[18/19] [chromium] › tests\e2e\smoke.spec.ts:44:3 › Smoke Tests - Critical Paths › anggota can access dashboard and savings
+[19/19] [chromium] › tests\e2e\smoke.spec.ts:62:3 › Smoke Tests - Critical Paths › login page has quick login buttons
+  19 passed (2.2m)
+

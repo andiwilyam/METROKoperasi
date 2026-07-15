@@ -14,6 +14,8 @@ const loginLimiter = rateLimit({
   message: { error: 'Terlalu banyak percobaan login. Silakan coba lagi dalam 15 menit.' },
   standardHeaders: true,
   legacyHeaders: false,
+  // CI/E2E runs the server + all tests from one IP; bypass only when explicitly enabled.
+  skip: () => process.env.E2E_LOGIN_UNLIMITED === '1',
 });
 
 // Rate limit: max 5 register attempts per jam per IP

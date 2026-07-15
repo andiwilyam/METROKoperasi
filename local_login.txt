@@ -1,0 +1,149 @@
+﻿
+Running 4 tests using 1 worker
+
+[1/4] [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as admin
+  1) [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as admin ────────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('aside, nav, button:has-text("Keluar Aplikasi")').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('aside, nav, button:has-text("Keluar Aplikasi")').first()
+
+
+      44 |       
+      45 |       // Verify logged in - check for sidebar or dashboard content
+    > 46 |       await expect(page.locator('aside, nav, button:has-text("Keluar Aplikasi")').first()).toBeVisible({ timeout: 5000 });
+         |                                                                                            ^
+      47 |     });
+      48 |   }
+      49 | });
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\login.spec.ts:46:92
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\login-Login-Flow-should-login-as-admin-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\login-Login-Flow-should-login-as-admin-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\login-Login-Flow-should-login-as-admin-chromium\error-context.md
+
+
+[2/4] [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as operator
+  2) [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as operator ─────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('aside, nav, button:has-text("Keluar Aplikasi")').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('aside, nav, button:has-text("Keluar Aplikasi")').first()
+
+
+      44 |       
+      45 |       // Verify logged in - check for sidebar or dashboard content
+    > 46 |       await expect(page.locator('aside, nav, button:has-text("Keluar Aplikasi")').first()).toBeVisible({ timeout: 5000 });
+         |                                                                                            ^
+      47 |     });
+      48 |   }
+      49 | });
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\login.spec.ts:46:92
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\login-Login-Flow-should-login-as-operator-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\login-Login-Flow-should-login-as-operator-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\login-Login-Flow-should-login-as-operator-chromium\error-context.md
+
+
+[3/4] [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as anggota
+  3) [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as anggota ──────────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('aside, nav, button:has-text("Keluar Aplikasi")').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('aside, nav, button:has-text("Keluar Aplikasi")').first()
+
+
+      44 |       
+      45 |       // Verify logged in - check for sidebar or dashboard content
+    > 46 |       await expect(page.locator('aside, nav, button:has-text("Keluar Aplikasi")').first()).toBeVisible({ timeout: 5000 });
+         |                                                                                            ^
+      47 |     });
+      48 |   }
+      49 | });
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\login.spec.ts:46:92
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\login-Login-Flow-should-login-as-anggota-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\login-Login-Flow-should-login-as-anggota-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\login-Login-Flow-should-login-as-anggota-chromium\error-context.md
+
+
+[4/4] [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as perusahaan
+  4) [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as perusahaan ───────────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: locator('aside, nav, button:has-text("Keluar Aplikasi")').first()
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" with timeout 5000ms
+      - waiting for locator('aside, nav, button:has-text("Keluar Aplikasi")').first()
+
+
+      44 |       
+      45 |       // Verify logged in - check for sidebar or dashboard content
+    > 46 |       await expect(page.locator('aside, nav, button:has-text("Keluar Aplikasi")').first()).toBeVisible({ timeout: 5000 });
+         |                                                                                            ^
+      47 |     });
+      48 |   }
+      49 | });
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\login.spec.ts:46:92
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\login-Login-Flow-should-login-as-perusahaan-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\login-Login-Flow-should-login-as-perusahaan-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\login-Login-Flow-should-login-as-perusahaan-chromium\error-context.md
+
+
+  4 failed
+    [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as admin ─────────────────
+    [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as operator ──────────────
+    [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as anggota ───────────────
+    [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as perusahaan ────────────
+
