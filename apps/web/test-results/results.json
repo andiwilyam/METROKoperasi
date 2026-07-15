@@ -1,0 +1,1251 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--project=chromium"
+    ],
+    "configFile": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\playwright.config.ts",
+    "rootDir": "C:/Users/ASUS NUC/Desktop/Project Aplikasi/MetroCoop/apps/web/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": true,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ASUS NUC/Desktop/Project Aplikasi/MetroCoop/apps/web/test-results",
+        "repeatEach": 1,
+        "retries": 2,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/ASUS NUC/Desktop/Project Aplikasi/MetroCoop/apps/web/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "test-results/results.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "test-results/results.xml"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.61.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "login.spec.ts",
+      "file": "login.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Login Flow",
+          "file": "login.spec.ts",
+          "line": 19,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should login as admin",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 37732,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('aside, nav, button:has-text(\"Keluar Aplikasi\")').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('aside, nav, button:has-text(\"Keluar Aplikasi\")').first()\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('aside, nav, button:has-text(\"Keluar Aplikasi\")').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('aside, nav, button:has-text(\"Keluar Aplikasi\")').first()\u001b[22m\n\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\login.spec.ts:46:92",
+                        "location": {
+                          "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\login.spec.ts",
+                          "column": 92,
+                          "line": 46
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 44 |\u001b[39m       \n \u001b[90m 45 |\u001b[39m       \u001b[90m// Verify logged in - check for sidebar or dashboard content\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 46 |\u001b[39m       \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mlocator(\u001b[32m'aside, nav, button:has-text(\"Keluar Aplikasi\")'\u001b[39m)\u001b[33m.\u001b[39mfirst())\u001b[33m.\u001b[39mtoBeVisible({ timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                                            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 47 |\u001b[39m     })\u001b[33m;\u001b[39m\n \u001b[90m 48 |\u001b[39m   }\n \u001b[90m 49 |\u001b[39m })\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\login.spec.ts",
+                            "column": 92,
+                            "line": 46
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('aside, nav, button:has-text(\"Keluar Aplikasi\")').first()\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('aside, nav, button:has-text(\"Keluar Aplikasi\")').first()\u001b[22m\n\n\n  44 |       \n  45 |       // Verify logged in - check for sidebar or dashboard content\n> 46 |       await expect(page.locator('aside, nav, button:has-text(\"Keluar Aplikasi\")').first()).toBeVisible({ timeout: 5000 });\n     |                                                                                            ^\n  47 |     });\n  48 |   }\n  49 | });\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\login.spec.ts:46:92"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-15T03:25:31.855Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\login-Login-Flow-should-login-as-admin-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\login-Login-Flow-should-login-as-admin-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\login-Login-Flow-should-login-as-admin-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\login.spec.ts",
+                        "column": 92,
+                        "line": 46
+                      }
+                    },
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 23501,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 1,
+                      "startTime": "2026-07-15T03:26:37.971Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "trace",
+                          "contentType": "application/zip",
+                          "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\login-Login-Flow-should-login-as-admin-chromium-retry1\\trace.zip"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "flaky"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-a50505c3cb6ec97a2007",
+              "file": "login.spec.ts",
+              "line": 26,
+              "column": 5
+            },
+            {
+              "title": "should login as operator",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 31834,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-15T03:27:08.465Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-9b87a7b92b24213f76cc",
+              "file": "login.spec.ts",
+              "line": 26,
+              "column": 5
+            },
+            {
+              "title": "should login as anggota",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3627,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-15T03:27:40.426Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-f81a34fe17035e87f7e6",
+              "file": "login.spec.ts",
+              "line": 26,
+              "column": 5
+            },
+            {
+              "title": "should login as perusahaan",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4266,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-15T03:27:44.074Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "41d3fd2474a19feb00a1-c0ba41397267ed4f4b5f",
+              "file": "login.spec.ts",
+              "line": 26,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "sidebar.spec.ts",
+      "file": "sidebar.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Sidebar Navigation",
+          "file": "sidebar.spec.ts",
+          "line": 188,
+          "column": 6,
+          "specs": [],
+          "suites": [
+            {
+              "title": "admin role",
+              "file": "sidebar.spec.ts",
+              "line": 190,
+              "column": 10,
+              "specs": [
+                {
+                  "title": "should display all core sidebar menus",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 1,
+                          "parallelIndex": 0,
+                          "status": "failed",
+                          "duration": 4416,
+                          "error": {
+                            "message": "Error: Expected core menu \"Dashboard Utama\" not found\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                            "stack": "Error: Expected core menu \"Dashboard Utama\" not found\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:205:71",
+                            "location": {
+                              "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                              "column": 71,
+                              "line": 205
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 203 |\u001b[39m         \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m expected \u001b[36mof\u001b[39m coreMenus) {\n \u001b[90m 204 |\u001b[39m           \u001b[36mconst\u001b[39m found \u001b[33m=\u001b[39m foundMenus\u001b[33m.\u001b[39msome(m \u001b[33m=>\u001b[39m m\u001b[33m.\u001b[39mtoLowerCase()\u001b[33m.\u001b[39mincludes(expected\u001b[33m.\u001b[39mtoLowerCase()))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 205 |\u001b[39m           expect(found\u001b[33m,\u001b[39m \u001b[32m`Expected core menu \"${expected}\" not found`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 206 |\u001b[39m         }\n \u001b[90m 207 |\u001b[39m         \n \u001b[90m 208 |\u001b[39m         \u001b[90m// Check optional menus - just log if found\u001b[39m\u001b[0m"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                                "column": 71,
+                                "line": 205
+                              },
+                              "message": "Error: Expected core menu \"Dashboard Utama\" not found\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n  203 |         for (const expected of coreMenus) {\n  204 |           const found = foundMenus.some(m => m.toLowerCase().includes(expected.toLowerCase()));\n> 205 |           expect(found, `Expected core menu \"${expected}\" not found`).toBeTruthy();\n      |                                                                       ^\n  206 |         }\n  207 |         \n  208 |         // Check optional menus - just log if found\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:205:71"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:27:48.416Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-41fc7-play-all-core-sidebar-menus-chromium\\test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-41fc7-play-all-core-sidebar-menus-chromium\\video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-41fc7-play-all-core-sidebar-menus-chromium\\error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                            "column": 71,
+                            "line": 205
+                          }
+                        },
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 8111,
+                          "errors": [],
+                          "stdout": [
+                            {
+                              "text": "  ✓ Optional menu found: Unit Tambahan\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Modul Dashboard\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Data Perusahaan\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Pipeline Investasi\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Pembukuan & Keuangan\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Kelola Pengumuman\n"
+                            }
+                          ],
+                          "stderr": [],
+                          "retry": 1,
+                          "startTime": "2026-07-15T03:27:54.225Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "trace",
+                              "contentType": "application/zip",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-41fc7-play-all-core-sidebar-menus-chromium-retry1\\trace.zip"
+                            }
+                          ]
+                        }
+                      ],
+                      "status": "flaky"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-e84fe5388197e0f7e071",
+                  "file": "sidebar.spec.ts",
+                  "line": 199,
+                  "column": 7
+                },
+                {
+                  "title": "should load content for each main menu",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 15766,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:28:03.198Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-0873cb9ecdfb2e87aef5",
+                  "file": "sidebar.spec.ts",
+                  "line": 220,
+                  "column": 7
+                },
+                {
+                  "title": "should expand and load Simpanan sub-menus",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 2,
+                          "parallelIndex": 0,
+                          "status": "failed",
+                          "duration": 6823,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:238:27",
+                            "location": {
+                              "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                              "column": 27,
+                              "line": 238
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 236 |\u001b[39m           \u001b[36mconst\u001b[39m parent \u001b[33m=\u001b[39m \u001b[32m'Simpanan (Savings)'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 237 |\u001b[39m           \u001b[36mconst\u001b[39m clicked \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m clickMenu(page\u001b[33m,\u001b[39m parent)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 238 |\u001b[39m           expect(clicked)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 239 |\u001b[39m           \n \u001b[90m 240 |\u001b[39m           \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m sub \u001b[36mof\u001b[39m \u001b[33mSUB_MENUS\u001b[39m[parent]) {\n \u001b[90m 241 |\u001b[39m             \u001b[36mconst\u001b[39m subClicked \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m clickSubMenu(page\u001b[33m,\u001b[39m parent\u001b[33m,\u001b[39m sub\u001b[33m.\u001b[39mlabel)\u001b[33m;\u001b[39m\u001b[0m"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                                "column": 27,
+                                "line": 238
+                              },
+                              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n  236 |           const parent = 'Simpanan (Savings)';\n  237 |           const clicked = await clickMenu(page, parent);\n> 238 |           expect(clicked).toBeTruthy();\n      |                           ^\n  239 |           \n  240 |           for (const sub of SUB_MENUS[parent]) {\n  241 |             const subClicked = await clickSubMenu(page, parent, sub.label);\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:238:27"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:28:18.983Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-90cf1-and-load-Simpanan-sub-menus-chromium\\test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-90cf1-and-load-Simpanan-sub-menus-chromium\\video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-90cf1-and-load-Simpanan-sub-menus-chromium\\error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                            "column": 27,
+                            "line": 238
+                          }
+                        },
+                        {
+                          "workerIndex": 3,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 32072,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 1,
+                          "startTime": "2026-07-15T03:28:26.847Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "trace",
+                              "contentType": "application/zip",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-90cf1-and-load-Simpanan-sub-menus-chromium-retry1\\trace.zip"
+                            }
+                          ]
+                        }
+                      ],
+                      "status": "flaky"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-642af3a709f08fd0361c",
+                  "file": "sidebar.spec.ts",
+                  "line": 235,
+                  "column": 9
+                },
+                {
+                  "title": "should expand and load Pinjaman sub-menus",
+                  "ok": false,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 3,
+                          "parallelIndex": 0,
+                          "status": "failed",
+                          "duration": 47285,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:252:27",
+                            "location": {
+                              "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                              "column": 27,
+                              "line": 252
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 250 |\u001b[39m           \u001b[36mconst\u001b[39m parent \u001b[33m=\u001b[39m \u001b[32m'Pinjaman (Loans)'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 251 |\u001b[39m           \u001b[36mconst\u001b[39m clicked \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m clickMenu(page\u001b[33m,\u001b[39m parent)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 252 |\u001b[39m           expect(clicked)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 253 |\u001b[39m           \n \u001b[90m 254 |\u001b[39m           \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m sub \u001b[36mof\u001b[39m \u001b[33mSUB_MENUS\u001b[39m[parent]) {\n \u001b[90m 255 |\u001b[39m             \u001b[36mconst\u001b[39m subClicked \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m clickSubMenu(page\u001b[33m,\u001b[39m parent\u001b[33m,\u001b[39m sub\u001b[33m.\u001b[39mlabel)\u001b[33m;\u001b[39m\u001b[0m"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                                "column": 27,
+                                "line": 252
+                              },
+                              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n  250 |           const parent = 'Pinjaman (Loans)';\n  251 |           const clicked = await clickMenu(page, parent);\n> 252 |           expect(clicked).toBeTruthy();\n      |                           ^\n  253 |           \n  254 |           for (const sub of SUB_MENUS[parent]) {\n  255 |             const subClicked = await clickSubMenu(page, parent, sub.label);\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:252:27"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:29:01.657Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\\test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\\video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\\error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                            "column": 27,
+                            "line": 252
+                          }
+                        },
+                        {
+                          "workerIndex": 4,
+                          "parallelIndex": 0,
+                          "status": "failed",
+                          "duration": 111937,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:252:27",
+                            "location": {
+                              "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                              "column": 27,
+                              "line": 252
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 250 |\u001b[39m           \u001b[36mconst\u001b[39m parent \u001b[33m=\u001b[39m \u001b[32m'Pinjaman (Loans)'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 251 |\u001b[39m           \u001b[36mconst\u001b[39m clicked \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m clickMenu(page\u001b[33m,\u001b[39m parent)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 252 |\u001b[39m           expect(clicked)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 253 |\u001b[39m           \n \u001b[90m 254 |\u001b[39m           \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m sub \u001b[36mof\u001b[39m \u001b[33mSUB_MENUS\u001b[39m[parent]) {\n \u001b[90m 255 |\u001b[39m             \u001b[36mconst\u001b[39m subClicked \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m clickSubMenu(page\u001b[33m,\u001b[39m parent\u001b[33m,\u001b[39m sub\u001b[33m.\u001b[39mlabel)\u001b[33m;\u001b[39m\u001b[0m"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                                "column": 27,
+                                "line": 252
+                              },
+                              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n  250 |           const parent = 'Pinjaman (Loans)';\n  251 |           const clicked = await clickMenu(page, parent);\n> 252 |           expect(clicked).toBeTruthy();\n      |                           ^\n  253 |           \n  254 |           for (const sub of SUB_MENUS[parent]) {\n  255 |             const subClicked = await clickSubMenu(page, parent, sub.label);\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:252:27"
+                            },
+                            {
+                              "message": "\u001b[31mTearing down \"context\" exceeded the test timeout of 90000ms.\u001b[39m"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 1,
+                          "startTime": "2026-07-15T03:30:17.169Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\\test-failed-1.png"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\\error-context.md"
+                            },
+                            {
+                              "name": "trace",
+                              "contentType": "application/zip",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\\trace.zip"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                            "column": 27,
+                            "line": 252
+                          }
+                        },
+                        {
+                          "workerIndex": 5,
+                          "parallelIndex": 0,
+                          "status": "failed",
+                          "duration": 71504,
+                          "error": {
+                            "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                            "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:252:27",
+                            "location": {
+                              "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                              "column": 27,
+                              "line": 252
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 250 |\u001b[39m           \u001b[36mconst\u001b[39m parent \u001b[33m=\u001b[39m \u001b[32m'Pinjaman (Loans)'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m 251 |\u001b[39m           \u001b[36mconst\u001b[39m clicked \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m clickMenu(page\u001b[33m,\u001b[39m parent)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 252 |\u001b[39m           expect(clicked)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                           \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 253 |\u001b[39m           \n \u001b[90m 254 |\u001b[39m           \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m sub \u001b[36mof\u001b[39m \u001b[33mSUB_MENUS\u001b[39m[parent]) {\n \u001b[90m 255 |\u001b[39m             \u001b[36mconst\u001b[39m subClicked \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m clickSubMenu(page\u001b[33m,\u001b[39m parent\u001b[33m,\u001b[39m sub\u001b[33m.\u001b[39mlabel)\u001b[33m;\u001b[39m\u001b[0m"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                                "column": 27,
+                                "line": 252
+                              },
+                              "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n  250 |           const parent = 'Pinjaman (Loans)';\n  251 |           const clicked = await clickMenu(page, parent);\n> 252 |           expect(clicked).toBeTruthy();\n      |                           ^\n  253 |           \n  254 |           for (const sub of SUB_MENUS[parent]) {\n  255 |             const subClicked = await clickSubMenu(page, parent, sub.label);\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:252:27"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 2,
+                          "startTime": "2026-07-15T03:32:50.010Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry2\\video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry2\\error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                            "column": 27,
+                            "line": 252
+                          }
+                        }
+                      ],
+                      "status": "unexpected"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-d4722ce72b3145c76247",
+                  "file": "sidebar.spec.ts",
+                  "line": 249,
+                  "column": 9
+                }
+              ]
+            },
+            {
+              "title": "operator role",
+              "file": "sidebar.spec.ts",
+              "line": 190,
+              "column": 10,
+              "specs": [
+                {
+                  "title": "should display all core sidebar menus",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 6,
+                          "parallelIndex": 0,
+                          "status": "failed",
+                          "duration": 13186,
+                          "error": {
+                            "message": "Error: Expected core menu \"Dashboard Utama\" not found\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m",
+                            "stack": "Error: Expected core menu \"Dashboard Utama\" not found\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:205:71",
+                            "location": {
+                              "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                              "column": 71,
+                              "line": 205
+                            },
+                            "snippet": "\u001b[0m \u001b[90m 203 |\u001b[39m         \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m expected \u001b[36mof\u001b[39m coreMenus) {\n \u001b[90m 204 |\u001b[39m           \u001b[36mconst\u001b[39m found \u001b[33m=\u001b[39m foundMenus\u001b[33m.\u001b[39msome(m \u001b[33m=>\u001b[39m m\u001b[33m.\u001b[39mtoLowerCase()\u001b[33m.\u001b[39mincludes(expected\u001b[33m.\u001b[39mtoLowerCase()))\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 205 |\u001b[39m           expect(found\u001b[33m,\u001b[39m \u001b[32m`Expected core menu \"${expected}\" not found`\u001b[39m)\u001b[33m.\u001b[39mtoBeTruthy()\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                                                       \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 206 |\u001b[39m         }\n \u001b[90m 207 |\u001b[39m         \n \u001b[90m 208 |\u001b[39m         \u001b[90m// Check optional menus - just log if found\u001b[39m\u001b[0m"
+                          },
+                          "errors": [
+                            {
+                              "location": {
+                                "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                                "column": 71,
+                                "line": 205
+                              },
+                              "message": "Error: Expected core menu \"Dashboard Utama\" not found\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeTruthy\u001b[2m()\u001b[22m\n\nReceived: \u001b[31mfalse\u001b[39m\n\n  203 |         for (const expected of coreMenus) {\n  204 |           const found = foundMenus.some(m => m.toLowerCase().includes(expected.toLowerCase()));\n> 205 |           expect(found, `Expected core menu \"${expected}\" not found`).toBeTruthy();\n      |                                                                       ^\n  206 |         }\n  207 |         \n  208 |         // Check optional menus - just log if found\n    at C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts:205:71"
+                            }
+                          ],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:34:29.202Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "screenshot",
+                              "contentType": "image/png",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium\\test-failed-1.png"
+                            },
+                            {
+                              "name": "video",
+                              "contentType": "video/webm",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium\\video.webm"
+                            },
+                            {
+                              "name": "error-context",
+                              "contentType": "text/markdown",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium\\error-context.md"
+                            }
+                          ],
+                          "errorLocation": {
+                            "file": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\tests\\e2e\\sidebar.spec.ts",
+                            "column": 71,
+                            "line": 205
+                          }
+                        },
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 5148,
+                          "errors": [],
+                          "stdout": [
+                            {
+                              "text": "  ✓ Optional menu found: Unit Tambahan\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Modul Dashboard\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Data Perusahaan\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Pipeline Investasi\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Pembukuan & Keuangan\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Kelola Pengumuman\n"
+                            }
+                          ],
+                          "stderr": [],
+                          "retry": 1,
+                          "startTime": "2026-07-15T03:34:54.383Z",
+                          "annotations": [],
+                          "attachments": [
+                            {
+                              "name": "trace",
+                              "contentType": "application/zip",
+                              "path": "C:\\Users\\ASUS NUC\\Desktop\\Project Aplikasi\\MetroCoop\\apps\\web\\test-results\\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium-retry1\\trace.zip"
+                            }
+                          ]
+                        }
+                      ],
+                      "status": "flaky"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-88a18901e77121758e23",
+                  "file": "sidebar.spec.ts",
+                  "line": 199,
+                  "column": 7
+                },
+                {
+                  "title": "should load content for each main menu",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 14833,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:34:59.982Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-6fede233091120dc3b0e",
+                  "file": "sidebar.spec.ts",
+                  "line": 220,
+                  "column": 7
+                },
+                {
+                  "title": "should expand and load Simpanan sub-menus",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 9773,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:35:14.835Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-6a265c57e0de6dadf5c7",
+                  "file": "sidebar.spec.ts",
+                  "line": 235,
+                  "column": 9
+                },
+                {
+                  "title": "should expand and load Pinjaman sub-menus",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 11896,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:35:24.629Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-27fb4bcb4f4eda1f17fb",
+                  "file": "sidebar.spec.ts",
+                  "line": 249,
+                  "column": 9
+                }
+              ]
+            },
+            {
+              "title": "anggota role",
+              "file": "sidebar.spec.ts",
+              "line": 190,
+              "column": 10,
+              "specs": [
+                {
+                  "title": "should display all core sidebar menus",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 3571,
+                          "errors": [],
+                          "stdout": [
+                            {
+                              "text": "  ✓ Optional menu found: Sewa Aset Koperasi\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Loket PPOB & Pulsa\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Virtual Account Deposit\n"
+                            },
+                            {
+                              "text": "  ✓ Optional menu found: Kredit Cicilan Pengadaan\n"
+                            }
+                          ],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:35:36.542Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-db111d1e0994f5c18796",
+                  "file": "sidebar.spec.ts",
+                  "line": 199,
+                  "column": 7
+                },
+                {
+                  "title": "should load content for each main menu",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 14525,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:35:40.129Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-294e5c2e2071513ad531",
+                  "file": "sidebar.spec.ts",
+                  "line": 220,
+                  "column": 7
+                }
+              ]
+            },
+            {
+              "title": "perusahaan role",
+              "file": "sidebar.spec.ts",
+              "line": 190,
+              "column": 10,
+              "specs": [
+                {
+                  "title": "should display all core sidebar menus",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 2968,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:35:54.673Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-953cf5ea19a0173d1fa1",
+                  "file": "sidebar.spec.ts",
+                  "line": 199,
+                  "column": 7
+                },
+                {
+                  "title": "should load content for each main menu",
+                  "ok": true,
+                  "tags": [],
+                  "tests": [
+                    {
+                      "timeout": 90000,
+                      "annotations": [],
+                      "expectedStatus": "passed",
+                      "projectId": "chromium",
+                      "projectName": "chromium",
+                      "results": [
+                        {
+                          "workerIndex": 7,
+                          "parallelIndex": 0,
+                          "status": "passed",
+                          "duration": 10481,
+                          "errors": [],
+                          "stdout": [],
+                          "stderr": [],
+                          "retry": 0,
+                          "startTime": "2026-07-15T03:35:57.658Z",
+                          "annotations": [],
+                          "attachments": []
+                        }
+                      ],
+                      "status": "expected"
+                    }
+                  ],
+                  "id": "19544871d9648c30f4b7-f15c7a37a7c2ea3dff2b",
+                  "file": "sidebar.spec.ts",
+                  "line": 220,
+                  "column": 7
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "smoke.spec.ts",
+      "file": "smoke.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Smoke Tests - Critical Paths",
+          "file": "smoke.spec.ts",
+          "line": 24,
+          "column": 6,
+          "specs": [
+            {
+              "title": "admin can access dashboard and key modules",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5912,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-15T03:36:08.168Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4219922fea2e2bd3c691-c60d049b5dc74fc32e9c",
+              "file": "smoke.spec.ts",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "anggota can access dashboard and savings",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 5884,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-15T03:36:14.094Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4219922fea2e2bd3c691-11848c8c71030338f84a",
+              "file": "smoke.spec.ts",
+              "line": 44,
+              "column": 3
+            },
+            {
+              "title": "login page has quick login buttons",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1213,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-07-15T03:36:19.992Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "4219922fea2e2bd3c691-3f0f817a16b9154c5583",
+              "file": "smoke.spec.ts",
+              "line": 62,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-07-15T03:25:24.869Z",
+    "duration": 656454.272,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 4
+  }
+}

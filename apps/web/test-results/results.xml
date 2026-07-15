@@ -1,0 +1,207 @@
+<testsuites id="" name="" tests="19" failures="1" skipped="0" errors="0" time="656.454272">
+<testsuite name="login.spec.ts" timestamp="2026-07-15T03:25:27.063Z" hostname="chromium" tests="4" failures="0" skipped="0" time="100.96" errors="0">
+<testcase name="Login Flow › should login as admin" classname="login.spec.ts" time="61.233">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|login-Login-Flow-should-login-as-admin-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|login-Login-Flow-should-login-as-admin-chromium\video.webm]]
+
+[[ATTACHMENT|login-Login-Flow-should-login-as-admin-chromium\error-context.md]]
+
+[[ATTACHMENT|login-Login-Flow-should-login-as-admin-chromium-retry1\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Login Flow › should login as operator" classname="login.spec.ts" time="31.834">
+</testcase>
+<testcase name="Login Flow › should login as anggota" classname="login.spec.ts" time="3.627">
+</testcase>
+<testcase name="Login Flow › should login as perusahaan" classname="login.spec.ts" time="4.266">
+</testcase>
+</testsuite>
+<testsuite name="sidebar.spec.ts" timestamp="2026-07-15T03:25:27.063Z" hostname="chromium" tests="12" failures="1" skipped="0" time="384.295" errors="0">
+<testcase name="Sidebar Navigation › admin role › should display all core sidebar menus" classname="sidebar.spec.ts" time="12.527">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|sidebar-Sidebar-Navigation-41fc7-play-all-core-sidebar-menus-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-41fc7-play-all-core-sidebar-menus-chromium\video.webm]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-41fc7-play-all-core-sidebar-menus-chromium\error-context.md]]
+  ✓ Optional menu found: Unit Tambahan
+  ✓ Optional menu found: Modul Dashboard
+  ✓ Optional menu found: Data Perusahaan
+  ✓ Optional menu found: Pipeline Investasi
+  ✓ Optional menu found: Pembukuan & Keuangan
+  ✓ Optional menu found: Kelola Pengumuman
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-41fc7-play-all-core-sidebar-menus-chromium-retry1\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Sidebar Navigation › admin role › should load content for each main menu" classname="sidebar.spec.ts" time="15.766">
+</testcase>
+<testcase name="Sidebar Navigation › admin role › should expand and load Simpanan sub-menus" classname="sidebar.spec.ts" time="38.895">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|sidebar-Sidebar-Navigation-90cf1-and-load-Simpanan-sub-menus-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-90cf1-and-load-Simpanan-sub-menus-chromium\video.webm]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-90cf1-and-load-Simpanan-sub-menus-chromium\error-context.md]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-90cf1-and-load-Simpanan-sub-menus-chromium-retry1\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Sidebar Navigation › admin role › should expand and load Pinjaman sub-menus" classname="sidebar.spec.ts" time="230.726">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\video.webm]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\error-context.md]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\test-failed-1.png]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\error-context.md]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\trace.zip]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry2\video.webm]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry2\error-context.md]]
+]]>
+</system-out>
+<failure message="expect(received).toBeTruthy()" type="expect.toBeTruthy">
+<![CDATA[  [chromium] › sidebar.spec.ts:249:9 › Sidebar Navigation › admin role › should expand and load Pinjaman sub-menus 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      250 |           const parent = 'Pinjaman (Loans)';
+      251 |           const clicked = await clickMenu(page, parent);
+    > 252 |           expect(clicked).toBeTruthy();
+          |                           ^
+      253 |           
+      254 |           for (const sub of SUB_MENUS[parent]) {
+      255 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:252:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      250 |           const parent = 'Pinjaman (Loans)';
+      251 |           const clicked = await clickMenu(page, parent);
+    > 252 |           expect(clicked).toBeTruthy();
+          |                           ^
+      253 |           
+      254 |           for (const sub of SUB_MENUS[parent]) {
+      255 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:252:27
+
+    Tearing down "context" exceeded the test timeout of 90000ms.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ..\..\test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ..\..\test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace ..\..\test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      250 |           const parent = 'Pinjaman (Loans)';
+      251 |           const clicked = await clickMenu(page, parent);
+    > 252 |           expect(clicked).toBeTruthy();
+          |                           ^
+      253 |           
+      254 |           for (const sub of SUB_MENUS[parent]) {
+      255 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:252:27
+
+    attachment #1: video (video/webm) ──────────────────────────────────────────────────────────────
+    ..\..\test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry2\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ..\..\test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry2\error-context.md
+]]>
+</failure>
+</testcase>
+<testcase name="Sidebar Navigation › operator role › should display all core sidebar menus" classname="sidebar.spec.ts" time="18.334">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium\test-failed-1.png]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium\video.webm]]
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium\error-context.md]]
+  ✓ Optional menu found: Unit Tambahan
+  ✓ Optional menu found: Modul Dashboard
+  ✓ Optional menu found: Data Perusahaan
+  ✓ Optional menu found: Pipeline Investasi
+  ✓ Optional menu found: Pembukuan & Keuangan
+  ✓ Optional menu found: Kelola Pengumuman
+
+[[ATTACHMENT|sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium-retry1\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="Sidebar Navigation › operator role › should load content for each main menu" classname="sidebar.spec.ts" time="14.833">
+</testcase>
+<testcase name="Sidebar Navigation › operator role › should expand and load Simpanan sub-menus" classname="sidebar.spec.ts" time="9.773">
+</testcase>
+<testcase name="Sidebar Navigation › operator role › should expand and load Pinjaman sub-menus" classname="sidebar.spec.ts" time="11.896">
+</testcase>
+<testcase name="Sidebar Navigation › anggota role › should display all core sidebar menus" classname="sidebar.spec.ts" time="3.571">
+<system-out>
+<![CDATA[  ✓ Optional menu found: Sewa Aset Koperasi
+  ✓ Optional menu found: Loket PPOB & Pulsa
+  ✓ Optional menu found: Virtual Account Deposit
+  ✓ Optional menu found: Kredit Cicilan Pengadaan
+]]>
+</system-out>
+</testcase>
+<testcase name="Sidebar Navigation › anggota role › should load content for each main menu" classname="sidebar.spec.ts" time="14.525">
+</testcase>
+<testcase name="Sidebar Navigation › perusahaan role › should display all core sidebar menus" classname="sidebar.spec.ts" time="2.968">
+</testcase>
+<testcase name="Sidebar Navigation › perusahaan role › should load content for each main menu" classname="sidebar.spec.ts" time="10.481">
+</testcase>
+</testsuite>
+<testsuite name="smoke.spec.ts" timestamp="2026-07-15T03:25:27.063Z" hostname="chromium" tests="3" failures="0" skipped="0" time="13.009" errors="0">
+<testcase name="Smoke Tests - Critical Paths › admin can access dashboard and key modules" classname="smoke.spec.ts" time="5.912">
+</testcase>
+<testcase name="Smoke Tests - Critical Paths › anggota can access dashboard and savings" classname="smoke.spec.ts" time="5.884">
+</testcase>
+<testcase name="Smoke Tests - Critical Paths › login page has quick login buttons" classname="smoke.spec.ts" time="1.213">
+</testcase>
+</testsuite>
+</testsuites>
