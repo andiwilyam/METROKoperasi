@@ -18,7 +18,7 @@ Received: false
 ```
 
 ```
-Tearing down "context" exceeded the test timeout of 30000ms.
+Tearing down "context" exceeded the test timeout of 90000ms.
 ```
 
 # Page snapshot

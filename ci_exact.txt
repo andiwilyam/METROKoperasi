@@ -1,0 +1,457 @@
+﻿
+Running 19 tests using 1 worker
+[31mConfiguration Error: HTML reporter output folder clashes with the tests output folder:[39m
+
+    html reporter folder: [1mC:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\test-results\html-report[22m
+    test results folder: [1mC:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\test-results[22m
+
+HTML reporter will clear its output directory prior to being generated, which will lead to the artifact loss.
+
+
+  ok  1 [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as admin (31.3s)
+  ok  2 [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as operator (23.5s)
+  ok  3 [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as anggota (4.1s)
+  ok  4 [chromium] › tests\e2e\login.spec.ts:26:5 › Login Flow › should login as perusahaan (3.1s)
+  ✓ Optional menu found: Unit Tambahan
+  ✓ Optional menu found: Modul Dashboard
+  ✓ Optional menu found: Data Perusahaan
+  ✓ Optional menu found: Pipeline Investasi
+  ✓ Optional menu found: Pembukuan & Keuangan
+  ✓ Optional menu found: Kelola Pengumuman
+  ok  5 [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › admin role › should display all core sidebar menus (6.0s)
+  ok  6 [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › admin role › should load content for each main menu (16.4s)
+  ok  7 [chromium] › tests\e2e\sidebar.spec.ts:235:9 › Sidebar Navigation › admin role › should expand and load Simpanan sub-menus (11.4s)
+  x   8 [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › admin role › should expand and load Pinjaman sub-menus (40.1s)
+  x   9 [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › admin role › should expand and load Pinjaman sub-menus (retry #1) (47.0s)
+  ok 10 [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › admin role › should expand and load Pinjaman sub-menus (retry #2) (37.2s)
+  x  11 [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › operator role › should display all core sidebar menus (5.2s)
+  x  12 [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › operator role › should display all core sidebar menus (retry #1) (54.5s)
+  x  13 [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › operator role › should display all core sidebar menus (retry #2) (50.0s)
+  ok 14 [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › operator role › should load content for each main menu (42.8s)
+  x  15 [chromium] › tests\e2e\sidebar.spec.ts:235:9 › Sidebar Navigation › operator role › should expand and load Simpanan sub-menus (4.9s)
+  x  16 [chromium] › tests\e2e\sidebar.spec.ts:235:9 › Sidebar Navigation › operator role › should expand and load Simpanan sub-menus (retry #1) (12.2s)
+  ok 17 [chromium] › tests\e2e\sidebar.spec.ts:235:9 › Sidebar Navigation › operator role › should expand and load Simpanan sub-menus (retry #2) (22.1s)
+  x  18 [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › operator role › should expand and load Pinjaman sub-menus (46.1s)
+  x  19 [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › operator role › should expand and load Pinjaman sub-menus (retry #1) (21.3s)
+  x  20 [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › operator role › should expand and load Pinjaman sub-menus (retry #2) (4.7s)
+  ✓ Optional menu found: Sewa Aset Koperasi
+  ✓ Optional menu found: Loket PPOB & Pulsa
+  ✓ Optional menu found: Virtual Account Deposit
+  ✓ Optional menu found: Kredit Cicilan Pengadaan
+  ok 21 [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › anggota role › should display all core sidebar menus (4.8s)
+  x  22 [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › anggota role › should load content for each main menu (56.0s)
+  ok 23 [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › anggota role › should load content for each main menu (retry #1) (22.3s)
+  ok 24 [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › perusahaan role › should display all core sidebar menus (4.9s)
+  ok 25 [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › perusahaan role › should load content for each main menu (13.2s)
+  x  26 [chromium] › tests\e2e\smoke.spec.ts:25:3 › Smoke Tests - Critical Paths › admin can access dashboard and key modules (1.0m)
+  x  27 [chromium] › tests\e2e\smoke.spec.ts:25:3 › Smoke Tests - Critical Paths › admin can access dashboard and key modules (retry #1) (1.0m)
+  ok 28 [chromium] › tests\e2e\smoke.spec.ts:25:3 › Smoke Tests - Critical Paths › admin can access dashboard and key modules (retry #2) (7.4s)
+  ok 29 [chromium] › tests\e2e\smoke.spec.ts:44:3 › Smoke Tests - Critical Paths › anggota can access dashboard and savings (6.5s)
+  ok 30 [chromium] › tests\e2e\smoke.spec.ts:62:3 › Smoke Tests - Critical Paths › login page has quick login buttons (2.2s)
+
+
+  1) [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › operator role › should display all core sidebar menus 
+
+    Error: Expected core menu "Manajemen Anggota" not found
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+      203 |         for (const expected of coreMenus) {
+      204 |           const found = foundMenus.some(m => m.toLowerCase().includes(expected.toLowerCase()));
+    > 205 |           expect(found, `Expected core menu "${expected}" not found`).toBeTruthy();
+          |                                                                       ^
+      206 |         }
+      207 |         
+      208 |         // Check optional menus - just log if found
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:205:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: Expected core menu "Tiket & Pengaduan" not found
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+      203 |         for (const expected of coreMenus) {
+      204 |           const found = foundMenus.some(m => m.toLowerCase().includes(expected.toLowerCase()));
+    > 205 |           expect(found, `Expected core menu "${expected}" not found`).toBeTruthy();
+          |                                                                       ^
+      206 |         }
+      207 |         
+      208 |         // Check optional menus - just log if found
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:205:71
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error: browserContext.close: Target page, context or browser has been closed
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium-retry1\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: Expected core menu "Dashboard Utama" not found
+
+    expect(received).toBeTruthy()
+
+    Received: false
+
+      203 |         for (const expected of coreMenus) {
+      204 |           const found = foundMenus.some(m => m.toLowerCase().includes(expected.toLowerCase()));
+    > 205 |           expect(found, `Expected core menu "${expected}" not found`).toBeTruthy();
+          |                                                                       ^
+      206 |         }
+      207 |         
+      208 |         // Check optional menus - just log if found
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:205:71
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium-retry2\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-b275e-play-all-core-sidebar-menus-chromium-retry2\error-context.md
+
+  2) [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › operator role › should expand and load Pinjaman sub-menus 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      250 |           const parent = 'Pinjaman (Loans)';
+      251 |           const clicked = await clickMenu(page, parent);
+    > 252 |           expect(clicked).toBeTruthy();
+          |                           ^
+      253 |           
+      254 |           for (const sub of SUB_MENUS[parent]) {
+      255 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:252:27
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      250 |           const parent = 'Pinjaman (Loans)';
+      251 |           const clicked = await clickMenu(page, parent);
+    > 252 |           expect(clicked).toBeTruthy();
+          |                           ^
+      253 |           
+      254 |           for (const sub of SUB_MENUS[parent]) {
+      255 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:252:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium-retry1\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium-retry1\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      250 |           const parent = 'Pinjaman (Loans)';
+      251 |           const clicked = await clickMenu(page, parent);
+    > 252 |           expect(clicked).toBeTruthy();
+          |                           ^
+      253 |           
+      254 |           for (const sub of SUB_MENUS[parent]) {
+      255 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:252:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium-retry2\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium-retry2\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-c4b07-and-load-Pinjaman-sub-menus-chromium-retry2\error-context.md
+
+  3) [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › admin role › should expand and load Pinjaman sub-menus 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      250 |           const parent = 'Pinjaman (Loans)';
+      251 |           const clicked = await clickMenu(page, parent);
+    > 252 |           expect(clicked).toBeTruthy();
+          |                           ^
+      253 |           
+      254 |           for (const sub of SUB_MENUS[parent]) {
+      255 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:252:27
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> C:\Users\ASUS NUC\AppData\Local\ms-playwright\chromium_headless_shell-1228\chrome-headless-shell-win64\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\ASUSNU~1\AppData\Local\Temp\playwright_chromiumdev_profile-gzADxr --remote-debugging-pipe --no-startup-window
+    <launched> pid=1988
+    [pid=1988][err] [0715/100032.599:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=1988][err] [0715/100032.608:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=1988][err] [0715/100032.623:INFO:CONSOLE:16] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (16)
+    [pid=1988][err] [0715/100104.574:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=1988][err] [0715/100105.509:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=1988][err] [0715/100105.587:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=1988][err] [0715/100111.993:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=1988][err] [0715/100117.298:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=1988][err] [0715/100117.382:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=1988][err] [0715/100127.432:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=1988][err] [0715/100127.572:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=1988][err] [0715/100127.585:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=1988][err] [0715/100131.456:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=1988][err] [0715/100131.591:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=1988][err] [0715/100131.608:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=1988][err] [0715/100134.833:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=1988][err] [0715/100134.846:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=1988][err] [0715/100136.693:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=1988][err] [0715/100141.036:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=1988][err] [0715/100141.080:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=1988][err] [0715/100143.262:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=1988][err] [0715/100157.201:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=1988][err] [0715/100157.336:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=1988][err] [0715/100208.722:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=1988][err] [0715/100208.746:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=1988] <gracefully close start>
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      250 |           const parent = 'Pinjaman (Loans)';
+      251 |           const clicked = await clickMenu(page, parent);
+    > 252 |           expect(clicked).toBeTruthy();
+          |                           ^
+      253 |           
+      254 |           for (const sub of SUB_MENUS[parent]) {
+      255 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:252:27
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\sidebar-Sidebar-Navigation-e792e-and-load-Pinjaman-sub-menus-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests\e2e\sidebar.spec.ts:235:9 › Sidebar Navigation › operator role › should expand and load Simpanan sub-menus 
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      236 |           const parent = 'Simpanan (Savings)';
+      237 |           const clicked = await clickMenu(page, parent);
+    > 238 |           expect(clicked).toBeTruthy();
+          |                           ^
+      239 |           
+      240 |           for (const sub of SUB_MENUS[parent]) {
+      241 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:238:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-78b82-and-load-Simpanan-sub-menus-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-78b82-and-load-Simpanan-sub-menus-chromium\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-78b82-and-load-Simpanan-sub-menus-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: expect(received).toBeTruthy()
+
+    Received: false
+
+      236 |           const parent = 'Simpanan (Savings)';
+      237 |           const clicked = await clickMenu(page, parent);
+    > 238 |           expect(clicked).toBeTruthy();
+          |                           ^
+      239 |           
+      240 |           for (const sub of SUB_MENUS[parent]) {
+      241 |             const subClicked = await clickSubMenu(page, parent, sub.label);
+        at C:\Users\ASUS NUC\Desktop\Project Aplikasi\MetroCoop\apps\web\tests\e2e\sidebar.spec.ts:238:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-78b82-and-load-Simpanan-sub-menus-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: video (video/webm) ──────────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-78b82-and-load-Simpanan-sub-menus-chromium-retry1\video.webm
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-78b82-and-load-Simpanan-sub-menus-chromium-retry1\error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-78b82-and-load-Simpanan-sub-menus-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\sidebar-Sidebar-Navigation-78b82-and-load-Simpanan-sub-menus-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › anggota role › should load content for each main menu 
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error: browserContext.close: Test ended.
+    Browser logs:
+
+    <launching> C:\Users\ASUS NUC\AppData\Local\ms-playwright\chromium_headless_shell-1228\chrome-headless-shell-win64\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\ASUSNU~1\AppData\Local\Temp\playwright_chromiumdev_profile-yDn89F --remote-debugging-pipe --no-startup-window
+    <launched> pid=16524
+    [pid=16524][err] [0715/101245.469:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=16524][err] [0715/101245.471:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=16524][err] [0715/101245.499:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=16524][err] [0715/101250.235:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=16524][err] [0715/101250.259:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=16524][err] [0715/101252.063:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=16524] <gracefully close start>
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\sidebar-Sidebar-Navigation-ddaa2--content-for-each-main-menu-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\sidebar-Sidebar-Navigation-ddaa2--content-for-each-main-menu-chromium\error-context.md
+
+  6) [chromium] › tests\e2e\smoke.spec.ts:25:3 › Smoke Tests - Critical Paths › admin can access dashboard and key modules 
+
+    Test timeout of 30000ms exceeded.
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error: browserContext.close: Test timeout of 30000ms exceeded.
+    Browser logs:
+
+    <launching> C:\Users\ASUS NUC\AppData\Local\ms-playwright\chromium_headless_shell-1228\chrome-headless-shell-win64\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\ASUSNU~1\AppData\Local\Temp\playwright_chromiumdev_profile-V3rd03 --remote-debugging-pipe --no-startup-window
+    <launched> pid=10580
+    [pid=10580][err] [0715/101400.386:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=10580][err] [0715/101400.434:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=10580][err] [0715/101429.179:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=10580][err] [0715/101429.238:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=10580][err] [0715/101430.436:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=10580][err] [0715/101434.103:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=10580][err] [0715/101434.119:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=10580][err] [0715/101447.390:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=10580][err] [0715/101447.432:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=10580][err] [0715/101458.390:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=10580] <gracefully close start>
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\smoke-Smoke-Tests---Critic-08b4e-s-dashboard-and-key-modules-chromium\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\smoke-Smoke-Tests---Critic-08b4e-s-dashboard-and-key-modules-chromium\error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Test timeout of 30000ms exceeded.
+
+    Tearing down "context" exceeded the test timeout of 30000ms.
+
+    Error: browserContext.close: Test timeout of 30000ms exceeded.
+    Browser logs:
+
+    <launching> C:\Users\ASUS NUC\AppData\Local\ms-playwright\chromium_headless_shell-1228\chrome-headless-shell-win64\chrome-headless-shell.exe --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,Translate,AutoDeElevate,RenderDocument,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --user-data-dir=C:\Users\ASUSNU~1\AppData\Local\Temp\playwright_chromiumdev_profile-9T2QVC --remote-debugging-pipe --no-startup-window
+    <launched> pid=11556
+    [pid=11556][err] [0715/101608.508:ERROR:gpu\ipc\client\command_buffer_proxy_impl.cc:285] ContextResult::kTransientFailure: Failed to send GpuControl.CreateCommandBuffer.
+    [pid=11556][err] [0715/101610.660:INFO:CONSOLE:8] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (8)
+    [pid=11556][err] [0715/101610.976:INFO:CONSOLE:0] "Loading the stylesheet 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap' violates the following Content Security Policy directive: "style-src 'self' 'unsafe-inline'". Note that 'style-src-elem' was not explicitly set, so 'style-src' is used as a fallback. The action has been blocked.", source: http://localhost:3000/login (0)
+    [pid=11556][err] [0715/101628.362:ERROR:net\socket\tcp_socket_win.cc:1069] connect failed: 10013
+    [pid=11556] <gracefully close start>
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results\smoke-Smoke-Tests---Critic-08b4e-s-dashboard-and-key-modules-chromium-retry1\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results\smoke-Smoke-Tests---Critic-08b4e-s-dashboard-and-key-modules-chromium-retry1\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\smoke-Smoke-Tests---Critic-08b4e-s-dashboard-and-key-modules-chromium-retry1\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\smoke-Smoke-Tests---Critic-08b4e-s-dashboard-and-key-modules-chromium-retry1\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests\e2e\sidebar.spec.ts:199:7 › Sidebar Navigation › operator role › should display all core sidebar menus 
+    [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › operator role › should expand and load Pinjaman sub-menus 
+  4 flaky
+    [chromium] › tests\e2e\sidebar.spec.ts:249:9 › Sidebar Navigation › admin role › should expand and load Pinjaman sub-menus 
+    [chromium] › tests\e2e\sidebar.spec.ts:235:9 › Sidebar Navigation › operator role › should expand and load Simpanan sub-menus 
+    [chromium] › tests\e2e\sidebar.spec.ts:220:7 › Sidebar Navigation › anggota role › should load content for each main menu 
+    [chromium] › tests\e2e\smoke.spec.ts:25:3 › Smoke Tests - Critical Paths › admin can access dashboard and key modules 
+  13 passed (17.3m)
+
