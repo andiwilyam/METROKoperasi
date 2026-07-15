@@ -1,0 +1,7 @@
+﻿gh : template: :1: unexpected "%" in operand
+At line:15 char:4257
++ ... MetroCoop"; gh api repos/andiwilyam/METROKoperasi/actions/runs/293843 ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (template: :1: unexpected "%" in operand:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
