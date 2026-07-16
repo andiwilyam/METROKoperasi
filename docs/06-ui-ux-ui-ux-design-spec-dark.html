@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI/UX Design — MetroCoop (Dark Theme)</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Dark Theme Colors - Wallpaper Inspired */
+  --primary: #bfdbfe;           /* Sky blue - bright but soft */
+  --primary-light: #93c5fd;     /* Sky blue light */
+  --primary-dark: #1e40af;      /* Dark blue */
+  --accent: #06b6d4;            /* Cyan accent */
+  --bg: #0a0c14;                /* Very dark blue - wallpaper */
+  --bg-alt: #111827;            /* Slightly lighter dark */
+  --bg-code: #151821;           /* Dark code background */
+  --text: #e5e7eb;              /* Off white */
+  --text-muted: #a5b4fc;        /* Muted blue */
+  --text-caption: #93c5fd;      /* Closed captions text */
+  --border: #374151;            /* Dark border */
+  --shadow: 0 4px 12px rgba(20, 20, 40, 0.4); /* Enhanced shadow */
+  --sidebar-w: 280px;
+}
+
+/* Ensure dark mode is default - override light mode variables */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  background-image: 
+    linear-gradient(135deg, rgba(3, 7, 18, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%),
+    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
+  display: flex;
+}
+
+/* Closed Captions Panel (Top Banner) */
+.closed-captions-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(20, 28, 50, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 12px;
+  color: var(--text-caption);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.closed-captions-panel .cc-icon {
+  margin-right: 8px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.closed-ca examples {
+  display: inline-flex;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.closed-captions-panel .cc-example {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--text-caption);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 40px; /* Leave space for closed captions panel */
+  left: 0;
+  width: var(--sidebar-w);
+  height: calc(100vh - 40px);
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.3);
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.sidebar-brand small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+
+.sidebar-nav a.active {
+  background: rgba(59, 130, 246, 0.25);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+
+/* Main content - adjusted for closed captions */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+  margin-top: 40px;
+}
+
+.content-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Typography with improved contrast */
+h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary-light);
+  margin: 0 0 12px;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 48px 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--primary-dark);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+h4 { font-size: 16px; font-weight: 600; color: var(--primary-light); margin: 24px 0 8px; }
+h5 { font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 20px 0 6px; text-transform: uppercase; }
+p { margin: 0 0 12px; color: var(--text); line-height: 1.8; }
+strong { font-weight: 600; color: #fff; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; color: #fff; }
+
+/* Tables with better contrast */
+table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 13px; }
+th { background: var(--primary-dark); color: #fff; font-weight: 600; padding: 12px 14px; }
+td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; background: var(--bg-alt); }
+tr:hover td { background: rgba(59, 130, 246, 0.15); }
+
+/* Code blocks with better visibility */
+code { background: var(--bg-code); color: var(--accent); }
+pre {
+  background: #0a0e17;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Emphasizing important information with background */
+.important-note {
+  background: rgba(251, 146, 60, 0.15);
+  border-left: 4px solid #fb923c;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: #fff;
+}
+
+/* Enhanced scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Print styles optimized for dark theme */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  body { background-image: none; background-color: white; }
+  h1, h2, h3 { color: black; }
+  * { color: black !important; background: white !important; border-color: #ddd !important; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 240px; }
+  .content-inner { padding: 32px; }
+}
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar { position: relative; width: 100%; height: auto; }
+  .content { margin-left: 0; margin-top: 40px; }
+  .closed-captions-panel { position: relative; height: auto; }
+  .content-inner { padding: 24px 16px; }
+}
+</style>
+</head>
+<body>
+  
+    <div class="closed-captions-panel">
+      <span class="cc-icon">🔊</span>
+      Penjelasan: Sistem MetroCoop adalah platform manajemen koperasi simpan pinjam terintegrasi yang dirancang khusus untuk memenuhi kebutuhan koperasi Indonesia, didukung oleh teknologi cloud modern dan AI intelligent scoring.
+      <div class="examples">
+        <span class="cc-example">🏦 KSP: Koperasi Simpan Pinjam</span>
+        <span class="cc-example">💰 4 Jenis Simpanan</span>
+        <span class="cc-example">🪙 RPA Mulai</span>
+        <span class="cc-example">🤖 AI Credit Scoring</span>
+      </div>
+    </div>
+  
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h2>MetroCoop</h2>
+      <small>Documentation Suite - Dark Theme</small>
+    </div>
+    <div class="sidebar-nav">
+      <a href="01-proposal-proposal-teknis-komersial.html" class="">
+      <span class="num">1</span>
+      Proposal Teknis & Komersial
+    </a>
+<a href="02-company-profile-company-profile-portofolio.html" class="">
+      <span class="num">2</span>
+      Company Profile & Portofolio
+    </a>
+<a href="03-nda-nda-draft.html" class="">
+      <span class="num">3</span>
+      Draft NDA
+    </a>
+<a href="04-brd-brd-urs.html" class="">
+      <span class="num">4</span>
+      BRD / URS
+    </a>
+<a href="05-srs-srs-specification.html" class="">
+      <span class="num">5</span>
+      SRS
+    </a>
+<a href="06-ui-ux-ui-ux-design-spec.html" class="active">
+      <span class="num">6</span>
+      UI/UX Design
+    </a>
+<a href="07-project-plan-project-plan.html" class="">
+      <span class="num">7</span>
+      Project Plan
+    </a>
+    </div>
+    <div class="sidebar-footer">
+      MetroCoop © 2026<br>
+      Theme: Dark | Wallpaper: Cyberpunk Blue<br>
+      Generated: 16/7/2026
+    </div>
+  </nav>
+  <main class="content">
+    <div class="content-inner">
+      <h1>Spesifikasi Desain UI/UX — MetroCoop</h1>
+
+<p><strong>Versi Dokumen:</strong> 2.0  <br><strong>Tanggal:</strong> 16 Juli 2026  <br><strong>Status:</strong> Final  <br><strong>Proyek:</strong> MetroCoop — Sistem Informasi Koperasi Simpan Pinjam Terintegrasi  <br><strong>Arsitektur:</strong> Monorepo (React 19 + Tailwind CSS v4 + Zustand)  <br><strong>Library Ikon:</strong> Lucide React  <br><strong>Animasi:</strong> Motion (Framer Motion successor)</p>
+
+<hr>
+
+<h2>Daftar Isi</h2>
+
+<ul><li><a href="#1-pendahuluan">Pendahuluan</a></li>
+<li><a href="#2-design-system">Design System</a></li>
+<li><a href="#3-arsitektur-layout">Arsitektur Layout</a></li>
+<li><a href="#4-spesifikasi-wireframe">Spesifikasi Wireframe</a></li>
+<li><a href="#5-struktur-navigasi">Struktur Navigasi</a></li>
+<li><a href="#6-spesifikasi-formulir">Spesifikasi Formulir</a></li>
+<li><a href="#7-desain-responsif">Desain Responsif</a></li>
+<li><a href="#8-darklight-mode">Dark/Light Mode</a></li>
+<li><a href="#9-aksesibilitas">Aksesibilitas</a></li>
+<li><a href="#10-lampiran">Lampiran</a></li>
+</ul>
+<hr>
+
+<h2>1. Pendahuluan</h2>
+
+<h3>1.1 Tujuan</h3>
+
+<p>Dokumen ini mendeskripsikan seluruh aspek desain UI/UX untuk aplikasi <strong>MetroCoop</strong>, sebuah platform digitalisasi koperasi simpan pinjam (KSP) yang terintegrasi. Dokumen ini menjadi acuan utama bagi tim pengembang, desainer UI, dan stakeholder proyek dalam membangun, memelihara, dan mengevaluasi antarmuka pengguna aplikasi.</p>
+
+<h3>1.2 Ruang Lingkup</h3>
+
+<p>Spesifikasi mencakup seluruh layar (<em>screen</em>) yang ada dalam aplikasi, meliputi:</p>
+
+<ul><li><strong>Portal Publik:</strong> Landing page (CMS-editable), layar autentikasi</li>
+<li><strong>Portal Admin/Operator:</strong> Dashboard utama, manajemen keanggotaan, simpanan, pinjaman, unit usaha (toko/POS, PPOB, sewa, pembiayaan, ventura), akuntansi (COA, jurnal, buku besar, neraca saldo, laporan keuangan), pengaturan sistem</li>
+<li><strong>Portal Anggota:</strong> Dashboard mandiri, informasi simpanan/pinjaman, pengajuan, tiket bantuan, profil</li>
+<li><strong>Portal Perusahaan:</strong> Pengajuan pembiayaan ventura, registrasi mitra bisnis</li>
+</ul>
+<h3>1.3 Prinsip Desain</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Prinsip</th><th>Deskripsi</th></tr></thead><tbody><tr><td>1</td><td><strong>WCAG 2.1 AA</strong></td><td>Semua elemen memenuhi kontras minimum 4.5:1, navigasi keyboard, label aksesibilitas</td></tr><tr><td>2</td><td><strong>Mobile-Responsive</strong></td><td>Mendukung tiga breakpoint: mobile (<768px), tablet (768–1023px), desktop (≥1024px)</td></tr><tr><td>3</td><td><strong>Dark/Light Mode</strong></td><td>Empat tema preset yang dapat ditukar secara real-time tanpa reload</td></tr><tr><td>4</td><td><strong>Konsistensi Visual</strong></td><td>Seluruh komponen menggunakan design token terpusat (<code>--mc-*</code> CSS variables)</td></tr><tr><td>5</td><td><strong>Feedback Instan</strong></td><td>Setiap aksi pengguna mendapat respons visual (loading, sukses, error, animasi)</td></tr><tr><td>6</td><td><strong>Hierarki Informasi</strong></td><td>Tampilan data mengikuti pola: KPI ringkas → grafik → tabel detail</td></tr></tbody></table>
+<h3>1.4 Target Pengguna</h3>
+
+<table class="dark-theme"><thead><tr><th>Peran</th><th>Akses</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Superadmin</td><td>Penuh</td><td>Akses seluruh modul + pengaturan sistem</td></tr><tr><td>Admin</td><td>Penuh</td><td>Akses seluruh modul operasional</td></tr><tr><td>Operator</td><td>Terbatas</td><td>Akses operasional harian tanpa pengaturan sensitif</td></tr><tr><td>Anggota</td><td>Mandiri</td><td>Portal self-service untuk data pribadi</td></tr><tr><td>Perusahaan</td><td>Terbatas</td><td>Portal untuk pengajuan pembiayaan ventura</td></tr></tbody></table>
+<hr>
+
+<h2>2. Design System</h2>
+
+<h3>2.1 Tema Warna (Theme Presets)</h3>
+
+<p>Aplikasi mendukung <strong>4 tema preset</strong> yang diatur melalui atribut <code>data-theme</code> pada <code><html></code> dan disimpan di <code>localStorage</code> dengan kunci <code>theme_preset</code>.</p>
+
+<h4>2.1.1 Heritage Light (Default)</h4>
+
+<p>Tema utama dengan nuansa krem dan emas, terinspirasi estetika <em>editorial luxe</em>.</p>
+
+<table class="dark-theme"><thead><tr><th>Token CSS</th><th>Nilai</th><th>Kegunaan</th></tr></thead><tbody><tr><td><code>--mc-bg</code></td><td><code>#f6f1e9</code></td><td>Latar belakang halaman</td></tr><tr><td><code>--mc-surface</code></td><td><code>#fffdf9</code></td><td>Latar kartu/formulir</td></tr><tr><td><code>--mc-surface-2</code></td><td><code>#fbf7ef</code></td><td>Latar elemen sekunder</td></tr><tr><td><code>--mc-border</code></td><td><code>#e8dfcd</code></td><td>Garis batas elemen</td></tr><tr><td><code>--mc-ink</code></td><td><code>#2c2820</code></td><td>Teks utama</td></tr><tr><td><code>--mc-ink-strong</code></td><td><code>#23201b</code></td><td>Teks judul/bold</td></tr><tr><td><code>--mc-muted</code></td><td><code>#5a5246</code></td><td>Teks sekunder/hint</td></tr><tr><td><code>--mc-sidebar</code></td><td><code>#fbf7ef</code></td><td>Latar sidebar</td></tr><tr><td><code>--mc-sidebar-ink</code></td><td><code>#23201b</code></td><td>Teks sidebar</td></tr><tr><td><code>--mc-sidebar-muted</code></td><td><code>#8a8068</code></td><td>Teks sidebar sekunder</td></tr><tr><td><code>--mc-sidebar-active</code></td><td><code>rgba(200, 162, 75, 0.14)</code></td><td>Latar item sidebar aktif</td></tr><tr><td><code>--mc-primary</code></td><td><code>#9a7422</code></td><td>Warna primer (emas)</td></tr><tr><td><code>--mc-accent</code></td><td><code>#c8a24b</code></td><td>Warna aksen utama (tombol, badge)</td></tr><tr><td><code>--mc-accent-2</code></td><td><code>#a8802f</code></td><td>Aksen hover</td></tr><tr><td><code>--mc-on-accent</code></td><td><code>#fffdf9</code></td><td>Teks di atas elemen aksen</td></tr><tr><td><code>--mc-success</code></td><td><code>#1f6f54</code></td><td>Warna sukses</td></tr><tr><td><code>--mc-success-bg</code></td><td><code>rgba(31, 111, 84, 0.12)</code></td><td>Latar badge sukses</td></tr><tr><td><code>--mc-danger</code></td><td><code>#a8443a</code></td><td>Warna bahaya/error</td></tr><tr><td><code>--mc-danger-bg</code></td><td><code>rgba(180, 60, 50, 0.10)</code></td><td>Latar badge bahaya</td></tr><tr><td><code>--mc-ring</code></td><td><code>rgba(154, 116, 34, 0.45)</code></td><td>Warna outline fokus</td></tr></tbody></table>
+<h4>2.1.2 Midnight Heritage</h4>
+
+<p>Tema gelap dengan nuansa <em>navy + emas</em>, kesan bank privat.</p>
+
+<table class="dark-theme"><thead><tr><th>Token CSS</th><th>Nilai</th></tr></thead><tbody><tr><td><code>--mc-bg</code></td><td><code>#0c1322</code></td></tr><tr><td><code>--mc-surface</code></td><td><code>#111c30</code></td></tr><tr><td><code>--mc-surface-2</code></td><td><code>#0e1828</code></td></tr><tr><td><code>--mc-border</code></td><td><code>rgba(255, 255, 255, 0.07)</code></td></tr><tr><td><code>--mc-ink</code></td><td><code>#dde3ee</code></td></tr><tr><td><code>--mc-ink-strong</code></td><td><code>#f0e6cf</code></td></tr><tr><td><code>--mc-muted</code></td><td><code>#9aa6bd</code></td></tr><tr><td><code>--mc-sidebar</code></td><td><code>#0a1120</code></td></tr><tr><td><code>--mc-sidebar-ink</code></td><td><code>#f0e6cf</code></td></tr><tr><td><code>--mc-primary</code></td><td><code>#e0b973</code></td></tr><tr><td><code>--mc-accent</code></td><td><code>#c8a24b</code></td></tr><tr><td><code>--mc-success</code></td><td><code>#6ee7b7</code></td></tr><tr><td><code>--mc-danger</code></td><td><code>#fca5a5</code></td></tr><tr><td><code>--mc-ring</code></td><td><code>rgba(224, 185, 115, 0.5)</code></td></tr></tbody></table>
+<h4>2.1.3 Classic Royal Blue</h4>
+
+<p>Tema biru korporat klasik, familiar bagi pengguna sistem perbankan.</p>
+
+<table class="dark-theme"><thead><tr><th>Token CSS</th><th>Nilai</th></tr></thead><tbody><tr><td><code>--mc-bg</code></td><td><code>#f8fafc</code></td></tr><tr><td><code>--mc-surface</code></td><td><code>#ffffff</code></td></tr><tr><td><code>--mc-surface-2</code></td><td><code>#f1f5f9</code></td></tr><tr><td><code>--mc-border</code></td><td><code>#e2e8f0</code></td></tr><tr><td><code>--mc-ink</code></td><td><code>#334155</code></td></tr><tr><td><code>--mc-ink-strong</code></td><td><code>#0f172a</code></td></tr><tr><td><code>--mc-muted</code></td><td><code>#64748b</code></td></tr><tr><td><code>--mc-sidebar</code></td><td><code>#0f172a</code></td></tr><tr><td><code>--mc-sidebar-ink</code></td><td><code>#e2e8f0</code></td></tr><tr><td><code>--mc-primary</code></td><td><code>#2563eb</code></td></tr><tr><td><code>--mc-accent</code></td><td><code>#d97706</code></td></tr><tr><td><code>--mc-success</code></td><td><code>#16a34a</code></td></tr><tr><td><code>--mc-danger</code></td><td><code>#dc2626</code></td></tr><tr><td><code>--mc-ring</code></td><td><code>rgba(37, 99, 235, 0.45)</code></td></tr></tbody></table>
+<h4>2.1.4 Teal Ocean</h4>
+
+<p>Tema <em>marine modern</em> untuk koperasi digital.</p>
+
+<table class="dark-theme"><thead><tr><th>Token CSS</th><th>Nilai</th></tr></thead><tbody><tr><td><code>--mc-bg</code></td><td><code>#f0fdfa</code></td></tr><tr><td><code>--mc-surface</code></td><td><code>#ffffff</code></td></tr><tr><td><code>--mc-surface-2</code></td><td><code>#ecfeff</code></td></tr><tr><td><code>--mc-border</code></td><td><code>#cbd5e1</code></td></tr><tr><td><code>--mc-ink</code></td><td><code>#334155</code></td></tr><tr><td><code>--mc-ink-strong</code></td><td><code>#042f2e</code></td></tr><tr><td><code>--mc-muted</code></td><td><code>#5e7591</code></td></tr><tr><td><code>--mc-sidebar</code></td><td><code>#042f2e</code></td></tr><tr><td><code>--mc-sidebar-ink</code></td><td><code>#ccfbf1</code></td></tr><tr><td><code>--mc-primary</code></td><td><code>#0d9488</code></td></tr><tr><td><code>--mc-accent</code></td><td><code>#0891b2</code></td></tr><tr><td><code>--mc-success</code></td><td><code>#0f766e</code></td></tr><tr><td><code>--mc-danger</code></td><td><code>#dc2626</code></td></tr><tr><td><code>--mc-ring</code></td><td><code>rgba(13, 148, 136, 0.45)</code></td></tr></tbody></table>
+<h3>2.2 Tipografi</h3>
+
+<table class="dark-theme"><thead><tr><th>Font</th><th>Family CSS</th><th>Kegunaan</th></tr></thead><tbody><tr><td><strong>Inter</strong></td><td><code>"Inter", ui-sans-serif, system-ui, sans-serif</code></td><td>Teks body, label, tombol, tabel</td></tr><tr><td><strong>JetBrains Mono</strong></td><td><code>"JetBrains Mono", ui-monospace, SFMono-Regular, monospace</code></td><td>Angka, kode akun, nomor transaksi, kode</td></tr><tr><td><strong>Fraunces</strong></td><td><code>"Fraunces", serif</code></td><td>Display headings (landing page)</td></tr></tbody></table>
+<strong>Skala Ukuran Teks:</strong>
+
+<table class="dark-theme"><thead><tr><th>Kelas Tailwind</th><th>Ukuran</th><th>Kegunaan</th></tr></thead><tbody><tr><td><code>text-[9px]</code></td><td>9px</td><td>Label sidebar "Koperasi Simpan Pinjam"</td></tr><tr><td><code>text-[10px]</code></td><td>10px</td><td>Badge, status label, info mikro, navigasi section header</td></tr><tr><td><code>text-[11px]</code></td><td>11px</td><td>Breadcrumb, sub-menu sidebar, deskripsi singkat</td></tr><tr><td><code>text-xs</code></td><td>12px</td><td>Body text utama, label form, tombol kecil</td></tr><tr><td><code>text-sm</code></td><td>14px</td><td>Heading kartu, judul tabel</td></tr><tr><td><code>text-base</code></td><td>16px</td><td>Paragraf landing page</td></tr><tr><td><code>text-lg</code></td><td>18px</td><td>Heading form login</td></tr><tr><td><code>text-xl</code></td><td>20px</td><td>Heading halaman</td></tr><tr><td><code>text-2xl</code></td><td>24px</td><td>KPI angka besar, judul dashboard</td></tr><tr><td><code>text-3xl</code></td><td>30px</td><td>Headline landing hero</td></tr></tbody></table>
+<strong>Bobot Font:</strong>
+
+<table class="dark-theme"><thead><tr><th>Bobot</th><th>Tailwind</th><th>Kegunaan</th></tr></thead><tbody><tr><td>Regular (400)</td><td><code>font-normal</code></td><td>Teks body</td></tr><tr><td>Medium (500)</td><td><code>font-medium</code></td><td>Label, breadcrumb</td></tr><tr><td>Semibold (600)</td><td><code>font-semibold</code></td><td>Tombol, sub-heading</td></tr><tr><td>Bold (700)</td><td><code>font-bold</code></td><td>Judul halaman, nama anggota</td></tr><tr><td>Extrabold (800)</td><td><code>font-extrabold</code></td><td>KPI angka, headline</td></tr></tbody></table>
+<h3>2.3 Spacing Scale</h3>
+
+<p>Menggunakan skala spacing bawaan Tailwind CSS v4:</p>
+
+<table class="dark-theme"><thead><tr><th>Token</th><th>Nilai</th><th>Kegunaan Umum</th></tr></thead><tbody><tr><td><code>p-1</code> / <code>m-1</code></td><td>4px</td><td>Padding mikro (ikon tombol)</td></tr><tr><td><code>p-1.5</code> / <code>m-1.5</code></td><td>6px</td><td>Padding item sidebar</td></tr><tr><td><code>p-2</code> / <code>m-2</code></td><td>8px</td><td>Padding kartu kecil, tombol inline</td></tr><tr><td><code>p-3</code> / <code>m-3</code></td><td>12px</td><td>Padding tabel sel, badge</td></tr><tr><td><code>p-4</code> / <code>m-4</code></td><td>16px</td><td>Padding kartu, margin section</td></tr><tr><td><code>p-5</code> / <code>m-5</code></td><td>20px</td><td>Padding kartu utama</td></tr><tr><td><code>p-6</code> / <code>m-6</code></td><td>24px</td><td>Padding header banner, margin antar section</td></tr><tr><td><code>p-8</code> / <code>m-8</code></td><td>32px</td><td>Padding form login, spacing hero</td></tr></tbody></table>
+<h3>2.4 Border Radius</h3>
+
+<table class="dark-theme"><thead><tr><th>Kelas</th><th>Nilai</th><th>Kegunaan</th></tr></thead><tbody><tr><td><code>rounded-md</code></td><td>6px</td><td>Tombol kecil, badge inline</td></tr><tr><td><code>rounded-lg</code></td><td>8px</td><td>Input form, tombol utama, tabel header</td></tr><tr><td><code>rounded-xl</code></td><td>12px</td><td>Kartu ringkas (KPI cards)</td></tr><tr><td><code>rounded-2xl</code></td><td>16px</td><td>Kartu utama, form login</td></tr><tr><td><code>rounded-3xl</code></td><td>24px</td><td>Kartu hero, elemen dekoratif</td></tr><tr><td><code>rounded-full</code></td><td>9999px</td><td>Avatar, badge status, scrollbar thumb</td></tr></tbody></table>
+<h3>2.5 Shadows</h3>
+
+<table class="dark-theme"><thead><tr><th>Level</th><th>Tailwind</th><th>Kegunaan</th></tr></thead><tbody><tr><td>Shadow-sm</td><td><code>shadow-sm</code></td><td>Header sticky, kartu default</td></tr><tr><td>Shadow-md</td><td><code>shadow-md</code></td><td>Kartu interaktif, tombol utama</td></tr><tr><td>Shadow-lg</td><td><code>shadow-lg</code></td><td>Dropdown menu</td></tr><tr><td>Shadow-xl</td><td><code>shadow-xl</code></td><td>Modal, dialog overlay</td></tr><tr><td>Shadow-2xl</td><td><code>shadow-2xl</code></td><td>Login form box</td></tr><tr><td>Box-shadow custom</td><td>Token-based</td><td><code>shadow-[var(--mc-accent)]/30</code> untuk brand accent</td></tr></tbody></table>
+<h3>2.6 Utility Classes Kustom (mc-*)</h3>
+
+<table class="dark-theme"><thead><tr><th>Class</th><th>Fungsi</th></tr></thead><tbody><tr><td><code>.mc-bg</code></td><td>Background + warna teks halaman</td></tr><tr><td><code>.mc-surface</code></td><td>Background kartu/formulir</td></tr><tr><td><code>.mc-surface-2</code></td><td>Background elemen sekunder</td></tr><tr><td><code>.mc-card</code></td><td>Surface + border + rounded-xl</td></tr><tr><td><code>.mc-ink</code></td><td>Warna teks utama</td></tr><tr><td><code>.mc-ink-strong</code></td><td>Warna teks judul</td></tr><tr><td><code>.mc-muted</code></td><td>Warna teks sekunder</td></tr><tr><td><code>.mc-border</code></td><td>Warna border</td></tr><tr><td><code>.mc-sidebar</code></td><td>Background sidebar</td></tr><tr><td><code>.mc-sidebar-ink</code></td><td>Teks sidebar</td></tr><tr><td><code>.mc-sidebar-muted</code></td><td>Teks sidebar sekunder</td></tr><tr><td><code>.mc-sidebar-item:hover</code></td><td>Hover state item sidebar</td></tr><tr><td><code>.mc-sidebar-active</code></td><td>State aktif item sidebar</td></tr><tr><td><code>.mc-btn-primary</code></td><td>Tombol primer (bg aksen, teks kontras)</td></tr><tr><td><code>.mc-btn-danger</code></td><td>Tombol bahaya (bg danger, teks danger)</td></tr><tr><td><code>.mc-badge-ok</code></td><td>Badge sukses (bg success, teks success)</td></tr><tr><td><code>.mc-badge-accent</code></td><td>Badge aksen (bg sidebar-active, teks primary)</td></tr><tr><td><code>.mc-icon-accent</code></td><td>Warna ikon aksen</td></tr><tr><td><code>.mc-focus:focus-visible</code></td><td>Outline fokus untuk aksesibilitas</td></tr></tbody></table>
+<h3>2.7 Animasi</h3>
+
+<table class="dark-theme"><thead><tr><th>Nama</th><th>CSS</th><th>Kegunaan</th></tr></thead><tbody><tr><td><code>transition-all-custom</code></td><td><code>all 0.3s cubic-bezier(0.4, 0, 0.2, 1)</code></td><td>Transisi kartu</td></tr><tr><td><code>animate-soft-pulse</code></td><td><code>scale(1→1.05), opacity(0.5→1)</code></td><td>Ikon badge aktif</td></tr><tr><td><code>typing-caret</code></td><td><code>border-right blink 0.75s</code></td><td>Efek mengetik subtitle login</td></tr><tr><td><code>glass-card</code></td><td><code>rgba(255,255,255,0.85) + blur(12px)</code></td><td>Efek glassmorphism ringan</td></tr><tr><td><code>dark-glass-card</code></td><td><code>rgba(15,23,42,0.95) + blur(12px)</code></td><td>Glassmorphism tema gelap</td></tr><tr><td><code>animate-shake</code></td><td><code>translateX(-5px↔5px) 0.5s</code></td><td>Error validasi form</td></tr><tr><td><code>animate-dropdownFade</code></td><td>Fade-in dropdown</td><td>Menu dropdown header</td></tr><tr><td><code>animate-fadeIn</code></td><td>Fade-in halaman</td><td>Load halaman baru</td></tr></tbody></table>
+<h3>2.8 Library & Dependencies</h3>
+
+<table class="dark-theme"><thead><tr><th>Package</th><th>Versi</th><th>Kegunaan</th></tr></thead><tbody><tr><td><code>react</code></td><td>^19.0.1</td><td>Framework UI</td></tr><tr><td><code>react-dom</code></td><td>^19.0.1</td><td>Renderer DOM</td></tr><tr><td><code>tailwindcss</code></td><td>^4.1.14</td><td>Utility-first CSS</td></tr><tr><td><code>@tailwindcss/vite</code></td><td>^4.1.14</td><td>Integrasi Tailwind + Vite</td></tr><tr><td><code>lucide-react</code></td><td>^0.546.0</td><td>Library ikon</td></tr><tr><td><code>motion</code></td><td>^12.23.24</td><td>Animasi (successor Framer Motion)</td></tr><tr><td><code>zustand</code></td><td>^5.0.14</td><td>State management</td></tr><tr><td><code>react-router-dom</code></td><td>^7.18.1</td><td>Routing</td></tr><tr><td><code>vite</code></td><td>^6.2.3</td><td>Build tool</td></tr><tr><td><code>playwright</code></td><td>^1.61.1</td><td>E2E testing</td></tr></tbody></table>
+<hr>
+
+<h2>3. Arsitektur Layout</h2>
+
+<h3>3.1 Struktur Layout Utama</h3>
+
+<p>``<code><br>┌─────────────────────────────────────────────────────────┐<br>│  HEADER (h-16, sticky top-0, z-30)                     │<br>│  ┌──────┬───────────────────────┬────────────────────┐  │<br>│  │ Menu │ Breadcrumb + Judul    │ Jam │ Badge │ User │  │<br>│  └──────┴───────────────────────┴────────────────────┘  │<br>├──────────┬──────────────────────────────────────────────┤<br>│ SIDEBAR  │  MAIN CONTENT AREA                           │<br>│ (w-64)   │  (flex-1, overflow-y-auto, p-6)             │<br>│          │                                              │<br>│ Brand    │  ┌──────────────────────────────────────┐   │<br>│ ─────    │  │  Konten halaman aktif                │   │<br>│ Menu     │  │  (AdminDashboard / AdminAnggota /     │   │<br>│ items    │  │   MemberPortal / dll.)                │   │<br>│          │  └──────────────────────────────────────┘   │<br>│          │                                              │<br>│          │                                              │<br>│ ─────    │                                              │<br>│ Theme    │                                              │<br>│ Switch   │                                              │<br>│ Logout   │                                              │<br>└──────────┴──────────────────────────────────────────────┘<br></code>`<code></p>
+
+<h3>3.2 Sidebar</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/Sidebar.tsx">Sidebar.tsx</a></p>
+
+<table class="dark-theme"><thead><tr><th>Properti</th><th>Nilai</th></tr></thead><tbody><tr><td>Lebar</td><td></code>w-64<code> (256px)</td></tr><tr><td>Tinggi</td><td></code>h-screen<code> (100vh)</td></tr><tr><td>Posisi</td><td></code>fixed<code> (mobile) / </code>sticky top-0<code> (desktop)</td></tr><tr><td>Z-index</td><td></code>z-50<code></td></tr><tr><td>Background</td><td></code>var(--mc-sidebar)<code></td></tr><tr><td>Border</td><td>Right border </code>var(--mc-border)<code></td></tr><tr><td>Transisi</td><td></code>transform 300ms ease-in-out<code></td></tr></tbody></table>
+<strong>Area Sidebar:</strong>
+
+<ul><li><strong>Brand Header</strong> (h-16): Logo ikon + nama "MetroCoop" + sublabel "Koperasi Simpan Pinjam"</li>
+<li><strong>Navigasi Menu</strong> (flex-1, overflow-y-auto, px-4, py-6, space-y-7):</li>
+</ul>   - Section header berlabel uppercase: "MANAJEMEN UTAMA", "Unit Usaha (Business)", "Manajemen Investasi & Penyertaan Modal", "Akuntansi & Laporan"
+   - Item menu: Ikon Lucide (w-4 h-4) + label (text-xs font-medium)
+   - Sub-menu: indent </code>pl-7<code>, font lebih kecil (text-[11px])
+   - Item aktif: </code>.mc-sidebar-active<code> (bg accent transparan, teks primary, font-semibold)
+   - Hover: </code>rgba(128,128,128,0.08)<code>
+<ul><li><strong>Footer</strong> (p-4, border-top):</li>
+</ul>   - Theme switcher: toggle Moon/Sun icon
+   - Tombol "Keluar Aplikasi" (mc-btn-danger)
+
+<p><strong>Responsif:</strong><br><ul><li>Desktop (≥1024px): Sidebar selalu terlihat (translate-x-0)</li><br><li>Mobile/Tablet (<1024px): Sidebar tersembunyi (-translate-x-full), muncul dengan overlay </code>bg-black/50 backdrop-blur-sm<code> saat tombol hamburger diklik</li><br></ul><br><h3>3.3 Header</h3></p>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/Header.tsx">Header.tsx</a></p>
+
+<table class="dark-theme"><thead><tr><th>Properti</th><th>Nilai</th></tr></thead><tbody><tr><td>Tinggi</td><td></code>h-16<code> (64px)</td></tr><tr><td>Posisi</td><td></code>sticky top-0 z-30<code></td></tr><tr><td>Background</td><td></code>var(--mc-surface)<code></td></tr><tr><td>Border</td><td>Bottom border </code>var(--mc-border)<code></td></tr><tr><td>Shadow</td><td></code>shadow-sm<code></td></tr></tbody></table>
+<strong>Area Header:</strong>
+
+<ul><li><strong>Kiri:</strong></li>
+</ul>   - Tombol hamburger (☰): </code>lg:hidden<code>, hanya tampil di mobile
+   - Breadcrumb: Teks </code>[11px] font-medium mc-muted<code> — format: </code>Aplikasi / MetroCoop<code>
+   - Judul halaman: </code>text-sm font-bold mc-ink-strong<code> — judul dinamis dari </code>formatTitle(activeMenu)<code>
+<ul><li><strong>Kanan:</strong></li>
+</ul>   - Jam real-time: </code>font-mono animate-fadeIn<code>, format Indonesia </code>16 Juli 2026, 14:30:00 WIB<code>, </code>hidden md:flex<code>
+   - Badge role: </code>text-[10px] font-bold rounded-full<code>, warna berbeda per role (Admin = mc-badge-ok, Anggota = mc-badge-accent)
+   - Notifikasi bell: ikon </code>Bell<code> dengan counter badge merah (text-[8px])
+   - Profil user: Avatar inisial (w-8 h-8 rounded-full) + nama + role, dropdown menu
+
+<p><strong>Dropdown Profil:</strong><br><ul><li>Lebar: </code>w-56<code></li><br><li>Isi: nama lengkap, username, status sesi, tombol "Keluar Sesi"</li><br><li>Backdrop: overlay </code>fixed inset-0 z-30<code> untuk menutup</li><br></ul><br><h3>3.4 Main Content Area</h3></p>
+
+<table class="dark-theme"><thead><tr><th>Properti</th><th>Nilai</th></tr></thead><tbody><tr><td>Lebar</td><td></code>flex-1<code> (sisa dari sidebar)</td></tr><tr><td>Padding</td><td></code>p-6<code></td></tr><tr><td>Overflow</td><td></code>overflow-y-auto<code></td></tr><tr><td>Min-height</td><td>Mengisi sisa viewport</td></tr></tbody></table>
+<h3>3.5 Responsive Breakpoints</h3>
+
+<table class="dark-theme"><thead><tr><th>Breakpoint</th><th>Tailwind Prefix</th><th>Lebar</th><th>Perilaku</th></tr></thead><tbody><tr><td>Mobile</td><td>Default / </code>sm<code></td><td><640px</td><td>Sidebar overlay, 1 kolom, header compact</td></tr><tr><td>Tablet</td><td></code>md<code> / </code>lg<code></td><td>640–1023px</td><td>Sidebar overlay, 2 kolom grid, header jam tampil</td></tr><tr><td>Desktop</td><td></code>lg<code> / </code>xl<code></td><td>≥1024px</td><td>Sidebar sticky, grid 4 kolom, full layout</td></tr></tbody></table>
+<hr>
+
+<h2>4. Spesifikasi Wireframe</h2>
+
+<h3>4.1 MetroKspLandingPage</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/pages/MetroKspLandingPage.tsx">MetroKspLandingPage.tsx</a>  <br><strong>Sub-komponen:</strong> Navbar, HeroSection, FeaturesGrid, TeamGrid, TestimonialSlider, PricingTable, ContactFooter  <br><strong>Kelas CSS:</strong> </code>.metroksp<code> (namespace) + </code>.mk-*<code> tokens</p>
+
+<p><strong>Layout & Elemen:</strong></p>
+
+<table class="dark-theme"><thead><tr><th>Section</th><th>Komponen</th><th>Deskripsi</th></tr></thead><tbody><tr><td><strong>Navbar</strong></td><td></code>Navbar<code></td><td>Logo + nama koperasi, navigasi anchor (#fitur, #produk, #kontak), tombol "Masuk" → login</td></tr><tr><td><strong>Hero</strong></td><td></code>HeroSection<code></td><td>Full-screen, background gradient/gambar, headline besar (text-4xl to 6xl), subheadline, 2 CTA tombol (primer + outline), badge status "Diawasi OJK"</td></tr><tr><td><strong>Fitur</strong></td><td></code>FeaturesGrid<code></td><td>Grid 3–4 kolom kartu fitur, ikon + judul + deskripsi</td></tr><tr><td><strong>Tim</strong></td><td></code>TeamGrid<code></td><td>Grid kartu anggota pengurus (foto + nama + jabatan)</td></tr><tr><td><strong>Testimoni</strong></td><td></code>TestimonialSlider<code></td><td>Carousel testimonial anggota (nama + foto + kutipan)</td></tr><tr><td><strong>Harga</strong></td><td></code>PricingTable<code></td><td>Tabel paket/produk simpanan dengan harga</td></tr><tr><td><strong>Kontak</strong></td><td></code>ContactFooter<code></td><td>Form kontak + alamat + copyright + social media</td></tr></tbody></table>
+<strong>Karakteristik Khusus:</strong>
+<ul><li>Seluruh konten bersifat <strong>CMS-editable</strong> — data diambil dari </code>metroKspData<code> object</li>
+<li>Background hero menggunakan CSS gradient atau gambar</li>
+<li>Efek glassmorphism pada kartu: </code>bg-white/10 backdrop-blur border border-white/20 rounded-2xl<code></li>
+<li>Font display: Fraunces untuk headline</li>
+<li>Variabel CSS khusus landing: </code>--mk-primary<code> (berbeda dari </code>--mc-*<code>)</li>
+</ul>
+<strong>Wireframe ASCII — Landing Page:</strong>
+
+<p></code>`<code><br>┌────────────────────────────────────────────────────────────┐<br>│  [Logo]  Fitur  Produk  Tim  Testimoni  [Masuk]           │<br>├────────────────────────────────────────────────────────────┤<br>│                                                            │<br>│  [Badge: Diawasi OJK]                                     │<br>│                                                            │<br>│  ════════════════════════════                              │<br>│  Headline Besar                      ┌──────────────┐      │<br>│  Subheadline deskripsi               │ Kartu:       │      │<br>│                                       │ Mengapa      │      │<br>│  [CTA Primer ──→] [CTA Sekunder]     │ MetroKSP     │      │<br>│                                       │ • Bagi hasil │      │<br>│                                       │ • Bunga rendah│     │<br>│                                       │ • Diawasi OJK│      │<br>│                                       └──────────────┘      │<br>│                                                            │<br>├────────────────────────────────────────────────────────────┤<br>│  # Fitur (FeaturesGrid)                                    │<br>│  ┌─────────┐ ┌─────────┐ ┌─────────┐ ┌─────────┐         │<br>│  │ [Ikon]  │ │ [Ikon]  │ │ [Ikon]  │ │ [Ikon]  │         │<br>│  │ Judul 1 │ │ Judul 2 │ │ Judul 3 │ │ Judul 4 │         │<br>│  │ Deskrip.│ │ Deskrip.│ │ Deskrip.│ │ Deskrip.│         │<br>│  └─────────┘ └─────────┘ └─────────┘ └─────────┘         │<br>├────────────────────────────────────────────────────────────┤<br>│  # Tim (TeamGrid)                                          │<br>│  ┌──────┐ ┌──────┐ ┌──────┐ ┌──────┐                      │<br>│  │ Foto │ │ Foto │ │ Foto │ │ Foto │                      │<br>│  │ Nama │ │ Nama │ │ Nama │ │ Nama │                      │<br>│  │ Jabat.│ │ Jabat.│ │ Jabat.│ │ Jabat.│                    │<br>│  └──────┘ └──────┘ └──────┘ └──────┘                      │<br>├────────────────────────────────────────────────────────────┤<br>│  # Testimoni (TestimonialSlider)                            │<br>│  "Kutipan testimonial anggota..." — Nama Anggota           │<br>│  ○ ○ ● ○  (dots navigasi)                                  │<br>├────────────────────────────────────────────────────────────┤<br>│  # Pricing (PricingTable)                                   │<br>│  ┌──────────┐ ┌──────────┐ ┌──────────┐                   │<br>│  │ Simpanan │ │ Simpanan │ │ Simpanan │                   │<br>│  │ Pokok    │ │ Wajib    │ │ Sukarela │                   │<br>│  │ Rp XXX   │ │ Rp XXX   │ │ Rp XXX   │                   │<br>│  │ [Daftar] │ │ [Daftar] │ │ [Daftar] │                   │<br>│  └──────────┘ └──────────┘ └──────────┘                   │<br>├────────────────────────────────────────────────────────────┤<br>│  # Kontak (ContactFooter)                                   │<br>│  ┌────────────────────┐ ┌────────────────────┐             │<br>│  │ Form:              │ │ Alamat:            │             │<br>│  │ [Nama]             │ │ Jl. ...            │             │<br>│  │ [Email]            │ │ Telp: ...          │             │<br>│  │ [Pesan]            │ │ © 2026 MetroCoop   │             │<br>│  │ [Kirim]            │ │                    │             │<br>│  └────────────────────┘ └────────────────────┘             │<br>└────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<p><strong>Responsif Landing:</strong><br><ul><li>Mobile: Hero 1 kolom, fitur 1 kolom, navbar hamburger menu</li><br><li>Tablet: Hero 2 kolom, fitur 2 kolom</li><br><li>Desktop: Hero 2 kolom (konten + kartu), fitur 3–4 kolom</li><br></ul><br><hr></p>
+
+<h3>4.2 LoginScreen</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/LoginScreen.tsx">LoginScreen.tsx</a></p>
+
+<p><strong>Layout & Elemen:</strong></p>
+
+<table class="dark-theme"><thead><tr><th>Area</th><th>Posisi</th><th>Elemen</th></tr></thead><tbody><tr><td>Background</td><td>Full-screen</td><td>Canvas animasi partikel + 2 blur sphere dekoratif</td></tr><tr><td>Branding</td><td>Kiri (md:col-span-5)</td><td>Logo, judul "MetroCoop v2.0", subjudul, statistik singkat (100% Auto Journaling, Multi Portal), test credentials</td></tr><tr><td>Form Login</td><td>Kanan (md:col-span-7)</td><td>Tab selector (Admin & Operator / Portal Anggota / Perusahaan), form fields, tombol submit</td></tr></tbody></table>
+<strong>Tab Portal:</strong>
+<ul><li>Tab 1: "Admin & Operator" — ikon Shield, warna emas (mc-accent)</li>
+<li>Tab 2: "Portal Anggota" — ikon User, warna emas (mc-accent)</li>
+<li>Tab 3: "Perusahaan" — ikon Building2, warna ungu (#a855f7)</li>
+</ul>
+<strong>Form Fields:</strong>
+<ul><li>Username/NIK: Input text, label dinamis per tab (Username Admin / NIK Anggota / Username Perusahaan)</li>
+<li>Password: Input password dengan toggle show/hide (Eye/EyeOff icon)</li>
+<li>Error state: Alert merah dengan animasi </code>animate-shake<code></li>
+<li>Processing state: Spinner + teks "Memvalidasi..."</li>
+</ul>
+<strong>Quick Login Buttons:</strong>
+<ul><li>3 tombol test credentials (Admin, Operator, Anggota) — klik auto-fill</li>
+<li>Perusahaan tab: form registrasi inline (toggle show/hide)</li>
+</ul>
+<strong>Wireframe ASCII — Login:</strong>
+
+<p></code>`<code><br>┌──────────────────────────────────────────────────────────────┐<br>│ (Canvas Partikel Background + Blur Spheres)                   │<br>│                                                               │<br>│  ┌──────────────────────┬─────────────────────────────┐      │<br>│  │                      │                             │      │<br>│  │ [Logo] MetroCoop     │ ┌─────┬──────────┬────────┐ │      │<br>│  │   v2.0              │ │Admin│ Anggota  │Perusaha.│ │      │<br>│  │                      │ └─────┴──────────┴────────┘ │      │<br>│  │ Platform Digitalisasi│                             │      │<br>│  │ Koperasi Masa Kini   │  Masuk Back Office          │      │<br>│  │                      │  Portal _____________        │      │<br>│  │ Kelola data, transaksi│                            │      │<br>│  │ simpanan, pinjaman...│  ┌──────────────────────┐  │      │<br>│  │                      │  │ Username Admin       │  │      │<br>│  │ ┌────────┐ ┌───────┐│  │ [________________]   │  │      │<br>│  │ │ 100%   │ │ Multi ││  ├──────────────────────┤  │      │<br>│  │ │ Auto   │ │Portal ││  │ Kata Sandi           │  │      │<br>│  │ │Journal.│ │       ││  │ [______________] [👁] │  │      │<br>│  │ └────────┘ └───────┘│  ├──────────────────────┤  │      │<br>│  │                      │  │                      │  │      │<br>│  │ 🔑 Test Credentials: │  │ [Masuk Sistem ✨]    │  │      │<br>│  │ ┌──────┐ ┌────────┐ │  │                      │  │      │<br>│  │ │Admin │ │Operat. │ │  └──────────────────────┘  │      │<br>│  │ └──────┘ └────────┘ │                             │      │<br>│  │ ┌──────────────────┐│  SSL Terenkripsi            │      │<br>│  │ │ Anggota           ││  © 2026 MetroCoop v2.0     │      │<br>│  │ └──────────────────┘│                             │      │<br>│  └──────────────────────┴─────────────────────────────┘      │<br>│                                                               │<br>│  METRO KOMUNIKA ASIA @2026 • Design By Andi Wilyam          │<br>└──────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<p><strong>Responsif Login:</strong><br><ul><li>Mobile: Layout 1 kolom (branding di atas, form di bawah), padding px-4</li><br><li>Tablet: Layout 2 kolom (branding kiri, form kanan)</li><br><li>Desktop: Layout 2 kolom, max-w-5xl, center</li><br></ul><br><hr></p>
+
+<h3>4.3 AdminDashboard</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminDashboard.tsx">AdminDashboard.tsx</a></p>
+
+<p><strong>Layout & Elemen:</strong></p>
+
+<table class="dark-theme"><thead><tr><th>Section</th><th>Grid</th><th>Elemen</th></tr></thead><tbody><tr><td>Welcome Banner</td><td>Full-width</td><td>Card dengan border-left accent, judul, badge tahun buku, tombol pengaturan</td></tr><tr><td>KPI Cards</td><td></code>grid-cols-1 sm:grid-cols-2 lg:grid-cols-4<code></td><td>4 kartu: Anggota Aktif, Total Simpanan, Pinjaman Beredar, SHU Terkumpul</td></tr><tr><td>Chart + Org</td><td></code>grid-cols-1 lg:grid-cols-12<code></td><td>8 kolom chart SVG, 4 kolom struktur pengurus</td></tr><tr><td>Unit Usaha Quick Access</td><td></code>grid-cols-1 md:grid-cols-2 lg:grid-cols-4<code></td><td>4 kartu: Toko POS, Sewa Alat, PPOB, Digital Payment</td></tr><tr><td>Venture Row</td><td></code>grid-cols-1 md:grid-cols-3<code></td><td>3 kartu: Total Investasi (gradient), Dividen, Pengajuan Baru</td></tr><tr><td>Pinjaman Table</td><td>Full-width</td><td>Tabel permohonan pinjaman terbaru dengan aksi Setujui/Tolak</td></tr></tbody></table>
+<strong>Data yang Ditampilkan:</strong>
+<ul><li>KPI: jumlah anggota aktif, total simpanan (format IDR), pinjaman beredar, SHU terkumpul</li>
+<li>Chart SVG: Perkembangan transaksi 6 bulan terakhir (Simpanan vs Pinjaman)</li>
+<li>Struktur pengurus: Ketua, Bendahara, anggota lain</li>
+<li>Unit usaha: Total revenue per unit (Toko, Sewa, PPOB, VA)</li>
+<li>Venture: Total investasi aktif, dividen terkumpul, pengajuan pending</li>
+</ul>
+<strong>Interaksi:</strong>
+<ul><li>Klik kartu KPI → navigasi ke modul terkait</li>
+<li>Tombol "Lihat Semua" → navigasi ke daftar lengkap</li>
+<li>Tombol "Setujui & Cairkan" / "Tolak" pada tabel pinjaman</li>
+</ul>
+<strong>Wireframe ASCII — Dashboard:</strong>
+
+<p></code>`<code><br>┌──────────────────────────────────────────────────────────────┐<br>│  Kesehatan Koperasi Global — MetroKSP        [Pengaturan]    │<br>│  Tahun Buku 2026 ✨  Sistem informasi keuangan koperasi...   │<br>├──────────┬──────────────┬───────────────┬───────────────────┤<br>│ Anggota  │ Total        │ Pinjaman      │ SHU               │<br>│ Aktif    │ Simpanan     │ Beredar       │ Terkumpul         │<br>│          │              │               │                   │<br>│ 150      │ Rp 500.000.000│ Rp 200.000.000│ Rp 25.000.000   │<br>│ +5 bln   │ Setoran aman │ Risiko Kendal. │ + Positif (Laba) │<br>└──────────┴──────────────┴───────────────┴───────────────────┘<br>┌──────────────────────────────────────┬──────────────────────┐<br>│  Perkembangan Transaksi Global       │ Organisasi Koperasi  │<br>│  Simpanan ●────── ●                  │                      │<br>│  Pinjaman ○────── ○                  │ [A] Ketua Koperasi   │<br>│                                      │ [B] Bendahara        │<br>│  Simpanan vs Pinjaman 6 bln terakhir │ [C] Sekretaris       │<br>│                                      │                      │<br>│  Jan Feb Mar Apr Mei Jun             │ [Sertifikasi Standar │<br>│                                      │  Mutu Koperasi]      │<br>├──────────┬──────────────┬────────────┬┼─────────────────────┤<br>│ Unit     │ Sewa Alat    │ PPOB       ││ Digital Payment (VA)│<br>│ Toko POS │              │ Pulsa/Listrik│                     │<br>│          │              │            ││                     │<br>│ Rp XXX   │ Rp XXX       │ Rp XXX     ││ Rp XXX              │<br>│ [Masuk →]│ [Urus →]     │ [Transaksi→]│ [Layanan VA →]     │<br>└──────────┴──────────────┴────────────┴┴─────────────────────┘<br>┌──────────────────────────────────────────────────────────────┐<br>│  Permohonan Pinjaman Terbaru               [Lihat Semua →]   │<br>│  ┌──────────┬──────────┬──────────┬────────┬────────┬──────┐│<br>│  │ Nama     │ Produk   │ Pokok    │ Tenor  │ Angs.  │ Aksi ││<br>│  ├──────────┼──────────┼──────────┼────────┼────────┼──────┤│<br>│  │ Anggota  │ Reguler  │ Rp 10Jt  │ 12 bln │ Rp 900K│[✓][✗]││<br>│  └──────────┴──────────┴──────────┴────────┴────────┴──────┘│<br>└──────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<p><strong>Responsif Dashboard:</strong><br><ul><li>Mobile: KPI cards 1 kolom, chart & org stacking, unit usaha 1 kolom</li><br><li>Tablet: KPI 2 kolom, chart penuh, unit usaha 2 kolom</li><br><li>Desktop: KPI 4 kolom, chart 8 kolom + org 4 kolom, unit usaha 4 kolom</li><br></ul><br><hr></p>
+
+<h3>4.4 AdminAnggota (Manajemen Anggota)</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminAnggota.tsx">AdminAnggota.tsx</a></p>
+
+<p><strong>Layout & Elemen:</strong></p>
+
+<table class="dark-theme"><thead><tr><th>Section</th><th>Elemen</th></tr></thead><tbody><tr><td>Header</td><td>Judul "Manajemen Data Anggota" + tombol "Tambah Anggota Baru"</td></tr><tr><td>Search Bar</td><td>Input search (Search icon) + filter</td></tr><tr><td>Tabel Anggota</td><td>Kolom: No, NIK, Nama, Alamat, No. HP, Saldo Simpanan, Status, Aksi</td></tr><tr><td>Detail View</td><td>Klik baris → detail lengkap anggota</td></tr><tr><td>Form Tambah/Edit</td><td>Dialog/slide-out form input data anggota</td></tr><tr><td>Tab Pengurus</td><td>Sub-view untuk manajemen struktur pengurus</td></tr></tbody></table>
+<strong>Kolom Tabel:</strong>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Kolom</th><th>Tipe</th><th>Lebar</th></tr></thead><tbody><tr><td>1</td><td>No</td><td>Auto-number</td><td>40px</td></tr><tr><td>2</td><td>NIK</td><td>Mono font</td><td>120px</td></tr><tr><td>3</td><td>Nama Lengkap</td><td>Bold text</td><td>Auto</td></tr><tr><td>4</td><td>Alamat</td><td>Muted text</td><td>Auto</td></tr><tr><td>5</td><td>No. HP</td><td>Mono font</td><td>100px</td></tr><tr><td>6</td><td>Saldo Simpanan</td><td>IDR format</td><td>120px</td></tr><tr><td>7</td><td>Status</td><td>Badge (Aktif/Meninggal/Diaktifkan)</td><td>80px</td></tr><tr><td>8</td><td>Aksi</td><td>Tombol Edit/Detail/Hapus</td><td>120px</td></tr></tbody></table>
+<strong>Interaksi:</strong>
+<ul><li>Search: filter real-time berdasarkan nama, NIK, no HP</li>
+<li>Tombol "Tambah Anggota Baru" → buka form</li>
+<li>Tombol Edit (ikon Edit) → buka form edit dengan data terisi</li>
+<li>Tombol Detail → tampilkan detail view</li>
+<li>Tombol Aktifkan/Nonaktifkan → toggle status keanggotaan</li>
+</ul>
+<strong>Wireframe ASCII — AdminAnggota:</strong>
+
+<p></code>`<code><br>┌──────────────────────────────────────────────────────────────┐<br>│  Manajemen Data Anggota                    [+ Tambah Baru]   │<br>│  Kelola data nasabah, status keanggotaan...                  │<br>├──────────────────────────────────────────────────────────────┤<br>│  🔍 [Search berdasarkan nama, NIK, HP...]                    │<br>├──────────────────────────────────────────────────────────────┤<br>│  ┌──┬──────────┬────────────┬──────────┬──────┬─────────┬──┐│<br>│  │# │ NIK      │ Nama       │ Alamat   │ HP   │ Saldo   │AK││<br>│  ├──┼──────────┼────────────┼──────────┼──────┼─────────┼──┤│<br>│  │1 │12345678..│ Marmad Tua │ Jl. Mer..│081..│Rp 5.000K│✏ ││<br>│  │2 │09876543..│ Siti Amin  │ Jl. Sud..│082..│Rp 3.200K│✏ ││<br>│  │3 │11223344..│ Budi Sant. │ Jl. Gat. │083..│Rp 1.800K│✏ ││<br>│  └──┴──────────┴────────────┴──────────┴──────┴─────────┴──┘│<br>│                                                    [1/5]  >  │<br>└──────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<p><strong>Responsif AdminAnggota:</strong><br><ul><li>Mobile: Header stacking, search full-width, tabel horizontal scroll</li><br><li>Tablet: Search + button inline, tabel penuh</li><br><li>Desktop: Tabel penuh dengan semua kolom terlihat</li><br></ul><br><hr></p>
+
+<h3>4.5 AdminSimpanan (Simpanan)</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminSimpanan.tsx">AdminSimpanan.tsx</a></p>
+
+<p><strong>Sub-views (tabs):</strong><br><ul><li></code>transaksi<code> — Setor & Tarik Simpanan</li><br><li></code>permohonan<code> — Permohonan Penarikan</li><br><li></code>jenis<code> — Konfigurasi Jenis Simpanan</li><br></ul><br><strong>Jenis Simpanan:</strong> Pokok, Wajib, Sukarela, Deposito</p>
+
+<p><strong>Layout — Sub-view Transaksi:</strong><br><ul><li>Header: judul + tombol "Setor" / "Tarik"</li><br><li>Search bar</li><br><li>Tabel transaksi: No, Tanggal, Anggota, Jenis, Tipe (Setor/Tarik), Jumlah (IDR), Keterangan</li><br></ul><br><strong>Layout — Sub-view Jenis Simpanan:</strong><br><ul><li>Grid kartu jenis simpanan (4 kartu)</li><br><li>Setiap kartu: nama jenis, minimal setoran, bunga %, tombol Edit</li><br><li>Tombol "Tambah Jenis" → form inline</li><br></ul><br><strong>Form Input Transaksi Simpanan:</strong><br><ul><li>Dropdown anggota (searchable)</li><br><li>Dropdown jenis simpanan (pokok/wajib/sukarela/deposito)</li><br><li>Input jumlah (numeric, format IDR)</li><br><li>Input keterangan (text)</li><br><li>Tombol "Simpan" / "Batal"</li><br></ul><br><hr></p>
+
+<h3>4.6 AdminPinjaman (Pinjaman)</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminPinjaman.tsx">AdminPinjaman.tsx</a></p>
+
+<p><strong>Sub-views (tabs):</strong><br><ul><li></code>pengajuan<code> — Daftar Pengajuan Pinjaman</li><br><li></code>angsuran<code> — Pembayaran Angsuran</li><br><li></code>tagihan<code> — Tagihan & Jatuh Tempo</li><br><li></code>jenis<code> — Konfigurasi Jenis Pinjaman</li><br></ul><br><strong>Layout — Sub-view Pengajuan:</strong><br><ul><li>Header + search</li><br><li>Tabel: No Pinjaman, Anggota, Produk, Pokok (IDR), Tenor, Bunga, Angsuran/Bln, Status, Aksi</li><br><li>Tombol aksi: Setujui & Cairkan (mc-badge-ok), Tolak (mc-btn-danger)</li><br></ul><br><strong>Layout — Sub-view Angsuran:</strong><br><ul><li>Tabel angsuran: No Angsuran, Pinjaman No, Anggota, Pokok, Bunga, Total, Jatuh Tempo, Status, Aksi (Bayar)</li><br><li>Tombol "Bayar" → form pencatatan pembayaran angsuran</li><br></ul><br><strong>Layout — Sub-view Jenis Pinjaman:</strong><br><ul><li>Grid/daftar jenis pinjaman</li><br><li>Setiap item: nama, bunga %, maks plafon, maks tenor, metode bunga (flat/efektif/anuitas), biaya admin</li><br><li>Form tambah/edit inline</li><br></ul><br><strong>Wireframe ASCII — AdminPinjaman:</strong></p>
+
+<p></code>`<code><br>┌──────────────────────────────────────────────────────────────┐<br>│  [Pengajuan] [Angsuran] [Tagihan] [Konfigurasi]              │<br>├──────────────────────────────────────────────────────────────┤<br>│  Daftar Pengajuan Pinjaman                                   │<br>│  🔍 [Search...]                                              │<br>├──────────────────────────────────────────────────────────────┤<br>│  ┌────────┬──────────┬────────┬───────┬──────┬────────┬────┐│<br>│  │No.Pinj │ Anggota  │Produk  │Pokok  │Tenor │Angs/bln│Aksi││<br>│  ├────────┼──────────┼────────┼───────┼──────┼────────┼────┤│<br>│  │P-0001  │Marmad    │Reguler │Rp 10Jt│12 bln│Rp 900K │[✓] ││<br>│  │P-0002  │Siti      │Darurat │Rp 5 Jt│ 6 bln│Rp 850K │[✗] ││<br>│  └────────┴──────────┴────────┴───────┴──────┴────────┴────┘│<br>│                                                    [1/3]  >  │<br>└──────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<hr>
+
+<h3>4.7 AdminCOA (Chart of Accounts / Bagan Akun)</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminCOA.tsx">AdminCOA.tsx</a></p>
+
+<p><strong>Fitur Utama:</strong><br><ul><li>Tree view hierarkis hingga <strong>6 level</strong></li><br><li>Expandable/collapsible per node</li><br><li>6 kategori: ASET, KEWAJIBAN, EKUITAS, PENDAPATAN, BEBAN, SHU</li><br></ul><br><strong>Layout:</strong><br><ul><li>Header: judul + tombol "Tambah Akun Baru"</li><br><li>Search bar + filter kategori (dropdown)</li><br><li>Tree view: indentasi per level (marginLeft: depth × 20px)</li><br><li>Setiap node: ikon (FolderOpen untuk header, FileText untuk akun), kode akun (mono font), nama akun, badge saldo normal (D/K), badge kategori, tombol Edit/Nonaktifkan</li><br></ul><br><strong>Kolom Tree:</strong></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Lebar</th><th>Keterangan</th></tr></thead><tbody><tr><td>Expand/Collapse</td><td>w-4</td><td>ChevronDown / ChevronRight</td></tr><tr><td>Ikon tipe</td><td>w-3.5</td><td>FolderOpen (header) / FileText (akun)</td></tr><tr><td>Kode Akun</td><td>w-20</td><td>Mono font, contoh: 1.1.01.01</td></tr><tr><td>Nama Akun</td><td>flex-1</td><td>Font medium-bold</td></tr><tr><td>Saldo Normal</td><td>Badge</td><td>D (debit) / K (kredit)</td></tr><tr><td>Kategori</td><td>w-16</td><td>Teks kecil</td></tr></tbody></table>
+<strong>Form Tambah/Edit Akun:</strong>
+<ul><li>Kode Akun (text, mono)</li>
+<li>Nama Akun (text)</li>
+<li>Kategori (select: ASET/KEWAJIBAN/EKUITAS/PENDAPATAN/BEBAN/SHU)</li>
+<li>Sub Kategori (text)</li>
+<li>Saldo Normal (select: debit/kredit)</li>
+<li>Level (number: 1–6)</li>
+<li>Parent Akun (select, opsional)</li>
+<li>Header Account (checkbox: isHeader)</li>
+</ul>
+<strong>Wireframe ASCII — AdminCOA:</strong>
+
+<p></code>`<code><br>┌──────────────────────────────────────────────────────────────┐<br>│  Bagan Akun (Chart of Accounts)          [+ Tambah Akun Baru]│<br>│  Struktur hierarkis akun keuangan koperasi (6 level)         │<br>├──────────────────────────────────────────────────────────────┤<br>│  🔍 [Search akun...]  Kategori: [Semua ▾]                   │<br>├──────────────────────────────────────────────────────────────┤<br>│  ▼ 📁 1.1.01    Kas              [D] ASET                   │<br>│    ▼ 📁 1.1.01.01  Kas Besar     [D] ASET                   │<br>│      ▶ 📄 1.1.01.01.01  Kas Tunai  [D] ASET         [✏][👁]│<br>│      ▶ 📄 1.1.01.01.02  Kas Bank   [D] ASET         [✏][👁]│<br>│    ▶ 📁 1.1.01.02  Kas Kecil     [D] ASET                   │<br>│  ▶ 📁 1.1.02    Bank             [D] ASET                   │<br>│  ▶ 📁 1.1.03    Piutang          [D] ASET                   │<br>├──────────────────────────────────────────────────────────────┤<br>│  Kode Akun: [________]  Nama: [____________________]         │<br>│  Kategori: [ASET ▾]  Saldo: [Debit ▾]  Level: [3]          │<br>│  Parent: [1.1.01 ▾]  [✓ Header Account]                     │<br>│                                   [Simpan]  [Batal]          │<br>└──────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<hr>
+
+<h3>4.8 AdminJurnal (Jurnal Umum)</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminJurnal.tsx">AdminJurnal.tsx</a></p>
+
+<p><strong>Fitur Utama:</strong><br><ul><li>Tabel daftar jurnal (auto + manual)</li><br><li>Form input jurnal manual dengan dynamic rows</li><br><li>Validasi debit = kredit</li><br><li>Approval workflow: Draft → Posted → Approved / Reversed</li><br><li>Reversal jurnal</li><br></ul><br><strong>Layout — Daftar Jurnal:</strong><br><ul><li>Header + tombol "+ Buat Jurnal Manual"</li><br><li>Tabel: No, Tanggal, Keterangan, Total Debit, Total Kredit, Status, Aksi</li><br><li>Status badge: Draft (mc-badge-accent), Posted (mc-badge-accent), Approved (mc-badge-ok), Reversed (mc-btn-danger)</li><br></ul><br><strong>Layout — Form Jurnal Manual:</strong><br><ul><li>Input tanggal (date picker)</li><br><li>Input keterangan (text)</li><br><li>Dynamic rows tabel: COA (select), Debit (IDR), Kredit (IDR)</li><br><li>Tombol "+ Tambah Baris" / "Hapus Baris"</li><br><li>Ringkasan: Total Debit, Total Kredit, Selisih</li><br><li>Indikator keseimbangan: hijau jika seimbang, merah jika tidak</li><br><li>Tombol "Simpan Jurnal" (disabled jika tidak seimbang)</li><br></ul><br><strong>Wireframe ASCII — AdminJurnal:</strong></p>
+
+<p></code>`<code><br>┌──────────────────────────────────────────────────────────────┐<br>│  Jurnal Umum & Entri Manual               [+ Buat Manual]    │<br>├──────────────────────────────────────────────────────────────┤<br>│  ┌─────┬──────────┬────────────┬──────────┬────────┬───────┐│<br>│  │ No  │ Tanggal  │ Keterangan │ Debit    │ Kredit │Status ││<br>│  ├─────┼──────────┼────────────┼──────────┼────────┼───────┤│<br>│  │ J-1 │ 16/07/26 │ Setoran    │Rp 10.000K│        │Approved│<br>│  │ J-2 │ 16/07/26 │ Belanja    │Rp  5.000K│Rp 5.000│Posted │<br>│  └─────┴──────────┴────────────┴──────────┴────────┴───────┘│<br>├──────────────────────────────────────────────────────────────┤<br>│  Form Jurnal Manual:                                         │<br>│  Tanggal: [16/07/2026]   Keterangan: [___________________]  │<br>│  ┌──────────────┬──────────┬──────────┬───┐                  │<br>│  │ COA          │ Debit    │ Kredit   │ ✕ │                  │<br>│  ├──────────────┼──────────┼──────────┼───┤                  │<br>│  │ 1.1.01.01    │Rp 10.000K│          │ [✕]│                 │<br>│  │ 4.1.01       │          │Rp 10.000K│ [✕]│                 │<br>│  └──────────────┴──────────┴──────────┴───┘                  │<br>│  [+ Tambah Baris]                                            │<br>│  ─────────────────────────────────────────────                │<br>│  Total Debit: Rp 10.000K  │  Total Kredit: Rp 10.000K       │<br>│  Selisih: Rp 0 <span class="check">✅</span> Seimbang                                   │<br>│                                   [Simpan Jurnal]            │<br>└──────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<hr>
+
+<h3>4.9 AdminToko (POS / Retail)</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminToko.tsx">AdminToko.tsx</a></p>
+
+<p><strong>Sub-views (tabs):</strong><br><ul><li></code>kasir<code> — Kasir POS Utama</li><br><li></code>barang<code> — Katalog & Stok Barang</li><br><li></code>supplier<code> — Supplier & Pembelian</li><br><li></code>laporan<code> — Laporan Toko</li><br></ul><br><strong>Layout — Kasir POS:</strong><br><ul><li>2 kolom: Kiri (input barang + keranjang), Kanan (ringkasan pembayaran)</li><br><li>Input: dropdown barang + qty + tombol "Tambah ke Keranjang"</li><br><li>Keranjang: tabel item (Nama, Qty, Harga, Subtotal, Hapus)</li><br><li>Ringkasan: Total Belanja, Diskon, Total Bayar, Bayar Tunai, Kembalian</li><br><li>Tombol "Proses Pembayaran" → cetak faktur</li><br></ul><br><strong>Layout — Katalog Barang:</strong><br><ul><li>Header + tombol "+ Tambah Barang"</li><br><li>Search + filter kategori</li><br><li>Tabel: Kode, Nama Barang, Kategori, Stok, Satuan, Harga Beli, Harga Jual, Aksi</li><br></ul><br><strong>Form Input Barang:</strong><br><ul><li>Kode Barang (text)</li><br><li>Nama Barang (text)</li><br><li>Kategori (select dari KategoriBarang)</li><br><li>Stok (number)</li><br><li>Satuan (text: pcs, kg, liter, dll.)</li><br><li>Harga Beli (IDR)</li><br><li>Harga Jual (IDR)</li><br><li>Supplier (select)</li><br></ul><br><strong>Wireframe ASCII — AdminToko Kasir:</strong></p>
+
+<p></code>`<code><br>┌──────────────────────────────────────────────────────────────┐<br>│  Kasir POS (Point of Sale)                                   │<br>├──────────────────────────────────────────────────────────────┤<br>│  ┌─────────────────────────────────┬────────────────────────┐│<br>│  │ Tambah Barang:                  │ Keranjang Belanja      ││<br>│  │ Barang: [Pilih Barang ▾]        │ ┌──────┬────┬─────┬──┐ ││<br>│  │ Qty: [1]  [Tambah ke Keranjang] │ │Nama  │Qty │Hrg  │X │ ││<br>│  │                                 │ ├──────┼────┼─────┼──┤ ││<br>│  │ Barang populer:                 │ │Sabun │ 2  │15K  │✕ │ ││<br>│  │ [Sabun Rp 15K] [Sampo Rp 25K]  │ │Sampo │ 1  │25K  │✕ │ ││<br>│  │ [Minyak Rp 28K]                 │ └──────┴────┴─────┴──┘ ││<br>│  │                                 │                        ││<br>│  │                                 │ Total:    Rp 55.000    ││<br>│  │                                 │ Diskon: - Rp  5.000    ││<br>│  │                                 │ Bayar:    Rp 50.000    ││<br>│  │                                 │ Tunai:    [__________] ││<br>│  │                                 │ Kembalian:Rp  0        ││<br>│  │                                 │ [Proses Pembayaran 💰]  ││<br>│  └─────────────────────────────────┴────────────────────────┘│<br>└──────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<hr>
+
+<h3>4.10 AdminLaporan (Laporan Keuangan)</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminLaporan.tsx">AdminLaporan.tsx</a></p>
+
+<p><strong>Sub-views:</strong><br><ul><li></code>labarugi<code> — Laporan Laba/Rugi</li><br><li></code>neraca<code> — Laporan Neraca</li><br><li></code>shu<code> — Laba Bersih & SHU</li><br><li></code>jurnal<code> — Ringkasan Jurnal</li><br></ul><br><strong>Layout — Laporan Laba/Rugi:</strong><br><ul><li>Header: judul + periode</li><br><li>Struktur tabel laporan keuangan standar:</li><br></ul>  - <strong>Pendapatan:</strong> Bunga Pinjaman, Pendapatan Toko, Pendapatan Lain<br>  - <strong>Beban:</strong> HPP Toko, Beban Gaji, Beban Operasional<br>  - <strong>Laba Bersih</strong> = Total Pendapatan - Total Beban</p>
+
+<p><strong>Layout — Laporan Neraca:</strong><br><ul><li>2 kolom:</li><br></ul>  - Kiri: <strong>Aset</strong> (Lancar + Tetap)<br>  - Kanan: <strong>Kewajiban + Ekuitas</strong></p>
+
+<p><strong>Layout — SHU:</strong><br><ul><li>Total laba bersih</li><br><li>Slider/input distribusi: Jasa Modal %, Jasa Usaha %</li><br><li>Hasil perhitungan per komponen SHU</li><br><li>Tombol "Proses SHU"</li><br></ul><br><strong>Wireframe ASCII — AdminLaporan:</strong></p>
+
+<p></code>`<code><br>┌──────────────────────────────────────────────────────────────┐<br>│  [Laba/Rugi] [Neraca] [SHU] [Arus Kas] [Rasio] [PDE]       │<br>├──────────────────────────────────────────────────────────────┤<br>│  LAPORAN LABA RUGI KOPERASI — Periode: 2026                 │<br>├──────────────────────────────────────────────────────────────┤<br>│  PENDAPATAN                                                  │<br>│    Pendapatan Bunga Pinjaman       Rp  50.000.000            │<br>│    Pendapatan Toko                 Rp  20.000.000            │<br>│    Pendapatan Lain-lain            Rp   5.000.000            │<br>│                                      ─────────────           │<br>│    Total Pendapatan                Rp  75.000.000            │<br>│                                                              │<br>│  BEBAN                                                       │<br>│    HPP Toko                        Rp  12.000.000            │<br>│    Beban Gaji                      Rp  15.000.000            │<br>│    Beban Operasional               Rp   8.000.000            │<br>│                                      ─────────────           │<br>│    Total Beban                     Rp  35.000.000            │<br>│                                                              │<br>│  ════════════════════════════════════════                    │<br>│  LABA BERSIH (SHU)               Rp  40.000.000             │<br>└──────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<hr>
+
+<h3>4.11 Layar Akuntansi Lainnya</h3>
+
+<h4>AdminBukuBesar (General Ledger)</h4>
+
+<p><strong>Komponen:</strong> </code>AdminBukuBesar.tsx<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Filter</td><td>Dropdown akun COA, periode (bulan/tahun)</td></tr><tr><td>Tabel</td><td>Tanggal, No Jurnal, Keterangan, Debit, Kredit, Saldo</td></tr><tr><td>Saldo</td><td>Running balance per transaksi</td></tr><tr><td>Ringkasan</td><td>Total Debit, Total Kredit, Saldo Akhir</td></tr></tbody></table>
+<h4>AdminNeracaSaldo (Trial Balance)</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Tabel</td><td>Kode Akun, Nama Akun, Debit, Kredit</td></tr><tr><td>Footer</td><td>Total Debit = Total Kredit (validasi)</td></tr><tr><td>Export</td><td>Tombol cetak/ekspor PDF</td></tr></tbody></table>
+<h4>AdminArusKas (Cash Flow Statement)</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Sections</td><td>Aktivitas Operasi, Investasi, Pendanaan</td></tr><tr><td>Tabel</td><td>Keterangan, Tahun Berjalan, Tahun Lalu</td></tr><tr><td>Indikator</td><td>Arus kas bersih positif/negatif</td></tr></tbody></table>
+<h4>AdminRasio (Financial Ratios)</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>KPI Cards</td><td>Rasio Likuiditas, Profitabilitas, Solvabilitas</td></tr><tr><td>Detail</td><td>Perhitungan per rasio, benchmark standar industri</td></tr></tbody></table>
+<h4>AdminSubLedger (Sub Ledger)</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Filter</td><td>Pilih anggota, periode</td></tr><tr><td>Tabel</td><td>Detail transaksi pinjaman per anggota</td></tr></tbody></table>
+<h4>AdminTutupBuku (Period Close Wizard)</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Wizard steps</td><td>1. Validasi data → 2. Hitung SHU → 3. Posting jurnal tutup → 4. Tutup periode</td></tr><tr><td>Progress bar</td><td>Indikator langkah aktif</td></tr><tr><td>Checklist</td><td>Validasi sebelum tutup buku</td></tr></tbody></table>
+<hr>
+
+<h3>4.12 Layar Unit Usaha Lainnya</h3>
+
+<h4>AdminPpob / AdminPPOBDashboard</h4>
+
+<p><strong>Komponen:</strong> </code>AdminPpob.tsx<code>, </code>AdminPPOBDashboard.tsx<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Dashboard</td><td>KPI: total transaksi PPOB, pendapatan, transaksi hari ini</td></tr><tr><td>Layanan</td><td>Daftar produk: Pulsa, Listrik, BPJS, PDAM, Internet</td></tr><tr><td>Form Transaksi</td><td>Pilih layanan, input no tujuan, nominal, proses</td></tr><tr><td>Riwayat</td><td>Tabel transaksi PPOB dengan status</td></tr></tbody></table>
+<h4>AdminDigipay</h4>
+
+<p><strong>Komponen:</strong> </code>AdminDigipay.tsx<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Virtual Account</td><td>Daftar nomor VA, status aktif/nonaktif</td></tr><tr><td>Transaksi VA</td><td>Tabel transaksi masuk, status sukses/gagal</td></tr><tr><td>Top Up</td><td>Form top up virtual account</td></tr></tbody></table>
+<h4>AdminSewa (Sewa Aset)</h4>
+
+<p><strong>Komponen:</strong> </code>AdminSewa.tsx<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Daftar Aset</td><td>Nama aset, kondisi, tarif sewa, status</td></tr><tr><td>Transaksi Sewa</td><td>Pilih aset, durasi, hitung biaya, catat transaksi</td></tr><tr><td>Pengembalian</td><td>Form pengembalian aset + denda</td></tr></tbody></table>
+<h4>AdminPembiayaan</h4>
+
+<p><strong>Komponen:</strong> </code>AdminPembiayaan.tsx<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Dashboard</td><td>Kredit berjalan, angsuran terkumpul</td></tr><tr><td>Produk Cicilan</td><td>Daftar barang cicilan, DP, tenor, angsuran</td></tr><tr><td>Angsuran</td><td>Pembayaran angsuran cicilan pengadaan</td></tr></tbody></table>
+<h4>AdminVentura / AdminVenturaDashboard / AdminPipelineVentura / AdminPengajuanVentura</h4>
+
+<table class="dark-theme"><thead><tr><th>Komponen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Dashboard</td><td>KPI investasi aktif, total portofolio, dividen</td></tr><tr><td>Perusahaan</td><td>Daftar perusahaan mitra, profil, kontak</td></tr><tr><td>Pipeline</td><td>Visual pipeline: Prospect → Due Diligence → Approved → Disbursement</td></tr><tr><td>Pengajuan</td><td>Form pengajuan pembiayaan + upload dokumen + AI scoring</td></tr></tbody></table>
+<hr>
+
+<h3>4.13 Layar Admin & Pengaturan Lainnya</h3>
+
+<h4>AdminPerusahaan</h4>
+
+<p><strong>Komponen:</strong> </code>AdminPerusahaan.tsx<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Daftar Perusahaan</td><td>Nama, username, sektor industri, kontak, status</td></tr><tr><td>Form Registrasi</td><td>Nama perusahaan, username, password, email, telepon, sektor</td></tr><tr><td>Detail Profil</td><td>Profil lengkap perusahaan mitra</td></tr></tbody></table>
+<h4>AdminPengumuman</h4>
+
+<p><strong>Komponen:</strong> </code>AdminPengumuman.tsx<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Daftar Pengumuman</td><td>Judul, tanggal publish, status (draft/published), aksi</td></tr><tr><td>Form Pengumuman</td><td>Judul, konten (rich text), target audiens, jadwal publish</td></tr><tr><td>Broadcast</td><td>Tombol "Kirim ke Semua Anggota" / target spesifik</td></tr></tbody></table>
+<h4>AdminTiket</h4>
+
+<p><strong>Komponen:</strong> Referensi dari sidebar menu </code>tiket_admin<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Daftar Tiket</td><td>No tiket, subjek, anggota pengirim, status (open/in-progress/resolved), prioritas</td></tr><tr><td>Detail Tiket</td><td>Riwayat percakapan, form balasan</td></tr><tr><td>Aksi</td><td>Assign, ubah status, prioritas</td></tr></tbody></table>
+<h4>AdminAuditTrail</h4>
+
+<p><strong>Komponen:</strong> </code>AdminAuditTrail.tsx<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Filter</td><td>Periode, user, jenis transaksi</td></tr><tr><td>Tabel</td><td>Timestamp, user, aksi, entitas, detail, IP address</td></tr><tr><td>Export</td><td>Tombol ekspor log audit</td></tr></tbody></table>
+<h4>AdminPDE (Kualitas Aktiva Produktif)</h4>
+
+<p><strong>Komponen:</strong> </code>AdminPDE.tsx<code></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Ringkasan</td><td>Kategori aktiva: Lancar, Kurang Lancar, Diragukan, Macet</td></tr><tr><td>Tabel Detail</td><td>Daftar pinjaman per kategori kualitas</td></tr><tr><td>KPI</td><td>Persentase kolektibilitas, total aktiva produktif</td></tr></tbody></table>
+<h4>AdminDataMaster</h4>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminDataMaster.tsx">AdminDataMaster.tsx</a></p>
+
+<table class="dark-theme"><thead><tr><th>Sub-tab</th><th>Elemen</th></tr></thead><tbody><tr><td>Pengurus</td><td>Nama, jabatan, periode, status. Form tambah/edit/delete</td></tr><tr><td>Karyawan</td><td>Nama, posisi, gaji, kontak. CRUD operations</td></tr><tr><td>Aset Barang</td><td>Nama aset, kategori, kondisi, nilai. CRUD operations</td></tr><tr><td>Sumber Bayar</td><td>Nama sumber, tipe, rekening. CRUD operations</td></tr><tr><td>User Management</td><td>Username, role, status akun. CRUD + assign role</td></tr></tbody></table>
+<strong>Layout:</strong> Tab horizontal di bagian atas, konten tab di bawah. Setiap tab memiliki tabel daftar + form inline untuk tambah/edit.
+
+<h4>AdminTema</h4>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/admin/AdminTema.tsx">AdminTema.tsx</a></p>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Deskripsi</th></tr></thead><tbody><tr><td>Header Banner</td><td>Judul "Kustomisasi Tema & Identitas Visual Koperasi"</td></tr><tr><td>Grid Tema</td><td>2–3 kolom kartu tema preset</td></tr><tr><td>Setiap Kartu</td><td>Label, nama tema, deskripsi, preview warna, status (aktif/recommended)</td></tr><tr><td>Aksi</td><td>Klik kartu → terapkan tema secara real-time</td></tr></tbody></table>
+<hr>
+
+<h3>4.14 Portal Anggota</h3>
+
+<p><strong>Komponen:</strong> <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/apps/web/src/components/MemberPortal.tsx">MemberPortal.tsx</a></p>
+
+<p>Portal anggota menggunakan layout yang sama (sidebar + header) dengan menu yang berbeda.</p>
+
+<table class="dark-theme"><thead><tr><th>Menu ID</th><th>Komponen</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>member_dashboard<code></td><td>MemberDashboard</td><td>Ringkasan: total simpanan, pinjaman aktif, grafik saldo</td></tr><tr><td></code>member_simpanan<code></td><td>MemberSimpanan</td><td>Detail simpanan per jenis, mutasi terakhir</td></tr><tr><td></code>member_pinjaman<code></td><td>MemberPinjaman</td><td>Status pinjaman, jadwal angsuran, sisa pokok</td></tr><tr><td></code>member_mutasi<code></td><td>MemberLaporan</td><td>Daftar mutasi transaksi (setor/tarik/bayar)</td></tr><tr><td></code>member_pengajuan<code></td><td>MemberPengajuan</td><td>Form pengajuan pinjaman / penarikan baru</td></tr><tr><td></code>member_tiket<code></td><td>MemberTiket</td><td>Buat tiket bantuan, lihat riwayat</td></tr><tr><td></code>member_bukti<code></td><td>MemberUploadDokumen</td><td>Upload bukti transfer pembayaran</td></tr><tr><td></code>member_profil<code></td><td>MemberProfil</td><td>Ubah data profil: nama, alamat, foto</td></tr><tr><td></code>member_ventura<code></td><td>MemberVentura</td><td>Info investasi ventura aktif</td></tr><tr><td></code>member_ventura_dokumen<code></td><td>MemberUploadDokumen</td><td>Upload dokumen persyaratan ventura</td></tr><tr><td></code>member_sewa<code></td><td>MemberSewa</td><td>Sewa aset koperasi</td></tr><tr><td></code>member_ppob<code></td><td>MemberPpob</td><td>Loket PPOB & Pulsa</td></tr><tr><td></code>member_digipay<code></td><td>MemberDigipay</td><td>Virtual Account Deposit</td></tr><tr><td></code>member_cicilan<code></td><td>MemberCicilan</td><td>Kredit cicilan pengadaan</td></tr></tbody></table>
+<hr>
+
+<h2>5. Struktur Navigasi</h2>
+
+<h3>5.1 Pohon Sidebar Admin/Operator</h3>
+
+<p></code>`<code><br>MetroCoop<br>├── [Brand Header: Logo + Nama + Sublabel]<br>│<br>├── MANAJEMEN UTAMA<br>│   ├── 📊 Dashboard Utama                    → dashboard<br>│   ├── 👥 Manajemen Anggota                  → anggota<br>│   ├── 🐷 Simpanan (Savings) [▼]<br>│   │   ├── • Setor & Tarik                   → simpanan_transaksi<br>│   │   ├── • Permohonan Tarik                → simpanan_permohonan<br>│   │   └── • Konfigurasi Simpanan            → simpanan_jenis<br>│   └── 🤝 Pinjaman (Loans) [▼]<br>│       ├── • Daftar Pengajuan                → pinjaman_pengajuan<br>│       ├── • Bayar Angsuran                  → pinjaman_angsuran<br>│       ├── • Tagihan & Jatuh Tempo           → pinjaman_tagihan<br>│       └── • Konfigurasi Pinjaman            → pinjaman_konfigurasi<br>│<br>├── UNIT USAHA (Business)<br>│   ├── 🏪 Unit Toko (POS) [▼]<br>│   │   ├── 🛒 Kasir POS Utama               → toko_kasir<br>│   │   ├── • Katalog Barang                  → toko_barang<br>│   │   ├── • Supplier & Pembelian            → toko_supplier<br>│   │   └── • Laporan Toko                   → toko_laporan<br>│   └── 🔑 Unit Tambahan [▼]<br>│       ├── 📺 Sewa Aset & Rental            → sewa_dashboard<br>│       ├── 📱 PPOB & Pulsa                  → ppob_dashboard<br>│       ├── 💳 Digital Payment               → digipay_dashboard<br>│       └── 🏆 Kredit & Pembiayaan           → pembiayaan_dashboard<br>│<br>├── INVESTASI & PENYERTAAN MODAL<br>│   ├── 📈 Modul Dashboard                   → ventura_analytics<br>│   ├── 🏢 Data Perusahaan                   → ventura_perusahaan<br>│   └── 🔀 Pipeline Investasi                → ventura_pipeline<br>│<br>├── AKUNTANSI & LAPORAN<br>│   ├── 📄 Pembukuan & Keuangan [▼]<br>│   │   ├── • Bagan Akun (COA)              → akuntansi_coa<br>│   │   ├── • Jurnal Umum                    → akuntansi_jurnal<br>│   │   ├── • Buku Besar                     → akuntansi_bukubesar<br>│   │   ├── • Neraca Saldo                   → akuntansi_neracasaldo<br>│   │   ├── • Sub Ledger Piutang             → subledger_piutang<br>│   │   ├── • Laporan Laba / Rugi            → laporan_labarugi<br>│   │   ├── • Laporan Neraca                 → laporan_neraca<br>│   │   ├── • Laba Bersih & SHU              → laporan_shu<br>│   │   ├── • Laporan Arus Kas               → laporan_aruskas<br>│   │   ├── • Kualitas Aktiva (PDE)          → laporan_pde<br>│   │   ├── • Rasio Keuangan                 → laporan_rasio<br>│   │   ├── • Periode & Tutup Buku           → akuntansi_periode<br>│   │   └── • Audit Trail Jurnal             → akuntansi_audit<br>│   ├── ⚙️ Kelola Pengumuman                 → pengumuman_admin<br>│   └── 🆘 Tiket & Pengaduan                 → tiket_admin<br>│<br>├── ───────────────────────── (separator)<br>│<br>├── 🏛️ Data Master Organisasi                → data_master<br>├── ⚙️ Pengaturan Koperasi [Admin only]      → pengaturan<br>├── 🎨 Kustomisasi Tema [Admin only]         → tema_tampilan<br>└── 🌐 Landing Page Editor [Admin only]      → landing_cms<br></code>`<code></p>
+
+<h3>5.2 Pohon Sidebar Anggota</h3>
+
+<p></code>`<code><br>Member Portal<br>├── 📊 Ringkasan Dashboard                   → member_dashboard<br>├── 🐷 Simpanan Saya                         → member_simpanan<br>├── 🤝 Pinjaman Saya                         → member_pinjaman<br>├── 📄 Mutasi Rekening                       → member_mutasi<br>├── 📝 Pengajuan Pinjam / Tarik              → member_pengajuan<br>├── 🆘 Tiket Bantuan (Helpdesk)              → member_tiket<br>├── 📎 Kirim Bukti Transfer                  → member_bukti<br>├── 🏆 Investasi Ventura Saya                → member_ventura<br>├── 📎 Upload Dokumen Ventura                → member_ventura_dokumen<br>├── 📺 Sewa Aset Koperasi                    → member_sewa<br>├── 📱 Loket PPOB & Pulsa                    → member_ppob<br>├── 💳 Virtual Account Deposit                → member_digipay<br>├── 🛒 Kredit Cicilan Pengadaan              → member_cicilan<br>└── 👤 Ubah Profil Saya                      → member_profil<br></code>`<code></p>
+
+<h3>5.3 Feature Toggle Matrix</h3>
+
+<table class="dark-theme"><thead><tr><th>Modul</th><th>Admin</th><th>Operator</th><th>Anggota</th><th>Perusahaan</th></tr></thead><tbody><tr><td>Dashboard</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr><tr><td>Manajemen Anggota</td><td>✓</td><td>✓</td><td>—</td><td>—</td></tr><tr><td>Simpanan</td><td>✓</td><td>✓</td><td>✓ (pribadi)</td><td>—</td></tr><tr><td>Pinjaman</td><td>✓</td><td>✓</td><td>✓ (pribadi)</td><td>—</td></tr><tr><td>Toko/POS</td><td>✓</td><td>✓</td><td>✓ (pembeli)</td><td>—</td></tr><tr><td>Sewa Aset</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr><tr><td>PPOB</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr><tr><td>Digital Payment</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr><tr><td>Pembiayaan</td><td>✓</td><td>✓</td><td>✓</td><td>—</td></tr><tr><td>Ventura/Investasi</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr><tr><td>Akuntansi/Laporan</td><td>✓</td><td>✓</td><td>—</td><td>—</td></tr><tr><td>Data Master</td><td>✓</td><td>✓</td><td>—</td><td>—</td></tr><tr><td>Pengaturan Sistem</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Kustomisasi Tema</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Landing Page Editor</td><td>✓</td><td>—</td><td>—</td><td>—</td></tr><tr><td>Tiket/Pengaduan</td><td>✓</td><td>✓</td><td>✓</td><td>✓</td></tr></tbody></table>
+<hr>
+
+<h2>6. Spesifikasi Formulir</h2>
+
+<h3>6.1 Formulir Registrasi Anggota Baru</h3>
+
+<p><strong>Lokasi:</strong> AdminAnggota → "Tambah Anggota Baru"</p>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Tipe</th><th>Validasi</th><th>Required</th></tr></thead><tbody><tr><td>Nama Lengkap</td><td>text</td><td>Min 3 karakter</td><td>✓</td></tr><tr><td>NIK</td><td>text (mono)</td><td>10 digit, unik</td><td>✓</td></tr><tr><td>No. HP</td><td>text</td><td>Format Indonesia (08xx)</td><td>✓</td></tr><tr><td>Alamat</td><td>textarea</td><td>Min 10 karakter</td><td>✓</td></tr><tr><td>Penghasilan</td><td>number (IDR)</td><td>Min Rp 0</td><td>✓</td></tr><tr><td>Tanggal Lahir</td><td>date</td><td>Tidak boleh masa depan</td><td>—</td></tr><tr><td>Jenis Kelamin</td><td>select</td><td>Laki-laki / Perempuan</td><td>✓</td></tr><tr><td>Golongan Darah</td><td>select</td><td>A/B/AB/O</td><td>—</td></tr><tr><td>Pekerjaan</td><td>text</td><td>—</td><td>—</td></tr><tr><td>Status Kawin</td><td>select</td><td>Belum/Kawin/Cerai</td><td>—</td></tr><tr><td>Email</td><td>email</td><td>Format email valid</td><td>—</td></tr></tbody></table>
+<h3>6.2 Formulir Input Transaksi Simpanan</h3>
+
+<p><strong>Lokasi:</strong> AdminSimpanan → "Setor" / "Tarik"</p>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Tipe</th><th>Validasi</th><th>Required</th></tr></thead><tbody><tr><td>Anggota</td><td>searchable select</td><td>Harus ada di database</td><td>✓</td></tr><tr><td>Jenis Simpanan</td><td>select</td><td>Pokok/Wajib/Sukarela/Deposito</td><td>✓</td></tr><tr><td>Jumlah</td><td>number (IDR)</td><td>≥ minimal setoran jenis</td><td>✓</td></tr><tr><td>Keterangan</td><td>text</td><td>—</td><td>—</td></tr><tr><td>Metode Bayar</td><td>select</td><td>Tunai/Transfer</td><td>✓</td></tr><tr><td>Bukti Bayar</td><td>file upload</td><td>JPG/PNG/PDF, max 2MB</td><td>—</td></tr></tbody></table>
+<h3>6.3 Formulir Pengajuan Pinjaman</h3>
+
+<p><strong>Lokasi:</strong> AdminPinjaman → "Ajukan Pinjaman" / MemberPengajuan</p>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Tipe</th><th>Validasi</th><th>Required</th></tr></thead><tbody><tr><td>Anggota</td><td>select (admin) / auto (member)</td><td>—</td><td>✓</td></tr><tr><td>Jenis Pinjaman</td><td>select</td><td>Dari daftar produk aktif</td><td>✓</td></tr><tr><td>Pokok Pinjaman</td><td>number (IDR)</td><td>≤ maks plafon jenis</td><td>✓</td></tr><tr><td>Tenor</td><td>number (bulan)</td><td>≤ maks tenor jenis</td><td>✓</td></tr><tr><td>Tujuan Pinjaman</td><td>textarea</td><td>—</td><td>✓</td></tr><tr><td>Agunan</td><td>textarea</td><td>Deskripsi agunan</td><td>—</td></tr><tr><td>Estimasi Angsuran</td><td>read-only</td><td>Auto-hitung</td><td>—</td></tr></tbody></table>
+<h3>6.4 Formulir Input Jurnal Manual</h3>
+
+<p><strong>Lokasi:</strong> AdminJurnal → "Buat Jurnal Manual"</p>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Tipe</th><th>Validasi</th><th>Required</th></tr></thead><tbody><tr><td>Tanggal</td><td>date</td><td>Tidak boleh > hari ini</td><td>✓</td></tr><tr><td>Keterangan</td><td>text</td><td>Min 5 karakter</td><td>✓</td></tr><tr><td>Baris Jurnal (N)</td><td>—</td><td>Minimal 2 baris</td><td>✓</td></tr><tr><td>→ COA</td><td>searchable select</td><td>Dari Chart of Accounts</td><td>✓</td></tr><tr><td>→ Debit</td><td>number (IDR)</td><td>≥ 0</td><td>—</td></tr><tr><td>→ Kredit</td><td>number (IDR)</td><td>≥ 0</td><td>—</td></tr></tbody></table>
+<strong>Validasi Khusus:</strong>
+<ul><li>Total Debit harus sama dengan Total Kredit (selisih < Rp 0,01)</li>
+<li>Tombol "Simpan Jurnal" disabled jika tidak seimbang</li>
+<li>Indikator visual: hijau (seimbang) / merah (tidak seimbang)</li>
+</ul>
+<h3>6.5 Formulir Input Barang (POS)</h3>
+
+<p><strong>Lokasi:</strong> AdminToko → "Katalog Barang" → "Tambah Barang"</p>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Tipe</th><th>Validasi</th><th>Required</th></tr></thead><tbody><tr><td>Kode Barang</td><td>text (mono)</td><td>Unik, format koperasi</td><td>✓</td></tr><tr><td>Nama Barang</td><td>text</td><td>Min 2 karakter</td><td>✓</td></tr><tr><td>Kategori</td><td>select</td><td>Dari KategoriBarang</td><td>✓</td></tr><tr><td>Stok</td><td>number</td><td>Min 0</td><td>✓</td></tr><tr><td>Satuan</td><td>text</td><td>pcs/kg/liter/box/pack</td><td>✓</td></tr><tr><td>Harga Beli</td><td>number (IDR)</td><td>> 0</td><td>✓</td></tr><tr><td>Harga Jual</td><td>number (IDR)</td><td>≥ Harga Beli</td><td>✓</td></tr><tr><td>Minimal Stok</td><td>number</td><td>Untuk alert stok rendah</td><td>—</td></tr><tr><td>Supplier</td><td>select</td><td>Dari daftar supplier</td><td>—</td></tr><tr><td>Barcode</td><td>text</td><td>Unik</td><td>—</td></tr><tr><td>Foto Produk</td><td>file upload</td><td>JPG/PNG, max 1MB</td><td>—</td></tr></tbody></table>
+<hr>
+
+<h2>7. Desain Responsif</h2>
+
+<h3>7.1 Strategi Responsif</h3>
+
+<p>MetroCoop menggunakan pendekatan <strong>mobile-first</strong> dengan Tailwind CSS responsive prefixes. Semua komponen dirancang untuk tampil optimal di tiga tier:</p>
+
+<table class="dark-theme"><thead><tr><th>Tier</th><th>Width</th><th>Tailwind Prefix</th><th>Strategi Layout</th></tr></thead><tbody><tr><td><strong>Mobile</strong></td><td>< 640px</td><td>Default</td><td>1 kolom, sidebar overlay, tabel horizontal scroll, kartu stacking</td></tr><tr><td><strong>Tablet</strong></td><td>640–1023px</td><td></code>sm:<code> / </code>md:<code></td><td>2 kolom grid, sidebar overlay, tabel bisa penuh</td></tr><tr><td><strong>Desktop</strong></td><td>≥ 1024px</td><td></code>lg:<code> / </code>xl:<code></td><td>4 kolom grid, sidebar sticky, tabel penuh</td></tr></tbody></table>
+<h3>7.2 Perilaku Responsive per Kategori Layar</h3>
+
+<h4>Landing Page</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Mobile</th><th>Tablet</th><th>Desktop</th></tr></thead><tbody><tr><td>Navbar</td><td>Hamburger menu</td><td>Hamburger + CTA</td><td>Full nav</td></tr><tr><td>Hero</td><td>1 kolom, teks center</td><td>2 kolom</td><td>2 kolom (konten + kartu)</td></tr><tr><td>Features</td><td>1 kolom</td><td>2 kolom</td><td>3–4 kolom</td></tr><tr><td>Team</td><td>1 kolom</td><td>2 kolom</td><td>3–4 kolom</td></tr><tr><td>Pricing</td><td>1 kolom</td><td>2 kolom</td><td>3 kolom</td></tr><tr><td>Contact</td><td>1 kolom</td><td>2 kolom</td><td>2 kolom</td></tr></tbody></table>
+<h4>Login Screen</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Mobile</th><th>Tablet</th><th>Desktop</th></tr></thead><tbody><tr><td>Layout</td><td>1 kolom (branding atas, form bawah)</td><td>2 kolom</td><td>2 kolom max-w-5xl center</td></tr><tr><td>Branding</td><td>Tersembunyi di mobile ringkas</td><td>Tampil penuh</td><td>Tampil penuh</td></tr><tr><td>Form</td><td>Full-width px-4</td><td>max-w-md</td><td>max-w-md</td></tr></tbody></table>
+<h4>Dashboard Admin</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Mobile</th><th>Tablet</th><th>Desktop</th></tr></thead><tbody><tr><td>KPI Cards</td><td>1 kolom</td><td>2 kolom</td><td>4 kolom</td></tr><tr><td>Chart + Org</td><td>1 kolom stacking</td><td>1 kolom</td><td>8:4 kolom</td></tr><tr><td>Unit Usaha</td><td>1 kolom</td><td>2 kolom</td><td>4 kolom</td></tr><tr><td>Tabel Pinjaman</td><td>Horizontal scroll</td><td>Full width</td><td>Full width</td></tr></tbody></table>
+<h4>AdminAnggota / Tabel CRUD</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Mobile</th><th>Tablet</th><th>Desktop</th></tr></thead><tbody><tr><td>Header</td><td>Stacking (judul + tombol)</td><td>Inline</td><td>Inline</td></tr><tr><td>Search</td><td>Full-width</td><td>Inline dengan tombol</td><td>Inline</td></tr><tr><td>Tabel</td><td>Horizontal scroll</td><td>Full width</td><td>Full width</td></tr><tr><td>Form Modal</td><td>Full-screen overlay</td><td>Centered modal</td><td>Centered modal</td></tr></tbody></table>
+<h4>AdminCOA (Tree View)</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Mobile</th><th>Tablet</th><th>Desktop</th></tr></thead><tbody><tr><td>Tree indent</td><td>12px per level</td><td>16px per level</td><td>20px per level</td></tr><tr><td>Kolom</td><td>Kode + Nama saja</td><td>+ Badge D/K</td><td>+ Kategori + Aksi</td></tr><tr><td>Form Edit</td><td>Full-width di bawah</td><td>Side panel</td><td>Inline di bawah tree</td></tr></tbody></table>
+<h4>AdminToko (POS)</h4>
+
+<table class="dark-theme"><thead><tr><th>Elemen</th><th>Mobile</th><th>Tablet</th><th>Desktop</th></tr></thead><tbody><tr><td>Layout</td><td>1 kolom (keranjang atas, input bawah)</td><td>2 kolom</td><td>2 kolom</td></tr><tr><td>Keranjang</td><td>Full-width</td><td>50%</td><td>50%</td></tr><tr><td>Input Barang</td><td>Full-width</td><td>50%</td><td>50%</td></tr></tbody></table>
+<hr>
+
+<h2>8. Dark/Light Mode</h2>
+
+<h3>8.1 Mekanisme Theme Switching</h3>
+
+<p>MetroCoop mendukung <strong>4 tema preset</strong> yang dapat ditukar tanpa reload:</p>
+
+<ul><li><strong>Penyimpanan:</strong> Tema disimpan di </code>localStorage<code> dengan kunci </code>theme_preset<code></li>
+<li><strong>Penerapan:</strong> Melalui atribut </code>data-theme<code> pada elemen </code><html><code></li>
+<li><strong>Trigger:</strong> Toggle tombol Moon/Sun di footer sidebar atau halaman AdminTema</li>
+</ul>
+<h3>8.2 CSS Variable System</h3>
+
+<p>Setiap tema mendefinisikan variabel CSS yang sama dengan nilai berbeda:</p>
+
+<p></code>`<code>css<br>:root, [data-theme="heritage-light"] {<br>  --mc-bg: #f6f1e9;<br>  --mc-surface: #fffdf9;<br>  /<em> ... tokens lainnya ... </em>/<br>}</p>
+
+<p>[data-theme="midnight-heritage"] {<br>  --mc-bg: #0c1322;<br>  --mc-surface: #111c30;<br>  /<em> ... tokens lainnya ... </em>/<br>}<br></code>`<code></p>
+
+<h3>8.3 Mapping Tema → Mode Terang/Gelap</h3>
+
+<table class="dark-theme"><thead><tr><th>Tema</th><th>Mode</th><th>Karakteristik</th></tr></thead><tbody><tr><td>Heritage Light</td><td>Terang</td><td>Krem + emas, background terang</td></tr><tr><td>Midnight Heritage</td><td>Gelap</td><td>Navy + emas, background gelap</td></tr><tr><td>Classic Royal Blue</td><td>Terang</td><td>Biru korporat, background putih</td></tr><tr><td>Teal Ocean</td><td>Terang</td><td>Teal marine, background hijau muda</td></tr></tbody></table>
+<h3>8.4 Komponen yang Terpengaruh</h3>
+
+<table class="dark-theme"><thead><tr><th>Komponen</th><th>Token yang Digunakan</th></tr></thead><tbody><tr><td>Sidebar</td><td></code>--mc-sidebar<code>, </code>--mc-sidebar-ink<code>, </code>--mc-sidebar-active<code></td></tr><tr><td>Header</td><td></code>--mc-surface<code>, </code>--mc-border<code>, </code>--mc-ink-strong<code></td></tr><tr><td>Kartu</td><td></code>--mc-surface<code>, </code>--mc-border<code>, </code>--mc-ink<code></td></tr><tr><td>Tabel</td><td></code>--mc-surface-2<code>, </code>--mc-border<code>, </code>--mc-ink<code></td></tr><tr><td>Tombol</td><td></code>--mc-accent<code>, </code>--mc-on-accent<code>, </code>--mc-danger<code></td></tr><tr><td>Badge</td><td></code>--mc-success<code>, </code>--mc-success-bg<code>, </code>--mc-danger-bg<code></td></tr><tr><td>Input</td><td></code>--mc-surface<code>, </code>--mc-border<code>, </code>--mc-ink<code>, </code>--mc-ring<code></td></tr><tr><td>Glassmorphism</td><td></code>glass-card<code> (terang) / </code>dark-glass-card<code> (gelap)</td></tr></tbody></table>
+<h3>8.5 Dark Mode Toggle (Sidebar)</h3>
+
+<p></code>`<code>tsx<br>// Di footer sidebar:<br><button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}><br>  {theme === 'light' ? <Moon /> : <Sun />}<br></button><br></code>`<code></p>
+
+<p><strong>Catatan:</strong> Toggle di sidebar hanya mengganti antara </code>light<code> ↔ </code>dark<code> (2 mode). Untuk memilih salah satu dari 4 preset tema, gunakan halaman AdminTema (Kustomisasi Tema).</p>
+
+<hr>
+
+<h2>9. Aksesibilitas</h2>
+
+<h3>9.1 Standar yang Diterapkan</h3>
+
+<p>MetroCoop mematuhi <strong>WCAG 2.1 Level AA</strong> dengan ketentuan:</p>
+
+<h3>9.2 Checklist Kepatuhan WCAG 2.1 AA</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Kriteria WCAG</th><th>Status</th><th>Implementasi</th></tr></thead><tbody><tr><td>1</td><td><strong>1.1.1 Non-text Content</strong></td><td>✓</td><td>Semua ikon memiliki atribut </code>aria-label<code> atau teks alternatif</td></tr><tr><td>2</td><td><strong>1.3.1 Info and Relationships</strong></td><td>✓</td><td>Menggunakan heading hierarchy (h1→h2→h3), tabel dengan </code><th><code></td></tr><tr><td>3</td><td><strong>1.4.1 Use of Color</strong></td><td>✓</td><td>Status ditampilkan dengan teks + ikon, bukan hanya warna</td></tr><tr><td>4</td><td><strong>1.4.3 Contrast Minimum</strong></td><td>✓</td><td>Kontras teks ≥ 4.5:1 untuk teks normal, ≥ 3:1 untuk teks besar</td></tr><tr><td>5</td><td><strong>1.4.4 Resize Text</strong></td><td>✓</td><td>Teks dapat di-scale hingga 200% tanpa kehilangan fungsi</td></tr><tr><td>6</td><td><strong>1.4.10 Reflow</strong></td><td>✓</td><td>Konten reflow pada 320px tanpa horizontal scroll (kecuali tabel data)</td></tr><tr><td>7</td><td><strong>2.1.1 Keyboard</strong></td><td>✓</td><td>Seluruh navigasi dan interaksi dapat dilakukan dengan keyboard</td></tr><tr><td>8</td><td><strong>2.1.2 No Keyboard Trap</strong></td><td>✓</td><td>Tidak ada elemen yang menjebak fokus keyboard</td></tr><tr><td>9</td><td><strong>2.4.1 Bypass Blocks</strong></td><td>✓</td><td>Skip navigation via sidebar langsung ke konten</td></tr><tr><td>10</td><td><strong>2.4.3 Focus Order</strong></td><td>✓</td><td>Urutan fokus mengikuti urutan visual (tabindex natural)</td></tr><tr><td>11</td><td><strong>2.4.7 Focus Visible</strong></td><td>✓</td><td>Outline fokus menggunakan </code>.mc-focus:focus-visible<code> dengan </code>outline: 2px solid var(--mc-ring)<code></td></tr><tr><td>12</td><td><strong>3.3.1 Error Identification</strong></td><td>✓</td><td>Error validasi ditampilkan dengan teks + warna + ikon</td></tr><tr><td>13</td><td><strong>3.3.2 Labels or Instructions</strong></td><td>✓</td><td>Setiap input memiliki </code><label><code> yang terkait</td></tr><tr><td>14</td><td><strong>4.1.2 Name, Role, Value</strong></td><td>✓</td><td>Komponen interaktif menggunakan elemen HTML semantic</td></tr></tbody></table>
+<h3>9.3 Focus Management</h3>
+
+<p></code>`<code>css<br>/<em> Dari tokens.css </em>/<br>.mc-focus:focus-visible,<br>.mc-btn-primary:focus-visible,<br>.mc-btn-danger:focus-visible,<br>button:focus-visible,<br>a:focus-visible,<br>input:focus-visible,<br>select:focus-visible {<br>  outline: 2px solid var(--mc-ring);<br>  outline-offset: 2px;<br>}<br></code>`<code></p>
+
+<h3>9.4 ARIA Labels pada Komponen Kunci</h3>
+
+<table class="dark-theme"><thead><tr><th>Komponen</th><th>Atribut ARIA</th></tr></thead><tbody><tr><td>Tombol hamburger sidebar</td><td></code>aria-label="Buka menu"<code></td></tr><tr><td>Tombol tutup sidebar</td><td></code>aria-label="Tutup menu"<code></td></tr><tr><td>Toggle show/hide password</td><td></code>aria-label="Sembunyikan/Tampilkan kata sandi"<code></td></tr><tr><td>Tombol notifikasi</td><td></code>aria-label="Notifikasi & pengaduan"<code></td></tr><tr><td>Tombol ganti tema</td><td></code>aria-label="Ganti Tema"<code></td></tr></tbody></table>
+<h3>9.5 Kontras Warna per Tema</h3>
+
+<table class="dark-theme"><thead><tr><th>Tema</th><th>Teks di Atas Background</th><th>Rasio Kontras</th></tr></thead><tbody><tr><td>Heritage Light</td><td></code>#2c2820<code> di atas </code>#fffdf9<code></td><td>~13.5:1 ✓</td></tr><tr><td>Midnight Heritage</td><td></code>#dde3ee<code> di atas </code>#111c30<code></td><td>~10.2:1 ✓</td></tr><tr><td>Royal Blue</td><td></code>#334155<code> di atas </code>#ffffff<code></td><td>~7.8:1 ✓</td></tr><tr><td>Teal Ocean</td><td></code>#334155<code> di atas </code>#ffffff<code></td><td>~7.8:1 ✓</td></tr></tbody></table>
+<h3>9.6 Responsive Accessibility</h3>
+
+<ul><li><strong>Touch targets:</strong> Minimum 44×44px untuk semua tombol interaktif di mobile</li>
+<li><strong>Scroll behavior:</strong> Tabel data panjang menggunakan horizontal scroll dengan indikator visual</li>
+<li><strong>Content reflow:</strong> Pada viewport 320px, konten tetap terbaca tanpa zoom</li>
+<li><strong>Motion:</strong> Animasi dapat dikurangi via </code>prefers-reduced-motion<code> media query</li>
+</ul>
+<hr>
+
+<h2>10. Lampiran</h2>
+
+<h3>10.1 Daftar Komponen UI</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Komponen</th><th>File</th><th>Deskripsi</th></tr></thead><tbody><tr><td>1</td><td>MetroKspLandingPage</td><td></code>pages/MetroKspLandingPage.tsx<code></td><td>Landing page publik (CMS-editable)</td></tr><tr><td>2</td><td>LoginScreen</td><td></code>components/LoginScreen.tsx<code></td><td>Layar autentikasi multi-portal</td></tr><tr><td>3</td><td>Sidebar</td><td></code>components/Sidebar.tsx<code></td><td>Navigasi samping collapsible</td></tr><tr><td>4</td><td>Header</td><td></code>components/Header.tsx<code></td><td>Header atas sticky dengan informasi konteks</td></tr><tr><td>5</td><td>AdminDashboard</td><td></code>components/admin/AdminDashboard.tsx<code></td><td>Dashboard utama admin</td></tr><tr><td>6</td><td>AdminAnggota</td><td></code>components/admin/AdminAnggota.tsx<code></td><td>Manajemen data anggota</td></tr><tr><td>7</td><td>AdminPerusahaan</td><td></code>components/admin/AdminPerusahaan.tsx<code></td><td>Manajemen perusahaan mitra</td></tr><tr><td>8</td><td>AdminSimpanan</td><td></code>components/admin/AdminSimpanan.tsx<code></td><td>Transaksi & konfigurasi simpanan</td></tr><tr><td>9</td><td>AdminPinjaman</td><td></code>components/admin/AdminPinjaman.tsx<code></td><td>Pengajuan, angsuran, konfigurasi pinjaman</td></tr><tr><td>10</td><td>AdminPembiayaan</td><td></code>components/admin/AdminPembiayaan.tsx<code></td><td>Sistem kredit & pembiayaan</td></tr><tr><td>11</td><td>AdminCOA</td><td></code>components/admin/AdminCOA.tsx<code></td><td>Bagan akun hierarkis 6 level</td></tr><tr><td>12</td><td>AdminJurnal</td><td></code>components/admin/AdminJurnal.tsx<code></td><td>Jurnal umum + entri manual</td></tr><tr><td>13</td><td>AdminBukuBesar</td><td></code>components/admin/AdminBukuBesar.tsx<code></td><td>Buku besar (general ledger)</td></tr><tr><td>14</td><td>AdminNeracaSaldo</td><td></code>components/admin/AdminNeracaSaldo.tsx<code></td><td>Neraca saldo (trial balance)</td></tr><tr><td>15</td><td>AdminArusKas</td><td></code>components/admin/AdminArusKas.tsx<code></td><td>Laporan arus kas</td></tr><tr><td>16</td><td>AdminRasio</td><td></code>components/admin/AdminRasio.tsx<code></td><td>Rasio keuangan koperasi</td></tr><tr><td>17</td><td>AdminTutupBuku</td><td></code>components/admin/AdminTutupBuku.tsx<code></td><td>Wizard tutup buku periode</td></tr><tr><td>18</td><td>AdminLaporan</td><td></code>components/admin/AdminLaporan.tsx<code></td><td>Laporan laba/rugi, neraca, SHU</td></tr><tr><td>19</td><td>AdminSubLedger</td><td></code>components/admin/AdminSubLedger.tsx<code></td><td>Sub ledger piutang anggota</td></tr><tr><td>20</td><td>AdminToko</td><td></code>components/admin/AdminToko.tsx<code></td><td>POS/Retail — kasir, barang, supplier</td></tr><tr><td>21</td><td>AdminPpob</td><td></code>components/admin/AdminPpob.tsx<code></td><td>Transaksi PPOB</td></tr><tr><td>22</td><td>AdminPPOBDashboard</td><td></code>components/admin/AdminPPOBDashboard.tsx<code></td><td>Dashboard PPOB</td></tr><tr><td>23</td><td>AdminDigipay</td><td></code>components/admin/AdminDigipay.tsx<code></td><td>Digital Payment & Virtual Account</td></tr><tr><td>24</td><td>AdminSewa</td><td></code>components/admin/AdminSewa.tsx<code></td><td>Sewa aset & rental</td></tr><tr><td>25</td><td>AdminCicilanDashboard</td><td></code>components/admin/AdminCicilanDashboard.tsx<code></td><td>Dashboard cicilan pengadaan</td></tr><tr><td>26</td><td>AdminVentura</td><td></code>components/admin/AdminVentura.tsx<code></td><td>Modul pembiayaan venture</td></tr><tr><td>27</td><td>AdminVentureDashboard</td><td></code>components/admin/AdminVentureDashboard.tsx<code></td><td>Dashboard investasi</td></tr><tr><td>28</td><td>AdminPipelineVentura</td><td></code>components/admin/AdminPipelineVentura.tsx<code></td><td>Pipeline investasi terpadu</td></tr><tr><td>29</td><td>AdminPengajuanVentura</td><td></code>components/admin/AdminPengajuanVentura.tsx<code></td><td>Pengajuan pembiayaan + AI scoring</td></tr><tr><td>30</td><td>AdminDataMaster</td><td></code>components/admin/AdminDataMaster.tsx<code></td><td>Data master: pengurus, karyawan, aset, sumber bayar</td></tr><tr><td>31</td><td>AdminPengumuman</td><td></code>components/admin/AdminPengumuman.tsx<code></td><td>Manajemen pengumuman & broadcast</td></tr><tr><td>32</td><td>AdminAuditTrail</td><td></code>components/admin/AdminAuditTrail.tsx<code></td><td>Audit log viewer</td></tr><tr><td>33</td><td>AdminPDE</td><td></code>components/admin/AdminPDE.tsx<code></td><td>Kualitas aktiva produktif</td></tr><tr><td>34</td><td>AdminTema</td><td></code>components/admin/AdminTema.tsx<code></td><td>Kustomisasi tema visual</td></tr><tr><td>35</td><td>MemberPortal</td><td></code>components/MemberPortal.tsx<code></td><td>Portal mandiri anggota</td></tr><tr><td>36</td><td>MemberPerusahaanPortal</td><td></code>components/MemberPerusahaanPortal.tsx<code></td><td>Portal perusahaan mitra</td></tr></tbody></table>
+<h3>10.2 Daftar Sub-komponen Landing Page</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Komponen</th><th>File</th></tr></thead><tbody><tr><td>1</td><td>Navbar</td><td></code>components/landingMetroKSP/Navbar.tsx<code></td></tr><tr><td>2</td><td>HeroSection</td><td></code>components/landingMetroKSP/HeroSection.tsx<code></td></tr><tr><td>3</td><td>FeaturesGrid</td><td></code>components/landingMetroKSP/FeaturesGrid.tsx<code></td></tr><tr><td>4</td><td>TeamGrid</td><td></code>components/landingMetroKSP/TeamGrid.tsx<code></td></tr><tr><td>5</td><td>TestimonialSlider</td><td></code>components/landingMetroKSP/TestimonialSlider.tsx<code></td></tr><tr><td>6</td><td>PricingTable</td><td></code>components/landingMetroKSP/PricingTable.tsx<code></td></tr><tr><td>7</td><td>ContactFooter</td><td></code>components/landingMetroKSP/ContactFooter.tsx<code></td></tr><tr><td>8</td><td>defaultData</td><td></code>components/landingMetroKSP/defaultData.ts<code></td></tr><tr><td>9</td><td>metroksp.css</td><td></code>components/landingMetroKSP/metroksp.css<code></td></tr></tbody></table>
+<h3>10.3 Daftar Komponen Portal Anggota</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Komponen</th><th>File</th></tr></thead><tbody><tr><td>1</td><td>MemberDashboard</td><td></code>components/member/MemberDashboard.tsx<code></td></tr><tr><td>2</td><td>MemberSimpanan</td><td></code>components/member/MemberSimpanan.tsx<code></td></tr><tr><td>3</td><td>MemberPinjaman</td><td></code>components/member/MemberPinjaman.tsx<code></td></tr><tr><td>4</td><td>MemberLaporan</td><td></code>components/member/MemberLaporan.tsx<code></td></tr><tr><td>5</td><td>MemberPengajuan</td><td></code>components/member/MemberPengajuan.tsx<code></td></tr><tr><td>6</td><td>MemberTiket</td><td></code>components/member/MemberTiket.tsx<code></td></tr><tr><td>7</td><td>MemberProfil</td><td></code>components/member/MemberProfil.tsx<code></td></tr><tr><td>8</td><td>MemberVentura</td><td></code>components/member/MemberVentura.tsx<code></td></tr><tr><td>9</td><td>MemberSewa</td><td></code>components/member/MemberSewa.tsx<code></td></tr><tr><td>10</td><td>MemberPpob</td><td></code>components/member/MemberPpob.tsx<code></td></tr><tr><td>11</td><td>MemberDigipay</td><td></code>components/member/MemberDigipay.tsx<code></td></tr><tr><td>12</td><td>MemberCicilan</td><td></code>components/member/MemberCicilan.tsx<code></td></tr><tr><td>13</td><td>MemberUploadDokumen</td><td></code>components/member/MemberUploadDokumen.tsx<code></td></tr><tr><td>14</td><td>MemberPengumuman</td><td></code>components/member/MemberPengumuman.tsx<code></td></tr><tr><td>15</td><td>MemberDividen</td><td></code>components/member/MemberDividen.tsx<code></td></tr><tr><td>16</td><td>MemberToko</td><td></code>components/member/MemberToko.tsx<code></td></tr><tr><td>17</td><td>MemberPipelineInvestasi</td><td></code>components/member/MemberPipelineInvestasi.tsx<code></td></tr><tr><td>18</td><td>MemberPerusahaanDashboard</td><td></code>components/member/MemberPerusahaanDashboard.tsx<code></td></tr><tr><td>19</td><td>MemberPerusahaanProfil</td><td></code>components/member/MemberPerusahaanProfil.tsx<code></td></tr><tr><td>20</td><td>MemberPerusahaanTiket</td><td></code>components/member/MemberPerusahaanTiket.tsx<code></td></tr></tbody></table>
+<h3>10.4 Infrastruktur Pendukung</h3>
+
+<table class="dark-theme"><thead><tr><th>File</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>styles/tokens.css<code></td><td>Design tokens CSS (variabel warna, utility classes mc-*)</td></tr><tr><td></code>theme/theme.ts<code></td><td>Definisi 4 tema preset + fungsi apply/get/init</td></tr><tr><td></code>theme/ThemeProvider.tsx<code></td><td>React context provider untuk tema</td></tr><tr><td></code>index.css<code></td><td>Import Google Fonts + Tailwind + animasi kustom</td></tr><tr><td></code>stores/authStore.ts<code></td><td>Zustand store untuk autentikasi</td></tr><tr><td></code>stores/dataStore.ts<code></td><td>Zustand store untuk data aplikasi</td></tr><tr><td></code>lib/api.ts<code></td><td>API client untuk komunikasi backend</td></tr><tr><td></code>types.ts`</td><td>Re-export tipe data dari shared package</td></tr></tbody></table>
+<hr>
+
+<h3>10.5 Tabel Persetujuan (Sign-off)</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Role</th><th>Nama</th><th>Tanggal</th><th>Tanda Tangan</th><th>Status</th></tr></thead><tbody><tr><td>1</td><td>Product Owner</td><td>_________________</td><td>__ / __ / 2026</td><td>_____________</td><td>☐ Disetujui</td></tr><tr><td>2</td><td>UI/UX Designer</td><td>_________________</td><td>__ / __ / 2026</td><td>_____________</td><td>☐ Disetujui</td></tr><tr><td>3</td><td>Lead Developer</td><td>_________________</td><td>__ / __ / 2026</td><td>_____________</td><td>☐ Disetujui</td></tr><tr><td>4</td><td>QA Lead</td><td>_________________</td><td>__ / __ / 2026</td><td>_____________</td><td>☐ Disetujui</td></tr><tr><td>5</td><td>Project Manager</td><td>_________________</td><td>__ / __ / 2026</td><td>_____________</td><td>☐ Disetujui</td></tr></tbody></table>
+<hr>
+
+<p><strong>Catatan Akhir:</strong></p>
+
+<p>Dokumen ini bersifat <em>living document</em> dan akan diperbarui seiring perkembangan aplikasi. Setiap perubahan signifikan pada UI/UX harus didokumentasikan di sini dan mendapat persetujuan dari Product Owner dan UI/UX Designer.</p>
+
+<p><strong>Riwayat Perubahan:</strong></p>
+
+<table class="dark-theme"><thead><tr><th>Versi</th><th>Tanggal</th><th>Perubahan</th><th>Oleh</th></tr></thead><tbody><tr><td>1.0</td><td>11 Juli 2026</td><td>Dokumen awal</td><td>Tim MetroCoop</td></tr><tr><td>2.0</td><td>16 Juli 2026</td><td>Pembaruan komprehensif: 4 tema, seluruh layar, wireframe ASCII, checklist aksesibilitas</td><td>Tim MetroCoop</td></tr></tbody></table>
+<hr>
+
+<p><em>Dokumen ini merupakan bagian dari dokumentasi teknis MetroCoop — Sistem Informasi Koperasi Simpan Pinjam Terintegrasi.</em></p>
+    </div>
+  </main>
+</body>
+</html>

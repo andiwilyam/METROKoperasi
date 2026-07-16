@@ -512,6 +512,3 @@ console.log(`  ✅ index-dark.html`);
 success++;
 
 console.log(`\nDone: ${success} dark theme files generated, ${failed} failed.`);
-`;
-
-import meta from 'path';

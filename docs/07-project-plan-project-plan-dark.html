@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Plan — MetroCoop (Dark Theme)</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Dark Theme Colors - Wallpaper Inspired */
+  --primary: #bfdbfe;           /* Sky blue - bright but soft */
+  --primary-light: #93c5fd;     /* Sky blue light */
+  --primary-dark: #1e40af;      /* Dark blue */
+  --accent: #06b6d4;            /* Cyan accent */
+  --bg: #0a0c14;                /* Very dark blue - wallpaper */
+  --bg-alt: #111827;            /* Slightly lighter dark */
+  --bg-code: #151821;           /* Dark code background */
+  --text: #e5e7eb;              /* Off white */
+  --text-muted: #a5b4fc;        /* Muted blue */
+  --text-caption: #93c5fd;      /* Closed captions text */
+  --border: #374151;            /* Dark border */
+  --shadow: 0 4px 12px rgba(20, 20, 40, 0.4); /* Enhanced shadow */
+  --sidebar-w: 280px;
+}
+
+/* Ensure dark mode is default - override light mode variables */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  background-image: 
+    linear-gradient(135deg, rgba(3, 7, 18, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%),
+    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
+  display: flex;
+}
+
+/* Closed Captions Panel (Top Banner) */
+.closed-captions-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(20, 28, 50, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 12px;
+  color: var(--text-caption);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.closed-captions-panel .cc-icon {
+  margin-right: 8px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.closed-ca examples {
+  display: inline-flex;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.closed-captions-panel .cc-example {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--text-caption);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 40px; /* Leave space for closed captions panel */
+  left: 0;
+  width: var(--sidebar-w);
+  height: calc(100vh - 40px);
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.3);
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.sidebar-brand small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+
+.sidebar-nav a.active {
+  background: rgba(59, 130, 246, 0.25);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+
+/* Main content - adjusted for closed captions */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+  margin-top: 40px;
+}
+
+.content-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Typography with improved contrast */
+h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary-light);
+  margin: 0 0 12px;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 48px 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--primary-dark);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+h4 { font-size: 16px; font-weight: 600; color: var(--primary-light); margin: 24px 0 8px; }
+h5 { font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 20px 0 6px; text-transform: uppercase; }
+p { margin: 0 0 12px; color: var(--text); line-height: 1.8; }
+strong { font-weight: 600; color: #fff; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; color: #fff; }
+
+/* Tables with better contrast */
+table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 13px; }
+th { background: var(--primary-dark); color: #fff; font-weight: 600; padding: 12px 14px; }
+td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; background: var(--bg-alt); }
+tr:hover td { background: rgba(59, 130, 246, 0.15); }
+
+/* Code blocks with better visibility */
+code { background: var(--bg-code); color: var(--accent); }
+pre {
+  background: #0a0e17;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Emphasizing important information with background */
+.important-note {
+  background: rgba(251, 146, 60, 0.15);
+  border-left: 4px solid #fb923c;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: #fff;
+}
+
+/* Enhanced scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Print styles optimized for dark theme */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  body { background-image: none; background-color: white; }
+  h1, h2, h3 { color: black; }
+  * { color: black !important; background: white !important; border-color: #ddd !important; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 240px; }
+  .content-inner { padding: 32px; }
+}
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar { position: relative; width: 100%; height: auto; }
+  .content { margin-left: 0; margin-top: 40px; }
+  .closed-captions-panel { position: relative; height: auto; }
+  .content-inner { padding: 24px 16px; }
+}
+</style>
+</head>
+<body>
+  
+    <div class="closed-captions-panel">
+      <span class="cc-icon">🔊</span>
+      Penjelasan: Sistem MetroCoop adalah platform manajemen koperasi simpan pinjam terintegrasi yang dirancang khusus untuk memenuhi kebutuhan koperasi Indonesia, didukung oleh teknologi cloud modern dan AI intelligent scoring.
+      <div class="examples">
+        <span class="cc-example">🏦 KSP: Koperasi Simpan Pinjam</span>
+        <span class="cc-example">💰 4 Jenis Simpanan</span>
+        <span class="cc-example">🪙 RPA Mulai</span>
+        <span class="cc-example">🤖 AI Credit Scoring</span>
+      </div>
+    </div>
+  
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h2>MetroCoop</h2>
+      <small>Documentation Suite - Dark Theme</small>
+    </div>
+    <div class="sidebar-nav">
+      <a href="01-proposal-proposal-teknis-komersial.html" class="">
+      <span class="num">1</span>
+      Proposal Teknis & Komersial
+    </a>
+<a href="02-company-profile-company-profile-portofolio.html" class="">
+      <span class="num">2</span>
+      Company Profile & Portofolio
+    </a>
+<a href="03-nda-nda-draft.html" class="">
+      <span class="num">3</span>
+      Draft NDA
+    </a>
+<a href="04-brd-brd-urs.html" class="">
+      <span class="num">4</span>
+      BRD / URS
+    </a>
+<a href="05-srs-srs-specification.html" class="">
+      <span class="num">5</span>
+      SRS
+    </a>
+<a href="06-ui-ux-ui-ux-design-spec.html" class="">
+      <span class="num">6</span>
+      UI/UX Design
+    </a>
+<a href="07-project-plan-project-plan.html" class="active">
+      <span class="num">7</span>
+      Project Plan
+    </a>
+    </div>
+    <div class="sidebar-footer">
+      MetroCoop © 2026<br>
+      Theme: Dark | Wallpaper: Cyberpunk Blue<br>
+      Generated: 16/7/2026
+    </div>
+  </nav>
+  <main class="content">
+    <div class="content-inner">
+      <h1>Rencana Proyek (Project Plan)</h1>
+<h2>Implementasi Sistem Informasi Koperasi Simpan Pinjam MetroCoop</h2>
+
+<hr>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Nilai</th></tr></thead><tbody><tr><td><strong>Proyek</strong></td><td>MetroCoop — Sistem Informasi Koperasi Simpan Pinjam Terintegrasi</td></tr><tr><td><strong>Versi Dokumen</strong></td><td>1.0.0</td></tr><tr><td><strong>Tanggal</strong></td><td>16 Juli 2026</td></tr><tr><td><strong>Status</strong></td><td>Final</td></tr><tr><td><strong>Klasifikasi</strong></td><td>Konfidensial / Internal</td></tr></tbody></table>
+<hr>
+
+<h2>Daftar Isi</h2>
+
+<ul><li><a href="#1-pendahuluan">Pendahuluan</a></li>
+<li><a href="#2-tim-proyek">Tim Proyek</a></li>
+<li><a href="#3-timeline-detail">Timeline Detail</a></li>
+<li><a href="#4-gantt-chart">Gantt Chart</a></li>
+<li><a href="#5-milestone--jadwal-pembayaran">Milestone & Jadwal Pembayaran</a></li>
+<li><a href="#6-deliverables-per-fase">Deliverables per Fase</a></li>
+<li><a href="#7-manajemen-risiko">Manajemen Risiko</a></li>
+<li><a href="#8-rencana-komunikasi">Rencana Komunikasi</a></li>
+<li><a href="#9-manajemen-perubahan">Manajemen Perubahan</a></li>
+<li><a href="#10-jaminan-kualitas">Jaminan Kualitas</a></li>
+<li><a href="#11-rencana-migrasi-data">Rencana Migrasi Data</a></li>
+<li><a href="#12-rencana-pelatihan">Rencana Pelatihan</a></li>
+<li><a href="#13-checklist-go-live">Checklist Go-Live</a></li>
+<li><a href="#14-dukan-pasca-go-live">Dukungan Pasca Go-Live</a></li>
+<li><a href="#15-lampiran">Lampiran</a></li>
+</ul>
+<hr>
+
+<h2>1. Pendahuluan</h2>
+
+<h3>1.1 Tujuan Dokumen</h3>
+
+<p>Dokumen Rencana Proyek ini menguraikan rencana pelaksanaan implementasi penuh sistem <strong>MetroCoop</strong> untuk koperasi klien. Dokumen ini menjadi panduan operasional seluruh tim proyek mulai dari fase Discovery hingga berakhirnya masa Warranty Support.</p>
+
+<h3>1.2 Ruang Lingkup</h3>
+
+<p>Ruang lingkup implementasi mencakup seluruh modul fungsional sistem MetroCoop:</p>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Modul</th><th>Deskripsi</th></tr></thead><tbody><tr><td>1</td><td>Autentikasi & Otorisasi</td><td>JWT-based auth, RBAC 5 peran, session management, rate limiting</td></tr><tr><td>2</td><td>Manajemen Keanggotaan</td><td>Pendaftaran, validasi, status, dokumen, buku anggota digital</td></tr><tr><td>3</td><td>Simpanan</td><td>Pokok, wajib, sukarela, deposito dengan bunga otomatis</td></tr><tr><td>4</td><td>Pinjaman & Angsuran</td><td>Pengajuan, pencairan, 3 metode bunga, angsuran, denda, kolektibilitas</td></tr><tr><td>5</td><td>Akuntansi SAK ETAP</td><td>COA hierarkis, jurnal otomatis, buku besar, neraca saldo, laporan keuangan</td></tr><tr><td>6</td><td>Periode & Tutup Buku</td><td>12 periode/tahun, open/close period, tutup buku tahunan</td></tr><tr><td>7</td><td>Unit Usaha — POS/Toko</td><td>Kategori, supplier, stok, penjualan multi-item, HPP, laba rugi</td></tr><tr><td>8</td><td>Unit Usaha — PPOB</td><td>Pulsa, listrik, PDAM, BPJS, VA bank, QRIS, e-Wallet</td></tr><tr><td>9</td><td>Unit Usaha — Sewa Aset</td><td>Manajemen aset, jadwal sewa, denda keterlambatan</td></tr><tr><td>10</td><td>Unit Usaha — Cicilan Barang</td><td>DP, tenor, bunga, angsuran bulanan</td></tr><tr><td>11</td><td>Unit Usaha — Ventura</td><td>Portfolio investasi, dividen, pengajuan pembiayaan</td></tr><tr><td>12</td><td>AI Credit Scoring</td><td>Analisis 5C berbasis Google Gemini, rekomendasi plafon</td></tr><tr><td>13</td><td>Landing Page CMS</td><td>Hero, fitur, tim, testimoni, pricing, kontak</td></tr><tr><td>14</td><td>Pengumuman & Tiket</td><td>Broadcast ke anggota, sistem tiket bantuan dengan SLA</td></tr><tr><td>15</td><td>Laporan & Dashboard</td><td>Dashboard per role, 20+ laporan standar, export PDF/Excel</td></tr><tr><td>16</td><td>Migrasi Data</td><td>ETL dari sistem legacy klien ke MetroCoop</td></tr><tr><td>17</td><td>Pelatihan</td><td>5 sesi pelatihan untuk berbagai peran pengguna</td></tr><tr><td>18</td><td>Dukungan Pasca Go-Live</td><td>Warranty 12 minggu, bug fix, minor enhancement</td></tr></tbody></table>
+<h3>1.3 Asumsi</h3>
+
+<ul><li>Klien menyediakan akses penuh ke data legacy untuk keperluan migrasi (jika ada)</li>
+<li>Klien menunjuk seorang Project Sponsor yang berwenang menyetujui deliverable dan change request</li>
+<li>Tim klien tersedia untuk sesi workshop, review, dan UAT sesuai jadwal yang disepakati</li>
+<li>Infrastruktur cloud (Railway + PostgreSQL) disediakan dan dibayar oleh pengembang selama warranty</li>
+<li>Konektivitas internet stabil tersedia di lokasi klien untuk pelatihan remote</li>
+<li>Regulasi dan kebijakan internal koperasi tidak berubah selama masa implementasi</li>
+<li>Data migrasi kurang dari 50.000 record (anggota + transaksi historis)</li>
+<li>Customisasi UI/UX terbatas pada penyesuaian brand (logo, warna, nama koperasi)</li>
+<li>Integrasi eksternal (API bank, payment gateway) menggunakan koneksi yang sudah tersedia</li>
+<li>Durasi hari kerja: Senin–Jumat, 09:00–17:00 WIB</li>
+</ul>
+<h3>1.4 Dependensi</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Dependensi</th><th>Pihak</th><th>Dampak jika Tidak Tersedia</th></tr></thead><tbody><tr><td>1</td><td>NDA ditandatangani</td><td>Klien</td><td>Tidak bisa memulai Discovery</td></tr><tr><td>2</td><td>Akses data legacy untuk migrasi</td><td>Klien</td><td>Migrasi data tertunda</td></tr><tr><td>3</td><td>Akun Google Gemini API key</td><td>Pengembang</td><td>AI Credit Scoring tidak berfungsi</td></tr><tr><td>4</td><td>Akun Railway / PostgreSQL production</td><td>Pengembang</td><td>Tidak bisa deploy ke production</td></tr><tr><td>5</td><td>Domain name koperasi</td><td>Klien</td><td>Production URL tidak bisa dikonfigurasi</td></tr><tr><td>6</td><td>Approval BRD & SRS</td><td>Klien</td><td>Development tidak bisa dimulai</td></tr><tr><td>7</td><td>Tim klien tersedia untuk UAT</td><td>Klien</td><td>Go-live tertunda</td></tr><tr><td>8</td><td>Desain brand (logo, palet warna)</td><td>Klien / UI-UX</td><td>Landing page & dashboard tidak bisa final</td></tr></tbody></table>
+<h3>1.5 Risiko Utama</h3>
+
+<p>Risiko detail dibahas di <a href="#7-manajemen-risiko">Bagian 7: Manajemen Risiko</a>. Ringkasan risiko tinggi:</p>
+
+<ul><li>Keterlambatan persetujuan BRD/SRS menggeser seluruh timeline</li>
+<li>Perubahan scope selama development menambah durasi dan biaya</li>
+<li>Kualitas data legacy rendah, mempersulit migrasi</li>
+<li>Keterbatasan pengetahuan teknis tim klien terhadap sistem baru</li>
+<li>Gangguan infrastruktur cloud selama fase kritis</li>
+</ul>
+<hr>
+
+<h2>2. Tim Proyek</h2>
+
+<h3>2.1 Struktur Tim</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Peran</th><th>Nama</th><th>Alokasi</th><th>Tanggung Jawab Utama</th></tr></thead><tbody><tr><td>1</td><td><strong>Project Manager</strong></td><td>[NAMA]</td><td>50%</td><td>Perencanaan proyek, komunikasi stakeholder, manajemen risiko, budget, timeline, pelaporan ke steering committee</td></tr><tr><td>2</td><td><strong>Tech Lead</strong></td><td>[NAMA]</td><td>100%</td><td>Arsitektur sistem, code review, desain database, desain API, integrasi AI, quality gate</td></tr><tr><td>3</td><td><strong>Frontend Lead</strong></td><td>[NAMA]</td><td>100%</td><td>Implementasi UI/UX, design system, state management, PWA optimization, code review frontend</td></tr><tr><td>4</td><td><strong>Backend Engineer 1</strong></td><td>[NAMA]</td><td>100%</td><td>Pengembangan modul: autentikasi, keanggotaan, simpanan, pinjaman, jurnal otomatis</td></tr><tr><td>5</td><td><strong>Backend Engineer 2</strong></td><td>[NAMA]</td><td>100%</td><td>Pengembangan modul: akuntansi, unit usaha (POS, PPOB, sewa, cicilan, ventura), laporan</td></tr><tr><td>6</td><td><strong>Frontend Engineer 1</strong></td><td>[NAMA]</td><td>100%</td><td>Komponen UI, halaman admin, dashboard, form transaksi, tabel data</td></tr><tr><td>7</td><td><strong>Frontend Engineer 2</strong></td><td>[NAMA]</td><td>100%</td><td>Portal anggota, landing page CMS, notifikasi, PWA components</td></tr><tr><td>8</td><td><strong>QA Engineer</strong></td><td>[NAMA]</td><td>75%</td><td>Rencana pengujian, otomasi Playwright, koordinasi UAT, bug tracking</td></tr><tr><td>9</td><td><strong>DevOps Engineer</strong></td><td>[NAMA]</td><td>50%</td><td>CI/CD pipeline, deployment Railway, PostgreSQL, monitoring, backup, keamanan infra</td></tr><tr><td>10</td><td><strong>Business Analyst</strong></td><td>[NAMA]</td><td>75%</td><td>Elicitation kebutuhan, BRD/SRS, user story, UAT support, dokumentasi proses bisnis</td></tr><tr><td>11</td><td><strong>UI/UX Designer</strong></td><td>[NAMA]</td><td>50%</td><td>Wireframe, mockup, design system, prototipe interaktif, usability testing</td></tr></tbody></table>
+<strong>Total Tim Inti:</strong> 11 orang
+
+<h3>2.2 Peran Pendukung (On-Call)</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Peran</th><th>Keterlibatan</th><th>Tanggung Jawab</th></tr></thead><tbody><tr><td>1</td><td>Database Administrator</td><td>Saat migrasi & tuning</td><td>Optimasi query, index strategy, backup verification</td></tr><tr><td>2</td><td>Security Analyst</td><td>Fase awal & akhir</td><td>Security review, penetration testing, compliance audit</td></tr><tr><td>3</td><td>Technical Writer</td><td>Sebelum go-live</td><td>Dokumentasi user guide, API docs, runbook operasional</td></tr></tbody></table>
+<h3>2.3 RACI Matrix</h3>
+
+<table class="dark-theme"><thead><tr><th>Aktivitas</th><th>PM</th><th>TL</th><th>FL</th><th>BE</th><th>FE</th><th>QA</th><th>DevOps</th><th>BA</th><th>Designer</th></tr></thead><tbody><tr><td>Requirement Gathering</td><td>A</td><td>C</td><td>C</td><td>I</td><td>I</td><td>C</td><td>I</td><td>R</td><td>C</td></tr><tr><td>Architecture Design</td><td>A</td><td>R</td><td>C</td><td>C</td><td>I</td><td>I</td><td>C</td><td>C</td><td>I</td></tr><tr><td>UI/UX Design</td><td>A</td><td>C</td><td>C</td><td>I</td><td>I</td><td>I</td><td>I</td><td>C</td><td>R</td></tr><tr><td>Backend Development</td><td>A</td><td>A</td><td>I</td><td>R</td><td>I</td><td>C</td><td>C</td><td>I</td><td>I</td></tr><tr><td>Frontend Development</td><td>A</td><td>C</td><td>R</td><td>I</td><td>R</td><td>C</td><td>I</td><td>I</td><td>C</td></tr><tr><td>Testing</td><td>A</td><td>C</td><td>I</td><td>C</td><td>C</td><td>R</td><td>I</td><td>C</td><td>I</td></tr><tr><td>Deployment</td><td>A</td><td>A</td><td>I</td><td>I</td><td>I</td><td>C</td><td>R</td><td>I</td><td>I</td></tr><tr><td>UAT Coordination</td><td>A</td><td>C</td><td>C</td><td>C</td><td>C</td><td>R</td><td>I</td><td>R</td><td>I</td></tr><tr><td>Training</td><td>A</td><td>C</td><td>C</td><td>C</td><td>C</td><td>I</td><td>I</td><td>R</td><td>C</td></tr><tr><td>Post Go-Live Support</td><td>A</td><td>R</td><td>C</td><td>C</td><td>C</td><td>R</td><td>R</td><td>I</td><td>I</td></tr></tbody></table>
+<blockquote><strong>Keterangan:</strong> R = Responsible (pelaksana), A = Accountable (penanggung jawab), C = Consulted (konsultan), I = Informed (diinformasikan)</blockquote>
+
+<hr>
+
+<h2>3. Timeline Detail</h2>
+
+<h3>3.1 Ringkasan Fase</h3>
+
+<table class="dark-theme"><thead><tr><th>Fase</th><th>Nama</th><th>Durasi</th><th>Minggu</th></tr></thead><tbody><tr><td>Phase 0</td><td>Discovery & Planning</td><td>2 minggu</td><td>Week 1–2</td></tr><tr><td>Phase 1</td><td>Design & Architecture</td><td>2 minggu</td><td>Week 3–4</td></tr><tr><td>Phase 2</td><td>Core Development Sprint 1</td><td>4 minggu</td><td>Week 5–8</td></tr><tr><td>Phase 3</td><td>Core Development Sprint 2</td><td>4 minggu</td><td>Week 9–12</td></tr><tr><td>Phase 4</td><td>Unit Usaha Sprint</td><td>4 minggu</td><td>Week 13–16</td></tr><tr><td>Phase 5</td><td>AI & Polish</td><td>2 minggu</td><td>Week 17–18</td></tr><tr><td>Phase 6</td><td>UAT & Go-Live</td><td>2 minggu</td><td>Week 19–20</td></tr><tr><td>Phase 7</td><td>Warranty Support</td><td>12 minggu</td><td>Week 21–32</td></tr><tr><td><strong>Total</strong></td><td></td><td><strong>32 minggu</strong></td><td></td></tr></tbody></table>
+<h3>3.2 Phase 0: Discovery & Planning (Week 1–2)</h3>
+
+<p><strong>Tujuan:</strong> Memastikan seluruh stakeholder memiliki pemahaman yang sama mengenai kebutuhan, ruang lingkup, dan ekspektasi proyek.</p>
+
+<table class="dark-theme"><thead><tr><th>Minggu</th><th>Aktivitas</th><th>Tim</th><th>Deliverable</th></tr></thead><tbody><tr><td>Week 1</td><td>Project Kickoff Meeting — perkenalan tim, presentasi roadmap, penjelasan metodologi</td><td>PM, TL, BA, Klien</td><td>Notulensi kickoff, daftar kontak</td></tr><tr><td>Week 1</td><td>Penandatanganan NDA (Non-Disclosure Agreement)</td><td>PM, Klien</td><td>NDA bermeterai</td></tr><tr><td>Week 1</td><td>Requirement Workshop Hari 1 — pemetaan proses bisnis, pain points, gap analysis</td><td>BA, TL, PM, Klien</td><td>Hasil workshop, process map</td></tr><tr><td>Week 2</td><td>Requirement Workshop Hari 2 — detail modul, aturan bisnis, edge cases</td><td>BA, TL, PM, Klien</td><td>Daftar kebutuhan terperinci</td></tr><tr><td>Week 2</td><td>Finalisasi BRD (Business Requirements Document)</td><td>BA, PM</td><td>BRD v1.0 Final</td></tr><tr><td>Week 2</td><td>Penandatanganan BRD oleh Project Sponsor klien</td><td>PM, Klien</td><td>BRD signed-off</td></tr><tr><td>Week 2</td><td>Setup project management tools (Jira/Linear, Slack/Teams channel)</td><td>PM, DevOps</td><td>Workspace aktif</td></tr></tbody></table>
+<h3>3.3 Phase 1: Design & Architecture (Week 3–4)</h3>
+
+<p><strong>Tujuan:</strong> Menghasilkan spesifikasi teknis lengkap yang menjadi acuan seluruh tim development.</p>
+
+<table class="dark-theme"><thead><tr><th>Minggu</th><th>Aktivitas</th><th>Tim</th><th>Deliverable</th></tr></thead><tbody><tr><td>Week 3</td><td>Penyusunan SRS (Software Requirements Specification)</td><td>BA, TL</td><td>SRS v1.0</td></tr><tr><td>Week 3</td><td>Desain UI/UX wireframe untuk seluruh halaman utama</td><td>Designer, FL</td><td>Wireframe (Figma)</td></tr><tr><td>Week 3</td><td>Desain design system — warna, tipografi, komponen, spacing</td><td>Designer, FL</td><td>Design system guide</td></tr><tr><td>Week 3</td><td>Desain database schema — ERD, data dictionary, index strategy</td><td>TL, BE1, BE2</td><td>Database design document</td></tr><tr><td>Week 4</td><td>Desain arsitektur sistem — API contract, middleware, error handling</td><td>TL</td><td>API design document</td></tr><tr><td>Week 4</td><td>Setup CI/CD pipeline — GitHub Actions, Railway, database staging</td><td>DevOps</td><td>Pipeline aktif, staging env</td></tr><tr><td>Week 4</td><td>Setup development environment — monorepo, branch strategy, linting rules</td><td>TL, DevOps</td><td>Developer handbook</td></tr><tr><td>Week 4</td><td>Desain UI/UX mockup high-fidelity untuk halaman kritis</td><td>Designer, FL</td><td>Mockup final (Figma)</td></tr><tr><td>Week 4</td><td>Approval SRS & UI/UX mockup oleh klien</td><td>PM, Klien</td><td>SRS & mockup signed-off</td></tr></tbody></table>
+<h3>3.4 Phase 2: Core Development Sprint 1 (Week 5–8)</h3>
+
+<p><strong>Tujuan:</strong> Mengembangkan modul inti — autentikasi, keanggotaan, simpanan, pinjaman — termasuk jurnal otomatis.</p>
+
+<table class="dark-theme"><thead><tr><th>Minggu</th><th>Aktivitas</th><th>Tim</th><th>Deliverable</th></tr></thead><tbody><tr><td>Week 5</td><td>Modul Autentikasi & Otorisasi — JWT auth, RBAC 5 peran, middleware</td><td>BE1, FE1</td><td>Auth module selesai</td></tr><tr><td>Week 5</td><td>Komponen design system — button, input, table, modal, sidebar, header</td><td>FL, FE1, FE2</td><td>Component library</td></tr><tr><td>Week 6</td><td>Modul Keanggotaan — CRUD anggota, 4 tipe simpanan, status, dokumen</td><td>BE1, FE1</td><td>Anggota module selesai</td></tr><tr><td>Week 6</td><td>Dashboard Admin — KPI cards, charts, recent activity</td><td>FE1, FE2</td><td>Admin dashboard</td></tr><tr><td>Week 7</td><td>Modul Simpanan — setor/tarik 4 jenis, bunga otomatis, mutasi rekening</td><td>BE1, FE1</td><td>Simpanan module selesai</td></tr><tr><td>Week 7</td><td>Modul Pinjaman — pengajuan, pencairan, 3 metode bunga, scheduler angsuran</td><td>BE2, FE2</td><td>Pinjaman module selesai</td></tr><tr><td>Week 8</td><td>Integrasi jurnal otomatis dari transaksi simpanan & pinjaman</td><td>BE1, BE2</td><td>Jurnal otomatis end-to-end</td></tr><tr><td>Week 8</td><td>Sprint Review & Demo ke klien</td><td>Tim Proyek</td><td>Demo modul inti, feedback</td></tr></tbody></table>
+<h3>3.5 Phase 3: Core Development Sprint 2 (Week 9–12)</h3>
+
+<p><strong>Tujuan:</strong> Mengembangkan modul akuntansi lengkap sesuai SAK ETAP — COA, jurnal, periode, laporan keuangan, dan tutup buku.</p>
+
+<table class="dark-theme"><thead><tr><th>Minggu</th><th>Aktivitas</th><th>Tim</th><th>Deliverable</th></tr></thead><tbody><tr><td>Week 9</td><td>Modul COA (Chart of Accounts) — 6 level hierarkis, CRUD, import</td><td>BE2, FE1</td><td>COA module selesai</td></tr><tr><td>Week 9</td><td>Modul Jurnal — manual entry, approval workflow, posting</td><td>BE2, FE2</td><td>Jurnal module selesai</td></tr><tr><td>Week 10</td><td>Modul Periode Akuntansi — 12 periode, open/close period</td><td>BE2, FE1</td><td>Periode module selesai</td></tr><tr><td>Week 10</td><td>Buku Besar & Neraca Saldo — auto-posting, drill-down</td><td>BE2, FE2</td><td>Buku besar & neraca saldo</td></tr><tr><td>Week 11</td><td>Laporan Keuangan — Neraca, Laba Rugi, Arus Kas, Catatan atas LK</td><td>BE2, FE1</td><td>Financial reports</td></tr><tr><td>Week 11</td><td>Modul Tutup Buku — tutup bulanan, tutup tahunan, reverse jurnal</td><td>BE2, FE2</td><td>Tutup buku module</td></tr><tr><td>Week 12</td><td>Laporan OJK — LKP, BMPK, Kolektibilitas, KPMM</td><td>BE2, BA</td><td>OJK reporting module</td></tr><tr><td>Week 12</td><td>Sprint Review & Demo ke klien — termasuk laporan keuangan</td><td>Tim Proyek</td><td>Demo akuntansi, feedback</td></tr></tbody></table>
+<h3>3.6 Phase 4: Unit Usaha Sprint (Week 13–16)</h3>
+
+<p><strong>Tujuan:</strong> Mengembangkan seluruh modul unit usaha — POS/Toko, PPOB, Sewa Aset, Cicilan Barang, Ventura.</p>
+
+<table class="dark-theme"><thead><tr><th>Minggu</th><th>Aktivitas</th><th>Tim</th><th>Deliverable</th></tr></thead><tbody><tr><td>Week 13</td><td>Modul POS/Toko — kategori, supplier, stok, penjualan multi-item, HPP FIFO</td><td>BE2, FE1</td><td>POS module selesai</td></tr><tr><td>Week 13</td><td>Modul PPOB — pulsa, listrik, PDAM, BPJS, integrasi API agregator</td><td>BE1, FE2</td><td>PPOB module selesai</td></tr><tr><td>Week 14</td><td>Modul Sewa Aset — manajemen aset, jadwal sewa, denda, pembayaran parsial</td><td>BE2, FE1</td><td>Sewa module selesai</td></tr><tr><td>Week 14</td><td>Modul Cicilan Barang — DP, tenor, bunga, angsuran, status lunas</td><td>BE1, FE2</td><td>Cicilan module selesai</td></tr><tr><td>Week 15</td><td>Modul Ventura — portfolio investasi, dividen, pipeline pembiayaan</td><td>BE2, FE1</td><td>Ventura module selesai</td></tr><tr><td>Week 15</td><td>Dashboard Unit Usaha — agregasi laba rugi per unit, KPI</td><td>FE1, FE2</td><td>Unit usaha dashboard</td></tr><tr><td>Week 16</td><td>Integrasi jurnal otomatis dari semua unit usaha</td><td>BE1, BE2</td><td>End-to-end jurnal integration</td></tr><tr><td>Week 16</td><td>Sprint Review & Demo ke klien — seluruh modul</td><td>Tim Proyek</td><td>Demo lengkap, feedback</td></tr></tbody></table>
+<h3>3.7 Phase 5: AI & Polish (Week 17–18)</h3>
+
+<p><strong>Tujuan:</strong> Mengimplementasikan fitur AI, landing page CMS, audit trail, dan optimasi performa.</p>
+
+<table class="dark-theme"><thead><tr><th>Minggu</th><th>Aktivitas</th><th>Tim</th><th>Deliverable</th></tr></thead><tbody><tr><td>Week 17</td><td>AI Credit Scoring — integrasi Gemini, analisis 5C, rekomendasi plafon</td><td>TL, BE1</td><td>AI scoring selesai</td></tr><tr><td>Week 17</td><td>Landing Page CMS — hero, fitur, tim, testimoni, pricing, kontak</td><td>FE2, Designer</td><td>Landing CMS selesai</td></tr><tr><td>Week 17</td><td>Modul Pengumuman & Tiket — broadcast, tiket bantuan dengan SLA</td><td>BE1, FE1</td><td>Pengumuman & tiket</td></tr><tr><td>Week 18</td><td>Audit Trail — log lengkap create/update/delete dengan before/after</td><td>BE2</td><td>Audit trail selesai</td></tr><tr><td>Week 18</td><td>Optimasi performa — lazy loading, code splitting, query optimization</td><td>TL, FE1, FE2</td><td>Performance baseline</td></tr><tr><td>Week 18</td><td>Security hardening — penetration testing, dependency audit, CSP review</td><td>DevOps, TL</td><td>Security report</td></tr><tr><td>Week 18</td><td>Final integration testing — semua modul terhubung</td><td>QA, Tim</td><td>Integration test report</td></tr></tbody></table>
+<h3>3.8 Phase 6: UAT & Go-Live (Week 19–20)</h3>
+
+<p><strong>Tujuan:</strong> Pengujian penerimaan oleh pengguna, migrasi data, pelatihan, dan deployment ke production.</p>
+
+<table class="dark-theme"><thead><tr><th>Minggu</th><th>Aktivitas</th><th>Tim</th><th>Deliverable</th></tr></thead><tbody><tr><td>Week 19</td><td>User Acceptance Testing (UAT) — skenario uji oleh tim klien</td><td>QA, BA, Klien</td><td>UAT sign-off</td></tr><tr><td>Week 19</td><td>Data Migration — assessment, mapping, ETL, validasi</td><td>TL, BE1, DevOps</td><td>Data migrated & verified</td></tr><tr><td>Week 19</td><td>Pelatihan Batch 1 — Admin (2 hari), Operator (2 hari)</td><td>BA, TL</td><td>Training completion record</td></tr><tr><td>Week 20</td><td>Pelatihan Batch 2 — Anggota (1 hari), IT Admin (1 hari), Pengawas (1 hari)</td><td>BA, TL</td><td>Training completion record</td></tr><tr><td>Week 20</td><td>Production Deployment — DNS, SSL, database, health check</td><td>DevOps, TL</td><td>Production live</td></tr><tr><td>Week 20</td><td>Post Go-Live Monitoring — error tracking, performance, user feedback</td><td>Tim Proyek</td><td>Monitoring dashboard active</td></tr><tr><td>Week 20</td><td>Go-Live Ceremony — serah terima sistem, penandatanganan BAPO</td><td>PM, Klien</td><td>BAPO signed</td></tr></tbody></table>
+<h3>3.9 Phase 7: Warranty Support (Week 21–32)</h3>
+
+<p><strong>Tujuan:</strong> Dukungan teknis pasca go-live selama 12 minggu — bug fix, minor enhancement, knowledge transfer.</p>
+
+<table class="dark-theme"><thead><tr><th>Minggu</th><th>Aktivitas</th><th>Tim</th><th>Deliverable</th></tr></thead><tbody><tr><td>Week 21–24</td><td>Bug fix prioritas tinggi (P1 & P2), stabilisasi sistem</td><td>BE1, BE2, FE1</td><td>Bug fix log</td></tr><tr><td>Week 21–24</td><td>Monitoring performa, query tuning, error analysis</td><td>TL, DevOps</td><td>Performance report</td></tr><tr><td>Week 25–28</td><td>Minor enhancement dari feedback pengguna</td><td>FE1, FE2, BE2</td><td>Enhancement log</td></tr><tr><td>Week 25–28</td><td>Knowledge transfer ke IT admin klien — dokumentasi operasional</td><td>TL, BA</td><td>Knowledge transfer docs</td></tr><tr><td>Week 29–32</td><td>Penyelesaian residual bugs, final enhancement</td><td>Tim Proyek</td><td>Final bug report</td></tr><tr><td>Week 29–32</td><td>Penyerahan seluruh dokumentasi & source code</td><td>PM, TL</td><td>Documentation package</td></tr><tr><td>Week 32</td><td>Penutupan proyek — retrospective, penandatanganan berita serah terima</td><td>PM, Klien</td><td>Project closure report</td></tr></tbody></table>
+<hr>
+
+<h2>4. Gantt Chart</h2>
+
+<p>``<code><br>Minggu  : 1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   32<br>        ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤</p>
+
+<p>P0 Disc. ████ ████ ◆M1<br>P1 Des.       ░░░░ ████ ████ ◆<br>P2 Core1                 ████ ████ ████ ████ ◆M2<br>P3 Core2                                  ████ ████ ████ ████ ◆<br>P4 UnitUsaha                                               ████ ████ ████ ████ ◆M3<br>P5 AI/Polish                                                              ████ ████<br>P6 UAT/GL                                                                          ████ ████ ◆M4 ◆M5<br>P7 Warranty                                                                              ░░░░ ░░░░ ░░░░ ░░░░ ░░░░ ░░░░ ░░░░ ░░░░ ░░░░ ░░░░ ░░░░ ░░░░ ◆</p>
+
+<p>Legenda:<br>  ████  = Fase aktif (development/delivery)<br>  ░░░░  = Support / warranty period<br>  ◆     = Milestone / deliverable sign-off<br></code>`<code></p>
+
+<p><strong>Gantt Chart Detail (dengan sub-aktivitas):</strong></p>
+
+<p></code>`<code><br>Minggu           : 1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27   28   29   30   31   32<br>                   ├────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤<br>Project Kickoff    ████<br>NDA Signing        ████<br>Req. Workshop      ████ ████<br>BRD Sign-off            ████ ◆<br>SRS Development         ████ ████<br>UI/UX Wireframe         ████ ████<br>Design System           ████ ████<br>DB Schema Design        ████ ████<br>CI/CD Setup                  ████<br>SRS Approval                 ████ ◆<br>Auth Module                       ████<br>Component Library                 ████ ████<br>Anggota Module                        ████<br>Admin Dashboard                       ████<br>Simpanan Module                           ████<br>Pinjaman Module                           ████<br>Jurnal Integration                              ████<br>Core Demo ◆M2                                        ████<br>COA Module                                                ████<br>Jurnal Module                                             ████<br>Periode Module                                                  ████<br>Buku Besar / Neraca                                              ████<br>Laporan Keuangan                                                       ████<br>Tutup Buku                                                            ████<br>OJK Reporting                                                              ████<br>Accounting Demo ◆M3                                                            ████<br>POS/Toko Module                                                                     ████<br>PPOB Module                                                                          ████<br>Sewa Aset Module                                                                          ████<br>Cicilan Module                                                                             ████<br>Ventura Module                                                                                  ████<br>Unit Usaha Dashboard                                                                           ████<br>Unit Usaha Integration                                                                                ████<br>Unit Usaha Demo ◆M3                                                                                        ████<br>AI Credit Scoring                                                                                                  ████<br>Landing Page CMS                                                                                                   ████<br>Pengumuman & Tiket                                                                                                  ████<br>Audit Trail                                                                                                              ████<br>Performance Optimization                                                                                                ████<br>Security Hardening                                                                                                       ████<br>UAT                                                                                                                              ████<br>Data Migration                                                                                                                   ████<br>Training Admin                                                                                                                   ████<br>Training Operator                                                                                                                ████<br>Training Anggota/IT/Pengawas                                                                                                          ████<br>Production Deploy                                                                                                                        ████<br>UAT Sign-off ◆M4                                                                                                                        ████<br>Go-Live ◆M5                                                                                                                             ████<br>Warranty Support (Bug Fix)                                                                                                                       ░░░░ ░░░░ ░░░░ ░░░░<br>Warranty Support (Enhancement)                                                                                                                            ░░░░ ░░░░ ░░░░ ░░░░<br>Knowledge Transfer                                                                                                                                                ░░░░ ░░░░<br>Final Documentation                                                                                                                                                     ░░░░<br>Project Closure ◆                                                                                                                                                    ░░░░ ◆<br></code>`<code></p>
+
+<hr>
+
+<h2>5. Milestone & Jadwal Pembayaran</h2>
+
+<h3>5.1 Milestone</h3>
+
+<table class="dark-theme"><thead><tr><th>Milestone</th><th>Nama</th><th>Trigger</th><th>Persentase</th><th>Nilai Ilustratif</th><th>Target Pencapaian</th></tr></thead><tbody><tr><td><strong>M1</strong></td><td>Kontrak & Discovery</td><td>NDA + BRD ditandatangani</td><td>20%</td><td>Rp 150.000.000</td><td>Week 2</td></tr><tr><td><strong>M2</strong></td><td>Core Modules Ready</td><td>Modul Auth, Anggota, Simpanan, Pinjaman berfungsi & demo</td><td>25%</td><td>Rp 187.500.000</td><td>Week 8</td></tr><tr><td><strong>M3</strong></td><td>Akuntansi & Unit Usaha</td><td>Modul akuntansi SAK ETAP + seluruh unit usaha berfungsi</td><td>25%</td><td>Rp 187.500.000</td><td>Week 16</td></tr><tr><td><strong>M4</strong></td><td>UAT Sign-off</td><td>User acceptance test lulus, staging disetujui klien</td><td>20%</td><td>Rp 150.000.000</td><td>Week 19</td></tr><tr><td><strong>M5</strong></td><td>Production Go-Live</td><td>Sistem production live, health check green, pelatihan selesai</td><td>10%</td><td>Rp 75.000.000</td><td>Week 20</td></tr><tr><td></td><td><strong>Total</strong></td><td></td><td><strong>100%</strong></td><td><strong>Rp 750.000.000</strong></td><td></td></tr></tbody></table>
+<blockquote><strong>Catatan:</strong> Nilai di atas bersifat ilustratif. Harga final disesuaikan dengan ruang lingkup, tingkat customisasi, dan SLA dukungan yang disepakati dalam kontrak.</blockquote>
+
+<h3>5.2 Jadwal Pembayaran</h3>
+
+<table class="dark-theme"><thead><tr><th>Milestone</th><th>Syarat Pembayaran</th><th>Tempo Pembayaran</th></tr></thead><tbody><tr><td>M1</td><td>Invoice + NDA & BRD signed</td><td>7 hari kalender sejak invoice</td></tr><tr><td>M2</td><td>Invoice + demo report + client approval</td><td>14 hari kalender sejak invoice</td></tr><tr><td>M3</td><td>Invoice + demo report + client approval</td><td>14 hari kalender sejak invoice</td></tr><tr><td>M4</td><td>Invoice + UAT sign-off document</td><td>14 hari kalender sejak invoice</td></tr><tr><td>M5</td><td>Invoice + BAPO signed + production URL live</td><td>7 hari kalender sejak invoice</td></tr></tbody></table>
+<h3>5.3 Ketentuan Pembayaran Tambahan</h3>
+
+<ul><li><strong>Change Request (CR):</strong> Pembayaran terpisah setelah CR disetujui, dibayarkan 50% saat approval, 50% saat delivery</li>
+<li><strong>Extend Warranty:</strong> Dibayarkan di muka per bulan setelah 12 minggu warranty standar berakhir</li>
+<li><strong>On-site Training:</strong> Biaya travel & akomodasi ditanggung klien, diinvois dengan bukti</li>
+</ul>
+<hr>
+
+<h2>6. Deliverables per Fase</h2>
+
+<table class="dark-theme"><thead><tr><th>Fase</th><th>Deliverables</th><th>Format</th><th>Penerima</th></tr></thead><tbody><tr><td><strong>Phase 0</strong></td><td>NDA bermeterai</td><td>Dokumen hukum</td><td>PM, Klien</td></tr><tr><td></td><td>Notulensi kickoff meeting</td><td>Dokumen + rekaman</td><td>Seluruh tim</td></tr><tr><td></td><td>BRD (Business Requirements Document) v1.0</td><td>Markdown / PDF</td><td>PM, Klien</td></tr><tr><td><strong>Phase 1</strong></td><td>SRS (Software Requirements Specification) v1.0</td><td>Markdown / PDF</td><td>Tim dev, Klien</td></tr><tr><td></td><td>Wireframe seluruh halaman (Figma)</td><td>Figma link</td><td>Tim dev, Designer</td></tr><tr><td></td><td>Mockup high-fidelity (Figma)</td><td>Figma link</td><td>Tim dev, Klien</td></tr><tr><td></td><td>Design system guide</td><td>Markdown / Figma</td><td>Tim frontend</td></tr><tr><td></td><td>Database schema (ERD + data dictionary)</td><td>Diagram + Dokumen</td><td>Tim backend</td></tr><tr><td></td><td>CI/CD pipeline aktif di staging</td><td>Working environment</td><td>Tim dev</td></tr><tr><td><strong>Phase 2</strong></td><td>Modul Autentikasi & Otorisasi</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Keanggotaan</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Simpanan</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Pinjaman & Angsuran</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Jurnal otomatis end-to-end</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Admin Dashboard</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Component Library</td><td>Source code</td><td>Tim frontend</td></tr><tr><td><strong>Phase 3</strong></td><td>Modul COA</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Jurnal & Approval</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Periode Akuntansi</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Buku Besar & Neraca Saldo</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Laporan Keuangan (Neraca, Laba Rugi, Arus Kas)</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Tutup Buku</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Laporan OJK (LKP, BMPK, Kolektibilitas)</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td><strong>Phase 4</strong></td><td>Modul POS/Toko</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul PPOB</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Sewa Aset</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Cicilan Barang</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Ventura & Investasi</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Dashboard Unit Usaha</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td><strong>Phase 5</strong></td><td>AI Credit Scoring (Gemini)</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Landing Page CMS</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Modul Pengumuman & Tiket</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Audit Trail module</td><td>Deployed (staging)</td><td>Klien (demo)</td></tr><tr><td></td><td>Performance benchmark report</td><td>Dokumen</td><td>Tim dev, Klien</td></tr><tr><td></td><td>Security audit report</td><td>Dokumen</td><td>Tim dev, Klien</td></tr><tr><td><strong>Phase 6</strong></td><td>UAT sign-off document</td><td>Dokumen (signed)</td><td>PM, Klien</td></tr><tr><td></td><td>Data migration report</td><td>Dokumen + log</td><td>PM, Klien</td></tr><tr><td></td><td>Training completion records</td><td>Dokumen (signed)</td><td>PM, Klien</td></tr><tr><td></td><td>Production deployment — live & verified</td><td>Working environment</td><td>Klien</td></tr><tr><td></td><td>BAPO (Berita Acara Penerimaan Operasional)</td><td>Dokumen (signed)</td><td>PM, Klien</td></tr><tr><td></td><td>User guide (admin, operator, anggota)</td><td>PDF / Wiki</td><td>Klien</td></tr><tr><td><strong>Phase 7</strong></td><td>Bug fix log & resolution report</td><td>Dokumen</td><td>PM, Klien</td></tr><tr><td></td><td>Enhancement log</td><td>Dokumen</td><td>PM, Klien</td></tr><tr><td></td><td>Knowledge transfer documentation</td><td>Dokumen + video</td><td>Klien</td></tr><tr><td></td><td>Source code (lisensi perpetual)</td><td>Git repository</td><td>Klien</td></tr><tr><td></td><td>API documentation</td><td>Markdown / Swagger</td><td>Klien</td></tr><tr><td></td><td>Runbook operasional</td><td>PDF / Wiki</td><td>Klien</td></tr><tr><td></td><td>Project closure report</td><td>Dokumen (signed)</td><td>PM, Klien</td></tr></tbody></table>
+<hr>
+
+<h2>7. Manajemen Risiko</h2>
+
+<h3>7.1 Risk Register</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Risiko</th><th>Probabilitas</th><th>Dampak</th><th>Skor</th><th>Mitigation</th><th>Owner</th></tr></thead><tbody><tr><td>R1</td><td>Keterlambatan persetujuan BRD/SRS oleh klien</td><td>Tinggi</td><td>Tinggi</td><td>🔴 9</td><td>Tetapkan SLA persetujuan dalam kontrak (3 hari kerja). Siapkan draft alternatif untuk percepat review. PM follow-up harian.</td><td>PM</td></tr><tr><td>R2</td><td>Perubahan scope (change request) berlebihan selama development</td><td>Sedang</td><td>Tinggi</td><td>🟠 8</td><td>Proses CR ketat: impact assessment 3 hari, approval dari PM + Sponsor. Buffer timeline 10% untuk CR. Batasi CR fase berjalan ke fase berikutnya.</td><td>PM, BA</td></tr><tr><td>R3</td><td>Kualitas data legacy dari koperasi rendah (duplikasi, field kosong, format tidak konsisten)</td><td>Sedang</td><td>Tinggi</td><td>🟠 8</td><td>Mulai assessment data di Phase 0. Buat script validasi & cleansing. Sediakan buffer 1 minggu untuk data cleaning. Libatkan admin koperasi dalam verifikasi.</td><td>TL, BA</td></tr><tr><td>R4</td><td>Turnover atau ketersediaan tim klien untuk UAT dan pelatihan</td><td>Rendah</td><td>Tinggi</td><td>🟡 6</td><td>Jadwalkan UAT & training jauh hari (minimal 2 minggu sebelumnya). Siapkan backup user untuk UAT. Rekam sesi pelatihan untuk referensi.</td><td>PM</td></tr><tr><td>R5</td><td>Gangguan infrastruktur cloud (Railway downtime, database corruption)</td><td>Rendah</td><td>Tinggi</td><td>🟡 6</td><td>Setup automated backup harian + point-in-time recovery. Monitoring 24/7 via UptimeRobot. Health check endpoint aktif. Siapkan failover plan.</td><td>DevOps</td></tr><tr><td>R6</td><td>Bug kritis ditemukan saat UAT yang mengubah timeline</td><td>Sedang</td><td>Sedang</td><td>🟠 6</td><td>Jalankan integration testing sebelum UAT. Defect triage harian selama UAT. Buffer 3 hari untuk critical bug fix. Prioritaskan P1/P2 segera, P3/P4 ke warranty.</td><td>QA, TL</td></tr><tr><td>R7</td><td>Resistensi pengguna terhadap perubahan dari sistem manual ke sistem digital</td><td>Sedang</td><td>Sedang</td><td>🟠 6</td><td>Libatkan pengguna sejak Phase 0 (workshop). Tunjukkan quick win & manfaat langsung. Sediakan cheat sheet & video tutorial. Champion user di koperasi sebagai ambassador.</td><td>BA, PM</td></tr></tbody></table>
+<h3>7.2 Risk Response Strategy</h3>
+
+<table class="dark-theme"><thead><tr><th>Strategi</th><th>Penerapan</th></tr></thead><tbody><tr><td><strong>Avoid</strong></td><td>Hindari risiko dengan menghilangkan penyebab — misalnya freeze scope setelah SRS approval</td></tr><tr><td><strong>Mitigate</strong></td><td>Kurangi probabilitas atau dampak — misalnya backup data berulang kali selama migrasi</td></tr><tr><td><strong>Transfer</strong></td><td>Pindahkan risiko ke pihak lain — misalnya asuransi infrastruktur cloud, SLA dari provider</td></tr><tr><td><strong>Accept</strong></td><td>Terima risiko dengan contingency plan — misalnya buffer timeline untuk minor delays</td></tr></tbody></table>
+<h3>7.3 Monitoring Risiko</h3>
+
+<ul><li>Review risiko dilakukan setiap <strong>Weekly Status Call</strong></li>
+<li>Risk register diperbarui setiap <strong>2 minggu</strong> atau saat ada perubahan signifikan</li>
+<li>Setiap risiko dengan skor ≥ 8 (merah) dilaporkan ke <strong>Steering Committee</strong> bulanan</li>
+</ul>
+<hr>
+
+<h2>8. Rencana Komunikasi</h2>
+
+<h3>8.1 Jadwal Komunikasi Rutin</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Aktivitas</th><th>Frekuensi</th><th>Peserta</th><th>Durasi</th><th>Format</th></tr></thead><tbody><tr><td>1</td><td>Daily Standup (selama sprint)</td><td>Harian (Senin–Jumat)</td><td>Tim dev (TL, FL, BE, FE, QA)</td><td>15 menit</td><td>Slack/Teams huddle</td></tr><tr><td>2</td><td>Weekly Status Call</td><td>Mingguan (Senin)</td><td>PM, TL, BA, PM Klien</td><td>30 menit</td><td>Zoom/Meet</td></tr><tr><td>3</td><td>Sprint Review & Demo</td><td>Akhir sprint (2 mingguan)</td><td>Seluruh tim + klien</td><td>60 menit</td><td>Zoom/Meet + presentasi</td></tr><tr><td>4</td><td>Sprint Retrospective</td><td>Akhir sprint (2 mingguan)</td><td>Tim internal</td><td>45 menit</td><td>Zoom/Meet</td></tr><tr><td>5</td><td>Steering Committee</td><td>Bulanan</td><td>PM, TL, Klien Sponsor, Direksi klien</td><td>60 menit</td><td>Presentasi formal</td></tr><tr><td>6</td><td>Bug Triage</td><td>Harian (selama UAT)</td><td>QA, TL, BE, FE</td><td>15 menit</td><td>Slack thread</td></tr><tr><td>7</td><td>Architecture Review</td><td>2 mingguan</td><td>TL, DevOps, BE</td><td>60 menit</td><td>Zoom/Meet</td></tr></tbody></table>
+<h3>8.2 Channel Komunikasi</h3>
+
+<table class="dark-theme"><thead><tr><th>Channel</th><th>Platform</th><th>Tujuan</th></tr></thead><tbody><tr><td><strong>#general</strong></td><td>Slack / Microsoft Teams</td><td>Pengumuman umum, informasi proyek</td></tr><tr><td><strong>#dev-backend</strong></td><td>Slack / Microsoft Teams</td><td>Diskusi teknis backend, code review, PR</td></tr><tr><td><strong>#dev-frontend</strong></td><td>Slack / Microsoft Teams</td><td>Diskusi teknis frontend, component review</td></tr><tr><td><strong>#design</strong></td><td>Slack / Microsoft Teams</td><td>Review desain, feedback UI/UX</td></tr><tr><td><strong>#qa-testing</strong></td><td>Slack / Microsoft Teams</td><td>Bug reports, test results, UAT coordination</td></tr><tr><td><strong>#devops-infra</strong></td><td>Slack / Microsoft Teams</td><td>Deployment, monitoring, infra issues</td></tr><tr><td><strong>#client-communication</strong></td><td>Slack / Microsoft Teams (shared)</td><td>Komunikasi formal dengan klien</td></tr><tr><td><strong>Email</strong></td><td>Gmail / Outlook</td><td>Dokumen formal, kontrak, invoice</td></tr><tr><td><strong>Project Board</strong></td><td>Jira / Linear</td><td>Task management, sprint tracking</td></tr></tbody></table>
+<h3>8.3 Escalation Path</h3>
+
+<table class="dark-theme"><thead><tr><th>Level</th><th>Situasi</th><th>Escalated To</th><th>Response Time</th></tr></thead><tbody><tr><td><strong>Level 1</strong></td><td>Bug P3/P4, pertanyaan teknis minor</td><td>Tim dev (via Slack)</td><td>< 4 jam kerja</td></tr><tr><td><strong>Level 2</strong></td><td>Bug P1/P2, blocker development</td><td>Tech Lead + PM</td><td>< 2 jam kerja</td></tr><tr><td><strong>Level 3</strong></td><td>Perubahan scope, risiko proyek, keterlambatan > 3 hari</td><td>PM + Project Sponsor (klien)</td><td>< 1 hari kerja</td></tr><tr><td><strong>Level 4</strong></td><td>Krisis (security breach, data loss, sistem down)</td><td>PM + TL + DevOps + Sponsor</td><td>< 30 menit</td></tr></tbody></table>
+<h3>8.4 Template Laporan</h3>
+
+<p><strong>Weekly Status Report (contoh struktur):</strong></p>
+
+<p></code>`<code><br><ul><li>Ringkasan Minggu Ini</li><br></ul>   - Yang diselesaikan: [daftar]<br>   - Yang sedang dikerjakan: [daftar]<br>   - Yang terhambat: [daftar + alasan]</p>
+
+<ul><li>Progress vs Rencana</li>
+</ul>   - Schedule variance: [hari]
+   - Scope status: [on track / at risk]
+
+<ul><li>Risiko & Isu Terkini</li>
+</ul>   - [risiko/isu + dampak + mitigasi]
+
+<ul><li>Rencana Minggu Depan</li>
+</ul>   - [daftar deliverable]
+
+<ul><li>Butuh Keputusan</li>
+</ul>   - [jika ada]
+</code>`<code>
+
+<hr>
+
+<h2>9. Manajemen Perubahan</h2>
+
+<h3>9.1 Definisi Change Request (CR)</h3>
+
+<p>Change Request adalah setiap perubahan pada ruang lingkup, fitur, jadwal, atau anggaran yang telah disepakati dalam BRD/SRS. CR bisa berasal dari kedua belah pihak (pengembang maupun klien).</p>
+
+<h3>9.2 Jenis Perubahan</h3>
+
+<table class="dark-theme"><thead><tr><th>Kategori</th><th>Contoh</th><th>Proses</th></tr></thead><tbody><tr><td><strong>Minor</strong></td><td>Ubah label tombol, tambah kolom di tabel, warna different</td><td>Catatan di Slack, approval verbal dari TL</td></tr><tr><td><strong>Moderate</strong></td><td>Tambah sub-modul, ubah workflow approval, tambah filter laporan</td><td>CR form tertulis, impact assessment, approval PM</td></tr><tr><td><strong>Major</strong></td><td>Tambah modul baru, integrasi bank baru, perubahan arsitektur</td><td>CR form + RFC, approval Steering Committee</td></tr></tbody></table>
+<h3>9.3 Proses Change Request</h3>
+
+<p></code>`<code><br>┌──────────────────────────────────────────────────────────────────┐<br>│                    PROSES CHANGE REQUEST                         │<br>├──────────────────────────────────────────────────────────────────┤<br>│                                                                   │<br>│  1. Submit CR                                                     │<br>│     └─ Isi CR Form: deskripsi, alasan, prioritas                  │<br>│                                                                   │<br>│  2. Log & Triage                                                  │<br>│     └─ PM log ke CR Register, kategorikan (minor/moderate/major)  │<br>│                                                                   │<br>│  3. Impact Assessment (3 hari kerja untuk moderate/major)         │<br>│     ├─ Estimasi effort (hari developer)                           │<br>│     ├─ Dampak ke timeline (schedule impact)                       │<br>│     ├─ Dampak ke biaya (cost impact)                              │<br>│     └─ Risiko teknis                                              │<br>│                                                                   │<br>│  4. Review & Approval                                             │<br>│     ├─ Minor: TL approval                                         │<br>│     ├─ Moderate: PM + Sponsor approval                            │<br>│     └─ Major: Steering Committee approval                         │<br>│                                                                   │<br>│  5. Implementasi                                                  │<br>│     └─ CR dimasukkan ke sprint berikutnya atau fase terpisah      │<br>│                                                                   │<br>│  6. Verifikasi                                                    │<br>│     └─ QA test, PM review, klien accept                           │<br>│                                                                   │<br>└──────────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<h3>9.4 CR Form Template</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Isian</th></tr></thead><tbody><tr><td>CR Number</td><td>CR-YYYY-NNN</td></tr><tr><td>Date Submitted</td><td></td></tr><tr><td>Submitted By</td><td></td></tr><tr><td>Category</td><td>Minor / Moderate / Major</td></tr><tr><td>Description</td><td></td></tr><tr><td>Business Justification</td><td></td></tr><tr><td>Impact — Effort</td><td>[x] hari developer</td></tr><tr><td>Impact — Timeline</td><td>[x] hari tambahan</td></tr><tr><td>Impact — Cost</td><td>Rp [x] (jika berlaku)</td></tr><tr><td>Impact — Risk</td><td></td></tr><tr><td>Approved By</td><td></td></tr><tr><td>Approval Date</td><td></td></tr><tr><td>Status</td><td>Submitted / In Assessment / Approved / Rejected / Implemented / Verified</td></tr></tbody></table>
+<h3>9.5 Batasan Perubahan</h3>
+
+<ul><li><strong>Freeze Scope:</strong> Setelah SRS approval (akhir Phase 1), perubahan major tidak diterima kecuali melalui Steering Committee</li>
+<li><strong>Freeze Code:</strong> 5 hari sebelum UAT dimulai, code freeze diterapkan — hanya bug fix yang diperbolehkan</li>
+<li><strong>CR Backlog:</strong> CR yang ditolak dicatat dan bisa dipertimbangkan untuk fase enhancement pasca-warranty</li>
+</ul>
+<hr>
+
+<h2>10. Jaminan Kualitas</h2>
+
+<h3>10.1 Strategi Pengujian</h3>
+
+<table class="dark-theme"><thead><tr><th>Jenis Pengujian</th><th>Tools</th><th>Dilakukan Oleh</th><th>Frekuensi</th><th>Cakupan</th></tr></thead><tbody><tr><td><strong>Unit Testing</strong></td><td>Vitest</td><td>Backend & Frontend Engineers</td><td>Setiap commit (CI)</td><td>Fungsi individual, validasi, kalkulasi bisnis</td></tr><tr><td><strong>Integration Testing</strong></td><td>Vitest + supertest</td><td>Backend Engineers</td><td>Setiap PR</td><td>API endpoint, integrasi modul, jurnal otomatis</td></tr><tr><td><strong>End-to-End Testing</strong></td><td>Playwright</td><td>QA Engineer</td><td>Setiap PR ke main</td><td>Alur transaksi lengkap (simpanan → jurnal → laporan)</td></tr><tr><td><strong>Manual Exploratory Testing</strong></td><td>Browser</td><td>QA Engineer</td><td>Setiap sprint review</td><td>UI/UX, edge cases, usability</td></tr><tr><td><strong>User Acceptance Testing (UAT)</strong></td><td>Manual + skenario</td><td>Tim klien + BA</td><td>Week 19</td><td>Seluruh alur bisnis koperasi</td></tr><tr><td><strong>Performance Testing</strong></td><td>k6 / Lighthouse</td><td>DevOps + TL</td><td>Week 18</td><td>Response time, concurrent users, database query</td></tr><tr><td><strong>Security Testing</strong></td><td>OWASP ZAP, npm audit</td><td>DevOps + Security Analyst</td><td>Week 18 + sebelum go-live</td><td>OWASP Top 10, dependency vulnerabilities, auth bypass</td></tr></tbody></table>
+<h3>10.2 Quality Gates per Fase</h3>
+
+<table class="dark-theme"><thead><tr><th>Fase</th><th>Quality Gate</th><th>Kriteria Kelulusan</th></tr></thead><tbody><tr><td><strong>Phase 0</strong></td><td>BRD Approval</td><td>BRD ditandatangani oleh Sponsor klien</td></tr><tr><td><strong>Phase 1</strong></td><td>SRS & Design Approval</td><td>SRS & mockup ditandatangani oleh klien; ERD review oleh TL</td></tr><tr><td><strong>Phase 2</strong></td><td>Core Module Demo</td><td>Semua modul inti berfungsi; unit test > 80%; E2E test pass untuk critical path</td></tr><tr><td><strong>Phase 3</strong></td><td>Accounting Demo</td><td>COA, jurnal, laporan keuangan akurat; tutup buku berfungsi; match dengan data test</td></tr><tr><td><strong>Phase 4</strong></td><td>Unit Usaha Demo</td><td>Semua unit usaha berfungsi; jurnal integrasi ke COA; laporan laba rugi per unit</td></tr><tr><td><strong>Phase 5</strong></td><td>AI & Polish Ready</td><td>AI scoring berfungsi; landing CMS live; performance baseline tercapai; security pass</td></tr><tr><td><strong>Phase 6</strong></td><td>UAT Sign-off</td><td>0 critical/high bug terbuka; UAT scenarios > 95% pass; klien approve staging</td></tr></tbody></table>
+<h3>10.3 Definition of Done (DoD)</h3>
+
+<p>Sebuah user story dianggap <strong>done</strong> ketika:</p>
+
+<ul><li><span class="check">✅</span> Code ditulis dan berfungsi sesuai spesifikasi</li>
+<li><span class="check">✅</span> TypeScript compilation tanpa error (</code>tsc --noEmit<code> pass)</li>
+<li><span class="check">✅</span> Build production sukses (</code>vite build<code> + </code>esbuild<code> pass)</li>
+<li><span class="check">✅</span> Unit test ditulis dan pass (coverage > 80% untuk modul baru)</li>
+<li><span class="check">✅</span> Integration test pass untuk API endpoints terkait</li>
+<li><span class="check">✅</span> E2E test pass untuk user flow utama (jika applicable)</li>
+<li><span class="check">✅</span> Code review disetujui minimal 1 reviewer</li>
+<li><span class="check">✅</span> Tidak ada security vulnerability baru (npm audit clean)</li>
+<li><span class="check">✅</span> Responsive di desktop (1280px+) dan mobile (375px+)</li>
+<li><span class="check">✅</span> Accessibility: keyboard navigable, aria labels untuk interactive elements</li>
+<li><span class="check">✅</span> Error handling untuk semua edge cases</li>
+<li><span class="check">✅</span> Audit trail tercatat untuk setiap operasi create/update/delete</li>
+</ul>
+<h3>10.4 Bug Severity Definition</h3>
+
+<table class="dark-theme"><thead><tr><th>Severity</th><th>Definisi</th><th>Contoh</th><th>SLA Fix</th></tr></thead><tbody><tr><td><strong>Critical (P1)</strong></td><td>Sistem crash, data loss, security breach, semua pengguna terdampak</td><td>Login gagal total, transaksi kehilangan data</td><td>< 4 jam</td></tr><tr><td><strong>High (P2)</strong></td><td>Fitur utama error, blokir operasional harian, workaround tidak ada</td><td>Pembayaran simpanan gagal, jurnal tidak ter-generate</td><td>< 1 hari kerja</td></tr><tr><td><strong>Medium (P3)</strong></td><td>Fitur error tapi ada workaround, UI glitch, laporan salah perhitungan</td><td>Export PDF format aneh, tooltip salah teks</td><td>< 3 hari kerja</td></tr><tr><td><strong>Low (P4)</strong></td><td>Enhancement, kosmetik, dokumentasi, tidak mempengaruhi fungsionalitas</td><td>Warna tombol salah, spasi di footer</td><td>Next sprint / warranty</td></tr></tbody></table>
+<h3>10.5 Code Quality Standards</h3>
+
+<ul><li><strong>TypeScript Strict Mode:</strong> Seluruh codebase menggunakan </code>strict: true<code></li>
+<li><strong>Linting:</strong> ESLint dengan konfigurasi proyek, zero warning di production build</li>
+<li><strong>Formatting:</strong> Prettier dengan config </code>.prettierrc<code></li>
+<li><strong>Commit Convention:</strong> Conventional Commits (</code>feat:<code>, </code>fix:<code>, </code>docs:<code>, </code>refactor:<code>, </code>test:<code>, </code>chore:<code>)</li>
+<li><strong>Branch Strategy:</strong> Trunk-based development dengan feature branches singkat (< 3 hari)</li>
+<li><strong>Review Requirement:</strong> Minimal 1 approval sebelum merge ke </code>main<code></li>
+</ul>
+<hr>
+
+<h2>11. Rencana Migrasi Data</h2>
+
+<h3>11.1 Langkah Migrasi</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Langkah</th><th>Durasi</th><th>Aktivitas</th><th>Tim</th></tr></thead><tbody><tr><td>1</td><td><strong>Assessment</strong></td><td>2 hari</td><td>Identifikasi sumber data, format, volume, kualitas, potensi masalah</td><td>TL, BA, BE1</td></tr><tr><td>2</td><td><strong>Mapping</strong></td><td>3 hari</td><td>Buat mapping dari kolom sumber ke tabel/field MetroCoop; identifikasi transformasi</td><td>TL, BA, BE1</td></tr><tr><td>3</td><td><strong>Development ETL</strong></td><td>5 hari</td><td>Buat script migrasi (Node.js/Python), transformasi data, validasi bisnis rules</td><td>BE1, BE2</td></tr><tr><td>4</td><td><strong>Test Migration</strong></td><td>2 hari</td><td>Jalankan ETL ke database staging, validasi hasil, hitung reconciliation</td><td>BE1, QA</td></tr><tr><td>5</td><td><strong>Validation</strong></td><td>2 hari</td><td>Verifikasi oleh admin koperasi: jumlah anggota, saldo, transaksi, laporan</td><td>BA, Klien</td></tr><tr><td>6</td><td><strong>UAT Migration</strong></td><td>2 hari</td><td>User test dengan data migrated, pastikan semua fitur berfungsi dengan data nyata</td><td>QA, Klien</td></tr><tr><td>7</td><td><strong>Cutover</strong></td><td>1 hari</td><td>Migration final ke production, freeze sistem lama, switch DNS</td><td>TL, DevOps</td></tr></tbody></table>
+<strong>Total estimasi:</strong> 17 hari kerja (dimulai Week 18, selesai sebelum UAT Week 19)
+
+<h3>11.2 Data yang Dimigrasikan</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Data</th><th>Sumber</th><th>Target MetroCoop</th><th>Catatan</th></tr></thead><tbody><tr><td>1</td><td>Data anggota</td><td>Excel / DB lama</td><td>Tabel </code>anggota<code></td><td>Validasi NIK unique</td></tr><tr><td>2</td><td>Saldo simpanan</td><td>Excel / DB lama</td><td>Tabel </code>simpanan_saldo<code></td><td>Reconcile dengan laporan</td></tr><tr><td>3</td><td>Data pinjaman aktif</td><td>Excel / DB lama</td><td>Tabel </code>pinjaman<code></td><td>Hanya pinjaman belum lunas</td></tr><tr><td>4</td><td>Riwayat angsuran</td><td>Excel / DB lama</td><td>Tabel </code>angsuran<code></td><td>2 tahun terakhir</td></tr><tr><td>5</td><td>COA & saldo awal</td><td>Laporan keuangan</td><td>Tabel </code>coa<code> + </code>jurnal_entries<code></td><td>Periode awal implementasi</td></tr><tr><td>6</td><td>Data produk unit usaha</td><td>Excel</td><td>Tabel terkait POS, sewa, dll</td><td>Jika applicable</td></tr><tr><td>7</td><td>Pengumuman historis</td><td>Manual entry</td><td>Tabel </code>pengumuman<code></td><td>Opsional</td></tr></tbody></table>
+<h3>11.3 Validasi Migrasi</h3>
+
+<table class="dark-theme"><thead><tr><th>Metode</th><th>Kriteria</th></tr></thead><tbody><tr><td><strong>Count Reconciliation</strong></td><td>Jumlah record sumber = jumlah record target (±0)</td></tr><tr><td><strong>Sum Reconciliation</strong></td><td>Total saldo simpanan sumber = total saldo target (±Rp 1)</td></tr><tr><td><strong>Spot Check</strong></td><td>10% anggota random dicek manual datanya</td></tr><tr><td><strong>Cross-Module Check</strong></td><td>Saldo simpanan anggota di portal anggota cocok dengan admin</td></tr><tr><td><strong>Report Comparison</strong></td><td>Laporan keuangan dari sistem lama vs sistem baru match</td></tr><tr><td><strong>User Verification</strong></td><td>Admin koperasi verifikasi data 5 anggota sample secara menyeluruh</td></tr></tbody></table>
+<h3>11.4 Rollback Plan</h3>
+
+<p>Jika migrasi gagal atau data tidak valid:<br><ul><li>Sistem production menggunakan <strong>data snapshot</strong> sebelum migrasi</li><br><li>Sistem lama tetap aktif sebagai fallback selama 7 hari pasca cutover</li><br><li>Rollback script tersedia untuk menghapus data migrated dan mengembalikan state</li><br><li>Decision to rollback harus diambil dalam <strong>4 jam</strong> pasca cutover</li><br></ul><br><hr></p>
+
+<h2>12. Rencana Pelatihan</h2>
+
+<h3>12.1 Jadwal Pelatihan</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Kelas Pelatihan</th><th>Durasi</th><th>Peserta</th><th>Jadwal</th><th>Metode</th></tr></thead><tbody><tr><td>1</td><td><strong>Pelatihan Admin Koperasi</strong></td><td>2 hari (16 jam)</td><td>Admin utama, sekretaris, bendahara</td><td>Week 19 (Hari 1–2)</td><td>Remote (Zoom/Meet) + recording</td></tr><tr><td>2</td><td><strong>Pelatihan Operator/CS</strong></td><td>2 hari (16 jam)</td><td>Operator teller, customer service</td><td>Week 19 (Hari 3–4)</td><td>Remote (Zoom/Meet) + recording</td></tr><tr><td>3</td><td><strong>Pelatihan Anggota/Pengurus</strong></td><td>1 hari (8 jam)</td><td>Pengurus koperasi, anggota perwakilan</td><td>Week 20 (Hari 1)</td><td>Remote (Zoom/Meet) + recording</td></tr><tr><td>4</td><td><strong>Pelatihan IT Admin</strong></td><td>1 hari (8 jam)</td><td>Staf IT koperasi</td><td>Week 20 (Hari 2)</td><td>Remote (Zoom/Meet) + hands-on</td></tr><tr><td>5</td><td><strong>Pelatihan Pengawas</strong></td><td>1 hari (8 jam)</td><td>Pengawas koperasi</td><td>Week 20 (Hari 3)</td><td>Remote (Zoom/Meet) + hands-on</td></tr></tbody></table>
+<h3>12.2 Materi Pelatihan</h3>
+
+<h4>Kelas 1: Admin Koperasi (2 Hari)</h4>
+
+<table class="dark-theme"><thead><tr><th>Sesi</th><th>Topik</th><th>Durasi</th><th>Format</th></tr></thead><tbody><tr><td>Day 1 — Sesi 1</td><td>Login, dashboard, navigasi sistem</td><td>2 jam</td><td>Demo + hands-on</td></tr><tr><td>Day 1 — Sesi 2</td><td>Manajemen keanggotaan: daftar, edit, status, dokumen</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Day 1 — Sesi 3</td><td>Konfigurasi sistem: COA, parameter bunga, rate denda</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Day 1 — Sesi 4</td><td>Q&A dan praktik mandiri</td><td>2 jam</td><td>Self-practice</td></tr><tr><td>Day 2 — Sesi 1</td><td>Transaksi simpanan & pinjaman (as operator)</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Day 2 — Sesi 2</td><td>Laporan keuangan: generate, export, interpreting</td><td>2 jam</td><td>Demo + hands-on</td></tr><tr><td>Day 2 — Sesi 3</td><td>Tutup buku, periode akuntansi, jurnal manual</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Day 2 — Sesi 4</td><td>User management, backup, troubleshooting dasar</td><td>2 jam</td><td>Demo + hands-on</td></tr></tbody></table>
+<h4>Kelas 2: Operator/Customer Service (2 Hari)</h4>
+
+<table class="dark-theme"><thead><tr><th>Sesi</th><th>Topik</th><th>Durasi</th><th>Format</th></tr></thead><tbody><tr><td>Day 1 — Sesi 1</td><td>Login, dashboard, navigasi</td><td>2 jam</td><td>Demo + hands-on</td></tr><tr><td>Day 1 — Sesi 2</td><td>Layanan simpanan: setor, tarik, cek saldo, mutasi</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Day 1 — Sesi 3</td><td>Layanan pinjaman: pengajuan, pencairan, cek angsuran</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Day 1 — Sesi 4</td><td>Q&A dan praktik transaksi</td><td>2 jam</td><td>Self-practice</td></tr><tr><td>Day 2 — Sesi 1</td><td>Unit usaha: POS (kasir), PPOB, sewa</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Day 2 — Sesi 2</td><td>Tiket bantuan & pengumuman</td><td>1 jam</td><td>Hands-on</td></tr><tr><td>Day 2 — Sesi 3</td><td>Cetak bukti transaksi, export, pencarian data</td><td>1 jam</td><td>Hands-on</td></tr><tr><td>Day 2 — Sesi 4</td><td>Simulasi transaksi harian (end-to-end)</td><td>2 jam</td><td>Simulasi</td></tr></tbody></table>
+<h4>Kelas 3: Pengurus & Anggota (1 Hari)</h4>
+
+<table class="dark-theme"><thead><tr><th>Sesi</th><th>Topik</th><th>Durasi</th><th>Format</th></tr></thead><tbody><tr><td>Sesi 1</td><td>Portal anggota: login, dashboard, profil</td><td>2 jam</td><td>Demo + hands-on</td></tr><tr><td>Sesi 2</td><td>Cek simpanan, pinjaman, pengumuman</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Sesi 3</td><td>Pengajuan pinjaman online, tiket bantuan</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Sesi 4</td><td>Q&A dan praktik mandiri</td><td>2 jam</td><td>Self-practice</td></tr></tbody></table>
+<h4>Kelas 4: IT Admin (1 Hari)</h4>
+
+<table class="dark-theme"><thead><tr><th>Sesi</th><th>Topik</th><th>Durasi</th><th>Format</th></tr></thead><tbody><tr><td>Sesi 1</td><td>Arsitektur sistem, akses server, environment variables</td><td>2 jam</td><td>Presentasi + hands-on</td></tr><tr><td>Sesi 2</td><td>Database management: backup, restore, monitoring</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Sesi 3</td><td>Deployment pipeline, update, rollback procedure</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Sesi 4</td><td>Troubleshooting, log analysis, escalation procedure</td><td>2 jam</td><td>Presentasi + simulasi</td></tr></tbody></table>
+<h4>Kelas 5: Pengawas (1 Hari)</h4>
+
+<table class="dark-theme"><thead><tr><th>Sesi</th><th>Topik</th><th>Durasi</th><th>Format</th></tr></thead><tbody><tr><td>Sesi 1</td><td>Login & akses pengawas (read-only), dashboard</td><td>2 jam</td><td>Demo + hands-on</td></tr><tr><td>Sesi 2</td><td>Audit trail: melihat log transaksi, perubahan data</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Sesi 3</td><td>Laporan untuk pengawas: rekap, analitik, export</td><td>2 jam</td><td>Hands-on</td></tr><tr><td>Sesi 4</td><td>Q&A, simulasi audit</td><td>2 jam</td><td>Simulasi</td></tr></tbody></table>
+<h3>12.3 Materi Pendukung</h3>
+
+<table class="dark-theme"><thead><tr><th>Materi</th><th>Format</th><th>Penerima</th></tr></thead><tbody><tr><td>User Guide — Admin</td><td>PDF (50+ halaman)</td><td>Admin koperasi</td></tr><tr><td>User Guide — Operator</td><td>PDF (40+ halaman)</td><td>Operator/CS</td></tr><tr><td>User Guide — Anggota</td><td>PDF (20+ halaman)</td><td>Anggota koperasi</td></tr><tr><td>Quick Reference Card</td><td>1-halaman laminasi</td><td>Seluruh pengguna</td></tr><tr><td>Video Tutorial (10 menit per topik)</td><td>MP4 / YouTube unlisted</td><td>Seluruh pengguna</td></tr><tr><td>FAQ Document</td><td>PDF / Wiki</td><td>Seluruh pengguna</td></tr><tr><td>Cheat Sheet — Keyboard Shortcuts</td><td>PDF 1-halaman</td><td>Operator, Admin</td></tr></tbody></table>
+<h3>12.4 Evaluasi Pelatihan</h3>
+
+<ul><li><strong>Post-training quiz</strong> (10 soal pilihan ganda) untuk setiap kelas</li>
+<li><strong>Practical exam</strong>: setiap peserta harus berhasil menyelesaikan 3 transaksi end-to-end</li>
+<li><strong>Training completion certificate</strong> ditandatangani oleh PM dan klien</li>
+<li><strong>Feedback form</strong> dikumpulkan untuk evaluasi & perbaikan materi</li>
+</ul>
+<hr>
+
+<h2>13. Checklist Go-Live</h2>
+
+<h3>13.1 Checklist Persiapan Production Deployment</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Item</th><th>Status</th><th>Diverifikasi Oleh</th><th>Catatan</th></tr></thead><tbody><tr><td>1</td><td>Seluruh modul fungsional telah lulus UAT</td><td>☐</td><td>QA, Klien</td><td>UAT sign-off document</td></tr><tr><td>2</td><td>0 bug Critical (P1) dan High (P2) terbuka</td><td>☐</td><td>QA</td><td>Bug tracker verified</td></tr><tr><td>3</td><td>Database production siap (PostgreSQL, schema migrated)</td><td>☐</td><td>DevOps, TL</td><td>Schema v-final applied</td></tr><tr><td>4</td><td>Environment variables production dikonfigurasi</td><td>☐</td><td>DevOps</td><td>Secrets di Railway verified</td></tr><tr><td>5</td><td>SSL certificate aktif untuk domain produksi</td><td>☐</td><td>DevOps</td><td>HTTPS valid, no mixed content</td></tr><tr><td>6</td><td>DNS record dikonfigurasi ke production</td><td>☐</td><td>DevOps</td><td>nslookup / dig verified</td></tr><tr><td>7</td><td>Backup automated & tested (point-in-time recovery)</td><td>☐</td><td>DevOps</td><td>Restore test successful</td></tr><tr><td>8</td><td>Monitoring & alerting aktif (UptimeRobot / Railway metrics)</td><td>☐</td><td>DevOps</td><td>Alert ke Slack/email tested</td></tr><tr><td>9</td><td>Rate limiting & security headers aktif</td><td>☐</td><td>TL, DevOps</td><td>Helmet config verified</td></tr><tr><td>10</td><td>CORS policy production dikonfigurasi</td><td>☐</td><td>TL</td><td>Hanya domain klien yang diizinkan</td></tr><tr><td>11</td><td>Data migration selesai & validated</td><td>☐</td><td>TL, Klien</td><td>Migration report signed</td></tr><tr><td>12</td><td>Seed data production (COA standar, parameter default)</td><td>☐</td><td>BA, TL</td><td>Referenced in BRD</td></tr><tr><td>13</td><td>Feature flags dikonfigurasi sesuai kebutuhan klien</td><td>☐</td><td>BA, TL</td><td>Match with agreed scope</td></tr><tr><td>14</td><td>User accounts admin & operator dibuat</td><td>☐</td><td>TL</td><td>Akun test & production</td></tr><tr><td>15</td><td>Pelatihan seluruh pengguna selesai</td><td>☐</td><td>BA, PM</td><td>Training completion records</td></tr><tr><td>16</td><td>User guide & documentation tersedia</td><td>☐</td><td>BA</td><td>PDF / Wiki accessible</td></tr><tr><td>17</td><td>Rollback plan tersedia & teruji</td><td>☐</td><td>DevOps, TL</td><td>Rollback procedure documented</td></tr><tr><td>18</td><td>Health check endpoint berfungsi</td><td>☐</td><td>DevOps</td><td>/api/health returns 200</td></tr><tr><td>19</td><td>Error tracking aktif (Sentry / console logging)</td><td>☐</td><td>DevOps, TL</td><td>Error notification tested</td></tr><tr><td>20</td><td>BAPO (Berita Acara Penerimaan Operasional) siap ditandatangani</td><td>☐</td><td>PM, Klien</td><td>Document prepared</td></tr></tbody></table>
+<h3>13.2 Go-Live Sequence</h3>
+
+<p></code>`<code><br>┌─ H-3 hari: Code freeze, final smoke test<br>│<br>├─ H-2 hari: Database migration dry run di production (with backup)<br>│<br>├─ H-1 hari: Pre-deployment checklist review, stakeholder sign-off<br>│<br>├─ H-0 (Go-Live Day):<br>│   ├─ 06:00 — Final backup production database<br>│   ├─ 07:00 — Deploy ke production (zero-downtime)<br>│   ├─ 07:30 — Smoke test: login, transaksi simulasi, health check<br>│   ├─ 08:00 — Switch DNS ke production (if applicable)<br>│   ├─ 08:30 — Monitor error logs & performance (1 jam pertama kritis)<br>│   ├─ 09:00 — Informasikan klien: sistem live & ready<br>│   ├─ 12:00 — Midday health check<br>│   └─ 17:00 — End of day status: green/yellow/red<br>│<br>├─ H+1 hari: Morning health check, review user feedback<br>│<br>├─ H+3 hari: First week status report<br>│<br>└─ H+7 hari: Week 1 retrospective, adjust monitoring thresholds<br></code>`<code></p>
+
+<h3>13.3 Post Go-Live Monitoring (7 Hari Pertama)</h3>
+
+<table class="dark-theme"><thead><tr><th>Metrik</th><th>Target</th><th>Monitoring</th></tr></thead><tbody><tr><td>Uptime</td><td>≥ 99.5%</td><td>UptimeRobot, Railway dashboard</td></tr><tr><td>Response time (API)</td><td>< 500ms (p95)</td><td>Railway metrics</td></tr><tr><td>Error rate</td><td>< 1%</td><td>Error logging</td></tr><tr><td>Database connections</td><td>< 80% pool</td><td>PostgreSQL monitoring</td></tr><tr><td>User activity</td><td>Tracking adoption</td><td>Application logs</td></tr><tr><td>Bug reports</td><td>Categorize & triage</td><td>Slack #qa-testing</td></tr></tbody></table>
+<hr>
+
+<h2>14. Dukungan Pasca Go-Live</h2>
+
+<h3>14.1 Masa Warranty</h3>
+
+<table class="dark-theme"><thead><tr><th>Parameter</th><th>Nilai</th></tr></thead><tbody><tr><td>Durasi</td><td>12 minggu (Week 21–32)</td></tr><tr><td>Jam Kerja</td><td>Senin–Jumat, 09:00–17:00 WIB</td></tr><tr><td>Tim Dukungan</td><td>Tech Lead, Backend Engineers (2), Frontend Engineers (2), QA, DevOps</td></tr></tbody></table>
+<h3>14.2 SLA Dukungan (Tiers)</h3>
+
+<table class="dark-theme"><thead><tr><th>Severity</th><th>Definisi</th><th>Response Time</th><th>Resolution Target</th><th>Contoh</th></tr></thead><tbody><tr><td><strong>Critical (P1)</strong></td><td>Sistem down, data loss, security breach</td><td>< 1 jam</td><td>< 4 jam</td><td>Database error, login crash, data leak</td></tr><tr><td><strong>High (P2)</strong></td><td>Fitur utama error, blokir operasional</td><td>< 4 jam</td><td>< 1 hari kerja</td><td>Transaksi gagal, laporan salah, jurnal missing</td></tr><tr><td><strong>Medium (P3)</strong></td><td>Bug non-kritis, ada workaround</td><td>< 1 hari kerja</td><td>< 3 hari kerja</td><td>UI glitch, export format salah, tooltip salah</td></tr><tr><td><strong>Low (P4)</strong></td><td>Enhancement, kosmetik</td><td>< 3 hari kerja</td><td>Next sprint</td><td>Warna tombol salah, spasi di footer</td></tr></tbody></table>
+<h3>14.3 Escalation Path (Pasca Go-Live)</h3>
+
+<p></code>`<code><br>Level 1: Tim Dukungan Internal<br>├─ Tim dev menerima laporan via Slack #support-production<br>├─ Triage & kategorikan severity dalam < 30 menit<br>└─ Mulai investigasi & fix</p>
+
+<p>Level 2: Tech Lead Intervention<br>├─ Dipicu jika: P1 tidak ter-resolve dalam 2 jam, P2 tidak ter-resolve dalam 8 jam<br>├─ TL turun tangan langsung, assign resource tambahan<br>└─ PM diinformasikan</p>
+
+<p>Level 3: Management Escalation<br>├─ Dipicu jika: P1 tidak ter-resolve dalam 4 jam, pola bug berulang<br>├─ PM + Sponsor klien diinformasikan<br>└─ Rapat darurat dalam 1 jam</p>
+
+<p>Level 4: Crisis Management<br>├─ Dipicu jika: security breach, data loss, sistem down > 8 jam<br>├─ Seluruh tim crisis di-activate<br>└─ Komunikasi formal ke seluruh stakeholder<br></code>`<code></p>
+
+<h3>14.4 Aktivitas Selama Masa Warranty</h3>
+
+<table class="dark-theme"><thead><tr><th>Minggu</th><th>Fokus Aktivitas</th><th>Tim</th></tr></thead><tbody><tr><td>Week 21–22</td><td>Bug fix P1 & P2 dari laporan pengguna; stabilisasi error rate < 0.5%</td><td>BE1, BE2, QA</td></tr><tr><td>Week 23–24</td><td>Performance tuning — query optimization, cache strategy, lazy loading</td><td>TL, DevOps</td></tr><tr><td>Week 25–26</td><td>Minor enhancement dari feedback pengguna (disetujui PM)</td><td>FE1, FE2, BE2</td></tr><tr><td>Week 27–28</td><td>Knowledge transfer intensif — dokumentasi operasional, runbook</td><td>TL, BA</td></tr><tr><td>Week 29–30</td><td>Penyelesaian residual bugs, enhancement minor terakhir</td><td>Tim Proyek</td></tr><tr><td>Week 31</td><td>Penyerahan seluruh dokumentasi & source code</td><td>PM, TL</td></tr><tr><td>Week 32</td><td>Project closure — retrospective, penandatanganan berita serah terima</td><td>PM, Klien</td></tr></tbody></table>
+<h3>14.5 Aktivitas Pasca Warranty (Opsional)</h3>
+
+<table class="dark-theme"><thead><tr><th>Layanan</th><th>Deskripsi</th><th>Biaya</th></tr></thead><tbody><tr><td><strong>Extended Warranty</strong></td><td>Lanjutan dukungan bug fix & minor enhancement</td><td>Rp 10.000.000/bulan</td></tr><tr><td><strong>Major Enhancement</strong></td><td>Penambahan fitur baru, integrasi bank baru, modul tambahan</td><td>Per CR, estimasi terpisah</td></tr><tr><td><strong>Infrastructure Management</strong></td><td>Kelola hosting, monitoring, backup, update</td><td>Rp 5.000.000/bulan</td></tr><tr><td><strong>On-call Support</strong></td><td>Dukungan 24/7 untuk P1 (di luar jam kerja)</td><td>Rp 15.000.000/bulan</td></tr><tr><td><strong>Training Refresher</strong></td><td>Pelatihan ulang untuk staf baru</td><td>Rp 5.000.000/sesi</td></tr></tbody></table>
+<hr>
+
+<h2>15. Lampiran</h2>
+
+<h3>15.1 Glossary</h3>
+
+<table class="dark-theme"><thead><tr><th>Istilah</th><th>Definisi</th></tr></thead><tbody><tr><td><strong>MetroCoop</strong></td><td>Nama produk — platform manajemen Koperasi Simpan Pinjam terintegrasi</td></tr><tr><td><strong>KSP</strong></td><td>Koperasi Simpan Pinjam — badan hukum yang menjalankan usaha simpan pinjam</td></tr><tr><td><strong>COA</strong></td><td>Chart of Accounts / Daftar Akun — struktur hierarkis akun akuntansi</td></tr><tr><td><strong>SAK ETAP</strong></td><td>Standar Akuntansi Keuangan untuk Entitas Tanpa Akuntabilitas Publik</td></tr><tr><td><strong>OJK</strong></td><td>Otoritas Jasa Keuangan — lembaga pengawas sektor jasa keuangan</td></tr><tr><td><strong>CKPN</strong></td><td>Cadangan Kerugian Penurunan Nilai — cadangan wajib untuk piutang bermasalah</td></tr><tr><td><strong>KPMM</strong></td><td>Kewajiban Penyediaan Modal Minimum — minimum modal koperasi (8% dari CKPM)</td></tr><tr><td><strong>BMPK</strong></td><td>Batas Maksimum Pemberian Kredit — maksimum pemberian kredit per debitur</td></tr><tr><td><strong>SHU</strong></td><td>Sisa Hasil Usaha — laba bersih koperasi setelah dikurangi biaya dan cadangan</td></tr><tr><td><strong>RAT</strong></td><td>Rapat Anggota Tahunan — forum tertinggi pengambilan keputusan koperasi</td></tr><tr><td><strong>POS</strong></td><td>Point of Sale — sistem kasir penjualan retail/toko</td></tr><tr><td><strong>PPOB</strong></td><td>Payment Point Online Bank — layanan pembayaran digital</td></tr><tr><td><strong>RBAC</strong></td><td>Role-Based Access Control — mekanisme otorisasi berdasarkan peran</td></tr><tr><td><strong>JWT</strong></td><td>JSON Web Token — standar token autentikasi stateless</td></tr><tr><td><strong>CI/CD</strong></td><td>Continuous Integration / Continuous Deployment — pipeline otomasi</td></tr><tr><td><strong>UAT</strong></td><td>User Acceptance Testing — pengujian penerimaan oleh pengguna akhir</td></tr><tr><td><strong>BRD</strong></td><td>Business Requirements Document — dokumen kebutuhan bisnis</td></tr><tr><td><strong>SRS</strong></td><td>Software Requirements Specification — spesifikasi kebutuhan perangkat lunak</td></tr><tr><td><strong>BAPO</strong></td><td>Berita Acara Penerimaan Operasional — dokumen serah terima sistem</td></tr><tr><td><strong>CR</strong></td><td>Change Request — permintaan perubahan scope/fitur</td></tr><tr><td><strong>ETL</strong></td><td>Extract, Transform, Load — proses migrasi data</td></tr><tr><td><strong>SLA</strong></td><td>Service Level Agreement — perjanjian tingkat layanan</td></tr><tr><td><strong>PWA</strong></td><td>Progressive Web App — aplikasi web yang bisa diinstal di perangkat</td></tr><tr><td><strong>API</strong></td><td>Application Programming Interface — antarmuka pemrograman aplikasi</td></tr></tbody></table>
+<h3>15.2 Singkatan & Akronim</h3>
+
+<table class="dark-theme"><thead><tr><th>Singkatan</th><th>Kepanjangan</th></tr></thead><tbody><tr><td>PM</td><td>Project Manager</td></tr><tr><td>TL</td><td>Tech Lead</td></tr><tr><td>FL</td><td>Frontend Lead</td></tr><tr><td>BE</td><td>Backend Engineer</td></tr><tr><td>FE</td><td>Frontend Engineer</td></tr><tr><td>QA</td><td>Quality Assurance</td></tr><tr><td>BA</td><td>Business Analyst</td></tr><tr><td>DoD</td><td>Definition of Done</td></tr><tr><td>E2E</td><td>End-to-End</td></tr><tr><td>p95</td><td>Percentile ke-95 (metrik performa)</td></tr></tbody></table>
+<h3>15.3 Referensi Dokumen Terkait</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Dokumen</th><th>Lokasi</th><th>Versi</th></tr></thead><tbody><tr><td>1</td><td>Proposal Teknis & Komersial</td><td></code>docs/01-proposal/proposal-teknis-komersial.md<code></td><td>1.0</td></tr><tr><td>2</td><td>Company Profile</td><td></code>docs/02-company-profile/company-profile-portofolio.md<code></td><td>1.0</td></tr><tr><td>3</td><td>NDA Draft</td><td></code>docs/03-nda/nda-draft.md<code></td><td>1.0</td></tr><tr><td>4</td><td>BRD / URS</td><td></code>docs/04-brd/brd-urs.md<code></td><td>1.0</td></tr><tr><td>5</td><td>SRS Specification</td><td></code>docs/05-srs/srs-specification.md<code></td><td>1.0</td></tr><tr><td>6</td><td>UI/UX Design Specification</td><td></code>docs/06-ui-ux/ui-ux-design-spec.md<code></td><td>1.0</td></tr><tr><td>7</td><td>Project Plan</td><td></code>docs/07-project-plan/project-plan.md`</td><td>1.0</td></tr></tbody></table>
+<h3>15.4 Riwayat Dokumen</h3>
+
+<table class="dark-theme"><thead><tr><th>Versi</th><th>Tanggal</th><th>Perubahan</th><th>Oleh</th></tr></thead><tbody><tr><td>1.0.0</td><td>16 Juli 2026</td><td>Dokumen pertama — rencana implementasi lengkap 32 minggu</td><td>Tim MetroCoop</td></tr></tbody></table>
+<h3>15.5 Tabel Persetujuan (Sign-Off)</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Peran</th><th>Nama</th><th>Tanda Tangan</th><th>Tanggal</th></tr></thead><tbody><tr><td>1</td><td>Project Manager (Pengembang)</td><td>[NAMA]</td><td>________________</td><td>____/____/______</td></tr><tr><td>2</td><td>Tech Lead (Pengembang)</td><td>[NAMA]</td><td>________________</td><td>____/____/______</td></tr><tr><td>3</td><td>Project Sponsor (Klien)</td><td>[NAMA]</td><td>________________</td><td>____/____/______</td></tr><tr><td>4</td><td>Ketua Pengurus Koperasi</td><td>[NAMA]</td><td>________________</td><td>____/____/______</td></tr><tr><td>5</td><td>Pengawas Koperasi</td><td>[NAMA]</td><td>________________</td><td>____/____/______</td></tr></tbody></table>
+<hr>
+
+<p><em>— Akhir Dokumen Rencana Proyek MetroCoop —</em></p>
+    </div>
+  </main>
+</body>
+</html>

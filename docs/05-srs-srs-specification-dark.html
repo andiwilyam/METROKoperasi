@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRS — MetroCoop (Dark Theme)</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Dark Theme Colors - Wallpaper Inspired */
+  --primary: #bfdbfe;           /* Sky blue - bright but soft */
+  --primary-light: #93c5fd;     /* Sky blue light */
+  --primary-dark: #1e40af;      /* Dark blue */
+  --accent: #06b6d4;            /* Cyan accent */
+  --bg: #0a0c14;                /* Very dark blue - wallpaper */
+  --bg-alt: #111827;            /* Slightly lighter dark */
+  --bg-code: #151821;           /* Dark code background */
+  --text: #e5e7eb;              /* Off white */
+  --text-muted: #a5b4fc;        /* Muted blue */
+  --text-caption: #93c5fd;      /* Closed captions text */
+  --border: #374151;            /* Dark border */
+  --shadow: 0 4px 12px rgba(20, 20, 40, 0.4); /* Enhanced shadow */
+  --sidebar-w: 280px;
+}
+
+/* Ensure dark mode is default - override light mode variables */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  background-image: 
+    linear-gradient(135deg, rgba(3, 7, 18, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%),
+    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
+  display: flex;
+}
+
+/* Closed Captions Panel (Top Banner) */
+.closed-captions-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(20, 28, 50, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 12px;
+  color: var(--text-caption);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.closed-captions-panel .cc-icon {
+  margin-right: 8px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.closed-ca examples {
+  display: inline-flex;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.closed-captions-panel .cc-example {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--text-caption);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 40px; /* Leave space for closed captions panel */
+  left: 0;
+  width: var(--sidebar-w);
+  height: calc(100vh - 40px);
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.3);
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.sidebar-brand small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+
+.sidebar-nav a.active {
+  background: rgba(59, 130, 246, 0.25);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+
+/* Main content - adjusted for closed captions */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+  margin-top: 40px;
+}
+
+.content-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Typography with improved contrast */
+h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary-light);
+  margin: 0 0 12px;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 48px 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--primary-dark);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+h4 { font-size: 16px; font-weight: 600; color: var(--primary-light); margin: 24px 0 8px; }
+h5 { font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 20px 0 6px; text-transform: uppercase; }
+p { margin: 0 0 12px; color: var(--text); line-height: 1.8; }
+strong { font-weight: 600; color: #fff; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; color: #fff; }
+
+/* Tables with better contrast */
+table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 13px; }
+th { background: var(--primary-dark); color: #fff; font-weight: 600; padding: 12px 14px; }
+td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; background: var(--bg-alt); }
+tr:hover td { background: rgba(59, 130, 246, 0.15); }
+
+/* Code blocks with better visibility */
+code { background: var(--bg-code); color: var(--accent); }
+pre {
+  background: #0a0e17;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Emphasizing important information with background */
+.important-note {
+  background: rgba(251, 146, 60, 0.15);
+  border-left: 4px solid #fb923c;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: #fff;
+}
+
+/* Enhanced scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Print styles optimized for dark theme */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  body { background-image: none; background-color: white; }
+  h1, h2, h3 { color: black; }
+  * { color: black !important; background: white !important; border-color: #ddd !important; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 240px; }
+  .content-inner { padding: 32px; }
+}
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar { position: relative; width: 100%; height: auto; }
+  .content { margin-left: 0; margin-top: 40px; }
+  .closed-captions-panel { position: relative; height: auto; }
+  .content-inner { padding: 24px 16px; }
+}
+</style>
+</head>
+<body>
+  
+    <div class="closed-captions-panel">
+      <span class="cc-icon">🔊</span>
+      Penjelasan: Sistem MetroCoop adalah platform manajemen koperasi simpan pinjam terintegrasi yang dirancang khusus untuk memenuhi kebutuhan koperasi Indonesia, didukung oleh teknologi cloud modern dan AI intelligent scoring.
+      <div class="examples">
+        <span class="cc-example">🏦 KSP: Koperasi Simpan Pinjam</span>
+        <span class="cc-example">💰 4 Jenis Simpanan</span>
+        <span class="cc-example">🪙 RPA Mulai</span>
+        <span class="cc-example">🤖 AI Credit Scoring</span>
+      </div>
+    </div>
+  
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h2>MetroCoop</h2>
+      <small>Documentation Suite - Dark Theme</small>
+    </div>
+    <div class="sidebar-nav">
+      <a href="01-proposal-proposal-teknis-komersial.html" class="">
+      <span class="num">1</span>
+      Proposal Teknis & Komersial
+    </a>
+<a href="02-company-profile-company-profile-portofolio.html" class="">
+      <span class="num">2</span>
+      Company Profile & Portofolio
+    </a>
+<a href="03-nda-nda-draft.html" class="">
+      <span class="num">3</span>
+      Draft NDA
+    </a>
+<a href="04-brd-brd-urs.html" class="">
+      <span class="num">4</span>
+      BRD / URS
+    </a>
+<a href="05-srs-srs-specification.html" class="active">
+      <span class="num">5</span>
+      SRS
+    </a>
+<a href="06-ui-ux-ui-ux-design-spec.html" class="">
+      <span class="num">6</span>
+      UI/UX Design
+    </a>
+<a href="07-project-plan-project-plan.html" class="">
+      <span class="num">7</span>
+      Project Plan
+    </a>
+    </div>
+    <div class="sidebar-footer">
+      MetroCoop © 2026<br>
+      Theme: Dark | Wallpaper: Cyberpunk Blue<br>
+      Generated: 16/7/2026
+    </div>
+  </nav>
+  <main class="content">
+    <div class="content-inner">
+      <h1>Spesifikasi Kebutuhan Perangkat Lunak (Software Requirements Specification — SRS)</h1>
+
+<h2>Sistem Informasi Koperasi Simpan Pinjam MetroCoop</h2>
+
+<table class="dark-theme"><thead><tr><th><strong>Proyek</strong></th><th>MetroCoop — Koperasi Simpan Pinjam</th></tr></thead><tbody><tr><td><strong>Versi Dokumen</strong></td><td>1.0.0</td></tr><tr><td><strong>Tanggal</strong></td><td>16 Juli 2026</td></tr><tr><td><strong>Status</strong></td><td>Final</td></tr><tr><td><strong>Klasifikasi</strong></td><td>Rahasia / Internal</td></tr></tbody></table>
+<hr>
+
+<h2>Daftar Isi</h2>
+
+<ul><li><a href="#1-pendahuluan">Pendahuluan</a></li>
+<li><a href="#2-ikhtisar-sistem">Ikhtisar Sistem</a></li>
+<li><a href="#3-arsitektur--stack-teknis">Arsitektur & Stack Teknis</a></li>
+<li><a href="#4-spesifikasi-data-model">Spesifikasi Data Model</a></li>
+<li><a href="#5-use-case-sistem">Use Case Sistem</a></li>
+<li><a href="#6-aturan-bisnis-detail">Aturan Bisnis Detail</a></li>
+<li><a href="#7-spesifikasi-api">Spesifikasi API</a></li>
+<li><a href="#8-integrasi-eksternal">Integrasi Eksternal</a></li>
+<li><a href="#9-keamanan-sistem">Keamanan Sistem</a></li>
+<li><a href="#10-performa--skalabilitas">Performa & Skalabilitas</a></li>
+<li><a href="#11-kriteria-penerimaan">Kriteria Penerimaan</a></li>
+<li><a href="#12-lampiran">Lampiran</a></li>
+<li><a href="#13-persetujuan-dokumen">Persetujuan Dokumen</a></li>
+</ul>
+<hr>
+
+<h2>1. Pendahuluan</h2>
+
+<h3>1.1 Tujuan Dokumen</h3>
+
+<p>Dokumen Spesifikasi Kebutuhan Perangkat Lunak (SRS) ini mendeskripsikan seluruh kebutuhan fungsional, non-fungsional, dan teknis untuk sistem <strong>MetroCoop</strong> — platform manajemen Koperasi Simpan Pinjam (KSP) terintegrasi berbasis cloud. Dokumen ini menjadi acuan utama bagi seluruh stakeholder pengembangan: Product Manager, Tech Lead, Developer, QA, dan klien.</p>
+
+<h3>1.2 Ruang Lingkup</h3>
+
+<p>Sistem MetroCoop mencakup:</p>
+
+<ul><li><strong>Manajemen Keanggotaan</strong> — pendaftaran, validasi, status, dokumen anggota</li>
+<li><strong>Modul Simpanan</strong> — pokok, wajib, sukarela, deposito dengan bunga otomatis</li>
+<li><strong>Modul Pinjaman</strong> — pengajuan, pencairan, angsuran, denda, kolektibilitas</li>
+<li><strong>Akuntansi SAK ETAP</strong> — COA, jurnal otomatis, buku besar, neraca saldo, laporan keuangan</li>
+<li><strong>Unit Usaha</strong> — POS retail/toko, PPOB, sewa aset, cicilan barang, ventura/penyertaan modal</li>
+<li><strong>AI Credit Scoring</strong> — analisis 5C berbasis Google Gemini</li>
+<li><strong>Landing Page CMS</strong> — hero, fitur, tim, testimoni, pricing, kontak (dikelola admin)</li>
+<li><strong>Portal Anggota</strong> — dashboard, simpanan, pinjaman, pengumuman, tiket bantuan</li>
+<li><strong>Pelaporan OJK</strong> — LKP, BMPK, kolektibilitas, KPMM, SHU</li>
+</ul>
+<h3>1.3 Referensi Regulasi</h3>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Regulasi</th><th>Judul</th><th>Relevansi</th></tr></thead><tbody><tr><td>1</td><td><strong>UU No. 17 Tahun 2012</strong></td><td>Undang-Undang tentang Koperasi</td><td>Dasar utama keanggotaan, modal, pengurus, pengawas, RAT, SHU, sanksi</td></tr><tr><td>2</td><td><strong>POJK No. 12/POJK.03/2018</strong></td><td>Koperasi Simpan Pinjam</td><td>Prinsip kehati-hatian, KPMM, BMPK, Kolektibilitas, Pelaporan ke OJK</td></tr><tr><td>3</td><td><strong>POJK No. 70/POJK.03/2019</strong></td><td>Layanan Keuangan Digital (Laku Pandai)</td><td>Inklusi keuangan, layanan digital, e-KYC</td></tr><tr><td>4</td><td><strong>SEOJK No. 14/SEOJK.03/2019</strong></td><td>Standar Pelaporan KSP ke OJK</td><td>Format LKP, BMPK, Kolektibilitas, XBRL-ready</td></tr><tr><td>5</td><td><strong>SAK ETAP (PSAK 70)</strong></td><td>Standar Akuntansi Entitas Tanpa Akuntabilitas Publik</td><td>COA, Jurnal, Neraca, Laba Rugi, Arus Kas, Catatan atas LK</td></tr><tr><td>6</td><td><strong>PSAK 71 / IFRS 9</strong></td><td>Instrumen Keuangan — Pengukuran Nilai Wajar CKPN</td><td>Cadangan Kerugian Penurunan Nilai, kolektibilitas</td></tr><tr><td>7</td><td><strong>UU No. 27 Tahun 2022</strong></td><td>Perlindungan Data Pribadi (PDP)</td><td>Perlindungan data pribadi anggota, consent, DPO, breach notification</td></tr><tr><td>8</td><td><strong>UU No. 11 Tahun 2008 jo. UU No. 1 Tahun 2024</strong></td><td>Informasi dan Transaksi Elektronik (ITE)</td><td>Transaksi elektronik, tanda tangan digital, bukti elektronik</td></tr></tbody></table>
+<h3>1.4 Definisi, Singkatan, dan Akronim</h3>
+
+<table class="dark-theme"><thead><tr><th>Istilah</th><th>Definisi</th></tr></thead><tbody><tr><td><strong>KSP</strong></td><td>Koperasi Simpan Pinjam — badan hukum yang menjalankan usaha simpan pinjam berdasarkan prinsip koperasi</td></tr><tr><td><strong>COA</strong></td><td>Chart of Accounts / Daftar Akun — struktur hierarkis akun akuntansi sesuai SAK ETAP</td></tr><tr><td><strong>SAK ETAP</strong></td><td>Standar Akuntansi Keuangan untuk Entitas Tanpa Akuntabilitas Publik (berbasis PSAK 70)</td></tr><tr><td><strong>OJK</strong></td><td>Otoritas Jasa Keuangan — lembaga pengawas sektor jasa keuangan di Indonesia</td></tr><tr><td><strong>CKPN</strong></td><td>Cadangan Kerugian Penurunan Nilai — cadangan wajib untuk piutang bermasalah</td></tr><tr><td><strong>KPMM</strong></td><td>Kewajiban Penyediaan Modal Minimum — minimum modal yang harus dipenuhi KSP (8% dari CKPM)</td></tr><tr><td><strong>BMPK</strong></td><td>Batas Maksimum Pemberian Kredit — maksimum pemberian kredit per debitur (≤20% Modal Sendiri)</td></tr><tr><td><strong>SHU</strong></td><td>Sisa Hasil Usaha — laba bersih koperasi setelah dikurangi biaya dan cadangan</td></tr><tr><td><strong>RAT</strong></td><td>Rapat Anggota Tahunan — forum tertinggi pengambilan keputusan dalam koperasi</td></tr><tr><td><strong>POS</strong></td><td>Point of Sale — sistem kasir penjualan retail/toko</td></tr><tr><td><strong>PPOB</strong></td><td>Payment Point Online Bank — layanan pembayaran digital (pulsa, listrik, BPJS, dll.)</td></tr><tr><td><strong>RBAC</strong></td><td>Role-Based Access Control — mekanisme otorisasi berbasis peran pengguna</td></tr><tr><td><strong>JWT</strong></td><td>JSON Web Token — standar token autentikasi untuk komunikasi API</td></tr><tr><td><strong>PWA</strong></td><td>Progressive Web App — aplikasi web yang dapat diinstal dan berfungsi offline</td></tr><tr><td><strong>AI</strong></td><td>Artificial Intelligence — kecerdasan buatan, dalam konteks ini Google Gemini untuk credit scoring</td></tr><tr><td><strong>CKPM</strong></td><td>Coworking Kewajiban Penyediaan Modal — total aktiva tertimbang menurut risiko</td></tr><tr><td><strong>LKP</strong></td><td>Laporan Keuangan Periodik — laporan keuangan yang wajib dilaporkan ke OJK</td></tr></tbody></table>
+<hr>
+
+<h2>2. Ikhtisar Sistem</h2>
+
+<h3>2.1 Gambaran Umum</h3>
+
+<p>MetroCoop adalah sistem informasi terintegrasi berbasis cloud yang dirancang khusus untuk mengelola operasional harian Koperasi Simpan Pinjam. Sistem ini mengotomasi siklus transaksi keuangan (simpanan, pinjaman, angsuran), pembukuan akuntansi, unit usaha, dan pelaporan regulasi sekaligus menyediakan portal digital bagi anggota.</p>
+
+<h3>2.2 Tech Stack</h3>
+
+<h4>Frontend — <code>apps/web</code></h4>
+
+<table class="dark-theme"><thead><tr><th>Komponen</th><th>Teknologi</th><th>Versi</th></tr></thead><tbody><tr><td>UI Library</td><td>React</td><td>19.x</td></tr><tr><td>Bahasa</td><td>TypeScript</td><td>~5.8</td></tr><tr><td>Build Tool</td><td>Vite</td><td>6.x</td></tr><tr><td>CSS Framework</td><td>Tailwind CSS</td><td>4.x</td></tr><tr><td>Component Library</td><td>shadcn/ui</td><td>Latest (via Tailwind)</td></tr><tr><td>Routing</td><td>React Router DOM</td><td>7.x</td></tr><tr><td>State Management</td><td>Zustand</td><td>5.x</td></tr><tr><td>Animasi</td><td>Motion (Framer Motion)</td><td>12.x</td></tr><tr><td>Ikon</td><td>Lucide React</td><td>0.546</td></tr><tr><td>Unit Test</td><td>Vitest + Testing Library</td><td>4.x</td></tr><tr><td>E2E Test</td><td>Playwright</td><td>1.61.x</td></tr></tbody></table>
+<h4>Backend — <code>server.ts</code> + <code>server/</code></h4>
+
+<table class="dark-theme"><thead><tr><th>Komponen</th><th>Teknologi</th><th>Versi</th></tr></thead><tbody><tr><td>Runtime</td><td>Node.js</td><td>20.x LTS</td></tr><tr><td>Framework</td><td>Express.js</td><td>4.21.x</td></tr><tr><td>Bahasa</td><td>TypeScript</td><td>~5.8</td></tr><tr><td>ORM / Query</td><td>pg (node-postgres)</td><td>8.22.x</td></tr><tr><td>Autentikasi</td><td>JWT (jsonwebtoken)</td><td>9.x</td></tr><tr><td>Hashing Password</td><td>bcryptjs</td><td>3.x</td></tr><tr><td>Validasi Input</td><td>Zod</td><td>4.x</td></tr><tr><td>Security Headers</td><td>Helmet</td><td>8.x</td></tr><tr><td>CORS</td><td>cors</td><td>2.8.x</td></tr><tr><td>Rate Limiting</td><td>express-rate-limit</td><td>8.x</td></tr><tr><td>AI Integration</td><td>@google/genai (Gemini)</td><td>2.4.x</td></tr><tr><td>Bundler</td><td>esbuild</td><td>0.25.x</td></tr><tr><td>Dev Runner</td><td>tsx</td><td>4.21.x</td></tr></tbody></table>
+<h4>Database</h4>
+
+<table class="dark-theme"><thead><tr><th>Komponen</th><th>Teknologi</th><th>Versi</th></tr></thead><tbody><tr><td>Relational DB</td><td>PostgreSQL</td><td>16</td></tr><tr><td>Hosting</td><td>Railway (PostgreSQL Plugin)</td><td>—</td></tr><tr><td>Data Type Khusus</td><td>JSONB</td><td>Untuk details jurnal, items penjualan</td></tr></tbody></table>
+<h4>AI Engine</h4>
+
+<table class="dark-theme"><thead><tr><th>Komponen</th><th>Spesifikasi</th></tr></thead><tbody><tr><td>Model</td><td>Google Gemini 2.0 Flash</td></tr><tr><td>Endpoint</td><td><code>generativelanguage.googleapis.com</code></td></tr><tr><td>Autentikasi</td><td>API Key (via environment variable)</td></tr><tr><td>Output Format</td><td>JSON (structured output via responseSchema)</td></tr><tr><td>Penggunaan</td><td>Credit scoring 5C, audit risiko investasi</td></tr></tbody></table>
+<h4>CI/CD & Deployment</h4>
+
+<table class="dark-theme"><thead><tr><th>Komponen</th><th>Teknologi</th></tr></thead><tbody><tr><td>Version Control</td><td>GitHub</td></tr><tr><td>CI Pipeline</td><td>GitHub Actions (<code>.github/workflows/ci.yml</code>)</td></tr><tr><td>CD Target</td><td>Railway (Production)</td></tr><tr><td>Preview Deploy</td><td>Railway Preview (per-PR via <code>deploy-preview.yml</code>)</td></tr><tr><td>Containerization</td><td>Dockerfile (multi-stage build)</td></tr></tbody></table>
+<h3>2.3 Struktur Monorepo</h3>
+
+<p>``<code><br>MetroCoop/<br>├── apps/<br>│   ├── web/                    # Frontend React SPA<br>│   │   ├── src/<br>│   │   │   ├── components/<br>│   │   │   │   ├── admin/      # 30+ komponen admin<br>│   │   │   │   ├── member/     # 20+ komponen portal anggota<br>│   │   │   │   ├── landingMetroKSP/  # Landing page components<br>│   │   │   │   ├── AdminPortal.tsx<br>│   │   │   │   ├── MemberPortal.tsx<br>│   │   │   │   ├── Sidebar.tsx<br>│   │   │   │   ├── Header.tsx<br>│   │   │   │   └── LoginScreen.tsx<br>│   │   │   ├── lib/api.ts<br>│   │   │   ├── stores/         # authStore, dataStore<br>│   │   │   ├── styles/tokens.css<br>│   │   │   ├── theme/<br>│   │   │   ├── pages/<br>│   │   │   ├── App.tsx<br>│   │   │   ├── AppContent.tsx<br>│   │   │   └── main.tsx<br>│   │   ├── tests/e2e/          # Playwright specs<br>│   │   ├── package.json<br>│   │   └── vite.config.ts<br>│   └── mobile/                 # React Native (Expo) — fase lanjutan<br>│       └── src/<br>├── packages/<br>│   └── shared/                 # Shared library (types, validation, API client)<br>│       └── src/<br>│           ├── api/client.ts<br>│           ├── stores/<br>│           ├── types/index.ts<br>│           └── validation/index.ts<br>├── server/                     # Backend Express<br>│   ├── routes/auth.ts<br>│   ├── routes/data.ts<br>│   ├── lib/finance.ts          # Kalkulasi angsuran, HPP<br>│   ├── middleware.ts            # JWT auth, RBAC<br>│   ├── db.ts                   # PostgreSQL connection pool<br>│   └── migrate.ts              # Auto-migration runner<br>├── db/<br>│   ├── schema.sql              # DDL lengkap<br>│   └── seed.sql                # Data awal<br>├── scripts/                    # Utility scripts<br>├── server.ts                   # Entry point server<br>├── package.json                # Root workspace config<br>├── Dockerfile<br>├── railway.toml<br>└── .github/workflows/<br>    ├── ci.yml                  # CI: typecheck + build + E2E + deploy<br>    └── deploy-preview.yml      # Preview deploy per PR<br></code>`<code></p>
+
+<h3>2.4 Lingkungan Deployment</h3>
+
+<table class="dark-theme"><thead><tr><th>Lingkungan</th><th>Trigger</th><th>URL</th><th>Keterangan</th></tr></thead><tbody><tr><td><strong>Development</strong></td><td></code>npm run dev<code></td><td></code>http://localhost:3000<code></td><td>Vite dev server + Express, hot reload</td></tr><tr><td><strong>Preview (PR)</strong></td><td>Push ke branch PR</td><td></code>https://metrocoop-pr-<N>.up.railway.app<code></td><td>Auto-deploy via GitHub Actions</td></tr><tr><td><strong>Production</strong></td><td>Merge ke </code>main<code></td><td></code>https://metrocoop-app-production.up.railway.app<code></td><td>Full build, health check verified</td></tr></tbody></table>
+<hr>
+
+<h2>3. Arsitektur & Stack Teknis</h2>
+
+<h3>3.1 Arsitektur Aplikasi</h3>
+
+<p>Sistem menggunakan arsitektur <strong>monolithic SPA + REST API</strong> dalam satu proses Node.js, dengan pemisahan logis antara frontend (React SPA) dan backend (Express REST API) yang di-serve dari satu server.</p>
+
+<p></code>`<code><br>┌─────────────────────────────────────────────────────────┐<br>│                      CLIENT BROWSER                     │<br>│  ┌─────────────┐  ┌──────────────┐  ┌───────────────┐  │<br>│  │ React SPA   │  │ Landing Page │  │ Mobile (Expo) │  │<br>│  │ (Vite build)│  │ (Static HTML)│  │ (fase lanjutan)│  │<br>│  └──────┬──────┘  └──────┬───────┘  └───────┬───────┘  │<br>└─────────┼────────────────┼───────────────────┼──────────┘<br>          │                │                   │<br>          ▼                ▼                   ▼<br>┌─────────────────────────────────────────────────────────┐<br>│                   EXPRESS SERVER (Node.js)               │<br>│                                                         │<br>│  ┌─────────┐  ┌─────────┐  ┌──────────┐  ┌─────────┐  │<br>│  │ Helmet  │→ │  CORS   │→ │ RateLimit│→ │   JWT   │  │<br>│  │ Headers │  │ Origin  │  │ Global   │  │   Auth  │  │<br>│  └─────────┘  └─────────┘  └──────────┘  └─────────┘  │<br>│                                                         │<br>│  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │<br>│  │ Role Check   │→ │ Zod Validate │→ │ Route Handler│  │<br>│  │ (RBAC)       │  │ (Input)      │  │ (Business)   │  │<br>│  └──────────────┘  └──────────────┘  └──────┬───────┘  │<br>│                                              │          │<br>│  ┌───────────────────────────────────────────▼───────┐  │<br>│  │              SERVICE LAYER                        │  │<br>│  │  ┌──────────┐  ┌───────────┐  ┌───────────────┐  │  │<br>│  │  │ DB Query │  │ Auto-     │  │ Audit Trail   │  │  │<br>│  │  │ (pg pool)│  │ Journal   │  │ Log           │  │  │<br>│  │  └────┬─────┘  └───────────┘  └───────────────┘  │  │<br>│  └───────┼───────────────────────────────────────────┘  │<br>└──────────┼──────────────────────────────────────────────┘<br>           │<br>           ▼<br>┌──────────────────┐     ┌──────────────────────────────┐<br>│  PostgreSQL 16   │     │     External Services        │<br>│  (Railway DB)    │     │  ┌────────┐  ┌────────────┐  │<br>│  ┌────────────┐  │     │  │ Gemini │  │ Midtrans/  │  │<br>│  │ 40+ Tables │  │     │  │ AI API │  │ Xendit/    │  │<br>│  │ JSONB      │  │     │  └────────┘  │ Digiflazz  │  │<br>│  │ FK + Check │  │     │  ┌────────┐  └────────────┘  │<br>│  └────────────┘  │     │  │ WA API │  ┌────────────┐  │<br>│                  │     │  └────────┘  │ SMTP Email  │  │<br>└──────────────────┘     │              └────────────┘  │<br>                         └──────────────────────────────┘<br></code>`<code></p>
+
+<h3>3.2 Request Lifecycle</h3>
+
+<p>Setiap permintaan HTTP ke API melewati pipeline berikut secara berurutan:</p>
+
+<p></code>`<code><br>HTTP Request<br>    │<br>    ▼<br>[1] Helmet — Set security headers (CSP, X-Frame-Options, HSTS, dll.)<br>    │<br>    ▼<br>[2] CORS — Validate origin, set Access-Control-Allow-Credentials<br>    │<br>    ▼<br>[3] Rate Limiter — 100 req/15 min (global), 10 req/15 min (login), 5 req/jam (register)<br>    │<br>    ▼<br>[4] JWT Authentication — Verify Bearer token, decode payload → req.user<br>    │<br>    ▼<br>[5] RBAC Role Check — adminOnly() / requireStaff() / scopeMemberId()<br>    │<br>    ▼<br>[6] Zod Validation — Validate request body/query/params against schema<br>    │<br>    ▼<br>[7] Route Handler — Execute business logic<br>    │<br>    ▼<br>[8] DB Transaction — BEGIN → INSERT/UPDATE → COMMIT (atau ROLLBACK on error)<br>    │<br>    ▼<br>[9] Auto-Journal — Generate journal_entries + details JSONB (Debit = Kredit)<br>    │<br>    ▼<br>[10] Audit Log — Record action: user, timestamp, before/after values<br>    │<br>    ▼<br>HTTP Response (JSON)<br></code>`<code></p>
+
+<hr>
+
+<h2>4. Spesifikasi Data Model</h2>
+
+<h3>4.1 Tabel Utama — Definisi DDL</h3>
+
+<h4>4.1.1 </code>users<code> — Tabel Pengguna Sistem</h4>
+
+<p></code>`<code>sql<br>CREATE TABLE users (<br>  id            VARCHAR(50)  PRIMARY KEY,<br>  username      VARCHAR(100) UNIQUE NOT NULL,<br>  nama_lengkap  VARCHAR(200) NOT NULL,<br>  role          VARCHAR(30)  NOT NULL DEFAULT 'anggota'<br>                CHECK (role IN ('superadmin','admin','operator','anggota','anggota_perusahaan')),<br>  nik           VARCHAR(50)  DEFAULT NULL,<br>  member_id     VARCHAR(50)  DEFAULT NULL,<br>  is_active     BOOLEAN      DEFAULT true,<br>  password_hash VARCHAR(255) NOT NULL,<br>  created_at    TIMESTAMP    DEFAULT CURRENT_TIMESTAMP<br>);<br></code>`<code></p>
+
+<p><strong>Keterangan:</strong><br><ul><li></code>role<code> — Lima level otorisasi: </code>superadmin<code> (penuh), </code>admin<code> (operasional), </code>operator<code> (transaksi), </code>anggota<code> (portal diri sendiri), </code>anggota_perusahaan<code> (portal perusahaan)</li><br><li></code>member_id<code> — Referensi ke tabel </code>anggota.id<code>, menghubungkan akun pengguna dengan data keanggotaan</li><br><li></code>password_hash<code> — bcrypt hash dengan cost factor 10</li><br></ul><br><h4>4.1.2 </code>anggota<code> — Tabel Data Anggota</h4></p>
+
+<p></code>`<code>sql<br>CREATE TABLE anggota (<br>  id                       VARCHAR(50)  PRIMARY KEY,<br>  nik                      VARCHAR(50)  UNIQUE NOT NULL,<br>  nama                     VARCHAR(200) NOT NULL,<br>  no_ktp                   VARCHAR(50)  DEFAULT '',<br>  no_hp                    VARCHAR(50)  DEFAULT '',<br>  email                    VARCHAR(100) DEFAULT '',<br>  alamat                   TEXT         DEFAULT '',<br>  pekerjaan                VARCHAR(100) DEFAULT '',<br>  penghasilan              NUMERIC(15,0) DEFAULT 0,<br>  status_keanggotaan       VARCHAR(20)  DEFAULT 'aktif'<br>                           CHECK (status_keanggotaan IN ('aktif','nonaktif','keluar')),<br>  tanggal_daftar           DATE         DEFAULT CURRENT_DATE,<br>  saldo_simpanan_pokok     NUMERIC(15,0) DEFAULT 0,<br>  saldo_simpanan_wajib     NUMERIC(15,0) DEFAULT 0,<br>  saldo_simpanan_sukarela  NUMERIC(15,0) DEFAULT 0,<br>  tipe_anggota             VARCHAR(20)  DEFAULT 'konvensional'<br>                           CHECK (tipe_anggota IN ('konvensional','perusahaan'))<br>);<br></code>`<code></p>
+
+<p><strong>Keterangan:</strong><br><ul><li></code>nik<code> — Nomor Induk Kependudukan 16 digit, unik sebagai identitas utama anggota</li><br><li></code>tipe_anggota<code> — </code>konvensional<code> (individu) atau </code>perusahaan<code> (badan usaha)</li><br><li></code>saldo_simpanan_*<code> — Saldo aktual setiap jenis simpanan (diperbarui real-time pada setiap transaksi)</li><br></ul><br><h4>4.1.3 </code>pinjaman<code> — Tabel Pinjaman</h4></p>
+
+<p></code>`<code>sql<br>CREATE TABLE pinjaman (<br>  id                   VARCHAR(50)  PRIMARY KEY,<br>  anggota_id           VARCHAR(50)  NOT NULL REFERENCES anggota(id),<br>  anggota_nama         VARCHAR(200) NOT NULL,<br>  jenis_pinjaman_id    VARCHAR(50)  NOT NULL REFERENCES jenis_pinjaman(id),<br>  jenis_nama           VARCHAR(200) NOT NULL,<br>  no_pinjaman          VARCHAR(100) DEFAULT '',<br>  pokok                NUMERIC(15,0) NOT NULL,<br>  tenor_months         INTEGER      NOT NULL,<br>  bunga_persen         NUMERIC(5,2) DEFAULT 0,<br>  metode_bunga         VARCHAR(20)  DEFAULT 'flat',<br>  angsuran_per_bulan   NUMERIC(15,0) DEFAULT 0,<br>  biaya_admin          NUMERIC(15,0) DEFAULT 0,<br>  sisa_pokok           NUMERIC(15,0) DEFAULT 0,<br>  status               VARCHAR(20)  DEFAULT 'pengajuan'<br>                       CHECK (status IN ('pengajuan','disetujui','dicairkan','lunas','ditolak')),<br>  tanggal_pengajuan    DATE         DEFAULT CURRENT_DATE,<br>  tanggal_cair         DATE         DEFAULT NULL<br>);<br></code>`<code></p>
+
+<p><strong>Keterangan:</strong><br><ul><li></code>metode_bunga<code> — Tiga opsi perhitungan: </code>flat<code>, </code>efektif<code>, </code>anuitas<code></li><br><li></code>sisa_pokok<code> — Saldo pokok yang belum dilunasi, diperbarui setiap pembayaran angsuran</li><br><li></code>status<code> — Alur: </code>pengajuan<code> → </code>disetujui<code> → </code>dicairkan<code> → </code>lunas<code> (atau </code>ditolak<code>)</li><br></ul><br><h4>4.1.4 </code>angsuran<code> — Tabel Jadwal Angsuran</h4></p>
+
+<p></code>`<code>sql<br>CREATE TABLE angsuran (<br>  id                    VARCHAR(50) PRIMARY KEY,<br>  pinjaman_id           VARCHAR(50) NOT NULL REFERENCES pinjaman(id),<br>  anggota_nama          VARCHAR(200) NOT NULL,<br>  angsuran_ke           INTEGER     NOT NULL,<br>  tanggal_jatuh_tempo   DATE        NOT NULL,<br>  pokok_bayar           NUMERIC(15,0) DEFAULT 0,<br>  bunga_bayar           NUMERIC(15,0) DEFAULT 0,<br>  total_bayar           NUMERIC(15,0) DEFAULT 0,<br>  status                VARCHAR(20)  DEFAULT 'belum_bayar'<br>                        CHECK (status IN ('belum_bayar','lunas','terlambat')),<br>  tanggal_bayar         DATE        DEFAULT NULL<br>);<br></code>`<code></p>
+
+<p><strong>Keterangan:</strong><br><ul><li></code>anggsuran_ke<code> — Urutan angsuran (1, 2, 3, ... tenor_months)</li><br><li></code>status<code> — Diperbarui otomatis oleh scheduler harian berdasarkan tanggal jatuh tempo vs tanggal bayar</li><br></ul><br><h4>4.1.5 </code>journal_entries<code> — Tabel Jurnal Akuntansi</h4></p>
+
+<p></code>`<code>sql<br>CREATE TABLE journal_entries (<br>  id          VARCHAR(50) PRIMARY KEY,<br>  no_jurnal   VARCHAR(100) NOT NULL,<br>  tanggal     DATE        NOT NULL DEFAULT CURRENT_DATE,<br>  keterangan  TEXT        DEFAULT '',<br>  sumber      VARCHAR(100) DEFAULT '',<br>  debit       NUMERIC(15,0) DEFAULT 0,<br>  kredit      NUMERIC(15,0) DEFAULT 0,<br>  details     JSONB       DEFAULT '[]'::jsonb<br>);<br></code>`<code></p>
+
+<p><strong>Keterangan:</strong><br><ul><li></code>details<code> — JSONB berisi array objek </code>{coa, namaAkun, debit, kredit}<code> yang merepresentasikan jurnal detail (double entry)</li><br><li></code>sumber<code> — Asal transaksi: </code>simpanan_setor<code>, </code>pinjaman_cair<code>, </code>pos_penjualan<code>, </code>angsuran_bayar<code>, dll.</li><br><li></code>no_jurnal<code> — Nomor urut jurnal unik (format: </code>JRN-YYYYMM-XXXX<code>)</li><br></ul><br><h4>4.1.6 </code>chart_of_accounts<code> — Tabel Daftar Akun (COA)</h4></p>
+
+<p></code>`<code>sql<br>CREATE TABLE chart_of_accounts (<br>  id            VARCHAR(50)  PRIMARY KEY,<br>  kode_akun     VARCHAR(20)  NOT NULL UNIQUE,<br>  nama_akun     VARCHAR(200) NOT NULL,<br>  kategori      VARCHAR(30)  NOT NULL<br>                CHECK (kategori IN ('ASET','KEWAJIBAN','EKUITAS','PENDAPATAN','BEBAN','SHU')),<br>  sub_kategori  VARCHAR(100) DEFAULT '',<br>  saldo_normal  VARCHAR(6)   NOT NULL CHECK (saldo_normal IN ('debit','kredit')),<br>  level         INTEGER      DEFAULT 1,<br>  parent_id     VARCHAR(50)  DEFAULT NULL REFERENCES chart_of_accounts(id),<br>  is_active     BOOLEAN      DEFAULT true,<br>  is_header     BOOLEAN      DEFAULT false,<br>  created_at    TIMESTAMP    DEFAULT CURRENT_TIMESTAMP<br>);<br></code>`<code></p>
+
+<p><strong>Keterangan:</strong><br><ul><li>Struktur hierarkis 6 level sesuai SAK ETAP: Kelompok → Jenis → Kategori → Sub → Detail → Sub-detail</li><br><li></code>is_header<code> — true untuk akun kelompok (tidak bisa transaksi langsung)</li><br></ul><br><h4>4.1.7 </code>jenis_pinjaman<code> — Tabel Produk Pinjaman</h4></p>
+
+<p></code>`<code>sql<br>CREATE TABLE jenis_pinjaman (<br>  id              VARCHAR(50)  PRIMARY KEY,<br>  nama            VARCHAR(200) NOT NULL,<br>  bunga_persen    NUMERIC(5,2) DEFAULT 0,<br>  metode_bunga    VARCHAR(20)  DEFAULT 'flat'<br>                  CHECK (metode_bunga IN ('flat','efektif','anuitas')),<br>  maks_tenor      INTEGER      DEFAULT 12,<br>  maks_plafon     NUMERIC(15,0) DEFAULT 0,<br>  biaya_admin     NUMERIC(15,0) DEFAULT 0<br>);<br></code>`<code></p>
+
+<h3>4.2 Ringkasan Seluruh Tabel</h3>
+
+<p>Berikut adalah daftar lengkap 45+ tabel dalam sistem MetroCoop, dikelompokkan berdasarkan modul:</p>
+
+<h4>Modul Keanggotaan & Pengurus</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>1</td><td></code>users<code></td><td>Akun pengguna sistem (login, role, password)</td></tr><tr><td>2</td><td></code>anggota<code></td><td>Data lengkap anggota koperasi</td></tr><tr><td>3</td><td></code>pengurus<code></td><td>Data pengurus (ketua, bendahara, sekretaris)</td></tr><tr><td>4</td><td></code>karyawan<code></td><td>Data karyawan koperasi</td></tr><tr><td>5</td><td></code>perusahaan<code></td><td>Data perusahaan anggota korporasi</td></tr></tbody></table>
+<h4>Modul Simpanan</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>6</td><td></code>jenis_simpanan<code></td><td>Master jenis simpanan (pokok, wajib, sukarela, deposito)</td></tr><tr><td>7</td><td></code>simpanan_transaksi<code></td><td>Transaksi setor/tarik simpanan</td></tr><tr><td>8</td><td></code>permohonan_tarik<code></td><td>Pengajuan penarikan simpanan</td></tr><tr><td>9</td><td></code>bukti_transfer<code></td><td>Bukti transfer masuk dari anggota</td></tr></tbody></table>
+<h4>Modul Pinjaman & Angsuran</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>10</td><td></code>jenis_pinjaman<code></td><td>Produk pinjaman (KUR, Mikro, Konsumtif, dll.)</td></tr><tr><td>11</td><td></code>pinjaman<code></td><td>Data pinjaman aktif</td></tr><tr><td>12</td><td></code>angsuran<code></td><td>Jadwal dan status pembayaran angsuran</td></tr></tbody></table>
+<h4>Modul Akuntansi & Pelaporan</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>13</td><td></code>chart_of_accounts<code></td><td>Daftar akun (COA) hierarkis</td></tr><tr><td>14</td><td></code>journal_entries<code></td><td>Jurnal transaksi umum</td></tr><tr><td>15</td><td></code>journal_approvals<code></td><td>Approval dan status jurnal</td></tr><tr><td>16</td><td></code>accounting_periods<code></td><td>Periode akuntansi (bulan/tahun)</td></tr><tr><td>17</td><td></code>subledger_piutang<code></td><td>Subledger piutang pinjaman per anggota</td></tr></tbody></table>
+<h4>Modul Unit Usaha — Retail/Toko</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>18</td><td></code>kategori_barang<code></td><td>Kategori produk</td></tr><tr><td>19</td><td></code>supplier<code></td><td>Data pemasok</td></tr><tr><td>20</td><td></code>barang<code></td><td>Master barang dagang</td></tr><tr><td>21</td><td></code>penjualan<code></td><td>Transaksi penjualan (POS)</td></tr><tr><td>22</td><td></code>pembelian<code></td><td>Transaksi pembelian dari supplier</td></tr></tbody></table>
+<h4>Modul Unit Usaha — Sewa Aset</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>23</td><td></code>aset_barang<code></td><td>Master aset koperasi</td></tr><tr><td>24</td><td></code>sewa_assets<code></td><td>Aset yang tersedia untuk disewa</td></tr><tr><td>25</td><td></code>sewa_transactions<code></td><td>Transaksi penyewaan</td></tr></tbody></table>
+<h4>Modul Unit Usaha — PPOB & Digital Payment</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>26</td><td></code>ppob_layanan<code></td><td>Layanan PPOB (pulsa, listrik, tagihan)</td></tr><tr><td>27</td><td></code>ppob_transactions<code></td><td>Transaksi PPOB</td></tr><tr><td>28</td><td></code>sumber_bayar<code></td><td>Sumber metode pembayaran</td></tr><tr><td>29</td><td></code>virtual_accounts<code></td><td>Virtual account anggota</td></tr><tr><td>30</td><td></code>va_transactions<code></td><td>Transaksi via VA</td></tr></tbody></table>
+<h4>Modul Unit Usaha — Cicilan Barang</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>31</td><td></code>cicilan_barang<code></td><td>Pengajuan cicilan barang</td></tr><tr><td>32</td><td></code>cicilan_angsuran<code></td><td>Jadwal angsuran cicilan barang</td></tr></tbody></table>
+<h4>Modul Ventura & Investasi</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>33</td><td></code>venture_investments<code></td><td>Investasi ventura/penyertaan modal</td></tr><tr><td>34</td><td></code>venture_dividends<code></td><td>History dividen dari investasi</td></tr></tbody></table>
+<h4>Modul AI Credit Scoring & Pengajuan</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>35</td><td></code>pengajuan_pembiayaan<code></td><td>Pengajuan pembiayaan ventura</td></tr><tr><td>36</td><td></code>dokumen_pengajuan<code></td><td>Dokumen pendukung pengajuan</td></tr><tr><td>37</td><td></code>hasil_skoring<code></td><td>Hasil analisis 5C oleh AI</td></tr></tbody></table>
+<h4>Modul Administrasi & Komunikasi</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>38</td><td></code>pengumuman<code></td><td>Pengumuman dan promo</td></tr><tr><td>39</td><td></code>tiket_bantuan<code></td><td>Layanan helpdesk anggota</td></tr><tr><td>40</td><td></code>feature_toggles<code></td><td>Fitur toggle (enable/disable modul)</td></tr><tr><td>41</td><td></code>koperasi_info<code></td><td>Informasi profil koperasi</td></tr></tbody></table>
+<h4>Modul Landing Page CMS</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>42</td><td></code>landing_settings<code></td><td>Pengaturan umum landing page</td></tr><tr><td>43</td><td></code>landing_hero<code></td><td>Konten hero section</td></tr><tr><td>44</td><td></code>landing_features<code></td><td>Daftar fitur unggulan</td></tr><tr><td>45</td><td></code>landing_team<code></td><td>Data tim</td></tr><tr><td>46</td><td></code>landing_testimonials<code></td><td>Testimoni</td></tr><tr><td>47</td><td></code>landing_pricing<code></td><td>Paket harga</td></tr><tr><td>48</td><td></code>landing_contact<code></td><td>Informasi kontak</td></tr></tbody></table>
+<h4>Tabel Sistem</h4>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Nama Tabel</th><th>Fungsi</th></tr></thead><tbody><tr><td>49</td><td></code>migrations<code></td><td>Tracking versi database migration</td></tr></tbody></table>
+<hr>
+
+<h2>5. Use Case Sistem</h2>
+
+<h3>UC-01: Registrasi Anggota Baru</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-01</td></tr><tr><td><strong>Nama</strong></td><td>Registrasi Anggota Baru</td></tr><tr><td><strong>Actor</strong></td><td>Admin, Operator</td></tr><tr><td><strong>Precondition</strong></td><td>Pengguna terautentikasi dengan role admin atau operator</td></tr><tr><td><strong>Postcondition</strong></td><td>Akun pengguna baru dan data anggota berhasil dibuat dalam database</td></tr><tr><td><strong>Trigger</strong></td><td>Admin/Operator mengklik tombol "Tambah Anggota" dan mengisi formulir</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Admin/Operator membuka halaman Manajemen Anggota</li>
+<li>Sistem menampilkan daftar anggota beserta tombol "Tambah Anggota"</li>
+<li>Admin/Operator mengklik "Tambah Anggota"</li>
+<li>Sistem menampilkan formulir registrasi dengan field: NIK, Nama Lengkap, No KTP, No HP, Email, Alamat, Pekerjaan, Penghasilan</li>
+<li>Admin/Operator mengisi seluruh field wajib (NIK, Nama)</li>
+<li>Sistem memvalidasi format NIK (16 digit angka) menggunakan Zod schema</li>
+<li>Sistem mengecek duplikasi NIK di database (</code>SELECT id FROM anggota WHERE nik = $1<code>)</li>
+<li>Jika NIK sudah ada, sistem menampilkan error "NIK sudah terdaftar" → kembali ke langkah 5</li>
+<li>Sistem membuat record di tabel </code>anggota<code> dengan saldo simpanan awal = 0</li>
+<li>Sistem membuat record di tabel </code>users<code> dengan role </code>anggota<code>, password hash (bcrypt cost 10), dan </code>member_id<code> yang merujuk ke </code>anggota.id<code></li>
+<li>Sistem mengembalikan respons sukses dengan data anggota yang baru dibuat</li>
+</ul>
+<strong>Alur Alternatif:</strong>
+<ul><li><strong>5a.</strong> Admin/Operator mengisi NIK dengan format salah → Sistem menampilkan pesan validasi "NIK harus 16 digit angka"</li>
+<li><strong>7a.</strong> Database error → Sistem mengembalikan HTTP 500 dengan pesan error</li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>NIK harus unik di seluruh tabel </code>anggota<code></li>
+<li></code>status_keanggotaan<code> default </code>'aktif'<code></li>
+<li></code>tipe_anggota<code> default </code>'konvensional'<code></li>
+<li>Password harus minimal 6 karakter</li>
+<li></code>is_active<code> pada </code>users<code> default </code>true<code></li>
+<li>Semua perubahan data tercatat dalam audit trail</li>
+</ul>
+<hr>
+
+<h3>UC-02: Setor Simpanan</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-02</td></tr><tr><td><strong>Nama</strong></td><td>Setor Simpanan</td></tr><tr><td><strong>Actor</strong></td><td>Operator, Admin</td></tr><tr><td><strong>Precondition</strong></td><td>Anggota terdaftar dengan status aktif; operator terautentikasi</td></tr><tr><td><strong>Postcondition</strong></td><td>Saldo simpanan anggota bertambah; jurnal akuntansi otomatis tercatat</td></tr><tr><td><strong>Trigger</strong></td><td>Operator menerima setoran tunai/transfer dari anggota</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Operator membuka halaman Simpanan → Transaksi</li>
+<li>Sistem menampilkan formulir transaksi simpanan</li>
+<li>Operator memilih anggota dari dropdown (search by nama/NIK)</li>
+<li>Sistem menampilkan data anggota dan saldo terkini per jenis simpanan</li>
+<li>Operator memilih jenis simpanan (Pokok / Wajib / Sukarela / Deposito)</li>
+<li>Operator memilih tipe transaksi: <strong>Setor</strong></li>
+<li>Operator memasukkan jumlah setoran (harus > 0 dan ≥ minimal setoran jenis simpanan)</li>
+<li>Operator mengisi keterangan (opsional)</li>
+<li>Operator mengklik "Proses Transaksi"</li>
+<li>Sistem memvalidasi input menggunakan </code>SimpananTransaksiSchema<code> (Zod)</li>
+<li>Sistem melakukan DB transaction: UPDATE saldo anggota + INSERT transaksi + INSERT jurnal</li>
+<li>Sistem membuat jurnal otomatis: Debit </code>Kas/Bank<code>, Kredit </code>Simpanan [jenis]<code></li>
+<li>Sistem mengembalikan respons sukses dengan data transaksi dan saldo terbaru</li>
+</ul>
+<strong>Alur Alternatif:</strong>
+<ul><li><strong>7a.</strong> Jumlah < minimal setoran → Sistem menolak dengan pesan "Minimal setoran Rp X"</li>
+<li><strong>11a.</strong> Anggota nonaktif → Sistem menolak dengan "Anggota tidak aktif"</li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>Simpanan Pokok hanya bisa disetor saat pendaftaran (satu kali)</li>
+<li>Simpanan Wajib disetor berkala (minimal per bulan)</li>
+<li>Simpanan Sukarela bisa di kapan saja, tanpa batas minimal</li>
+<li>Setiap transaksi menghasilkan jurnal double entry (Debit = Kredit)</li>
+<li>Saldo pada tabel </code>anggota<code> di-update langsung (real-time)</li>
+</ul>
+<hr>
+
+<h3>UC-03: Tarik Simpanan</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-03</td></tr><tr><td><strong>Nama</strong></td><td>Tarik Simpanan</td></tr><tr><td><strong>Actor</strong></td><td>Anggota (via portal), Operator (via teller)</td></tr><tr><td><strong>Precondition</strong></td><td>Anggota memiliki saldo yang cukup pada jenis simpanan yang dipilih</td></tr><tr><td><strong>Postcondition</strong></td><td>Saldo simpanan berkurang; jurnal akuntansi tercatat</td></tr><tr><td><strong>Trigger</strong></td><td>Anggota mengajukan penarikan atau operator memproses penarikan tunai</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Anggota/Operator membuka halaman Penarikan Simpanan</li>
+<li>Sistem menampilkan formulir penarikan</li>
+<li>Pengguna memilih jenis simpanan dan memasukkan jumlah penarikan</li>
+<li>Sistem memvalidasi: jumlah ≤ saldo tersedia</li>
+<li>Untuk Simpanan Pokok: sistem <strong>menolak</strong> penarikan jika anggota masih aktif</li>
+<li>Untuk Deposito: sistem memeriksa apakah sudah jatuh tempo (jika belum, dikenakan penalti)</li>
+<li>Sistem membuat permohonan di </code>permohonan_tarik<code> dengan status </code>pengajuan<code></li>
+<li>Operator/Admin meng approve permohonan</li>
+<li>Sistem memproses: UPDATE saldo, INSERT transaksi, INSERT jurnal</li>
+<li>Jurnal: Debit </code>Simpanan [jenis]<code>, Kredit </code>Kas/Bank<code></li>
+</ul>
+<strong>Alur Alternatif:</strong>
+<ul><li><strong>5a.</strong> Penarikan Simpanan Pokok → <strong>Ditolak otomatis</strong>: "Simpanan Pokok tidak dapat ditarik selama keanggotaan aktif"</li>
+<li><strong>6a.</strong> Deposito sebelum jatuh tempo → Dikenakan penalti sesuai konfigurasi</li>
+<li><strong>4a.</strong> Saldo tidak cukup → Sistem menolak</li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>Simpanan Pokok <strong>tidak bisa ditarik</strong> selama status anggota </code>aktif<code> (sesuai Pasal 40 UU 17/2012)</li>
+<li>Simpanan Wajib bisa ditarik dengan approval operator</li>
+<li>Simpanan Sukarela bisa ditarik kapan saja</li>
+<li>Deposito: penalti dikenakan jika tarik sebelum jatuh tempo</li>
+<li>Saldo akhir tidak boleh negatif</li>
+</ul>
+<hr>
+
+<h3>UC-04: Pengajuan & Pencairan Pinjaman</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-04</td></tr><tr><td><strong>Nama</strong></td><td>Pengajuan dan Pencairan Pinjaman</td></tr><tr><td><strong>Actor</strong></td><td>Anggota (pengajuan), Admin (verifikasi & approval), Operator (pencairan)</td></tr><tr><td><strong>Precondition</strong></td><td>Anggota aktif, memiliki simpanan wajib minimal 3 bulan terakhir</td></tr><tr><td><strong>Postcondition</strong></td><td>Pinjaman cair, jadwal angsuran tergenerate, jurnal tercatat</td></tr><tr><td><strong>Trigger</strong></td><td>Anggota mengajukan pinjaman atau admin menyetujui pengajuan</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Anggota/Operator mengajukan pinjaman dengan data: jenis pinjaman, pokok, tenor, tujuan</li>
+<li>Sistem memvalidasi input menggunakan </code>PinjamanSchema<code> (Zod)</li>
+<li>Sistem mengecek syarat: simpanan wajib ≥ 3 bulan, BMPK ≤ 20% Modal Sendiri</li>
+<li>Jika lolos, sistem menyimpan dengan status </code>pengajuan<code></li>
+<li>Admin melakukan verifikasi 5C (Character, Capacity, Capital, Collateral, Condition)</li>
+<li>Opsional: Admin menjalankan <strong>AI Credit Scoring</strong> (Gemini) untuk rekomendasi</li>
+<li>Admin menyetujui/menolak pengajuan</li>
+<li>Jika disetujui: status → </code>disetujui<code>, operator memproses pencairan</li>
+<li>Pencairan: status → </code>dicairkan<code>, </code>tanggal_cair<code> diisi, </code>sisa_pokok<code> = </code>pokok<code></li>
+<li>Sistem generate jadwal angsuran berdasarkan metode bunga (flat/efektif/anuitas)</li>
+<li>Jurnal otomatis: Debit </code>Piutang Pinjaman<code>, Kredit </code>Kas/Bank<code></li>
+</ul>
+<strong>Alur Alternatif:</strong>
+<ul><li><strong>3a.</strong> BMPK melebihi 20% → Sistem menolak: "Plafon melebihi batas BMPK"</li>
+<li><strong>5a.</strong> Verifikasi 5C gagal → Admin menolak, status → </code>ditolak<code></li>
+<li><strong>6a.</strong> AI Score < 40 → Rekomendasi "Tolak"</li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>BMPK per debitur ≤ 20% Modal Sendiri (bisa 25% dengan persetujuan RAT)</li>
+<li>Angsuran per bulan dihitung otomatis berdasarkan metode bunga</li>
+<li>Biaya admin dipotong dari dana cair</li>
+<li>Jurnal seimbang pada setiap tahap transaksi</li>
+</ul>
+<hr>
+
+<h3>UC-05: Pembayaran Angsuran</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-05</td></tr><tr><td><strong>Nama</strong></td><td>Pembayaran Angsuran Pinjaman</td></tr><tr><td><strong>Actor</strong></td><td>Anggota (portal/VA), Operator (teller)</td></tr><tr><td><strong>Precondition</strong></td><td>Pinjaman berstatus </code>dicairkan<code> dengan angsuran </code>belum_bayar<code></td></tr><tr><td><strong>Postcondition</strong></td><td>Status angsuran → </code>lunas<code>, sisa pokok berkurang, jurnal tercatat</td></tr><tr><td><strong>Trigger</strong></td><td>Anggota membayar angsuran via VA/teller/portal</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Anggota/Operator memilih angsuran yang akan dibayar</li>
+<li>Sistem menampilkan detail: angsuran ke, pokok bayar, bunga bayar, total bayar, denda (jika ada)</li>
+<li>Pengguna mengkonfirmasi pembayaran</li>
+<li>Sistem memproses dalam DB transaction:</li>
+</ul>   a. UPDATE </code>angsuran<code> → status </code>lunas<code>, </code>tanggal_bayar<code> = hari ini
+   b. UPDATE </code>pinjaman<code> → </code>sisa_pokok<code> dikurangi </code>pokok_bayar<code>
+   c. INSERT jurnal: Debit </code>Kas/Bank<code>, Kredit </code>Piutang Pokok<code> + Kredit </code>Pendapatan Bunga<code>
+<ul><li>Jika </code>sisa_pokok<code> = 0 → UPDATE </code>pinjaman<code> → status </code>lunas<code></li>
+<li>Sistem mengembalikan respons sukses</li>
+</ul>
+<strong>Alur Alternatif:</strong>
+<ul><li><strong>2a.</strong> Pembayaran parsial → Sistem mencatat proporsional</li>
+<li><strong>5a.</strong> Masih ada sisa → Status pinjaman tetap </code>dicairkan<code></li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>Denda: Pokok tunggakan × Rate × Hari (cap 2%, flat, grace period 5 hari)</li>
+<li>Pembayaran melewati jatuh tempo → status angsuran → </code>terlambat<code> (update otomatis scheduler)</li>
+<li>Setiap pembayaran menghasilkan jurnal balanced</li>
+</ul>
+<hr>
+
+<h3>UC-06: Transaksi POS/Retail</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-06</td></tr><tr><td><strong>Nama</strong></td><td>Transaksi Penjualan POS (Point of Sale)</td></tr><tr><td><strong>Actor</strong></td><td>Operator (kasir)</td></tr><tr><td><strong>Precondition</strong></td><td>Operator terautentikasi; stok barang tersedia</td></tr><tr><td><strong>Postcondition</strong></td><td>Stok berkurang, transaksi tercatat, jurnal otomatis</td></tr><tr><td><strong>Trigger</strong></td><td>Kasir memproses penjualan barang</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Operator membuka modul POS/Toko</li>
+<li>Operator memindai/memilih barang (by kode atau nama)</li>
+<li>Sistem menampilkan harga jual dan stok tersedia</li>
+<li>Operator memasukkan jumlah (qty), menambahkan ke keranjang</li>
+<li>Ulangi langkah 2-4 untuk setiap barang</li>
+<li>Operator memilih metode bayar (Tunai / Transfer / E-Wallet / QRIS)</li>
+<li>Operator mengklik "Proses Penjualan"</li>
+<li>Sistem memvalidasi input menggunakan </code>PenjualanSchema<code> (Zod)</li>
+<li>Sistem memproses:</li>
+</ul>   a. INSERT </code>penjualan<code> (no_faktur auto, items JSONB, total, metode_bayar)
+   b. UPDATE </code>barang<code> → stok dikurangi per item
+   c. Hitung HPP (Harga Pokok Penjualan) dari harga beli
+   d. INSERT jurnal: Debit </code>Kas<code>, Kredit </code>Pendapatan Penjualan<code>; Debit </code>HPP<code>, Kredit </code>Persediaan<code>
+<ul><li>Sistem mencetak struk/faktur (opsional)</li>
+</ul>
+<strong>Alur Alternatif:</strong>
+<ul><li><strong>3a.</strong> Stok tidak cukup → Sistem menolak item</li>
+<li><strong>9a.</strong> Harga khusus anggota → sistem menggunakan harga diskon</li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>HPP dihitung menggunakan metode FIFO</li>
+<li>Multi-metode bayar dalam satu transaksi</li>
+<li>Diskon per-transaksi (persentase atau nominal)</li>
+<li>Stok tidak boleh negatif</li>
+</ul>
+<hr>
+
+<h3>UC-07: Jurnal Akuntansi Otomatis</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-07</td></tr><tr><td><strong>Nama</strong></td><td>Jurnal Akuntansi Otomatis dari Transaksi</td></tr><tr><td><strong>Actor</strong></td><td>Sistem (otomatis)</td></tr><tr><td><strong>Precondition</strong></td><td>Transaksi bisnis berhasil diproses</td></tr><tr><td><strong>Postcondition</strong></td><td>Entri jurnal tercatat dengan detail JSONB, Debit = Kredit</td></tr><tr><td><strong>Trigger</strong></td><td>Setiap transaksi keuangan (simpanan, pinjaman, POS, PPOB, sewa, angsuran)</td></tr></tbody></table>
+<strong>Mapping Jurnal Otomatis:</strong>
+
+<table class="dark-theme"><thead><tr><th>Sumber Transaksi</th><th>Debit</th><th>Kredit</th></tr></thead><tbody><tr><td>Setor Simpanan Pokok</td><td>1101 Kas / 1102 Bank</td><td>2101 Simpanan Pokok</td></tr><tr><td>Setor Simpanan Wajib</td><td>1101 Kas / 1102 Bank</td><td>2102 Simpanan Wajib</td></tr><tr><td>Setor Simpanan Sukarela</td><td>1101 Kas / 1102 Bank</td><td>2103 Simpanan Sukarela</td></tr><tr><td>Setor Deposito</td><td>1101 Kas / 1102 Bank</td><td>2104 Deposito</td></tr><tr><td>Tarik Simpanan</td><td>2103 Simpanan Sukarela</td><td>1101 Kas / 1102 Bank</td></tr><tr><td>Pencairan Pinjaman</td><td>1111 Piutang Pokok Pinjaman</td><td>1101 Kas / 1102 Bank</td></tr><tr><td>Bayar Angsuran (Pokok)</td><td>1101 Kas / 1102 Bank</td><td>1111 Piutang Pokok Pinjaman</td></tr><tr><td>Bayar Angsuran (Bunga)</td><td>1101 Kas / 1102 Bank</td><td>4101 Pendapatan Bunga</td></tr><tr><td>Denda Tunggakan</td><td>1101 Kas / 1102 Bank</td><td>4102 Pendapatan Denda</td></tr><tr><td>Penjualan POS (Tunai)</td><td>1101 Kas</td><td>4201 Pendapatan Penjualan</td></tr><tr><td>Penjualan POS (HPP)</td><td>5101 HPP</td><td>1201 Persediaan Barang</td></tr><tr><td>Pembelian Barang</td><td>1201 Persediaan Barang</td><td>2201 Hutang Dagang</td></tr><tr><td>Pembayaran Hutang Dagang</td><td>2201 Hutang Dagang</td><td>1101 Kas / 1102 Bank</td></tr><tr><td>Pendapatan Sewa</td><td>1101 Kas / 1102 Bank</td><td>4301 Pendapatan Sewa</td></tr><tr><td>Biaya Admin Pinjaman</td><td>1101 Kas / 1102 Bank</td><td>4401 Pendapatan Biaya Admin</td></tr><tr><td>Beban Gaji Karyawan</td><td>5201 Beban Gaji</td><td>1101 Kas / 1102 Bank</td></tr><tr><td>Beban Penyusutan</td><td>5301 Beban Penyusutan</td><td>1301 Akumulasi Penyusutan</td></tr><tr><td>CKPN (Cadangan)</td><td>5401 Beban CKPN</td><td>1401 CKPN</td></tr><tr><td>Pendapatan Bunga Deposito</td><td>2104 Deposito</td><td>1101 Kas / 1102 Bank</td></tr><tr><td>Penutup Pendapatan</td><td>4xxx Pendapatan</td><td>6101 Ikhtisar Laba Rugi</td></tr><tr><td>Penutup Beban</td><td>6201 Ikhtisar Laba Rugi</td><td>5xxx Beban</td></tr><tr><td>Penutup SHU</td><td>6101 Ikhtisar Laba Rugi</td><td>3101 SHU Belum Dibagi</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Transaksi bisnis berhasil diproses</li>
+<li>Sistem memanggil fungsi auto-journal</li>
+<li>Sistem menentukan kode COA debit dan kredit berdasarkan tipe transaksi</li>
+<li>Sistem menghitung nominal debit dan kredit</li>
+<li>Sistem melakukan DB transaction: INSERT </code>journal_entries<code> dengan </code>details<code> JSONB berisi array COA</li>
+<li>Sistem memverifikasi: total debit = total kredit</li>
+<li>Jika tidak seimbang → ROLLBACK, log error</li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>Setiap jurnal harus seimbang (Debit = Kredit) — dijamin oleh DB transaction</li>
+<li></code>details<code> JSONB memuat baris jurnal detail untuk setiap akun yang terpengaruh</li>
+<li></code>no_jurnal<code> di-generate otomatis format </code>JRN-YYYYMM-XXXX<code></li>
+<li>Semua jurnal harus traceable ke transaksi sumber</li>
+</ul>
+<hr>
+
+<h3>UC-08: Tutup Buku Periode Akuntansi</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-08</td></tr><tr><td><strong>Nama</strong></td><td>Tutup Buku Periode Akuntansi</td></tr><tr><td><strong>Actor</strong></td><td>Admin (Bendahara/Ketua)</td></tr><tr><td><strong>Precondition</strong></td><td>Seluruh transaksi periode telah dijurnal; tidak ada jurnal draft</td></tr><tr><td><strong>Postcondition</strong></td><td>Periode ditutup, SHU dihitung, jurnal penutup tercatat</td></tr><tr><td><strong>Trigger</strong></td><td>Admin mengklik "Tutup Buku" untuk periode tertentu</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Admin membuka modul Tutup Buku</li>
+<li>Sistem menampilkan daftar periode akuntansi beserta status (open/closed)</li>
+<li>Admin memilih periode yang akan ditutup</li>
+<li>Sistem melakukan pre-check:</li>
+</ul>   a. Semua jurnal periode berstatus </code>posted<code> (tidak ada draft)
+   b. Neraca Saldo seimbang (total debit = total kredit)
+   c. Tidak ada transaksi yang tertunda
+<ul><li>Sistem menjalankan closing process:</li>
+</ul>   a. Hitung total pendapatan dari seluruh akun pendapatan
+   b. Hitung total beban dari seluruh akun beban
+   c. Hitung SHU = Total Pendapatan - Total Beban
+   d. Hitung alokasi SHU: Cadangan (min 10%), Dana Pendidikan (max 5%), Jasa Modal, Jasa Usaha
+   e. Generate jurnal penutup: tutup akun pendapatan dan beban ke Ikhtisar Laba Rugi
+   f. Generate jurnal alokasi SHU
+<ul><li>Sistem UPDATE </code>accounting_periods<code> → </code>is_closed = true<code>, </code>closed_at<code>, </code>closed_by<code></li>
+<li>Sistem mengembalikan ringkasan SHU</li>
+</ul>
+<strong>Alur Alternatif:</strong>
+<ul><li><strong>4a.</strong> Masih ada jurnal draft → Sistem menolak: "Masih ada X jurnal yang belum diposting"</li>
+<li><strong>4b.</strong> Neraca tidak seimbang → Sistem menolak dan menampilkan selisih</li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>Periode hanya bisa ditutup secara kronologis (bulan berikutnya)</li>
+<li>Periode yang sudah ditutup tidak bisa dibuka kembali</li>
+<li>Proses tutup buku harus dilakukan paling lambat 6 bulan setelah akhir tahun buku (UU 17/2012)</li>
+<li>Hasil tutup buku menjadi dasar perhitungan dan pembagian SHU pada RAT</li>
+</ul>
+<hr>
+
+<h3>UC-09: AI Credit Scoring (Google Gemini)</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-09</td></tr><tr><td><strong>Nama</strong></td><td>Analisis Kredit Berbasis AI (Credit Scoring 5C)</td></tr><tr><td><strong>Actor</strong></td><td>Admin (saat proses verifikasi pengajuan pinjaman)</td></tr><tr><td><strong>Precondition</strong></td><td>Pengajuan pinjaman dengan status </code>pengajuan<code>; data anggota lengkap</td></tr><tr><td><strong>Postcondition</strong></td><td>Hasil skoring tersimpan; rekomendasi approve/review/reject dihasilkan</td></tr><tr><td><strong>Trigger</strong></td><td>Admin mengklik "Jalankan AI Credit Scoring" pada halaman pengajuan</td></tr></tbody></table>
+<strong>Input JSON (request ke Gemini):</strong>
+
+<p></code>`<code>json<br>{<br>  "pengajuan_id": "PJN-202607-0012",<br>  "anggota": {<br>    "nama": "Budi Santoso",<br>    "nik": "3201234567890123",<br>    "pekerjaan": "Wiraswasta",<br>    "penghasilan_bulanan": 15000000,<br>    "status_keanggotaan": "aktif",<br>    "lama_keanggotaan_bulan": 24,<br>    "saldo_simpanan_wajib": 600000,<br>    "riwayat_pinjaman": {<br>      "total_pinjaman": 2,<br>      "total_lunas": 1,<br>      "total_tunggakan_hari": 0<br>    }<br>  },<br>  "pengajuan": {<br>    "jenis_pinjaman": "Mikro Produktif",<br>    "pokok": 50000000,<br>    "tenor_bulan": 12,<br>    "bunga_persen": 1.5,<br>    "metode_bunga": "flat",<br>    "tujuan": "Modal usaha tambak udang"<br>  },<br>  "rasio_keuangan": {<br>    "modal_sendiri": 500000000,<br>    "total_aset": 2000000000,<br>    "total_kewajiban": 800000000,<br>    "total_piutang": 400000000,<br>    "piutang_macet": 20000000,<br>    "total_pendapatan_bunga": 120000000,<br>    "total_beban_operasional": 80000000,<br>    "kas_dan_bank": 300000000<br>  }<br>}<br></code>`<code></p>
+
+<p><strong>Output JSON (response dari Gemini):</strong></p>
+
+<p></code>`<code>json<br>{<br>  "skor_keseluruhan": 78.5,<br>  "status_kelayakan": "LAYAK",<br>  "analisis_5c": {<br>    "character": {<br>      "skor": 85,<br>      "keterangan": "Riwayat pinjaman bersih, tidak ada tunggakan, anggota aktif 24 bulan"<br>    },<br>    "capacity": {<br>      "skor": 75,<br>      "keterangan": "Penghasilan Rp 15 juta/bulan, rasio angsuran/penghasilan 12% (aman)"<br>    },<br>    "capital": {<br>      "skor": 70,<br>      "keterangan": "Modal sendiri cukup, BMPK per debitur masih dalam batas aman"<br>    },<br>    "collateral": {<br>      "skor": 80,<br>      "keterangan": "Simpanan wajib Rp 600.000 sebagai jaminan tambahan"<br>    },<br>    "condition": {<br>      "skor": 82,<br>      "keterangan": "Usaha tambak udang prospek baik, sektor perikanan stabil"<br>    }<br>  },<br>  "rasio_analisis": {<br>    "likuiditas": 1.25,<br>    "solvabilitas": 0.40,<br>    "profitabilitas": 6.0,<br>    "bopo": 40.0,<br>    "bmpk_persen": 2.5,<br>    "bmpk_status": "Aman (≤20%)"<br>  },<br>  "rekomendasi": {<br>    "keputusan": "SETUJUI",<br>    "plafon_rekomendasi": 50000000,<br>    "tenor_rekomendasi": 12,<br>    "bunga_rekomendasi": 1.5,<br>    "syarat_khusus": [<br>      "Lampirkan surat keterangan usaha dari kelurahan",<br>      "Agunan BPKB kendaraan bermotor"<br>    ]<br>  }<br>}<br></code>`<code></p>
+
+<p><strong>Threshold Keputusan:</strong></p>
+
+<table class="dark-theme"><thead><tr><th>Skor</th><th>Status</th><th>Keputusan</th><th>Keterangan</th></tr></thead><tbody><tr><td>≥ 60</td><td><strong>LAYAK</strong></td><td>Setujui</td><td>Memenuhi kriteria kelayakan kredit</td></tr><tr><td>40 – 59</td><td><strong>REVIEW</strong></td><td>Perlu Tinjauan Ulang</td><td>Perlu verifikasi manual oleh pengawas</td></tr><tr><td>< 40</td><td><strong>TIDAK LAYAK</strong></td><td>Tolak</td><td>Tidak memenuhi prinsip kehati-hatian</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Admin mengklik "Jalankan AI Credit Scoring"</li>
+<li>Sistem mengumpulkan data anggota, pengajuan, dan rasio keuangan</li>
+<li>Sistem membuat request ke Gemini API dengan structured output schema</li>
+<li>Gemini menganalisis berdasarkan prompt system (auditor koperasi senior)</li>
+<li>Sistem menerima response JSON</li>
+<li>Sistem menyimpan hasil di </code>hasil_skoring<code> dan memperbarui </code>pengajuan_pembiayaan<code></li>
+<li>Sistem menampilkan hasil analisis ke admin</li>
+</ul>
+<strong>Alur Alternatif:</strong>
+<ul><li><strong>3a.</strong> Gemini API timeout (>30 detik) → Sistem mengembalikan error "AI tidak tersedia, gunakan verifikasi manual"</li>
+<li><strong>3b.</strong> Gemini API quota habis → Sistem fallback ke skoring manual berbasis aturan</li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>AI scoring bersifat <strong>rekomendasi</strong> — keputusan akhir tetap pada admin/pengawas</li>
+<li>Semua hasil skoring tersimpan permanen untuk audit trail</li>
+<li>Skor AI tidak menggantikan verifikasi dokumen fisik</li>
+</ul>
+<hr>
+
+<h3>UC-10: Laporan OJK</h3>
+
+<table class="dark-theme"><thead><tr><th>Field</th><th>Detail</th></tr></thead><tbody><tr><td><strong>ID</strong></td><td>UC-10</td></tr><tr><td><strong>Nama</strong></td><td>Pelaporan Regulasi ke OJK</td></tr><tr><td><strong>Actor</strong></td><td>Admin (Ketua/Bendahara)</td></tr><tr><td><strong>Precondition</strong></td><td>Data transaksi dan akuntansi lengkap untuk periode pelaporan</td></tr><tr><td><strong>Postcondition</strong></td><td>Laporan tergenerate dalam format OJK (XML/JSON) dan tersedia untuk ekspor</td></tr><tr><td><strong>Trigger</strong></td><td>Jadwal pelaporan bulanan OJK atau permintaan manual</td></tr></tbody></table>
+<strong>Jenis Laporan:</strong>
+
+<table class="dark-theme"><thead><tr><th>Laporan</th><th>Standar</th><th>Isi</th><th>Frekuensi</th></tr></thead><tbody><tr><td><strong>LKP</strong> (Laporan Keuangan Periodik)</td><td>SEOJK 14</td><td>Neraca, Laba Rugi, Perubahan Ekuitas, Arus Kas</td><td>Bulanan</td></tr><tr><td><strong>BMPK</strong></td><td>SEOJK 14</td><td>Daftar pemberian kredit per debitur, persentase terhadap modal</td><td>Bulanan</td></tr><tr><td><strong>Kolektibilitas</strong></td><td>SEOJK 14</td><td>Status kolektibilitas per pinjaman (Lancar s.d. Macet), CKPN</td><td>Bulanan</td></tr><tr><td><strong>KPMM</strong></td><td>POJK 12/2018</td><td>Modal sendiri, CKPM, rasio KPMM</td><td>Bulanan</td></tr><tr><td><strong>SHU</strong></td><td>UU 17/2012</td><td>Penggunaan SHU: Cadangan, Pendidikan, Jasa Modal, Jasa Usaha</td><td>Tahunan</td></tr></tbody></table>
+<strong>Alur Utama:</strong>
+<ul><li>Admin membuka modul Laporan → OJK</li>
+<li>Sistem menampilkan daftar laporan yang tersedia dan status periode</li>
+<li>Admin memilih jenis laporan dan periode</li>
+<li>Sistem mengumpulkan data dari tabel-tabel terkait:</li>
+</ul>   - <strong>LKP</strong>: Query COA hierarchical → Neraca, Laba Rugi, Arus Kas
+   - <strong>BMPK</strong>: Query </code>pinjaman<code> → total pemberian per anggota vs Modal Sendiri
+   - <strong>Kolektibilitas</strong>: Query </code>subledger_piutang<code> → status kolektibilitas + CKPN
+   - <strong>KPMM</strong>: Hitung Modal Sendiri, CKPM, rasio KPMM
+<ul><li>Sistem memformat output sesuai skema OJK</li>
+<li>Admin mengunduh laporan dalam format XML/JSON/Excel</li>
+<li>Admin mengirim laporan ke OJK via SFTP/API (manual atau terintegrasi)</li>
+</ul>
+<strong>Alur Alternatif:</strong>
+<ul><li><strong>4a.</strong> Data tidak lengkap → Sistem menampilkan daftar data yang masih kurang</li>
+<li><strong>6a.</strong> Validasi skema gagal → Sistem menampilkan error spesifik</li>
+</ul>
+<strong>Aturan Bisnis:</strong>
+<ul><li>LKP harus disampaikan paling lambat tanggal 20 bulan berikutnya</li>
+<li>BMPK harus menunjukkan tidak ada debitur yang melebihi 20% Modal Sendiri</li>
+<li>Kolektibilitas harus dihitung berdasarkan hari tunggakan aktual</li>
+<li>Seluruh laporan harus tersimpan sebagai arsip digital</li>
+</ul>
+<hr>
+
+<h2>6. Aturan Bisnis Detail</h2>
+
+<h3>6.1 Metode Perhitungan Bunga Pinjaman</h3>
+
+<h4>6.1.1 Metode Flat</h4>
+
+<p>Bunga dihitung dari pokok awal dan tetap (flat) setiap periode.</p>
+
+<p></code>`<code><br>Bunga per Bulan = (Pokok Pinjaman × Suku Bunga per Tahun × 12) / Tenor (bulan)<br>Angsuran per Bulan = (Pokok Pinjaman / Tenor) + Bunga per Bulan<br></code>`<code></p>
+
+<p><strong>Contoh:</strong><br><ul><li>Pokok: Rp 50.000.000</li><br><li>Suku Bunga: 12% per tahun (1% per bulan)</li><br><li>Tenor: 12 bulan</li><br></ul><br></code>`<code><br>Bunga per Bulan = (50.000.000 × 0.12 × 12) / 12 = Rp 500.000<br>Pokok per Bulan = 50.000.000 / 12 = Rp 4.166.667<br>Angsuran per Bulan = 4.166.667 + 500.000 = Rp 4.666.667<br>Total Pembayaran = 4.666.667 × 12 = Rp 56.000.000<br></code>`<code></p>
+
+<h4>6.1.2 Metode Efektif (Sliding Balance)</h4>
+
+<p>Bunga dihitung dari sisa pokok yang masih berjalan (menurun).</p>
+
+<p></code>`<code><br>Bunga Bulan ke-n = Sisa Pokok × Suku Bunga per Bulan<br>Pokok Bulan ke-n = Angsuran Tetap - Bunga Bulan ke-n<br>Sisa Pokok (baru) = Sisa Pokok (lama) - Pokok Bulan ke-n<br></code>`<code></p>
+
+<p><strong>Implementasi (dari <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/server/lib/finance.ts#L19-L52">finance.ts</a>):</strong></p>
+
+<p></code>`<code>typescript<br>// Metode flat: pokok konstan, bunga dari pokok awal<br>if (isFlat) {<br>  bungaBayar = Math.round(pokok * i);<br>  pokokBayar = Math.round(pokok / tenorMonths);<br>}<br>// Metode efektif/anuitas: bunga dari sisa saldo<br>else {<br>  bungaBayar = Math.round(sisa * i);<br>  pokokBayar = Math.round(angsuran - bungaBayar);<br>}<br></code>`<code></p>
+
+<h4>6.1.3 Metode Anuitas</h4>
+
+<p>Angsuran total tetap setiap periode.</p>
+
+<p></code>`<code><br>Angsuran Tetap = Pokok × [r × (1 + r)^n] / [(1 + r)^n - 1]</p>
+
+<p>Keterangan:<br>  r = suku bunga per bulan (desimal)<br>  n = tenor dalam bulan<br></code>`<code></p>
+
+<p><strong>Contoh:</strong><br><ul><li>Pokok: Rp 50.000.000, Bunga: 1% per bulan, Tenor: 12 bulan</li><br></ul><br></code>`<code><br>r = 0.01, n = 12<br>(1.01)^12 = 1.126825<br>Angsuran = 50.000.000 × [0.01 × 1.126825] / [1.126825 - 1]<br>         = 50.000.000 × 0.011268 / 0.126825<br>         = Rp 4.434.972 per bulan<br></code>`<code></p>
+
+<h3>6.2 Bunga Simpanan</h3>
+
+<table class="dark-theme"><thead><tr><th>Jenis Simpanan</th><th>Suku Bunga</th><th>Metode Hitung</th><th>Keterangan</th></tr></thead><tbody><tr><td><strong>Simpanan Pokok</strong></td><td>0%</td><td>Tidak ada bunga</td><td>Modal keanggotaan, tidak dikenakan bunga</td></tr><tr><td><strong>Simpanan Wajib</strong></td><td>2% per tahun</td><td>Bulanan</td><td>Dihitung dari saldo rata-rata bulanan, dibagikan per bulan</td></tr><tr><td><strong>Simpanan Sukarela</strong></td><td>4% per tahun</td><td>Daily Balance</td><td>Dihitung dari saldo harian (daily balance), akumulasi bulanan</td></tr><tr><td><strong>Deposito</strong></td><td>6% per tahun</td><td>Fixed Rate</td><td>Bunga tetap sesuai tenor, dibayarkan saat jatuh tempo atau per bulan</td></tr></tbody></table>
+<strong>Rumus Daily Balance (Simpanan Sukarela):</strong>
+
+<p></code>`<code><br>Bunga Bulanan = Σ (Saldo Harian × Rate per Hari × 1 Hari) / 1<br>             = Rate per Hari × Σ Saldo Harian</p>
+
+<p>Keterangan:<br>  Rate per Hari = 4% / 365 = 0.010959% per hari<br>  Σ Saldo Harian = total saldo semua hari dalam bulan tersebut<br></code>`<code></p>
+
+<h3>6.3 Denda Tunggakan Angsuran</h3>
+
+<table class="dark-theme"><thead><tr><th>Parameter</th><th>Nilai</th><th>Keterangan</th></tr></thead><tbody><tr><td><strong>Basis Perhitungan</strong></td><td>Pokok tunggakan (bukan total tagihan)</td><td>Sesuai SEOJK</td></tr><tr><td><strong>Rumus</strong></td><td>Pokok Tunggakan × Rate per Hari × Jumlah Hari Terlambat</td><td>Flat (tidak compound)</td></tr><tr><td><strong>Cap Maksimum</strong></td><td>2% dari pokok tunggakan</td><td>Maksimum berdasarkan SEOJK</td></tr><tr><td><strong>Grace Period</strong></td><td>5 hari setelah jatuh tempo</td><td>Tidak dikenakan denda</td></tr><tr><td><strong>Metode</strong></td><td>Flat (bukan compound)</td><td>Bunga denda tidak menumpuk</td></tr></tbody></table>
+</code>`<code>
+Denda = Pokok Tunggakan × (Rate per Tahun / 365) × Hari Terlambat
+Denda = MIN(Denda, Pokok Tunggakan × 2%)
+
+<p>Keterangan:<br>  Hari Terlambat = MAX(0, Tanggal Bayar - Tanggal Jatuh Tempo - Grace Period)<br>  Grace Period = 5 hari<br></code>`<code></p>
+
+<p><strong>Contoh:</strong><br><ul><li>Pokok Tunggakan: Rp 5.000.000</li><br><li>Rate: 18% per tahun (0.0493% per hari)</li><br><li>Hari Terlambat: 15 hari (dikurangi grace period 5 hari = 10 hari efektif)</li><br></ul><br></code>`<code><br>Denda = 5.000.000 × 0.000493 × 10 = Rp 246.500<br>Cap Denda = 5.000.000 × 2% = Rp 100.000<br>Denda Dikenakan = Rp 100.000 (dikarenakan cap)<br></code>`<code></p>
+
+<h3>6.4 Kolektibilitas Pinjaman</h3>
+
+<table class="dark-theme"><thead><tr><th>Klasifikasi</th><th>Hari Tunggakan</th><th>Persentase CKPN</th><th>Keterangan</th></tr></thead><tbody><tr><td><strong>Lancar</strong></td><td>0 – 30 hari</td><td>0.4%</td><td>Pembayaran lancar atau terlambat ≤ 30 hari</td></tr><tr><td><strong>DPK (Diragukan Perlu Klaim)</strong></td><td>31 – 90 hari</td><td>10%</td><td>Terlambat 31-90 hari</td></tr><tr><td><strong>Kurang Lancar</strong></td><td>91 – 120 hari</td><td>50%</td><td>Terlambat 91-120 hari</td></tr><tr><td><strong>Diragukan</strong></td><td>121 – 180 hari</td><td>80%</td><td>Terlambat 121-180 hari</td></tr><tr><td><strong>Macet</strong></td><td>> 180 hari</td><td>100%</td><td>Terlambat lebih dari 180 hari</td></tr></tbody></table>
+<strong>Update Otomatis:</strong>
+<ul><li>Scheduler berjalan setiap pukul 00:05 WIB</li>
+<li>Menghitung hari tunggakan dari </code>angsuran.tanggal_jatuh_tempo<code> vs tanggal hari ini</li>
+<li>Memperbarui </code>subledger_piutang.kolektibilitas<code> dan </code>hari_tunggakan<code></li>
+<li>Menghitung CKPN otomatis: </code>CKPN = Pokok Piutang × Persentase CKPN<code></li>
+</ul>
+<h3>6.5 Batas Maksimum Pemberian Kredit (BMPK)</h3>
+
+<p></code>`<code><br>BMPK per Debitur ≤ 20% × Modal Sendiri Koperasi<br>BMPK per Debitur ≤ 25% × Modal Sendiri (dengan persetujuan RAT)<br></code>`<code></p>
+
+<p><strong>Keterangan:</strong><br><ul><li><strong>Modal Sendiri</strong> = Modal Pokok + Dana Cadangan + SHU Belum Dibagi</li><br><li>Perhitungan dilakukan secara real-time setiap pengajuan pinjaman</li><br><li>Hard-stop di API: sistem menolak otomatis jika melebihi batas</li><br><li>Pengecekan melibatkan seluruh pinjaman aktif (outstanding) per anggota</li><br></ul><br><h3>6.6 Sisa Hasil Usaha (SHU)</h3></p>
+
+<p><strong>Urutan Penggunaan SHU (sesuai Pasal 56 UU 17/2012):</strong></p>
+
+<table class="dark-theme"><thead><tr><th>No</th><th>Alokasi</th><th>Minimum</th><th>Maksimum</th><th>Keterangan</th></tr></thead><tbody><tr><td>1</td><td><strong>Dana Cadangan</strong></td><td>10% dari SHU</td><td>—</td><td>Wajib, tidak bisa dibagikan</td></tr><tr><td>2</td><td><strong>Dana Pendidikan</strong></td><td>—</td><td>5% dari SHU</td><td>Untuk pendidikan anggota dan masyarakat</td></tr><tr><td>3</td><td><strong>Jasa Modal</strong></td><td>—</td><td>—</td><td>Dibagikan berdasarkan simpanan (modal anggota)</td></tr><tr><td>4</td><td><strong>Jasa Usaha</strong></td><td>—</td><td>—</td><td>Dibagikan berdasarkan volume transaksi anggota</td></tr><tr><td>5</td><td><strong>SHU Anggota</strong></td><td>Sisa</td><td>—</td><td>Dibagikan merata atau berdasarkan kebijakan RAT</td></tr></tbody></table>
+<strong>Rumus Perhitungan:</strong>
+
+<p></code>`<code><br>SHU Bersih = Total Pendapatan - Total Beban - Pajak<br>Dana Cadangan = SHU Bersih × 10%<br>Dana Pendidikan = SHU Bersih × 5% (maksimal)<br>Sisa untuk Jasa Modal + Jasa Usaha + SHU Anggota = SHU Bersih - Cadangan - Pendidikan<br></code>`<code></p>
+
+<hr>
+
+<h2>7. Spesifikasi API</h2>
+
+<h3>7.1 Informasi Umum</h3>
+
+<table class="dark-theme"><thead><tr><th>Parameter</th><th>Nilai</th></tr></thead><tbody><tr><td><strong>Base URL</strong></td><td></code>https://metrocoop-app-production.up.railway.app/api<code></td></tr><tr><td><strong>Development URL</strong></td><td></code>http://localhost:3000/api<code></td></tr><tr><td><strong>Content-Type</strong></td><td></code>application/json<code></td></tr><tr><td><strong>Autentikasi</strong></td><td>JWT Bearer Token (header: </code>Authorization: Bearer <token><code>)</td></tr><tr><td><strong>Rate Limit (Global)</strong></td><td>100 request per 15 menit per IP</td></tr><tr><td><strong>Rate Limit (Login)</strong></td><td>10 request per 15 menit per IP</td></tr><tr><td><strong>Rate Limit (Register)</strong></td><td>5 request per jam per IP</td></tr></tbody></table>
+<h3>7.2 Format Request & Response</h3>
+
+<p><strong>Request Format:</strong></p>
+
+<p></code>`<code><br>POST /api/data/anggota<br>Authorization: Bearer eyJhbGciOiJIUzI1NiIs...<br>Content-Type: application/json</p>
+
+<p>{<br>  "nik": "3201234567890123",<br>  "nama": "Budi Santoso",<br>  "noHp": "081234567890"<br>}<br></code>`<code></p>
+
+<p><strong>Response Format — Sukses:</strong></p>
+
+<p></code>`<code>json<br>{<br>  "id": "m8xk2nf5a",<br>  "nik": "3201234567890123",<br>  "nama": "Budi Santoso",<br>  "statusKeanggotaan": "aktif",<br>  "saldoSimpananPokok": 0,<br>  "saldoSimpananWajib": 0,<br>  "saldoSimpananSukarela": 0<br>}<br></code>`<code></p>
+
+<p><strong>Response Format — Error:</strong></p>
+
+<p></code>`<code>json<br>{<br>  "error": "NIK sudah terdaftar"<br>}<br></code>`<code></p>
+
+<h3>7.3 Daftar Endpoint</h3>
+
+<h4>Autentikasi (Public)</h4>
+
+<table class="dark-theme"><thead><tr><th>Method</th><th>Path</th><th>Auth</th><th>Role</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>POST<code></td><td></code>/api/auth/login<code></td><td><span class="cross">❌</span></td><td>Public</td><td>Login pengguna, mengembalikan JWT token</td></tr><tr><td></code>POST<code></td><td></code>/api/auth/register-perusahaan<code></td><td><span class="cross">❌</span></td><td>Public</td><td>Registrasi anggota perusahaan baru</td></tr><tr><td></code>POST<code></td><td></code>/api/auth/hash-password<code></td><td><span class="cross">❌</span></td><td>Public</td><td>Generate hash password (utility)</td></tr></tbody></table>
+<h4>Data — Keanggotaan</h4>
+
+<table class="dark-theme"><thead><tr><th>Method</th><th>Path</th><th>Auth</th><th>Role</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>GET<code></td><td></code>/api/data/anggota<code></td><td><span class="check">✅</span></td><td>All</td><td>Ambil daftar anggota (scoped by role)</td></tr><tr><td></code>POST<code></td><td></code>/api/data/anggota<code></td><td><span class="check">✅</span></td><td>Admin/Operator</td><td>Tambah anggota baru</td></tr><tr><td></code>GET<code></td><td></code>/api/data/pengurus<code></td><td><span class="check">✅</span></td><td>All</td><td>Daftar pengurus</td></tr><tr><td></code>POST<code></td><td></code>/api/data/pengurus<code></td><td><span class="check">✅</span></td><td>Admin</td><td>Tambah pengurus</td></tr><tr><td></code>GET<code></td><td></code>/api/data/karyawan<code></td><td><span class="check">✅</span></td><td>Staff</td><td>Daftar karyawan</td></tr><tr><td></code>GET<code></td><td></code>/api/data/perusahaan<code></td><td><span class="check">✅</span></td><td>All</td><td>Daftar perusahaan</td></tr></tbody></table>
+<h4>Data — Simpanan</h4>
+
+<table class="dark-theme"><thead><tr><th>Method</th><th>Path</th><th>Auth</th><th>Role</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>GET<code></td><td></code>/api/data/jenis-simpanan<code></td><td><span class="check">✅</span></td><td>All</td><td>Daftar jenis simpanan</td></tr><tr><td></code>POST<code></td><td></code>/api/data/simpanan-transaksi<code></td><td><span class="check">✅</span></td><td>Admin/Operator</td><td>Proses setor/tarik simpanan</td></tr><tr><td></code>GET<code></td><td></code>/api/data/permohonan-tarik<code></td><td><span class="check">✅</span></td><td>Staff</td><td>Daftar permohonan penarikan</td></tr><tr><td></code>POST<code></td><td></code>/api/data/bukti-transfer<code></td><td><span class="check">✅</span></td><td>Admin</td><td>Upload bukti transfer</td></tr></tbody></table>
+<h4>Data — Pinjaman</h4>
+
+<table class="dark-theme"><thead><tr><th>Method</th><th>Path</th><th>Auth</th><th>Role</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>GET<code></td><td></code>/api/data/jenis-pinjaman<code></td><td><span class="check">✅</span></td><td>All</td><td>Daftar produk pinjaman</td></tr><tr><td></code>POST<code></td><td></code>/api/data/pinjaman<code></td><td><span class="check">✅</span></td><td>Admin/Operator</td><td>Ajukan pinjaman baru</td></tr><tr><td></code>GET<code></td><td></code>/api/data/angsuran<code></td><td><span class="check">✅</span></td><td>All</td><td>Daftar jadwal angsuran</td></tr><tr><td></code>POST<code></td><td></code>/api/data/angsuran/bayar<code></td><td><span class="check">✅</span></td><td>Admin/Operator</td><td>Proses pembayaran angsuran</td></tr></tbody></table>
+<h4>Data — POS / Toko</h4>
+
+<table class="dark-theme"><thead><tr><th>Method</th><th>Path</th><th>Auth</th><th>Role</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>GET<code></td><td></code>/api/data/barang<code></td><td><span class="check">✅</span></td><td>Staff</td><td>Daftar barang</td></tr><tr><td></code>POST<code></td><td></code>/api/data/penjualan<code></td><td><span class="check">✅</span></td><td>Operator</td><td>Proses penjualan POS</td></tr><tr><td></code>POST<code></td><td></code>/api/data/pembelian<code></td><td><span class="check">✅</span></td><td>Admin</td><td>Proses pembelian dari supplier</td></tr></tbody></table>
+<h4>Data — Akuntansi</h4>
+
+<table class="dark-theme"><thead><tr><th>Method</th><th>Path</th><th>Auth</th><th>Role</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>GET<code></td><td></code>/api/data/jurnal<code></td><td><span class="check">✅</span></td><td>Staff</td><td>Daftar jurnal akuntansi</td></tr><tr><td></code>POST<code></td><td></code>/api/data/jurnal<code></td><td><span class="check">✅</span></td><td>Admin</td><td>Buat jurnal manual</td></tr><tr><td></code>GET<code></td><td></code>/api/data/coa<code></td><td><span class="check">✅</span></td><td>Staff</td><td>Daftar Chart of Accounts</td></tr><tr><td></code>GET<code></td><td></code>/api/data/neraca-saldo<code></td><td><span class="check">✅</span></td><td>Staff</td><td>Neraca saldo per periode</td></tr><tr><td></code>GET<code></td><td></code>/api/data/buku-besar<code></td><td><span class="check">✅</span></td><td>Staff</td><td>Buku besar per akun</td></tr></tbody></table>
+<h4>Data — Unit Usaha Lainnya</h4>
+
+<table class="dark-theme"><thead><tr><th>Method</th><th>Path</th><th>Auth</th><th>Role</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>GET<code></td><td></code>/api/data/ppob-layanan<code></td><td><span class="check">✅</span></td><td>All</td><td>Daftar layanan PPOB</td></tr><tr><td></code>POST<code></td><td></code>/api/data/ppob-transaksi<code></td><td><span class="check">✅</span></td><td>Operator</td><td>Proses transaksi PPOB</td></tr><tr><td></code>GET<code></td><td></code>/api/data/sewa-assets<code></td><td><span class="check">✅</span></td><td>All</td><td>Daftar aset sewa</td></tr><tr><td></code>POST<code></td><td></code>/api/data/sewa-transaksi<code></td><td><span class="check">✅</span></td><td>Admin</td><td>Proses transaksi sewa</td></tr><tr><td></code>GET<code></td><td></code>/api/data/venture-investments<code></td><td><span class="check">✅</span></td><td>Staff</td><td>Daftar investasi ventura</td></tr></tbody></table>
+<h4>AI & Public</h4>
+
+<table class="dark-theme"><thead><tr><th>Method</th><th>Path</th><th>Auth</th><th>Role</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>POST<code></td><td></code>/api/gemini/audit<code></td><td><span class="check">✅</span></td><td>Admin</td><td>Audit risiko investasi via Gemini AI</td></tr><tr><td></code>GET<code></td><td></code>/api/public/landing<code></td><td><span class="cross">❌</span></td><td>Public</td><td>Data landing page (CMS)</td></tr><tr><td></code>GET<code></td><td></code>/api/health<code></td><td><span class="cross">❌</span></td><td>Public</td><td>Health check (Railway)</td></tr></tbody></table>
+<h3>7.4 Contoh Request/Response Lengkap</h3>
+
+<p><strong>Login:</strong></p>
+
+<p></code>`<code>http<br>POST /api/auth/login<br>Content-Type: application/json</p>
+
+<p>{<br>  "username": "admin",<br>  "password": "admin123"<br>}<br></code>`<code></p>
+
+<p></code>`<code>json<br>{<br>  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",<br>  "user": {<br>    "id": "u_admin01",<br>    "username": "admin",<br>    "namaLengkap": "Administrator Utama",<br>    "role": "admin",<br>    "nik": "admin",<br>    "memberId": null,<br>    "isActive": true<br>  }<br>}<br></code>`<code></p>
+
+<p><strong>Proses Setor Simpanan:</strong></p>
+
+<p></code>`<code>http<br>POST /api/data/simpanan-transaksi<br>Authorization: Bearer eyJhbGciOiJIUzI1NiIs...<br>Content-Type: application/json</p>
+
+<p>{<br>  "anggotaId": "m8xk2nf5a",<br>  "jenisSimpananId": "js_wajib",<br>  "tipe": "setor",<br>  "jumlah": 100000,<br>  "keterangan": "Setoran bulanan Juli 2026"<br>}<br></code>`<code></p>
+
+<p></code>`<code>json<br>{<br>  "id": "st_abc123",<br>  "anggotaId": "m8xk2nf5a",<br>  "anggotaNama": "Budi Santoso",<br>  "jenisNama": "Simpanan Wajib",<br>  "tipe": "setor",<br>  "jumlah": 100000,<br>  "keterangan": "Setoran bulanan Juli 2026"<br>}<br></code>`<code></p>
+
+<hr>
+
+<h2>8. Integrasi Eksternal</h2>
+
+<h3>8.1 Google Gemini AI</h3>
+
+<table class="dark-theme"><thead><tr><th>Parameter</th><th>Spesifikasi</th></tr></thead><tbody><tr><td><strong>Model</strong></td><td></code>gemini-2.0-flash<code></td></tr><tr><td><strong>Endpoint</strong></td><td></code>https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent<code></td></tr><tr><td><strong>Autentikasi</strong></td><td>API Key (via </code>GEMINI_API_KEY<code> environment variable)</td></tr><tr><td><strong>Rate Limit</strong></td><td>15 RPM (Requests Per Minute) per API key</td></tr><tr><td><strong>Timeout</strong></td><td>30 detik per request</td></tr><tr><td><strong>Output Format</strong></td><td>JSON (structured output via </code>responseSchema<code>)</td></tr><tr><td><strong>Fallback</strong></td><td>Jika timeout/错误 → error message, admin menggunakan verifikasi manual</td></tr></tbody></table>
+<strong>Penggunaan:</strong>
+<ul><li><strong>AI Credit Scoring</strong> — Analisis 5C untuk pengajuan pinjaman (UC-09)</li>
+<li><strong>AI Audit Investasi</strong> — Audit risiko investasi ventura</li>
+</ul>
+<strong>Contoh Integrasi (dari <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/server.ts#L108-L175">server.ts</a>):</strong>
+
+<p></code>`<code>typescript<br>const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });</p>
+
+<p>const response = await ai.models.generateContent({<br>  model: "gemini-2.0-flash",<br>  contents: prompt,<br>  config: {<br>    systemInstruction: "Anda adalah auditor koperasi senior...",<br>    responseMimeType: "application/json",<br>    responseSchema: { /<em> structured schema </em>/ }<br>  }<br>});<br></code>`<code></p>
+
+<h3>8.2 Payment Gateway</h3>
+
+<table class="dark-theme"><thead><tr><th>Provider</th><th>Fungsi</th><th>Endpoint</th><th>Status</th></tr></thead><tbody><tr><td><strong>Midtrans</strong></td><td>Virtual Account, QRIS, E-Wallet</td><td></code>https://api.midtrans.com/v2/charge<code></td><td>Direncanakan</td></tr><tr><td><strong>Xendit</strong></td><td>VA, Invoice, E-Wallet</td><td></code>https://api.xendit.co/v2/invoices<code></td><td>Direncanakan</td></tr><tr><td><strong>Digiflazz</strong></td><td>PPOB (pulsa, listrik, PDAM)</td><td></code>https://api.digiflazz.com/v1/transaction<code></td><td>Direncanakan</td></tr></tbody></table>
+<strong>Alur Integrasi Payment Gateway:</strong>
+
+<p></code>`<code><br>Anggota/Operator → Sistem MetroCoop → Payment Gateway API → Bank/E-Wallet<br>                                                    ↓<br>Sistem MetroCoop ← Webhook/Callback ← Payment Gateway<br>                                                    ↓<br>                         Update Status Transaksi + Jurnal Otomatis<br></code>`<code></p>
+
+<h3>8.3 WhatsApp Business API</h3>
+
+<table class="dark-theme"><thead><tr><th>Parameter</th><th>Spesifikasi</th></tr></thead><tbody><tr><td><strong>Provider</strong></td><td>Meta Cloud API / BSSP (Business Solution Service Provider)</td></tr><tr><td><strong>Endpoint</strong></td><td></code>https://graph.facebook.com/v18.0/<PHONE_ID>/messages<code></td></tr><tr><td><strong>Autentikasi</strong></td><td>Bearer Token (via environment variable)</td></tr><tr><td><strong>Template Messages</strong></td><td>Notifikasi angsuran, pengumuman, promo</td></tr></tbody></table>
+<strong>Template Notifikasi:</strong>
+
+<table class="dark-theme"><thead><tr><th>Template</th><th>Kegunaan</th><th>Isi</th></tr></thead><tbody><tr><td></code>angsuran_reminder<code></td><td>Pengingat jatuh tempo</td><td>"Yth. {nama}, angsuran ke-{ke} sebesar Rp {total} jatuh tempo pada {tanggal}. Mohon lakukan pembayaran."</td></tr><tr><td></code>setoran_berhasil<code></td><td>Konfirmasi setoran</td><td>"Setoran Rp {jumlah} ke {jenis} berhasil. Saldo terkini: Rp {saldo}."</td></tr><tr><td></code>pinjaman_disetujui<code></td><td>Notifikasi pencairan</td><td>"Pinjaman Anda sebesar Rp {pokok} telah disetujui dan dicairkan."</td></tr><tr><td></code>pengumuman_umum<code></td><td>Broadcast pengumuman</td><td>"{judul}: {isi_pesan}"</td></tr></tbody></table>
+<h3>8.4 Email SMTP</h3>
+
+<table class="dark-theme"><thead><tr><th>Parameter</th><th>Spesifikasi</th></tr></thead><tbody><tr><td><strong>Protocol</strong></td><td>SMTP (TLS)</td></tr><tr><td><strong>Provider</strong></td><td>Resend / SendGrid / Mailgun (konfigurable)</td></tr><tr><td><strong>Port</strong></td><td>587 (STARTTLS) atau 465 (TLS)</td></tr><tr><td><strong>From</strong></td><td></code>noreply@metrocoop.id<code></td></tr><tr><td><strong>Kegunaan</strong></td><td>Laporan bulanan, bukti transaksi, reset password</td></tr></tbody></table>
+<hr>
+
+<h2>9. Keamanan Sistem</h2>
+
+<h3>9.1 Autentikasi</h3>
+
+<table class="dark-theme"><thead><tr><th>Parameter</th><th>Spesifikasi</th></tr></thead><tbody><tr><td><strong>Metode</strong></td><td>JWT (JSON Web Token)</td></tr><tr><td><strong>Algoritma</strong></td><td>HS256</td></tr><tr><td><strong>Masa Berlaku Token</strong></td><td>24 jam</td></tr><tr><td><strong>Password Hashing</strong></td><td>bcrypt, cost factor 10</td></tr><tr><td><strong>Password Minimum</strong></td><td>6 karakter</td></tr></tbody></table>
+<strong>Alur Autentikasi:</strong>
+
+<p></code>`<code><br><ul><li>User mengirim username + password → POST /api/auth/login</li><br><li>Sistem mengecek ke tabel users</li><br><li>Sistem memverifikasi password dengan bcrypt.compare()</li><br><li>Jika valid → generate JWT dengan payload {id, username, role, memberId}</li><br><li>JWT dikembalikan ke client</li><br><li>Client menyimpan JWT dan mengirimkan di setiap request via Authorization header</li><br><li>Middleware memverifikasi JWT → decode payload → set req.user</li><br></ul></code>`<code></p>
+
+<h3>9.2 Role-Based Access Control (RBAC)</h3>
+
+<table class="dark-theme"><thead><tr><th>Resource</th><th>superadmin</th><th>admin</th><th>operator</th><th>anggota</th><th>anggota_perusahaan</th></tr></thead><tbody><tr><td><strong>Dashboard Admin</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Kelola Anggota</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Simpanan (CRUD)</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Pinjaman (CRUD)</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Angsuran (Bayar)</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>POS / Toko</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Jurnal Akuntansi</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>COA Management</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Laporan Keuangan</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Laporan OJK</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Pengaturan Sistem</strong></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Feature Toggle</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr><tr><td><strong>Portal Anggota</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td></tr><tr><td><strong>Lihat Data Sendiri</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td></tr><tr><td><strong>Lihat Semua Data</strong></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="check">✅</span></td><td><span class="cross">❌</span></td><td><span class="cross">❌</span></td></tr></tbody></table>
+<strong>Implementasi (dari <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/server/middleware.ts#L39-L43">middleware.ts</a> dan <a href="file:///c:/Users/ASUS%20NUC/Desktop/Project%20Aplikasi/MetroCoop/server/routes/data.ts#L22-L41">data.ts</a>):</strong>
+
+<p></code>`<code>typescript<br>// Data scoping: staff lihat semua, anggota hanya lihat data sendiri<br>const STAFF_ROLES = ['admin', 'superadmin', 'operator'];</p>
+
+<p>function scopeMemberId(req: AuthRequest): string | null {<br>  if (isStaff(req)) return null; // lihat semua<br>  return req.user?.memberId ?? req.user?.id;<br>}<br></code>`<code></p>
+
+<h3>9.3 Security Headers (Helmet)</h3>
+
+<table class="dark-theme"><thead><tr><th>Header</th><th>Nilai</th><th>Fungsi</th></tr></thead><tbody><tr><td></code>Content-Security-Policy<code></td><td></code>default-src 'self'; script-src 'self' 'unsafe-inline'<code></td><td>Mencegah XSS</td></tr><tr><td></code>X-Frame-Options<code></td><td></code>DENY<code></td><td>Mencegah Clickjacking</td></tr><tr><td></code>X-Content-Type-Options<code></td><td></code>nosniff<code></td><td>Mencegah MIME sniffing</td></tr><tr><td></code>Strict-Transport-Security<code></td><td></code>max-age=31536000; includeSubDomains<code></td><td>Paksa HTTPS (HSTS)</td></tr><tr><td></code>X-XSS-Protection<code></td><td></code>1; mode=block<code></td><td>Filter XSS (legacy browser)</td></tr><tr><td></code>Referrer-Policy<code></td><td></code>no-referrer<code></td><td>Kontrol informasi referrer</td></tr><tr><td></code>Permissions-Policies<code></td><td></code>camera=(), microphone=()<code></td><td>Disable fitur browser sensitif</td></tr></tbody></table>
+<h3>9.4 Perlindungan Data</h3>
+
+<table class="dark-theme"><thead><tr><th>Aspek</th><th>Implementasi</th><th>Standar</th></tr></thead><tbody><tr><td><strong>Data at Rest</strong></td><td>AES-256 encryption pada PostgreSQL (pgcrypto)</td><td>ISO 27001</td></tr><tr><td><strong>Data in Transit</strong></td><td>TLS 1.3 (enforced oleh Railway)</td><td>UU PDP Ps.14</td></tr><tr><td><strong>Password</strong></td><td>bcrypt hash, cost factor 10, tidak reversible</td><td>OWASP</td></tr><tr><td><strong>JWT Secret</strong></td><td>Min. 32 bytes random, disimpan di environment variable</td><td>—</td></tr><tr><td><strong>Audit Trail</strong></td><td>Semua transaksi keuangan & perubahan master data tercatat</td><td>SAK ETAP, UU PDP Ps.15</td></tr><tr><td><strong>Data Masking</strong></td><td>NIK, No HP, No Rekening ditampilkan parsial di UI</td><td>UU PDP</td></tr><tr><td><strong>Input Validation</strong></td><td>Zod schema validation di setiap endpoint</td><td>OWASP</td></tr></tbody></table>
+<h3>9.5 Rate Limiting</h3>
+
+<table class="dark-theme"><thead><tr><th>Endpoint</th><th>Batas</th><th>Window</th><th>Pesan Error</th></tr></thead><tbody><tr><td>Global (semua API)</td><td>100 request</td><td>15 menit</td><td>"Terlalu banyak request. Silakan coba lagi."</td></tr><tr><td></code>POST /api/auth/login<code></td><td>10 request</td><td>15 menit</td><td>"Terlalu banyak percobaan login. Silakan coba lagi dalam 15 menit."</td></tr><tr><td></code>POST /api/auth/register-perusahaan<code></td><td>5 request</td><td>1 jam</td><td>"Terlalu banyak percobaan registrasi. Silakan coba lagi dalam 1 jam."</td></tr></tbody></table>
+<hr>
+
+<h2>10. Performa & Skalabilitas</h2>
+
+<h3>10.1 Target Performa</h3>
+
+<table class="dark-theme"><thead><tr><th>Metrik</th><th>Target</th><th>Measurement</th></tr></thead><tbody><tr><td><strong>API Response Time (p95)</strong></td><td>< 500 ms</td><td>Percentile ke-95 dari semua API response</td></tr><tr><td><strong>First Contentful Paint (FCP)</strong></td><td>< 1.5 detik</td><td>Lighthouse / Core Web Vitals</td></tr><tr><td><strong>Largest Contentful Paint (LCP)</strong></td><td>< 2.5 detik</td><td>Lighthouse / Core Web Vitals</td></tr><tr><td><strong>Cumulative Layout Shift (CLS)</strong></td><td>< 0.1</td><td>Lighthouse / Core Web Vitals</td></tr><tr><td><strong>Interaction to Next Paint (INP)</strong></td><td>< 200 ms</td><td>Lighthouse / Core Web Vitals</td></tr><tr><td><strong>Uptime</strong></td><td>> 99.9%</td><td>Monthly SLA monitoring</td></tr><tr><td><strong>Concurrent Users</strong></td><td>500+</td><td>Tanpa degradasi performa signifikan</td></tr><tr><td><strong>Database Query</strong></td><td>< 100 ms (p95)</td><td>Rata-rata waktu eksekusi query</td></tr></tbody></table>
+<h3>10.2 Teknik Optimasi</h3>
+
+<h4>Frontend</h4>
+
+<table class="dark-theme"><thead><tr><th>Teknik</th><th>Implementasi</th><th>Dampak</th></tr></thead><tbody><tr><td><strong>Code Splitting</strong></td><td>React lazy + Suspense per route</td><td>Mengurangi initial bundle size</td></tr><tr><td><strong>Asset Optimization</strong></td><td>Vite build dengan tree-shaking, minification</td><td>Mengurangi ukuran JS/CSS</td></tr><tr><td><strong>Image Optimization</strong></td><td>Lazy loading, WebP format</td><td>Mengurangi bandwidth</td></tr><tr><td><strong>Caching</strong></td><td>Service Worker (PWA), HTTP cache headers</td><td>Mengurangi request berulang</td></tr><tr><td><strong>Bundle Analysis</strong></td><td></code>rollup-plugin-visualalyzer<code></td><td>Identifikasi dependency besar</td></tr></tbody></table>
+<h4>Backend</h4>
+
+<table class="dark-theme"><thead><tr><th>Teknik</th><th>Implementasi</th><th>Dampak</th></tr></thead><tbody><tr><td><strong>Connection Pooling</strong></td><td></code>pg.Pool<code> dengan max connections</td><td>Mengurangi overhead koneksi DB</td></tr><tr><td><strong>Database Indexing</strong></td><td>Index pada kolom yang sering di-query</td><td>Mempercepat query SELECT</td></tr><tr><td><strong>Pagination</strong></td><td>Limit + Offset pada setiap list endpoint</td><td>Mengurangi payload data</td></tr><tr><td><strong>Materialized Views</strong></td><td>Neraca Saldo, Buku Besar, Laporan bulanan</td><td>Query laporan lebih cepat</td></tr><tr><td><strong>JSONB</strong></td><td>Jurnal details, items penjualan</td><td>Query fleksibel tanpa JOIN</td></tr><tr><td><strong>Keep-Alive</strong></td><td>HTTP keep-alive pada connection pool</td><td>Mengurangi latency</td></tr></tbody></table>
+<h3>10.3 Database Index Kritis</h3>
+
+<p></code>`<code>sql<br>-- Keanggotaan<br>CREATE INDEX idx_anggota_nik ON anggota(nik);<br>CREATE INDEX idx_anggota_status ON anggota(status_keanggotaan);<br>CREATE INDEX idx_users_username ON users(username);<br>CREATE INDEX idx_users_member_id ON users(member_id);<br>CREATE INDEX idx_users_role ON users(role);</p>
+
+<p>-- Simpanan<br>CREATE INDEX idx_simpanan_transaksi_anggota ON simpanan_transaksi(anggota_id);<br>CREATE INDEX idx_simpanan_transaksi_tanggal ON simpanan_transaksi(tanggal);<br>CREATE INDEX idx_simpanan_transaksi_jenis ON simpanan_transaksi(jenis_simpanan_id);</p>
+
+<p>-- Pinjaman & Angsuran<br>CREATE INDEX idx_pinjaman_anggota ON pinjaman(anggota_id);<br>CREATE INDEX idx_pinjaman_status ON pinjaman(status);<br>CREATE INDEX idx_angsuran_pinjaman ON angsuran(pinjaman_id);<br>CREATE INDEX idx_angsuran_status ON angsuran(status);<br>CREATE INDEX idx_angsuran_jatuh_tempo ON angsuran(tanggal_jatuh_tempo);</p>
+
+<p>-- Jurnal Akuntansi<br>CREATE INDEX idx_journal_entries_tanggal ON journal_entries(tanggal);<br>CREATE INDEX idx_journal_entries_sumber ON journal_entries(sumber);<br>CREATE INDEX idx_journal_entries_no_jurnal ON journal_entries(no_jurnal);<br>CREATE INDEX idx_journal_entries_details_gin ON journal_entries USING GIN (details);</p>
+
+<p>-- COA<br>CREATE INDEX idx_coa_kode ON chart_of_accounts(kode_akun);<br>CREATE INDEX idx_coa_kategori ON chart_of_accounts(kategori);<br>CREATE INDEX idx_coa_parent ON chart_of_accounts(parent_id);</p>
+
+<p>-- POS / Toko<br>CREATE INDEX idx_barang_kategori ON barang(kategori_id);<br>CREATE INDEX idx_barang_supplier ON barang(supplier_id);<br>CREATE INDEX idx_penjualan_tanggal ON penjualan(tanggal);</p>
+
+<p>-- Subledger Piutang<br>CREATE INDEX idx_subledger_piutang_anggota ON subledger_piutang(anggota_id);<br>CREATE INDEX idx_subledger_piutang_kolektibilitas ON subledger_piutang(kolektibilitas);</p>
+
+<p>-- Periode Akuntansi<br>CREATE INDEX idx_accounting_periods_tahun_bulan ON accounting_periods(tahun, bulan);<br></code>`<code></p>
+
+<hr>
+
+<h2>11. Kriteria Penerimaan</h2>
+
+<h3>11.1 Kriteria Penerimaan Fungsional</h3>
+
+<table class="dark-theme"><thead><tr><th>ID</th><th>Kriteria</th><th>Verifikasi</th></tr></thead><tbody><tr><td><strong>FA-01</strong></td><td>Registrasi anggota baru berhasil dengan validasi NIK unik 16 digit</td><td>UAT: Daftar 5 anggota dengan NIK berbeda</td></tr><tr><td><strong>FA-02</strong></td><td>Transaksi simpanan (setor & tarik) menghasilkan jurnal balanced</td><td>UAT: Setor Rp 100.000, cek jurnal Debit = Kredit</td></tr><tr><td><strong>FA-03</strong></td><td>Pinjaman dengan 3 metode bunga (flat, efektif, anuitas) menghitung angsuran dengan benar</td><td>UAT: Input Rp 50 juta, 12 bulan, 12%/tahun, verifikasi jadwal</td></tr><tr><td><strong>FA-04</strong></td><td>Pembayaran angsuran mengurangi sisa pokok dan menghasilkan jurnal otomatis</td><td>UAT: Bayar angsuran ke-1, cek sisa pokok & jurnal</td></tr><tr><td><strong>FA-05</strong></td><td>Transaksi POS mengurangi stok dan menghitung HPP</td><td>UAT: Jual 3 barang, cek stok berkurang & jurnal HPP</td></tr><tr><td><strong>FA-06</strong></td><td>Jurnal akuntansi otomatis dari setiap modul transaksi seimbang</td><td>UAT: Eksekusi 10 transaksi berbeda, validasi neraca saldo = 0</td></tr><tr><td><strong>FA-07</strong></td><td>Tutup buku periode menghasilkan SHU yang benar sesuai formula</td><td>UAT: Tutup buku bulan, verifikasi alokasi SHU</td></tr><tr><td><strong>FA-08</strong></td><td>AI Credit Scoring menghasilkan skor 0-100 dengan rekomendasi</td><td>UAT: Jalankan scoring pada 10 sample pengajuan</td></tr><tr><td><strong>FA-09</strong></td><td>Laporan OJK (LKP, BMPK, Kolektibilitas) bisa diekspor dalam format yang valid</td><td>UAT: Generate laporan, validasi format</td></tr><tr><td><strong>FA-10</strong></td><td>Portal anggota hanya menampilkan data milik anggota yang bersangkutan</td><td>UAT: Login 2 anggota berbeda, cek data isolation</td></tr></tbody></table>
+<h3>11.2 Kriteria Penerimaan Non-Fungsional</h3>
+
+<table class="dark-theme"><thead><tr><th>ID</th><th>Kriteria</th><th>Target</th><th>Verifikasi</th></tr></thead><tbody><tr><td><strong>NFA-01</strong></td><td>API response time p95 < 500 ms</td><td>< 500 ms</td><td>Load test dengan k6 / Artillery (500 concurrent)</td></tr><tr><td><strong>NFA-02</strong></td><td>Lighthouse Performance Score ≥ 90</td><td>≥ 90</td><td>Lighthouse audit di Chrome DevTools</td></tr><tr><td><strong>NFA-03</strong></td><td>Uptime 99.9% selama 30 hari pasca go-live</td><td>99.9%</td><td>Railway monitoring dashboard</td></tr><tr><td><strong>NFA-04</strong></td><td>Zero Critical/High vulnerability dari penetration test</td><td>0</td><td>Penetration test oleh pihak ketiga</td></tr><tr><td><strong>NFA-05</strong></td><td>Backup dan restore berhasil dalam RTO < 4 jam</td><td>< 4 jam</td><td>Disaster recovery test quarterly</td></tr></tbody></table>
+<h3>11.3 Kriteria Penerimaan Kepatuhan</h3>
+
+<table class="dark-theme"><thead><tr><th>ID</th><th>Kriteria</th><th>Referensi</th><th>Verifikasi</th></tr></thead><tbody><tr><td><strong>CA-01</strong></td><td>Jurnal double entry seimbang untuk 100% transaksi</td><td>SAK ETAP</td><td>Audit neraca saldo selalu = 0</td></tr><tr><td><strong>CA-02</strong></td><td>BMPK per debitur tidak melebihi 20% Modal Sendiri</td><td>POJK 12/2018 Ps.14</td><td>Hard-stop di API, test dengan data</td></tr><tr><td><strong>CA-03</strong></td><td>Kolektibilitas dihitung otomatis sesuai ketentuan SEOJK</td><td>SEOJK 14</td><td>Verifikasi scheduler update harian</td></tr><tr><td><strong>CA-04</strong></td><td>Audit trail lengkap untuk 100% transaksi keuangan</td><td>UU PDP Ps.15</td><td>Query log untuk setiap transaksi</td></tr></tbody></table>
+<hr>
+
+<h2>12. Lampiran</h2>
+
+<h3>12.1 Environment Variables</h3>
+
+<table class="dark-theme"><thead><tr><th>Variable</th><th>Required</th><th>Default</th><th>Deskripsi</th></tr></thead><tbody><tr><td></code>PORT<code></td><td><span class="check">✅</span></td><td></code>3000<code></td><td>Port server Express</td></tr><tr><td></code>NODE_ENV<code></td><td><span class="check">✅</span></td><td></code>development<code></td><td>Mode: </code>development<code> / </code>production<code></td></tr><tr><td></code>JWT_SECRET<code></td><td><span class="check">✅</span></td><td>—</td><td>Secret key untuk signing JWT (min 32 bytes)</td></tr><tr><td></code>DB_HOST<code></td><td><span class="check">✅</span></td><td></code>localhost<code></td><td>Host PostgreSQL</td></tr><tr><td></code>DB_PORT<code></td><td><span class="check">✅</span></td><td></code>5432<code></td><td>Port PostgreSQL</td></tr><tr><td></code>DB_NAME<code></td><td><span class="check">✅</span></td><td></code>metromitra<code></td><td>Nama database</td></tr><tr><td></code>DB_USER<code></td><td><span class="check">✅</span></td><td></code>postgres<code></td><td>Username database</td></tr><tr><td></code>DB_PASS<code></td><td><span class="check">✅</span></td><td></code>postgres<code></td><td>Password database</td></tr><tr><td></code>DATABASE_URL<code></td><td><span class="cross">❌</span></td><td>—</td><td>Connection string alternatif (overrides DB_*)</td></tr><tr><td></code>GEMINI_API_KEY<code></td><td><span class="cross">❌</span></td><td></code>""<code></td><td>API Key Google Gemini untuk AI features</td></tr><tr><td></code>CORS_ORIGIN<code></td><td><span class="cross">❌</span></td><td></code>""<code></td><td>Domain yang diizinkan CORS (comma-separated)</td></tr><tr><td></code>APP_URL<code></td><td><span class="cross">❌</span></td><td></code>http://localhost:3000<code></td><td>Base URL aplikasi</td></tr><tr><td></code>E2E_LOGIN_UNLIMITED<code></td><td><span class="cross">❌</span></td><td>—</td><td>Set </code>1` untuk bypass rate limit di CI/E2E</td></tr></tbody></table>
+<h3>12.2 COA Standar KSP</h3>
+
+<table class="dark-theme"><thead><tr><th>Kode Akun</th><th>Nama Akun</th><th>Kategori</th><th>Saldo Normal</th><th>Sub Kategori</th></tr></thead><tbody><tr><td><strong>1101</strong></td><td>Kas</td><td>ASET</td><td>Debit</td><td>Kas dan Bank</td></tr><tr><td><strong>1102</strong></td><td>Bank</td><td>ASET</td><td>Debit</td><td>Kas dan Bank</td></tr><tr><td><strong>1111</strong></td><td>Piutang Pokok Pinjaman</td><td>ASET</td><td>Debit</td><td>Piutang</td></tr><tr><td><strong>1201</strong></td><td>Persediaan Barang</td><td>ASET</td><td>Debit</td><td>Persediaan</td></tr><tr><td><strong>1301</strong></td><td>Akumulasi Penyusutan</td><td>ASET</td><td>Kredit</td><td>Tetap</td></tr><tr><td><strong>1401</strong></td><td>Cadangan Kerugian Penurunan Nilai (CKPN)</td><td>ASET</td><td>Kredit</td><td>Penurunan Nilai</td></tr><tr><td><strong>2101</strong></td><td>Simpanan Pokok</td><td>KEWAJIBAN</td><td>Kredit</td><td>Simpanan Anggota</td></tr><tr><td><strong>2102</strong></td><td>Simpanan Wajib</td><td>KEWAJIBAN</td><td>Kredit</td><td>Simpanan Anggota</td></tr><tr><td><strong>2103</strong></td><td>Simpanan Sukarela</td><td>KEWAJIBAN</td><td>Kredit</td><td>Simpanan Anggota</td></tr><tr><td><strong>2104</strong></td><td>Deposito</td><td>KEWAJIBAN</td><td>Kredit</td><td>Simpanan Anggota</td></tr><tr><td><strong>2201</strong></td><td>Hutang Dagang</td><td>KEWAJIBAN</td><td>Kredit</td><td>Hutang</td></tr><tr><td><strong>3101</strong></td><td>Modal Pokok</td><td>EKUITAS</td><td>Kredit</td><td>Modal</td></tr><tr><td><strong>3102</strong></td><td>Dana Cadangan</td><td>EKUITAS</td><td>Kredit</td><td>Cadangan</td></tr><tr><td><strong>3103</strong></td><td>SHU Belum Dibagi</td><td>EKUITAS</td><td>Kredit</td><td>SHU</td></tr><tr><td><strong>4101</strong></td><td>Pendapatan Bunga Pinjaman</td><td>PENDAPATAN</td><td>Kredit</td><td>Pendapatan Usaha</td></tr><tr><td><strong>4201</strong></td><td>Pendapatan Penjualan</td><td>PENDAPATAN</td><td>Kredit</td><td>Pendapatan Unit Usaha</td></tr><tr><td><strong>4301</strong></td><td>Pendapatan Sewa</td><td>PENDAPATAN</td><td>Kredit</td><td>Pendapatan Unit Usaha</td></tr><tr><td><strong>4401</strong></td><td>Pendapatan Biaya Admin</td><td>PENDAPATAN</td><td>Kredit</td><td>Pendapatan Usaha</td></tr><tr><td><strong>5101</strong></td><td>Harga Pokok Penjualan</td><td>BEBAN</td><td>Debit</td><td>Beban Usaha</td></tr><tr><td><strong>5201</strong></td><td>Beban Gaji</td><td>BEBAN</td><td>Debit</td><td>Beban Operasional</td></tr><tr><td><strong>5301</strong></td><td>Beban Penyusutan</td><td>BEBAN</td><td>Debit</td><td>Beban Operasional</td></tr><tr><td><strong>5401</strong></td><td>Beban CKPN</td><td>BEBAN</td><td>Debit</td><td>Beban Kerugian</td></tr><tr><td><strong>6101</strong></td><td>Ikhtisar Laba Rugi (Pendapatan)</td><td>SHU</td><td>Kredit</td><td>Penutup</td></tr><tr><td><strong>6201</strong></td><td>Ikhtisar Laba Rugi (Beban)</td><td>SHU</td><td>Debit</td><td>Penutup</td></tr></tbody></table>
+<hr>
+
+<h2>13. Persetujuan Dokumen</h2>
+
+<p>Dokumen ini telah ditinjau dan disetujui oleh seluruh stakeholder proyek MetroCoop.</p>
+
+<table class="dark-theme"><thead><tr><th>Peran</th><th>Nama</th><th>Tanda Tangan</th><th>Tanggal</th></tr></thead><tbody><tr><td><strong>Project Manager</strong></td><td></td><td></td><td></td></tr><tr><td><strong>Tech Lead</strong></td><td></td><td></td><td></td></tr><tr><td><strong>Business Analyst</strong></td><td></td><td></td><td></td></tr><tr><td><strong>QA Lead</strong></td><td></td><td></td><td></td></tr><tr><td><strong>Client Representative</strong></td><td></td><td></td><td></td></tr></tbody></table>
+<hr>
+
+<table class="dark-theme"><thead><tr><th>Versi</th><th>Tanggal</th><th>Perubahan</th><th>Oleh</th></tr></thead><tbody><tr><td>1.0.0</td><td>16 Juli 2026</td><td>Rilis awal</td><td>Tim Pengembangan MetroCoop</td></tr></tbody></table>
+<hr>
+
+<p><em>Dokumen ini bersifat rahasia dan hanya boleh didistribusikan kepada pihak yang berkepentingan. Setiap perubahan harus melalui proses Change Request formal.</em></p>
+    </div>
+  </main>
+</body>
+</html>

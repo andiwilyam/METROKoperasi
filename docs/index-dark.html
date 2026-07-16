@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MetroCoop — Dark Theme Documentation Suite</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Dark Theme Colors - Wallpaper Inspired */
+  --primary: #bfdbfe;           /* Sky blue - bright but soft */
+  --primary-light: #93c5fd;     /* Sky blue light */
+  --primary-dark: #1e40af;      /* Dark blue */
+  --accent: #06b6d4;            /* Cyan accent */
+  --bg: #0a0c14;                /* Very dark blue - wallpaper */
+  --bg-alt: #111827;            /* Slightly lighter dark */
+  --bg-code: #151821;           /* Dark code background */
+  --text: #e5e7eb;              /* Off white */
+  --text-muted: #a5b4fc;        /* Muted blue */
+  --text-caption: #93c5fd;      /* Closed captions text */
+  --border: #374151;            /* Dark border */
+  --shadow: 0 4px 12px rgba(20, 20, 40, 0.4); /* Enhanced shadow */
+  --sidebar-w: 280px;
+}
+
+/* Ensure dark mode is default - override light mode variables */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  background-image: 
+    linear-gradient(135deg, rgba(3, 7, 18, 0.9) 0%, rgba(17, 24, 39, 0.95) 100%),
+    radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+  background-attachment: fixed;
+  display: flex;
+}
+
+/* Closed Captions Panel (Top Banner) */
+.closed-captions-panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: rgba(20, 28, 50, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 12px;
+  color: var(--text-caption);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.closed-captions-panel .cc-icon {
+  margin-right: 8px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.closed-ca examples {
+  display: inline-flex;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.closed-captions-panel .cc-example {
+  padding: 4px 10px;
+  border-radius: 4px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--text-caption);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 40px; /* Leave space for closed captions panel */
+  left: 0;
+  width: var(--sidebar-w);
+  height: calc(100vh - 40px);
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.3);
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.sidebar-brand small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(59, 130, 246, 0.15);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+
+.sidebar-nav a.active {
+  background: rgba(59, 130, 246, 0.25);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+
+/* Main content - adjusted for closed captions */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+  margin-top: 40px;
+}
+
+.content-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px;
+}
+
+/* Typography with improved contrast */
+h1 {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary-light);
+  margin: 0 0 12px;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 48px 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--primary-dark);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+h4 { font-size: 16px; font-weight: 600; color: var(--primary-light); margin: 24px 0 8px; }
+h5 { font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 20px 0 6px; text-transform: uppercase; }
+p { margin: 0 0 12px; color: var(--text); line-height: 1.8; }
+strong { font-weight: 600; color: #fff; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; color: #fff; }
+
+/* Tables with better contrast */
+table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 13px; }
+th { background: var(--primary-dark); color: #fff; font-weight: 600; padding: 12px 14px; }
+td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; background: var(--bg-alt); }
+tr:hover td { background: rgba(59, 130, 246, 0.15); }
+
+/* Code blocks with better visibility */
+code { background: var(--bg-code); color: var(--accent); }
+pre {
+  background: #0a0e17;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Emphasizing important information with background */
+.important-note {
+  background: rgba(251, 146, 60, 0.15);
+  border-left: 4px solid #fb923c;
+  padding: 16px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: #fff;
+}
+
+/* Enhanced scrollbars */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--primary-dark);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Print styles optimized for dark theme */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  body { background-image: none; background-color: white; }
+  h1, h2, h3 { color: black; }
+  * { color: black !important; background: white !important; border-color: #ddd !important; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 240px; }
+  .content-inner { padding: 32px; }
+}
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar { position: relative; width: 100%; height: auto; }
+  .content { margin-left: 0; margin-top: 40px; }
+  .closed-captions-panel { position: relative; height: auto; }
+  .content-inner { padding: 24px 16px; }
+}
+</style>
+</head>
+<body>
+  <div class="closed-captions-panel">
+    <span class="cc-icon">🔊</span>
+    Penjelasan: Dokumentasi MetroCoop hadir dalam tema gelap dengan wallpaper cyberpunk, UI/UX yang ditingkatkan, dan panduan yang terstruktur rapi.
+    <div class="examples">
+      <span class="cc-example">🖥️ Tema Gelap</span>
+      <span class="cc-example">🖼️ Wallpaper Kustom</span>
+      <span class="cc-example">📚 Navigasi Rapi</span>
+      <span class="cc-example">🎨 UI/UX yang Ditingkatkan</span>
+    </div>
+  </div>
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h2>MetroCoop</h2>
+      <small>Documentation Suite - Dark Theme</small>
+    </div>
+    <div class="sidebar-nav">
+      <a href="01-proposal-proposal-teknis-komersial-dark.html" class="active">
+        <span class="num">1</span>
+        Proposal Teknis & Komersial
+      </a>
+<a href="02-company-profile-company-profile-portofolio-dark.html" class="">
+        <span class="num">2</span>
+        Company Profile & Portofolio
+      </a>
+<a href="03-nda-nda-draft-dark.html" class="">
+        <span class="num">3</span>
+        Draft NDA
+      </a>
+<a href="04-brd-brd-urs-dark.html" class="">
+        <span class="num">4</span>
+        BRD / URS
+      </a>
+<a href="05-srs-srs-specification-dark.html" class="">
+        <span class="num">5</span>
+        SRS
+      </a>
+<a href="06-ui-ux-ui-ux-design-spec-dark.html" class="">
+        <span class="num">6</span>
+        UI/UX Design
+      </a>
+<a href="07-project-plan-project-plan-dark.html" class="">
+        <span class="num">7</span>
+        Project Plan
+      </a>
+    </div>
+    <div class="sidebar-footer">
+      MetroCoop © 2026<br>
+      Theme: Dark | Enhanced UI/UX<br>
+      Generated: 16/7/2026
+    </div>
+  </nav>
+  <main class="content">
+    <div class="content-inner">
+      <h1>🌙 Dokumentasi MetroCoop - Tema Gelap</h1>
+      <p style="color:var(--text-muted);font-size:16px;margin-bottom:32px;">
+        Dokumentasi lengkap dengan tema gelap, wallpaper kustom, dan navigasi yang ditingkatkan. Semua dokumen disajikan dalam visual yang nyaman untuk pengguna dengan preferensi dark theme.
+      </p>
+      
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;background:linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 24px rgba(59,130,246,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="01-proposal-proposal-teknis-komersial-dark.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:linear-gradient(135deg, var(--primary-dark), var(--accent));color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">1</span>
+          Proposal Teknis & Komersial
+        </a>
+        <p style="margin-top:8px;font-size:14px;color:var(--text-muted);line-height:1.5;">
+          Proposal Teknis &... - Dokumentasi lengkap dalam tema gelap.
+        </p>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;background:linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 24px rgba(59,130,246,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="02-company-profile-company-profile-portofolio-dark.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:linear-gradient(135deg, var(--primary-dark), var(--accent));color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">2</span>
+          Company Profile & Portofolio
+        </a>
+        <p style="margin-top:8px;font-size:14px;color:var(--text-muted);line-height:1.5;">
+          Company Profile &... - Dokumentasi lengkap dalam tema gelap.
+        </p>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;background:linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 24px rgba(59,130,246,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="03-nda-nda-draft-dark.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:linear-gradient(135deg, var(--primary-dark), var(--accent));color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">3</span>
+          Draft NDA
+        </a>
+        <p style="margin-top:8px;font-size:14px;color:var(--text-muted);line-height:1.5;">
+          Draft NDA... - Dokumentasi lengkap dalam tema gelap.
+        </p>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;background:linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 24px rgba(59,130,246,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="04-brd-brd-urs-dark.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:linear-gradient(135deg, var(--primary-dark), var(--accent));color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">4</span>
+          BRD / URS
+        </a>
+        <p style="margin-top:8px;font-size:14px;color:var(--text-muted);line-height:1.5;">
+          BRD / URS... - Dokumentasi lengkap dalam tema gelap.
+        </p>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;background:linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 24px rgba(59,130,246,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="05-srs-srs-specification-dark.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:linear-gradient(135deg, var(--primary-dark), var(--accent));color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">5</span>
+          SRS
+        </a>
+        <p style="margin-top:8px;font-size:14px;color:var(--text-muted);line-height:1.5;">
+          SRS... - Dokumentasi lengkap dalam tema gelap.
+        </p>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;background:linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 24px rgba(59,130,246,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="06-ui-ux-ui-ux-design-spec-dark.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:linear-gradient(135deg, var(--primary-dark), var(--accent));color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">6</span>
+          UI/UX Design
+        </a>
+        <p style="margin-top:8px;font-size:14px;color:var(--text-muted);line-height:1.5;">
+          UI/UX Design... - Dokumentasi lengkap dalam tema gelap.
+        </p>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;background:linear-gradient(135deg, var(--bg-alt) 0%, var(--bg) 100%);" onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 24px rgba(59,130,246,0.3)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="07-project-plan-project-plan-dark.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:linear-gradient(135deg, var(--primary-dark), var(--accent));color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">7</span>
+          Project Plan
+        </a>
+        <p style="margin-top:8px;font-size:14px;color:var(--text-muted);line-height:1.5;">
+          Project Plan... - Dokumentasi lengkap dalam tema gelap.
+        </p>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
