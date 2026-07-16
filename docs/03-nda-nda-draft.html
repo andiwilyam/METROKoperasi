@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Draft NDA — MetroCoop</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #0f3d91;
+  --primary-light: #1a56db;
+  --primary-dark: #0a2a6e;
+  --accent: #16a34a;
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --bg-code: #f1f5f9;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --sidebar-w: 280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --bg-alt: #1e293b;
+    --bg-code: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--primary-dark);
+  color: #e2e8f0;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.sidebar-brand small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 0;
+}
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.sidebar-nav a:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.sidebar-nav a.active {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+.sidebar-nav a .num {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 22px;
+  text-align: center;
+}
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Main content */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+.content-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 40px 80px;
+}
+
+/* Typography */
+h1 { font-size: 32px; font-weight: 800; color: var(--primary); margin: 0 0 8px; line-height: 1.2; }
+h2 { font-size: 24px; font-weight: 700; color: var(--text); margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--primary); }
+h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+h4 { font-size: 16px; font-weight: 600; color: var(--primary-light); margin: 24px 0 8px; }
+h5 { font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 20px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+p { margin: 0 0 12px; }
+strong { font-weight: 600; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Lists */
+ul, ol { margin: 0 0 16px; padding-left: 24px; }
+li { margin-bottom: 4px; }
+li ul, li ol { margin-top: 4px; margin-bottom: 0; }
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 13px;
+}
+th {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  white-space: nowrap;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:hover td { background: var(--bg-alt); }
+tr:nth-child(even) td { background: var(--bg-alt); }
+
+/* Code */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--bg-code);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--primary);
+}
+pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+}
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 13px;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: var(--bg-alt);
+  padding: 12px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+/* Emoji & checkmarks */
+.check { color: var(--accent); font-weight: 700; }
+.cross { color: #dc2626; }
+
+/* Print styles */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  .content-inner { max-width: 100%; padding: 20px; }
+  h1, h2 { page-break-after: avoid; }
+  table { page-break-inside: avoid; }
+  pre { white-space: pre-wrap; word-wrap: break-word; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 240px; }
+  .content-inner { padding: 32px 24px; }
+}
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar { position: relative; width: 100%; height: auto; max-height: 300px; }
+  .content { margin-left: 0; }
+  .content-inner { padding: 24px 16px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h2>MetroCoop</h2>
+      <small>Documentation Suite</small>
+    </div>
+    <div class="sidebar-nav">
+      <a href="01-proposal-proposal-teknis-komersial.html" class="">
+      <span class="num">1</span>
+      Proposal Teknis & Komersial
+    </a>
+<a href="02-company-profile-company-profile-portofolio.html" class="">
+      <span class="num">2</span>
+      Company Profile & Portofolio
+    </a>
+<a href="03-nda-nda-draft.html" class="active">
+      <span class="num">3</span>
+      Draft NDA
+    </a>
+<a href="04-brd-brd-urs.html" class="">
+      <span class="num">4</span>
+      BRD / URS
+    </a>
+<a href="05-srs-srs-specification.html" class="">
+      <span class="num">5</span>
+      SRS
+    </a>
+<a href="06-ui-ux-ui-ux-design-spec.html" class="">
+      <span class="num">6</span>
+      UI/UX Design
+    </a>
+<a href="07-project-plan-project-plan.html" class="">
+      <span class="num">7</span>
+      Project Plan
+    </a>
+    </div>
+    <div class="sidebar-footer">
+      MetroCoop © 2026<br>
+      Generated: 16/7/2026
+    </div>
+  </nav>
+  <main class="content">
+    <div class="content-inner">
+      <h1>Draft Perjanjian Kerahasiaan (Non-Disclosure Agreement / NDA)</h1>
+<h2>MetroCoop — Sistem Informasi Koperasi Terintegrasi</h2>
+
+<hr>
+
+<p><strong>VERSI:</strong> 1.0  <br><strong>TANGGAL:</strong> Juli 2026  <br><strong>STATUS:</strong> Draft untuk Negosiasi  <br><strong>KLASIFIKASI:</strong> Konfidensial</p>
+
+<hr>
+
+<h2>PIHAK-PIHAK</h2>
+
+<p><strong>PIHAK PERTAMA (Pemberi Informasi / Disclosing Party):</strong></p>
+
+<table><tbody><tr><td><strong>Nama Entitas</strong></td><td>Koperasi Simpan Pinjam [NAMA KOPERASI ANDA]</td></tr><tr><td><strong>Bentuk Hukum</strong></td><td>Koperasi Simpan Pinjam (KSP)</td></tr><tr><td><strong>Nomor Badan Hukum</strong></td><td>[AHU-XXXXXX.AH.01.XX.TAHUN-XXXX]</td></tr><tr><td><strong>Nomor Izin Usaha</strong></td><td>[SITU-XXX/XXX/KPPT/XXXX]</td></tr><tr><td><strong>Alamat</strong></td><td>[ALAMAT LENGKAP KOPERASI]</td></tr><tr><td><strong>Dewan Pengurus</strong></td><td>Ketua: [NAMA], Bendahara: [NAMA], Sekretaris: [NAMA]</td></tr><tr><td><strong>Diwakili Oleh</strong></td><td>[NAMA PEWAKIL], selaku [JABATAN]</td></tr><tr><td><strong>Dasar Hukum</strong></td><td>SK Pengurus No. [NOMOR] tanggal [TANGGAL]</td></tr></tbody></table>
+<strong>PIHAK KEDUA (Penerima Informasi / Receiving Party):</strong>
+
+<table><tbody><tr><td><strong>Nama Entitas</strong></td><td>PT Metro Mitra Digital (MetroCoop)</td></tr><tr><td><strong>Bentuk Hukum</strong></td><td>Perseroan Terbatas</td></tr><tr><td><strong>Nomor AKTA Pendirian</strong></td><td>AHU-XXXXXX.AH.01.XX.TAHUN-202X</td></tr><tr><td><strong>NPWP</strong></td><td>XX.XXX.XXX.X-XXX.XXX</td></tr><tr><td><strong>Alamat</strong></td><td>Jl. Pemuda No. 45, Kebayoran Baru, Jakarta Selatan 12120</td></tr><tr><td><strong>Diwakili Oleh</strong></td><td>[NAMA DIREKTUR], selaku Direktur Utama</td></tr><tr><td><strong>Dasar Hukum</strong></td><td>AKTA Perusahaan & SK Direksi No. [NOMOR] tanggal [TANGGAL]</td></tr></tbody></table>
+<strong>KEDUANYA DISAMAAN SEBUT "PIHAK" DAN SECARA INDIVIDU "PIHAK".</strong>
+
+<hr>
+
+<h2>LATAR BELAKANG</h2>
+
+<p><strong>BAHWA:</strong></p>
+
+<ul><li>Pihak Pertama berencana mengembangkan / mengimplementasikan <strong>Sistem Informasi Koperasi Terintegrasi (MetroCoop)</strong> untuk mengelola operasional keanggotaan, simpanan, pinjaman, akuntansi, unit usaha, dan pelaporan;</li>
+</ul>
+<ul><li>Dalam rangka evaluasi kelayakan, perancangan solusi, dan/atau pelaksanaan proyek, Pihak Pertama perlu membagikan <strong>Informasi Konfidensial</strong> meliputi data anggota, transaksi keuangan, proses bisnis internal, dokumen legal, dan strategi organisasi kepada Pihak Kedua;</li>
+</ul>
+<ul><li>Pihak Kedua bersedia menerima dan memproses Informasi Konfidensial tersebut <strong>hanya untuk keperluan proyek MetroCoop</strong> dan berkomitmen menjaga kerahasiaannya;</li>
+</ul>
+<ul><li>Kedua Pihak sepakat mengikatkan diri dalam <strong>Perjanjian Kerahasiaan (NDA)</strong> ini.</li>
+</ul>
+<hr>
+
+<h2>DEFINISI</h2>
+
+<table><thead><tr><th>Istilah</th><th>Definisi</th></tr></thead><tbody><tr><td><strong>Informasi Konfidensial</strong></td><td>Semua informasi non-publik, baik tertulis, lisan, elektronik, visual, maupun dalam bentuk apapun, yang diungkapkan oleh Pihak Pertama kepada Pihak Kedua (atau sebaliknya) sehubungan dengan proyek ini, termasuk tapi tidak terbatas pada: data anggota (NIK, nama, alamat, penghasilan, saldo), transaksi simpanan/pinjaman, jurnal akuntansi, laporan keuangan, struktur organisasi, dokumen legal (AKTA, SK, izin), strategi bisnis, rencana ekspansi, data karyawan/pengurus, kode sumber (source code) custom, credential sistem, API keys, dan analisis risiko kredit.</td></tr><tr><td><strong>Informasi Terbuka</strong></td><td>Informasi yang: (a) sudah publik sebelum diungkapkan; (b) menjadi publik tanpa kesalahan Pihak Penerima; (c) diterima dari pihak ketiga yang berhak membagikannya tanpa pelanggaran NDA; (d) dikembangkan independen oleh Pihak Penerima tanpa menggunakan Informasi Konfidensial.</td></tr><tr><td><strong>Tujuan</strong></td><td>Evaluasi kelayakan, perancangan arsitektur, pengembangan, testing, deployment, pelatihan, dan dukungan sistem MetroCoop bagi Pihak Pertama.</td></tr><tr><td><strong>Periode Rahasia</strong></td><td>3 (tiga) tahun terhitung dari tanggal berakhirnya proyek atau berakhirnya hubungan kerja sama, mana yang lebih lama. Untuk <strong>data pribadi anggota (PII)</strong> dan <strong>rahasia dagang</strong>, berlaku <strong>selamanya</strong> (indefinite) sebagaimana diatur UU PDP dan UU Rahasia Dagang.</td></tr><tr><td><strong>Proyek</strong></td><td>Pengembangan & implementasi sistem MetroCoop untuk Pihak Pertama, termasuk fase: discovery, design, development, UAT, go-live, dan warranty support.</td></tr></tbody></table>
+<hr>
+
+<h2>PASAL 1: KEWAJIBAN KERAHASIAAN</h2>
+
+<h3>1.1 Perlindungan Informasi</h3>
+Pihak Kedua wajib:
+<ul><li><strong>(a)</strong> Menjaga kerahasiaan Informasi Konfidensial dengan standar perlindungan <strong>minimal setara</strong> dengan perlindungan informasi rahasia sendiri, namun tidak kurang dari <strong>standar wajar (reasonable care)</strong>;</li>
+<li><strong>(b)</strong> <strong>TIDAK</strong> mengungkapkan, membagikan, menyalin, mereproduksi, memodifikasi, atau mendistribusikan Informasi Konfidensial kepada pihak ketiga manapun tanpa persetujuan tertulis Pihak Pertama;</li>
+<li><strong>(c)</strong> Membatasi akses Informasi Konfidensial hanya kepada <strong>personel yang benar-benar perlu tahu (need-to-know basis)</strong> yang: (i) terikat kewajiban kerahasiaan setara NDA ini; (ii) telah menandatangani pernyataan kerahasiaan individual; (iii) dilatih prosedur keamanan data.</li>
+</ul>
+<h3>1.2 Penggunaan Terbatas</h3>
+Informasi Konfidensial <strong>HANYA</strong> boleh digunakan untuk <strong>Tujuan</strong> sebagaimana didefinisikan di atas. Dilarang keras menggunakan informasi untuk:
+<ul><li>Kepentingan komersial Pihak Kedua sendiri (termasuk pengembangan produk lain)</li>
+<li>Analisis kompetitif terhadap Pihak Pertama</li>
+<li>Pemasaran ke klien lain tanpa anonimisasi agregat & persetujuan</li>
+<li>Pelatihan model AI/ML eksternal tanpa anonimisasi & persetujuan tertulis</li>
+</ul>
+<h3>1.3 Keamanan Teknis & Organisatorial</h3>
+Pihak Kedua menerapkan minimal:
+<table><thead><tr><th>Tindakan</th><th>Detail</th></tr></thead><tbody><tr><td><strong>Enkripsi</strong></td><td>AES-256 at rest, TLS 1.3 in transit untuk semua data Pihak Pertama</td></tr><tr><td><strong>Access Control</strong></td><td>RBAC, MFA wajib untuk sistem production, principle of least privilege</td></tr><tr><td><strong>Audit Log</strong></td><td>Log akses (read/write/delete) disimpan minimal 1 tahun, tamper-evident</td></tr><tr><td><strong>Backup</strong></td><td>Enkripsi backup, offsite, tested restore quarterly</td></tr><tr><td><strong>Personel</strong></td><td>Background check karyawan akses production, NDA individual, training keamanan tahunan</td></tr><tr><td><strong>Insiden</strong></td><td>Prosedur breach notification < 24 jam ke Pihak Pertama & otoritas (UU PDP)</td></tr></tbody></table>
+<hr>
+
+<h2>PASAL 2: EKSEPSI KEWAJIBAN</h2>
+
+<p>Kewajiban kerahasiaan <strong>TIDAK BERLAKU</strong> untuk informasi yang:<br><ul><li>Sudah menjadi milik publik <strong>sebelum</strong> diungkapkan;</li><br><li>Menjadi publik <strong>tanpa kesalahan</strong> Pihak Penerima;</li><br><li>Diterima dari <strong>pihak ketiga berhak</strong> tanpa pelanggaran kewajiban rahasia;</li><br><li>Dikembangkan <strong>independen</strong> tanpa referensi Informasi Konfidensial (dibuktikan bukti dokumentasi);</li><br><li><strong>Wajib diungkapkan</strong> oleh hukum/peraturan/pengadilan/otoritas — <strong>SYARATNYA</strong>: Pihak Penerima segera memberitahu Pihak Pemberi (kecuali dilarang hukum) dan memberikan kesempatan mengajukan upaya hukum/protective order.</li><br></ul><br><hr></p>
+
+<h2>PASAL 3: PERLINDUNGAN DATA PRIBADI (UU PDP COMPLIANCE)</h2>
+
+<h3>3.1 Peran Pihak</h3>
+<ul><li><strong>Pihak Pertama</strong> = <strong>Pengendali Data Pribadi (Data Controller)</strong></li>
+<li><strong>Pihak Kedua</strong> = <strong>Prosesor Data Pribadi (Data Processor)</strong></li>
+</ul>
+<h3>3.2 Kewajiban Khusus Pihak Kedua (Processor)</h3>
+<ul><li>Memproses data pribadi <strong>hanya sesuai instruksi tertulis</strong> Pihak Pertama (termasuk NDA ini & DPA terpisah jika perlu)</li>
+<li><strong>TIDAK</strong> menggunakan data pribadi untuk tujuan sendiri (profiling, marketing, AI training)</li>
+<li>Mengimplementasikan <strong>teknis & organisatoris</strong> per Pasal 1.3 & UU PDP</li>
+<li>Membantu Pihak Pertama memenuhi <strong>hak subjek data</strong> (akses, koreksi, hapus, portabilitas, keberatan)</li>
+<li><strong>Breach Notification</strong>: Maksimal <strong>24 jam</strong> setelah mengetahui pelanggaran data pribadi</li>
+<li><strong>Sub-processor</strong>: Hanya dengan persetujuan tertulis sebelumnya Pihak Pertama (daftar sub-processor lampiran)</li>
+<li><strong>Transfer Lintas Batas</strong>: Hanya ke negara dengan proteksi setara / SCC / persetujuan subjek data</li>
+</ul>
+<h3>3.3 Penghapusan/Pengembalian Data</h3>
+Pada berakhirnya proyek atau permintaan Pihak Pertama, Pihak Kedua:
+<ul><li>Menghapus <strong>secara permanen & terverifikasi</strong> (NIST 800-88) semua data pribadi dari sistem production, staging, backup, log, dan environment development</li>
+<li>Menyediakan <strong>sertifikat penghapusan</strong> tertulis</li>
+<li><strong>Eksepsi</strong>: Data yang wajib disimpan hukum (pajak 10 tahun, AML 5 tahun) — diarsipkan terpisah, enkripsi, akses terbatas, dihapus setelah masa retensi hukum</li>
+</ul>
+<hr>
+
+<h2>PASAL 4: HAK KEPEMILIKAN INTELEKTUAL</h2>
+
+<h3>4.1 Kepemilikan Data & Konten</h3>
+Semua <strong>data, konten, laporan, analisis, dokumen</strong> yang berasal dari Pihak Pertama (termasuk data anggota, transaksi, konfigurasi koperasi) <strong>KEMILIKAN SEPENUHNYA PIHAK PERTAMA</strong>. Pihak Kedua tidak memperoleh hak apapun kecuali lisensi terbatas untuk Tujuan.
+
+<h3>4.2 Source Code & IP Sistem MetroCoop</h3>
+<ul><li><strong>Core Platform MetroCoop</strong> (framework, library, UI components, arsitektur dasar) = <strong>Hak Kekayaan Intelektual Pihak Kedua</strong> (MetroCoop).</li>
+<li><strong>Customisasi & Konfigurasi Khusus Koperasi</strong> (custom module, report, workflow, integration config) yang dibayar penuh oleh Pihak Pertama = <strong>Hak Pihak Pertama</strong> (work for hire) — diserahkan source code & dokumentasi penuh saat go-live / akhir kontrak.</li>
+<li><strong>Lisensi Core Platform</strong>: Pihak Pertama mendapat <strong>lisensi non-eksklusif, perpetual, worldwide, royalty-free</strong> untuk menggunakan Core Platform MetroCoop untuk operasional koperasi mereka sendiri, termasuk hak memodifikasi untuk keperluan internal (tidak untuk redistribusi/SaaS ke pihak ketiga).</li>
+</ul>
+<h3>4.3 Feedback & Improvements</h3>
+Saran, bug report, feature request, atau improvement dari Pihak Pertama yang dimasukkan ke Core Platform MetroCoop menjadi <strong>hak Pihak Kedua</strong>, tanpa kewajiban royalti/kompensasi ke Pihak Pertama.
+
+<hr>
+
+<h2>PASAL 5: PERIODE BERLAKU & PENGHENTIAN</h2>
+
+<h3>5.1 Periode Berlaku</h3>
+NDA ini berlaku mulai <strong>tanggal penandatanganan</strong> hingga <strong>berakhirnya Periode Rahasia</strong> (Pasal Definisi).
+
+<h3>5.2 Pengembalian/Penghancuran Informasi</h3>
+Pada berakhirnya proyek atau permintaan tertulis Pihak Pertama, dalam <strong>14 hari kerja</strong> Pihak Kedua:
+<ul><li>Mengembalikan <strong>semua</strong> dokumen fisik & media penyimpanan berisi Informasi Konfidensial</li>
+<li>Menghapus permanen semua salinan elektronik (termasuk backup, staging, dev env, log) — <strong>terverifikasi</strong></li>
+<li>Menyediakan <strong>Surat Pernyataan Penghancuran/Kembalian</strong> ditandatangani pejabat berwenang</li>
+</ul>
+<h3>5.3 Survival Clause</h3>
+Kewajiban Pasal 1, 3, 4, 6, 7, 8, 9 <strong>tetap berlaku</strong> setelah berakhirnya NDA ini.
+
+<hr>
+
+<h2>PASAL 6: SANKSI & GANTI RUGI</h2>
+
+<h3>6.1 Denda Pelanggaran</h3>
+Setiap pelanggaran NDA ini membebankan <strong>denda tetap (liquidated damages)</strong> sebesar:
+<blockquote><strong>Rp 500.000.000 (Lima Ratus Juta Rupiah) per insiden pelanggaran</strong></blockquote>
+<blockquote><strong>+ ganti rugi aktual</strong> (termasuk biaya hukum, investigasi forensik, notifikasi, kerugian reputasi, denda regulasi)</blockquote>
+
+<blockquote><strong>Catatan</strong>: Denda ini <strong>bukan</strong> batas maksimal ganti rugi. Pihak Pertama berhak menuntut ganti rugi <strong>melebihi</strong> jumlah ini jika kerugian aktual lebih besar.</blockquote>
+
+<h3>6.2 Injunctive Relief</h3>
+Pihak Pertama berhak mengajukan <strong>gugatan penghentian (injunction)</strong> ke Pengadilan Negeri Jakarta Selatan tanpa harus membuktikan kerugian finansial, mengakui kerugian tidak terukur dengan uang.
+
+<h3>6.3 Tanggung Jawab Karyawan/Agen</h3>
+Pihak Kedua <strong>bertanggung jawab penuh</strong> atas pelanggaran oleh karyawan, kontraktor, sub-kontraktor, konsultan, atau afiliasinya. Pihak Kedua wajib memastikan mereka terikat kewajiban setara NDA ini.
+
+<hr>
+
+<h2>PASAL 7: PENYELESAIAN SENGKETA</h2>
+
+<h3>7.1 Musyawarah</h3>
+Kedua Pihak berusaha menyelesaikan sengketa melalui <strong>musyawarah mufakat</strong> maksimal <strong>30 hari</strong> sejak surat pemberitahuan sengketa.
+
+<h3>7.2 Mediasi</h3>
+Jika musyawarah gagal, diselesaikan melalui <strong>mediasi</strong> di <strong>Lembaga Mediasi Pengadilan Negeri Jakarta Selatan</strong> atau lembaga mediasi terakreditasi lain yang disepakati.
+
+<h3>7.3 Litigasi</h3>
+Jika mediasi gagal, diselesaikan di <strong>Pengadilan Negeri Jakarta Selatan</strong> dengan hukum Indonesia.
+
+<h3>7.4 Hukum Berlaku</h3>
+<strong>Hukum Republik Indonesia</strong> (termasuk UU No. 27/2022 PDP, UU No. 30/2000 Rahasia Dagang, KUH Perdata, UU Koperasi).
+
+<hr>
+
+<h2>PASAL 8: KETENTUM UMUM</h2>
+
+<table><thead><tr><th>Klausul</th><th>Isi</th></tr></thead><tbody><tr><td><strong>8.1 Penugasan (Assignment)</strong></td><td>Tidak boleh mentransfer hak/kewajiban tanpa persetujuan tertulis Pihak lain, kecuali ke afiliasi (dengan notifikasi 14 hari & afiliasi terikat NDA ini).</td></tr><tr><td><strong>8.2 Pemisahan (Severability)</strong></td><td>Jika bagian mana batal, bagian lain tetap berlaku. Pihak mengganti klausul batal dengan yang valid & mendekati niat asli.</td></tr><tr><td><strong>8.3 Tidak Ada Penghapusan Hak (No Waiver)</strong></td><td>Ketidakberlakuan hak sekali/tidak berarti penghapusan hak. Penghapusan hak harus tertulis.</td></tr><tr><td><strong>8.4 Seluruh Perjanjian (Entire Agreement)</strong></td><td>NDA ini menggantikan semua perjanjian/sepakatan sebelumnya (lisan/tertulis) soal kerahasiaan. Perubahan hanya sah jika tertulis & ditandatangani.</td></tr><tr><td><strong>8.5 Salinan (Counterparts)</strong></td><td>Dapat ditandatangani dalam beberapa salinan (termasuk digital/e-signature), masing-masing sah sebagai asli.</td></tr><tr><td><strong>8.6 Notifikasi</strong></td><td>Surat resmi via email resmi + kurir ke alamat di atas. Berlaku saat diterima (bukti kurir/read receipt email).</td></tr><tr><td><strong>8.7 Bahasa</strong></td><td>Bahasa Indonesia mengikat. Terjemahan Inggris hanya referensi.</td></tr><tr><td><strong>8.8 Force Majeure</strong></td><td>Pihak dibebaskan kewajiban selama force majeure (bencana alam, perang, pandemi, regulasi baru) dengan notifikasi 7 hari. Kewajiban kerahasiaan <strong>TIDAK</strong> dibebaskan oleh force majeure.</td></tr></tbody></table>
+<hr>
+
+<h2>PASAL 9: TANDA TANGAN</h2>
+
+<p><strong>Dibuat dalam 2 (dua) salinan bermaterai cukup, masing-masing mempunyai kekuatan hukum yang sama, setelah dibaca dan dipahami dengan sepenuhnya.</strong></p>
+
+<table><thead><tr><th></th><th><strong>PIHAK PERTAMA</strong><br>Koperasi Simpan Pinjam [NAMA KOPERASI]</th><th><strong>PIHAK KEDUA</strong><br>PT Metro Mitra Digital (MetroCoop)</th></tr></thead><tbody><tr><td><strong>Nama</strong></td><td>[NAMA KETUA PENGURUS]</td><td>[NAMA DIREKTUR UTAMA]</td></tr><tr><td><strong>Jabatan</strong></td><td>Ketua Pengurus</td><td>Direktur Utama</td></tr><tr><td><strong>Tanda Tangan</strong></td><td></td><td></td></tr><tr><td><strong>Tanggal</strong></td><td>[TANGGAL], 202[ ]</td><td>[TANGGAL], 202[ ]</td></tr><tr><td><strong>Materai</strong></td><td>[Rp 10.000]</td><td>[Rp 10.000]</td></tr></tbody></table>
+<hr>
+
+<h3>SAKSI 1 (Pihak Pertama)</h3>
+
+<table><thead><tr><th>Nama</th><th>[NAMA SAKSI 1]</th></tr></thead><tbody><tr><td>NIK</td><td>[NIK SAKSI 1]</td></tr><tr><td>Alamat</td><td>[ALAMAT SAKSI 1]</td></tr><tr><td>Tanda Tangan</td><td></td></tr><tr><td>Tanggal</td><td></td></tr></tbody></table>
+<h3>SAKSI 2 (Pihak Kedua)</h3>
+
+<table><thead><tr><th>Nama</th><th>[NAMA SAKSI 2]</th></tr></thead><tbody><tr><td>NIK</td><td>[NIK SAKSI 2]</td></tr><tr><td>Alamat</td><td>[ALAMAT SAKSI 2]</td></tr><tr><td>Tanda Tangan</td><td></td></tr><tr><td>Tanggal</td><td></td></tr></tbody></table>
+<hr>
+
+<h2>LAMPIRAN</h2>
+
+<h3>Lampiran A: Daftar Sub-Processor (Contoh)</h3>
+<table><thead><tr><th>Sub-Processor</th><th>Layanan</th><th>Lokasi Data</th><th>Alasan</th></tr></thead><tbody><tr><td>Railway.app</td><td>Hosting PostgreSQL & Container</td><td>Singapura / US</td><td>Managed infrastructure</td></tr><tr><td>Google Cloud (Gemini API)</td><td>AI Credit Scoring</td><td>Singapura / US</td><td>LLM inference</td></tr><tr><td>Cloudflare</td><td>CDN, DNS, WAF</td><td>Global (edge)</td><td>Performance & security</td></tr><tr><td>Resend / SendGrid</td><td>Email Transaksional</td><td>Singapura / US</td><td>Notifikasi & OTP</td></tr><tr><td>WhatsApp Business API (Meta/BSSP)</td><td>Notifikasi WA</td><td>Singapura</td><td>Komunikasi anggota</td></tr></tbody></table>
+<blockquote><em>Daftar final disepakati terpisah & diperbarui berkala dengan notifikasi 14 hari.</em></blockquote>
+
+<h3>Lampiran B: Data Processing Addendum (DPA) — Ringkasan</h3>
+Jika diperlukan, DPA terpisah mengikat sebagai <strong>Data Processing Agreement</strong> per UU PDP Pasal 28, mencakup: subjek data, kategori data, tujuan pemrosesan, durasi, hak & kewajiban controller/processor, tindakan keamanan, sub-processor, transfer lintas batas, audit rights, breach notification, penghapusan data.
+
+<h3>Lampiran C: Pernyataan Kerahasiaan Individual (Contoh)</h3>
+<blockquote>"Saya, [NAMA], NIK [NIK], sebagai [JABATAN] di PT Metro Mitra Digital, menyatakan telah membaca, memahami, dan mengikatkan diri pada NDA No. [NOMOR] tanggal [TANGGAL] antara Koperasi [NAMA] dan PT Metro Mitra Digital. Saya berkomitmen menjaga kerahasiaan semua Informasi Konfidensial yang saya akses sehubungan dengan proyek MetroCoop, selama masa kerja dan setelahnya, sesuai ketentuan NDA tersebut."</blockquote>
+
+<hr>
+
+<p><strong>— AKHIR DARI DRAFT NDA —</strong></p>
+
+<p><em>Catatan: Draft ini untuk keperluan negosiasi. Sebelum ditandatangani, disarankan ditinjau oleh hukum masing-masing Pihak. Klause spesifik (jurisdiksi, denda, periode, sub-processor) dapat disesuaikan kesepakatan bersama.</em></p>
+    </div>
+  </main>
+</body>
+</html>

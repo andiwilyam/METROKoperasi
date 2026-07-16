@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposal Teknis & Komersial — MetroCoop</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #0f3d91;
+  --primary-light: #1a56db;
+  --primary-dark: #0a2a6e;
+  --accent: #16a34a;
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --bg-code: #f1f5f9;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --sidebar-w: 280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --bg-alt: #1e293b;
+    --bg-code: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--primary-dark);
+  color: #e2e8f0;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.sidebar-brand small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 0;
+}
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.sidebar-nav a:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.sidebar-nav a.active {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+.sidebar-nav a .num {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 22px;
+  text-align: center;
+}
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Main content */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+.content-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 40px 80px;
+}
+
+/* Typography */
+h1 { font-size: 32px; font-weight: 800; color: var(--primary); margin: 0 0 8px; line-height: 1.2; }
+h2 { font-size: 24px; font-weight: 700; color: var(--text); margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--primary); }
+h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+h4 { font-size: 16px; font-weight: 600; color: var(--primary-light); margin: 24px 0 8px; }
+h5 { font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 20px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+p { margin: 0 0 12px; }
+strong { font-weight: 600; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Lists */
+ul, ol { margin: 0 0 16px; padding-left: 24px; }
+li { margin-bottom: 4px; }
+li ul, li ol { margin-top: 4px; margin-bottom: 0; }
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 13px;
+}
+th {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  white-space: nowrap;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:hover td { background: var(--bg-alt); }
+tr:nth-child(even) td { background: var(--bg-alt); }
+
+/* Code */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--bg-code);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--primary);
+}
+pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+}
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 13px;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: var(--bg-alt);
+  padding: 12px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+/* Emoji & checkmarks */
+.check { color: var(--accent); font-weight: 700; }
+.cross { color: #dc2626; }
+
+/* Print styles */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  .content-inner { max-width: 100%; padding: 20px; }
+  h1, h2 { page-break-after: avoid; }
+  table { page-break-inside: avoid; }
+  pre { white-space: pre-wrap; word-wrap: break-word; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 240px; }
+  .content-inner { padding: 32px 24px; }
+}
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar { position: relative; width: 100%; height: auto; max-height: 300px; }
+  .content { margin-left: 0; }
+  .content-inner { padding: 24px 16px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h2>MetroCoop</h2>
+      <small>Documentation Suite</small>
+    </div>
+    <div class="sidebar-nav">
+      <a href="01-proposal-proposal-teknis-komersial.html" class="active">
+      <span class="num">1</span>
+      Proposal Teknis & Komersial
+    </a>
+<a href="02-company-profile-company-profile-portofolio.html" class="">
+      <span class="num">2</span>
+      Company Profile & Portofolio
+    </a>
+<a href="03-nda-nda-draft.html" class="">
+      <span class="num">3</span>
+      Draft NDA
+    </a>
+<a href="04-brd-brd-urs.html" class="">
+      <span class="num">4</span>
+      BRD / URS
+    </a>
+<a href="05-srs-srs-specification.html" class="">
+      <span class="num">5</span>
+      SRS
+    </a>
+<a href="06-ui-ux-ui-ux-design-spec.html" class="">
+      <span class="num">6</span>
+      UI/UX Design
+    </a>
+<a href="07-project-plan-project-plan.html" class="">
+      <span class="num">7</span>
+      Project Plan
+    </a>
+    </div>
+    <div class="sidebar-footer">
+      MetroCoop © 2026<br>
+      Generated: 16/7/2026
+    </div>
+  </nav>
+  <main class="content">
+    <div class="content-inner">
+      <h1>Proposal Teknis & Komersial</h1>
+<h2>Pengembangan Sistem Informasi Koperasi Simpan Pinjam Terintegrasi (MetroCoop)</h2>
+
+<hr>
+
+<p><strong>Versi:</strong> 1.0  <br><strong>Tanggal:</strong> Juli 2026  <br><strong>Klasifikasi:</strong> Konfidensial  <br><strong>Disusun oleh:</strong> Tim Pengembang MetroCoop</p>
+
+<hr>
+
+<h2>Daftar Isi</h2>
+
+<ul><li><a href="#1-pendahuluan">Pendahuluan</a></li>
+<li><a href="#2-pemahaman-kebutuhan-koperasi">Pemahaman Kebutuhan Koperasi</a></li>
+<li><a href="#3-solusi-yang-ditaawarkan">Solusi yang Ditawarkan</a></li>
+<li><a href="#4-arsitektur-sistem">Arsitektur Sistem</a></li>
+<li><a href="#5-metodologi-pengembangan">Metodologi Pengembangan</a></li>
+<li><a href="#6-timeline--milestone">Timeline & Milestone</a></li>
+<li><a href="#7-tim-proyek">Tim Proyek</a></li>
+<li><a href="#8-investasi--harga-penawaran">Investasi & Harga Penawaran</a></li>
+<li><a href="#9-syarat--ketentuan">Syarat & Ketentuan</a></li>
+<li><a href="#10-penutup">Penutup</a></li>
+</ul>
+<hr>
+
+<h2>1. Pendahuluan</h2>
+
+<h3>1.1 Latar Belakang</h3>
+
+<p>Koperasi Simpan Pinjam (KSP) di Indonesia menghadapi tantangan transformasi digital yang semakin mendesak. Banyak koperasi masih mengelola operasional secara manual atau menggunakan sistem terpisah (silo) untuk keanggotaan, simpanan, pinjaman, akuntansi, dan unit usaha. Hal ini menimbulkan inefisiensi, kesalahan data, kesulitan pelaporan, dan risiko kepatuhan regulasi (OJK, UU Koperasi).</p>
+
+<h3>1.2 Tujuan Proposal</h3>
+
+<p>Dokumen ini mengajukan solusi <strong>MetroCoop</strong> — platform Sistem Informasi Koperasi Terintegrasi berbasis cloud yang dirancang khusus untuk kebutuhan KSP Indonesia. Proposal ini mencakup pemahaman kebutuhan, ruang lingkup solusi, arsitektur teknis, metodologi, timeline, komposisi tim, dan penawaran komersial.</p>
+
+<h3>1.3 Ruang Lingkup</h3>
+
+<ul><li>Pengembangan & deployment sistem MetroCoop (versi production-ready)</li>
+<li>Migrasi data legacy (jika ada)</li>
+<li>Pelatihan administrator & pengguna kunci</li>
+<li>Dukungan pasca-go-live (warranty period 3 bulan)</li>
+<li>Opsional: Modul kustomisasi lanjutan & integrasi eksternal</li>
+</ul>
+<hr>
+
+<h2>2. Pemahaman Kebutuhan Koperasi</h2>
+
+<h3>2.1 Tantangan Umum KSP Indonesia</h3>
+
+<table><thead><tr><th>Area</th><th>Tantangan Saat Ini</th><th>Dampak</th></tr></thead><tbody><tr><td><strong>Keanggotaan</strong></td><td>Data manual (Excel/kartu), duplikasi NIK, tidak terintegrasi dengan simpanan/pinjaman</td><td>Kesalahan saldo, sulit audit, member experience buruk</td></tr><tr><td><strong>Simpanan</strong></td><td>4 jenis simpanan (pokok, wajib, sukarela, deposito) dengan perhitungan bunga manual</td><td>Error bunga, pelaporan lambat, ketidakpuasan anggota</td></tr><tr><td><strong>Pinjaman</strong></td><td>3 metode bunga (flat, efektif, anuitas), tenor fleksibel, angsuran manual</td><td>Perhitungan salah, tunggakan tidak terlacak, kolektibilitas rendah</td></tr><tr><td><strong>Akuntansi</strong></td><td>Jurnal manual, COA tidak standar SAK ETAP, neraca saldo manual</td><td>Tidak compliant, audit mahal, pengambilan keputusan lambat</td></tr><tr><td><strong>Unit Usaha</strong></td><td>Toko, Sewa, PPOB, Cicilan Barang, Ventura terpisah</td><td>Data terfragmentasi, laporan konsolidasi mustahil</td></tr><tr><td><strong>Pelaporan</strong></td><td>Manual ke OJK/regulator, tidak real-time</td><td>Denda, reputasi buruk, risiko hukum</td></tr><tr><td><strong>Keamanan</strong></td><td>Tanpa role-based access, audit trail minim</td><td>Risiko kecurangan, kebocoran data anggota</td></tr></tbody></table>
+<h3>2.2 Kebutuhan Spesifik yang Teridentifikasi</h3>
+
+<ul><li><strong>Multi-role Access Control</strong>: Superadmin, Admin, Operator, Anggota, Anggota Perusahaan</li>
+<li><strong>4 Jenis Simpanan</strong> dengan perhitungan bunga otomatis (harian/bulanan)</li>
+<li><strong>3 Metode Bunga Pinjaman</strong>: Flat, Efektif, Anuitas — dengan scheduler angsuran otomatis</li>
+<li><strong>Akuntansi SAK ETAP</strong>: COA hierarchical, jurnal otomatis dari transaksi operasional</li>
+<li><strong>Unit Usaha Terintegrasi</strong>: POS Retail, Sewa Aset, PPOB/Digital Payment, Cicilan Barang, Investasi Ventura</li>
+<li><strong>AI Credit Scoring</strong>: Analisis risiko berbasis 5C (Character, Capacity, Capital, Collateral, Condition) menggunakan Google Gemini</li>
+<li><strong>Landing Page CMS</strong>: Konten dinamis tanpa deploy ulang</li>
+<li><strong>Audit Trail & Compliance</strong>: Log lengkap untuk audit internal & eksternal</li>
+<li><strong>Mobile-Responsive</strong>: Akses anggota via smartphone (PWA-ready)</li>
+</ul>
+<hr>
+
+<h2>3. Solusi yang Ditawarkan</h2>
+
+<h3>3.1 Fitur Utama (Core Modules)</h3>
+
+<table><thead><tr><th>Modul</th><th>Deskripsi Singkat</th><th>Status</th></tr></thead><tbody><tr><td><strong>Autentikasi & Otorisasi</strong></td><td>JWT-based auth, RBAC 5 role, session management, rate limiting</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Manajemen Keanggotaan</strong></td><td>CRUD anggota, 4 tipe simpanan saldo real-time, status keanggotaan, upload dokumen</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Transaksi Simpanan</strong></td><td>Setor/tarik 4 jenis, validasi saldo, bunga otomatis, mutasi rekening, cetak bukti</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Pinjaman & Angsuran</strong></td><td>4 produk pinjaman, 3 metode bunga, workflow pengajuan→cair→angsuran, penalty otomatis</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Akuntansi & Jurnal</strong></td><td>COA 6 level (SAK ETAP), jurnal otomatis dari modul lain, buku besar, neraca saldo, laporan keuangan</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Periode Akuntansi</strong></td><td>12 periode/tahun, open/close period, tutup buku, reverse jurnal</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>POS & Retail</strong></td><td>Kategori, supplier, stok real-time, penjualan multi-item, HPP, laporan laba rugi toko</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Sewa Aset</strong></td><td>Manajemen aset, jadwal sewa, denda keterlambatan, pembayaran parsial</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>PPOB & Digital Payment</strong></td><td>Pulsa, listrik, PDAM, BPJS, VA Bank (Mandiri/BNI/BRI/BCA/Permata), QRIS, e-Wallet</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Cicilan Barang</strong></td><td>Pembelian barang cicilan, DP, tenor, bunga, angsuran bulanan, status lunas</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Ventura & Investasi</strong></td><td>Portfolio investasi, dividen, skoring AI, pengajuan pembiayaan perusahaan</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Pengumuman & Tiket</strong></td><td>Broadcast ke anggota, sistem tiket bantuan dengan SLA</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Laporan & Dashboard</strong></td><td>Dashboard per role, 20+ laporan standar, export PDF/Excel</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Landing Page CMS</strong></td><td>Hero, fitur, tim, testimoni, pricing, kontak — editable via admin</td><td><span class="check">✅</span> Done</td></tr><tr><td><strong>Feature Toggle</strong></td><td>Enable/disable modul per kebutuhan koperasi</td><td><span class="check">✅</span> Done</td></tr></tbody></table>
+<h3>3.2 Fitur Unggulan (Differentiators)</h3>
+
+<table><thead><tr><th>Fitur</th><th>Nilai Tambah</th></tr></thead><tbody><tr><td><strong>Jurnal Otomatis End-to-End</strong></td><td>Setiap transaksi (simpanan, pinjaman, toko, sewa, PPOB) langsung generate jurnal ke COA — zero manual entry</td></tr><tr><td><strong>AI Credit Scoring (Gemini)</strong></td><td>Analisis 5C + rasio keuangan (likuiditas, solvabilitas, profitabilitas, BOPO, BMPK) → rekomendasi plafon/tenor/bunga otomatis</td></tr><tr><td><strong>Multi-Tenant Ready</strong></td><td>Arsitektur mendukung multi-koperasi dalam satu deployment (saat ini single-tenant, ready untuk scale)</td></tr><tr><td><strong>Real-time Dashboard</strong></td><td>WebSocket-ready untuk update saldo/transaksi real-time tanpa refresh</td></tr><tr><td><strong>Audit Trail Lengkap</strong></td><td>Setiap create/update/delete tercatat: user, timestamp, before/after values</td></tr><tr><td><strong>PWA-Ready</strong></td><td>Installable di mobile, offline-first untuk transaksi kasir</td></tr><tr><td><strong>Deploy ke Railway/Cloud</strong></td><td>CI/CD GitHub Actions → Railway, preview deploy per PR, health check otomatis</td></tr></tbody></table>
+<h3>3.3 Stack Teknologi</h3>
+
+<table><thead><tr><th>Layer</th><th>Teknologi</th><th>Alasan Pemilihan</th></tr></thead><tbody><tr><td><strong>Frontend</strong></td><td>React 18 + TypeScript + Vite</td><td>Modern, fast HMR, type-safe, ecosystem besar</td></tr><tr><td><strong>UI</strong></td><td>Tailwind CSS + shadcn/ui</td><td>Utility-first, accessible, customizable, no runtime overhead</td></tr><tr><td><strong>State</strong></td><td>Zustand (client) + React Query (server)</td><td>Simple, performant, cache management built-in</td></tr><tr><td><strong>Backend</strong></td><td>Node.js (ESM) + Express + TypeScript</td><td>Unified language, type-sharing via shared package</td></tr><tr><td><strong>Database</strong></td><td>PostgreSQL 16</td><td>ACID, JSONB, mature, cloud-managed ready (Railway/Neon/Supabase)</td></tr><tr><td><strong>ORM</strong></td><td>Raw SQL (pg) + migration runner custom</td><td>Full control, performance, no abstraction leak</td></tr><tr><td><strong>Auth</strong></td><td>JWT (HS256) + bcryptjs</td><td>Stateless, scalable, industry standard</td></tr><tr><td><strong>AI</strong></td><td>Google Gemini 2.5 Flash</td><td>Credit scoring, document analysis, cost-effective</td></tr><tr><td><strong>Build</strong></td><td>esbuild (server) + Vite (client)</td><td>Sub-second builds, tree-shaking</td></tr><tr><td><strong>CI/CD</strong></td><td>GitHub Actions → Railway</td><td>Native integration, preview envs, secrets management</td></tr><tr><td><strong>Testing</strong></td><td>Vitest (unit) + Playwright (E2E)</td><td>Fast, modern, reliable</td></tr><tr><td><strong>Monitoring</strong></td><td>Railway metrics + custom /api/health</td><td>Built-in + application-level</td></tr></tbody></table>
+<hr>
+
+<h2>4. Arsitektur Sistem</h2>
+
+<h3>4.1 Diagram Arsitektur High-Level</h3>
+
+<p>``<code><br>┌─────────────────────────────────────────────────────────────────────────────┐<br>│                            METROCOOP ARCHITECTURE                             │<br>├─────────────────────────────────────────────────────────────────────────────┤<br>│                                                                              │<br>│  ┌──────────────┐    ┌──────────────┐    ┌──────────────┐    ┌───────────┐  │<br>│  │   Browser    │    │   Mobile     │    │   Admin      │    │  3rd Party │  │<br>│  │   (React)    │    │   (PWA)      │    │   Portal     │    │  Services  │  │<br>│  └──────┬───────┘    └──────┬───────┘    └──────┬───────┘    └─────┬──────┘  │<br>│         │                   │                   │                   │         │<br>│         └───────────────────┼───────────────────┼───────────────────┘         │<br>│                             ▼                   ▼                             │<br>│                    ┌─────────────────────────────────────────┐               │<br>│                    │           API Gateway (Express)          │               │<br>│                    │  ┌───────────────────────────────────┐  │               │<br>│                    │  │     Middleware Stack              │  │               │<br>│                    │  │  Helmet • CORS • RateLimit • JWT  │  │               │<br>│                    │  └───────────────────────────────────┘  │               │<br>│                    └──────────────────┬──────────────────────┘               │<br>│                                       │                                      │<br>│         ┌─────────────────────────────┼─────────────────────────────┐        │<br>│         ▼                             ▼                             ▼        │<br>│  ┌─────────────┐              ┌─────────────┐              ┌─────────────┐  │<br>│  │   Module    │              │   Module    │              │   Module    │  │<br>│  │  Routers    │              │  Routers    │              │  Routers    │  │<br>│  │ (auth,      │              │ (anggota,   │              │ (akuntansi, │  │<br>│  │  data,      │              │  simpanan,  │              │  laporan,   │  │<br>│  │  upload)    │              │  pinjaman)  │              │  unit usaha)│  │<br>│  └──────┬──────┘              └──────┬──────┘              └──────┬──────┘  │<br>│         │                            │                            │         │<br>│         └────────────────────────────┼────────────────────────────┘         │<br>│                                      ▼                                      │<br>│                         ┌─────────────────────┐                             │<br>│                         │  PostgreSQL 16      │                             │<br>│                         │  (Primary + Replica)│                             │<br>│                         │  • 70+ Tables       │                             │<br>│                         │  • JSONB for flex   │                             │<br>│                         │  • Row-level Security│                            │<br>│                         └─────────────────────┘                             │<br>│                                      │                                      │<br>│                    ┌─────────────────┼─────────────────┐                   │<br>│                    ▼                 ▼                 ▼                   │<br>│            ┌─────────────┐    ┌─────────────┐    ┌─────────────┐           │<br>│            │  Google     │    │  Railway    │    │  External   │           │<br>│            │  Gemini AI  │    │  (Hosting)  │    │  APIs       │           │<br>│            │  (Scoring)  │    │  + PostgreSQL│   │  (Midtrans, │           │<br>│            └─────────────┘    └─────────────┘    │   VA Banks) │           │<br>│                                                   └─────────────┘           │<br>└─────────────────────────────────────────────────────────────────────────────┘<br></code>`<code></p>
+
+<h3>4.2 Arsitektur Monorepo</h3>
+
+<p></code>`<code><br>metrocoop/<br>├── apps/<br>│   ├── web/                    # React Frontend (Vite + Tailwind)<br>│   │   ├── src/<br>│   │   │   ├── components/     # UI Components (admin, member, landing)<br>│   │   │   ├── pages/          # Route-level pages<br>│   │   │   ├── stores/         # Zustand state<br>│   │   │   ├── lib/            # API client, utils<br>│   │   │   └── theme/          # Theme provider<br>│   │   └── tests/e2e/          # Playwright tests<br>│   └── mobile/                 # React Native (Expo) - future<br>├── packages/<br>│   └── shared/                 # Shared TypeScript types, validation, API client<br>│       ├── src/<br>│       │   ├── types/          # Domain types (Anggota, Pinjaman, Jurnal, etc.)<br>│       │   ├── api/            # Typed API client (fetch wrapper)<br>│       │   ├── validation/     # Zod schemas<br>│       │   └── stores/         # Shared Zustand stores<br>├── server/                     # Express Backend<br>│   ├── routes/                 # Module routers<br>│   ├── middleware/             # Auth, rate-limit, error handling<br>│   ├── lib/                    # Finance calculations, AI scoring<br>│   ├── db.ts                   # PostgreSQL pool + query helpers<br>│   ├── migrate.ts              # Migration runner<br>│   └── server.ts               # Entry point<br>├── db/<br>│   ├── schema.sql              # DDL (70+ tables)<br>│   └── seed.sql                # Reference data<br>├── landing/                    # Static landing page (CMS-driven)<br>├── .github/workflows/          # CI/CD pipelines<br>├── railway.toml                # Railway config<br>└── Dockerfile                  # Multi-stage build<br></code>`<code></p>
+
+<h3>4.3 Data Flow: Transaksi → Jurnal Otomatis</h3>
+
+<p></code>`<code><br>User Action (Setor Simpanan)<br>        │<br>        ▼<br>POST /api/simpanan/transaksi<br>        │<br>        ▼<br>Validate (Zod) → Check Saldo → Insert simpanan_transaksi<br>        │<br>        ▼<br>Auto-Generate Jurnal (Trigger di Service Layer)<br>        │<br>        ├─ Debit: Kas/Bank (1.1.01/1.1.03)      ← Sumber Bayar<br>        │<br>        └─ Kredit: Simpanan Pokok/Wajib/Sukarela (2.1.01/02/03)<br>        │<br>        ▼<br>Insert journal_entries + journal_approvals (status: posted)<br>        │<br>        ▼<br>Return Response { transaksi, jurnal }<br></code>`<code></p>
+
+<h3>4.4 Keamanan & Kepatuhan</h3>
+
+<table><thead><tr><th>Aspek</th><th>Implementasi</th></tr></thead><tbody><tr><td><strong>Authentication</strong></td><td>JWT HS256, 24h expiry, refresh token rotation (planned)</td></tr><tr><td><strong>Authorization</strong></td><td>RBAC middleware per route + resource-level checks</td></tr><tr><td><strong>Rate Limiting</strong></td><td>100 req/15min global, 10 login/15min per IP</td></tr><tr><td><strong>Headers</strong></td><td>Helmet (CSP, HSTS, X-Frame-Options, Referrer-Policy)</td></tr><tr><td><strong>CORS</strong></td><td>Whitelist origin production + preview</td></tr><tr><td><strong>Password</strong></td><td>bcryptjs cost factor 10</td></tr><tr><td><strong>SQL Injection</strong></td><td>Parameterized queries (pg driver), no string concat</td></tr><tr><td><strong>Audit Log</strong></td><td>Setiap mutasi data mencatat: user_id, table, pk, before_json, after_json, timestamp</td></tr><tr><td><strong>Data Encryption</strong></td><td>TLS 1.3 in transit, pgcrypto for PII at rest (planned)</td></tr><tr><td><strong>Backup</strong></td><td>Railway automated daily PG dump + point-in-time recovery</td></tr><tr><td><strong>Compliance</strong></td><td>Siap audit OJK, UU No. 17/2012 (Koperasi), SAK ETAP</td></tr></tbody></table>
+<hr>
+
+<h2>5. Metodologi Pengembangan</h2>
+
+<h3>5.1 Pendekatan: Agile Hybrid (Scrum + Kanban)</h3>
+
+<table><thead><tr><th>Fase</th><th>Durasi</th><th>Aktivitas Utama</th><th>Deliverable</th></tr></thead><tbody><tr><td><strong>Discovery</strong></td><td>2 minggu</td><td>Workshop kebutuhan, analisis gap, finalisasi scope</td><td>BRD, SRS, Wireframe</td></tr><tr><td><strong>Sprint 0 (Setup)</strong></td><td>1 minggu</td><td>Repo, CI/CD, DB staging, design system, auth skeleton</td><td>Running dev env</td></tr><tr><td><strong>Sprint 1-3 (Core)</strong></td><td>6 minggu</td><td>Auth, Anggota, Simpanan, Pinjaman, Jurnal Otomatis</td><td>Core modules done</td></tr><tr><td><strong>Sprint 4-5 (Akuntansi)</strong></td><td>4 minggu</td><td>COA, Periode, Buku Besar, Neraca, Laba Rugi, Tutup Buku</td><td>Accounting done</td></tr><tr><td><strong>Sprint 6-7 (Unit Usaha)</strong></td><td>4 minggu</td><td>POS, Sewa, PPOB, Cicilan, Ventura</td><td>Business units done</td></tr><tr><td><strong>Sprint 8 (AI & Polish)</strong></td><td>2 minggu</td><td>Credit Scoring, Landing CMS, Audit Trail, Performance</td><td>AI + UX done</td></tr><tr><td><strong>UAT & Go-Live</strong></td><td>2 minggu</td><td>User acceptance test, data migration, training, production deploy</td><td>Production ready</td></tr><tr><td><strong>Warranty</strong></td><td>12 minggu</td><td>Bug fix, minor enhancement, knowledge transfer</td><td>Stable ops</td></tr></tbody></table>
+<h3>5.2 Praktik Engineering</h3>
+
+<ul><li><strong>Trunk-based Development</strong>: Main branch selalu deployable</li>
+<li><strong>Feature Flags</strong>: Modul bisa dinonaktifkan tanpa deploy</li>
+<li><strong>Code Review</strong>: Minimal 1 reviewer, checklist: types, tests, security, perf</li>
+<li><strong>Testing Pyramid</strong>: Unit (Vitest) > Integration > E2E (Playwright)</li>
+<li><strong>Definition of Done</strong>: Typecheck pass, build pass, unit test >80%, E2E pass, docs updated</li>
+<li><strong>Semantic Commits</strong>: </code>feat:<code>, </code>fix:<code>, </code>docs:<code>, </code>refactor:<code>, </code>test:<code>, </code>chore:<code></li>
+</ul>
+<h3>5.3 Quality Gates (CI Pipeline)</h3>
+
+<p></code>`<code>yaml<br>Jobs:<br>  1. typecheck-build    # tsc --noEmit + vite build + esbuild server<br>  2. unit-test          # vitest run --coverage<br>  3. e2e-test           # playwright test (chromium, postgresql service)<br>  4. deploy-preview     # railway up --environment preview-pr-{num}<br>  5. deploy-production  # railway up --environment production (gate: main + CI pass)<br></code>`<code></p>
+
+<hr>
+
+<h2>6. Timeline & Milestone</h2>
+
+<h3>6.1 Gantt Chart (High-Level)</h3>
+
+<p></code>`<code><br>Minggu:    1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20<br>           │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │  │<br>Discovery  ████████<br>Sprint 0         ████<br>Sprint 1-3           ████████████████████<br>Sprint 4-5                     ████████████████<br>Sprint 6-7                                 ████████████████<br>Sprint 8                                           ████████<br>UAT & Go-Live                                               ████████<br>Warranty (support)                                             ████████████████████<br></code>``</p>
+
+<h3>6.2 Milestone Pembayaran (Payment Schedule)</h3>
+
+<table><thead><tr><th>Milestone</th><th>Trigger</th><th>Persentase</th><th>Nilai (Contoh)</th></tr></thead><tbody><tr><td><strong>M1: Kontrak & Discovery</strong></td><td>Tanda tangan kontrak + kickoff</td><td>20%</td><td>Rp 150.000.000</td></tr><tr><td><strong>M2: Core Modules Ready</strong></td><td>Sprint 3 done (Auth, Anggota, Simpanan, Pinjaman demo)</td><td>25%</td><td>Rp 187.500.000</td></tr><tr><td><strong>M3: Akuntansi & Unit Usaha</strong></td><td>Sprint 7 done (Accounting + POS + PPOB + Ventura)</td><td>25%</td><td>Rp 187.500.000</td></tr><tr><td><strong>M4: UAT Sign-off</strong></td><td>User acceptance test passed, staging approved</td><td>20%</td><td>Rp 150.000.000</td></tr><tr><td><strong>M5: Production Go-Live</strong></td><td>Deploy production, health check green, training done</td><td>10%</td><td>Rp 75.000.000</td></tr><tr><td><strong>Total</strong></td><td></td><td><strong>100%</strong></td><td><strong>Rp 750.000.000</strong></td></tr></tbody></table>
+<blockquote><strong>Catatan</strong>: Nilai di atas ilustratif. Harga final disesuaikan scope, customisasi, dan SLA support.</blockquote>
+
+<hr>
+
+<h2>7. Tim Proyek</h2>
+
+<table><thead><tr><th>Peran</th><th>Nama</th><th>Tanggung Jawab Utama</th><th>Alokasi</th></tr></thead><tbody><tr><td><strong>Project Manager</strong></td><td>[Nama PM]</td><td>Planning, stakeholder comm, risk, budget, timeline</td><td>50%</td></tr><tr><td><strong>Tech Lead / Backend Lead</strong></td><td>[Nama TL]</td><td>Arsitektur, code review, DB design, API design, AI integration</td><td>100%</td></tr><tr><td><strong>Frontend Lead</strong></td><td>[Nama FL]</td><td>UI/UX implementation, design system, state mgmt, PWA</td><td>100%</td></tr><tr><td><strong>Backend Engineer (2x)</strong></td><td>[Nama BE1, BE2]</td><td>Module development: auth, data, accounting, business units</td><td>100% each</td></tr><tr><td><strong>Frontend Engineer (2x)</strong></td><td>[Nama FE1, FE2]</td><td>Component library, pages, dashboard, landing CMS</td><td>100% each</td></tr><tr><td><strong>QA Engineer</strong></td><td>[Nama QA]</td><td>Test plan, automation (Playwright), UAT coordination</td><td>75%</td></tr><tr><td><strong>DevOps / Cloud Engineer</strong></td><td>[Nama DevOps]</td><td>CI/CD, Railway, PostgreSQL, monitoring, backup, security</td><td>50%</td></tr><tr><td><strong>Business Analyst</strong></td><td>[Nama BA]</td><td>Requirement elicitation, BRD/SRS, user story, UAT support</td><td>75%</td></tr><tr><td><strong>UI/UX Designer</strong></td><td>[Nama Designer]</td><td>Wireframe, mockup, design system, usability testing</td><td>50%</td></tr></tbody></table>
+<strong>Total Headcount</strong>: 11 orang (core team 9 + shared 2)
+
+<hr>
+
+<h2>8. Investasi & Harga Penawaran</h2>
+
+<h3>8.1 Paket Standar (Fixed Scope)</h3>
+
+<table><thead><tr><th>Komponen</th><th>Deskripsi</th><th>Harga (IDR)</th></tr></thead><tbody><tr><td><strong>Lisensi Platform MetroCoop</strong></td><td>Perpetaun, source code access, unlimited users</td><td>500.000.000</td></tr><tr><td><strong>Implementasi & Customisasi</strong></td><td>Setup, konfigurasi, migrasi data, custom workflow</td><td>150.000.000</td></tr><tr><td><strong>Pelatihan & Knowledge Transfer</strong></td><td>5 sesi: Admin, Operator, Anggota, Akuntansi, IT</td><td>50.000.000</td></tr><tr><td><strong>Warranty Support (3 bulan)</strong></td><td>Bug fix, minor enhancement, SLA 4 jam jam kerja</td><td>50.000.000</td></tr><tr><td><strong>Subtotal</strong></td><td></td><td><strong>750.000.000</strong></td></tr></tbody></table>
+<h3>8.2 Paket Berlangganan (SaaS) — Alternatif</h3>
+
+<table><thead><tr><th>Paket</th><th>Bulanan</th><th>Tahunan (10% off)</th><th>Termasuk</th></tr></thead><tbody><tr><td><strong>Starter</strong></td><td>Rp 8.000.000</td><td>Rp 86.400.000</td><td>Core modules, 500 anggota, 1 GB storage</td></tr><tr><td><strong>Professional</strong></td><td>Rp 15.000.000</td><td>Rp 162.000.000</td><td>Semua modul, unlimited anggota, 10 GB, AI scoring</td></tr><tr><td><strong>Enterprise</strong></td><td>Rp 25.000.000</td><td>Rp 270.000.000</td><td>Professional + multi-cabang, dedicated support, SLA 99.9%</td></tr></tbody></table>
+<h3>8.3 Biaya Tambahan (Opsional)</h3>
+
+<table><thead><tr><th>Item</th><th>Harga</th><th>Keterangan</th></tr></thead><tbody><tr><td>Modul Kustom / Integrasi Bank Baru</td><td>Rp 50.000.000 / modul</td><td>VA bank lain, SMS gateway, BPJS, dll</td></tr><tr><td>Migrasi Data Legacy (kompleks)</td><td>Rp 30.000.000</td><td>ETL dari sistem lama, validasi, UAT</td></tr><tr><td>Extend Warranty (per bulan)</td><td>Rp 10.000.000</td><td>Setelah 3 bulan warranty standar</td></tr><tr><td>On-premise Deployment</td><td>Rp 100.000.000</td><td>Install di server klien, air-gapped support</td></tr><tr><td>Penambahan User/Storage</td><td>Rp 5.000 / user/bulan</td><td>Di atas paket SaaS</td></tr></tbody></table>
+<h3>8.4 Asumsi Harga</h3>
+
+<ul><li>Scope sesuai BRD/SRS yang disepakati (change request melalui CR form)</li>
+<li>Data migrasi < 50.000 record (anggota + transaksi historis)</li>
+<li>Infrastruktur cloud (Railway/PostgreSQL) dibayar terpisah oleh klien atau termasuk di SaaS</li>
+<li>Pelatihan dilakukan remote (Zoom/Meet), on-site + biaya travel/akomodasi</li>
+<li>Support warranty: jam kerja (Senin-Jumat, 09:00-17:00 WIB), response time < 4 jam</li>
+</ul>
+<hr>
+
+<h2>9. Syarat & Ketentuan</h2>
+
+<h3>9.1 Ruang Lingkup & Change Request</h3>
+
+<ul><li>Setiap perubahan scope (tambah fitur, ubah flow, integrasi baru) memerlukan <strong>Change Request (CR)</strong> tertulis</li>
+<li>CR dievaluasi impact (effort, timeline, cost) dalam 3 hari kerja</li>
+<li>CR disetujui oleh Project Sponsor klien & PM MetroCoop</li>
+</ul>
+<h3>9.2 Hak Kekayaan Intelektual (IPR)</h3>
+
+<ul><li><strong>Kode sumber (source code)</strong>: Hak cipta dimiliki MetroCoop. Klien mendapat <strong>lisensi perpetual, non-eksklusif, royalty-free</strong> untuk penggunaan internal</li>
+<li><strong>Data koperasi</strong>: 100% milik klien. MetroCoop tidak berhak membagikan, menjual, atau menggunakan data untuk keperluan lain</li>
+<li><strong>Brand MetroCoop</strong>: Tetap milik pengembang. Klien boleh white-label dengan perjanjian terpisah</li>
+</ul>
+<h3>9.3 SLA Support (Warranty Period)</h3>
+
+<table><thead><tr><th>Severity</th><th>Deskripsi</th><th>Response Time</th><th>Resolution Target</th></tr></thead><tbody><tr><td><strong>Critical (P1)</strong></td><td>Sistem down, data hilang, security breach</td><td>< 1 jam</td><td>< 4 jam</td></tr><tr><td><strong>High (P2)</strong></td><td>Fitur utama error, blokir operasional harian</td><td>< 4 jam</td><td>< 1 hari kerja</td></tr><tr><td><strong>Medium (P3)</strong></td><td>Bug non-kritis, UI glitch, laporan salah</td><td>< 1 hari kerja</td><td>< 3 hari kerja</td></tr><tr><td><strong>Low (P4)</strong></td><td>Enhancement, kosmetik, dokumentasi</td><td>< 3 hari kerja</td><td>Next sprint</td></tr></tbody></table>
+<h3>9.4 Konfidensialitas</h3>
+
+<ul><li>Kedua pihak menjaga kerahasiaan informasi bisnis, data anggota, kode sumber, dan dokumen proyek</li>
+<li>Berlaku selama kontrak + 3 tahun pasca berakhirnya kontrak</li>
+<li>Kecuali: informasi yang sudah publik, wajib dibuka per undang-undang, atau disetujui tertulis</li>
+</ul>
+<h3>9.5 Force Majeure</h3>
+
+<p>Tidak ada pihak yang bertanggung jawab atas kegagalan penugasan akibat kekuatan di luar kendali (bencana alam, perang, pandemi, regulasi pemerintah, gangguan internet backbone).</p>
+
+<h3>9.6 Penyelesaian Sengketa</h3>
+
+<ul><li>Musyawarah mufakat (good faith) dalam 14 hari</li>
+<li>Mediasi di BANI (Badan Arbitrase Nasional Indonesia)</li>
+<li>Arbitrase di BANI dengan hukum Indonesia, bahasa Indonesia, tempat Jakarta</li>
+</ul>
+<h3>9.7 Masa Berlaku & Pembatalan</h3>
+
+<ul><li>Kontrak berlaku sejak tanda tangan sampai Go-Live + 3 bulan warranty</li>
+<li>Pembatalan: minimal 30 hari tertulis sebelumnya</li>
+<li>Jika dibatalkan klien sebelum M2: 50% nilai M1 + M2 dibayar</li>
+<li>Jika dibatalkan MetroCoop: refund 100% uang muka + kompensasi 10% total kontrak</li>
+</ul>
+<hr>
+
+<h2>10. Penutup</h2>
+
+<p>MetroCoop hadir sebagai solusi <strong>end-to-end, modern, dan compliant</strong> untuk transformasi digital Koperasi Simpan Pinjam Indonesia. Dengan arsitektur modular, jurnal otomatis, AI credit scoring, dan unit usaha terintegrasi, koperasi dapat:</p>
+
+<ul><li><span class="check">✅</span> <strong>Mengurangi operasional manual 80%+</strong></li>
+<li><span class="check">✅</span> <strong>Mempercepat pelaporan ke OJK/anggota dari minggu jadi jam</strong></li>
+<li><span class="check">✅</span> <strong>Meningkatkan akurasi data & kepercayaan anggota</strong></li>
+<li><span class="check">✅</span> <strong>Membuka pendapatan baru</strong> (PPOB, Ventura, Sewa, Toko)</li>
+<li><span class="check">✅</span> <strong>Siap audit & regulasi</strong> kapan saja</li>
+</ul>
+Kami siap menjadi <strong>partner teknologi jangka panjang</strong> — bukan sekadar vendor proyek. Tim kami berkomitmen pada kualitas kode, keamanan data, dan kesuksesan operasional koperasi Anda.
+
+<hr>
+
+<p><strong>Disiapkan oleh:</strong>  <br>Tim MetroCoop  <br>📧 email@metromitra.co.id  <br>📞 +62 21 789-0123  <br>🌐 https://metrocoop-app-production.up.railway.app</p>
+
+<hr>
+
+<p><em>Proposal ini berlaku 30 hari sejak tanggal terbit. Semua harga dalam Rupiah Indonesia (IDR) dan belum termasuk PPN 11% (kecuali dinyatakan lain).</em></p>
+    </div>
+  </main>
+</body>
+</html>

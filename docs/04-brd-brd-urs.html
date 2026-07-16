@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRD / URS — MetroCoop</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #0f3d91;
+  --primary-light: #1a56db;
+  --primary-dark: #0a2a6e;
+  --accent: #16a34a;
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --bg-code: #f1f5f9;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --sidebar-w: 280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --bg-alt: #1e293b;
+    --bg-code: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--primary-dark);
+  color: #e2e8f0;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.sidebar-brand small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 0;
+}
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.sidebar-nav a:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.sidebar-nav a.active {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+.sidebar-nav a .num {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 22px;
+  text-align: center;
+}
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Main content */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+.content-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 40px 80px;
+}
+
+/* Typography */
+h1 { font-size: 32px; font-weight: 800; color: var(--primary); margin: 0 0 8px; line-height: 1.2; }
+h2 { font-size: 24px; font-weight: 700; color: var(--text); margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--primary); }
+h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+h4 { font-size: 16px; font-weight: 600; color: var(--primary-light); margin: 24px 0 8px; }
+h5 { font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 20px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+p { margin: 0 0 12px; }
+strong { font-weight: 600; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Lists */
+ul, ol { margin: 0 0 16px; padding-left: 24px; }
+li { margin-bottom: 4px; }
+li ul, li ol { margin-top: 4px; margin-bottom: 0; }
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 13px;
+}
+th {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  white-space: nowrap;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:hover td { background: var(--bg-alt); }
+tr:nth-child(even) td { background: var(--bg-alt); }
+
+/* Code */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--bg-code);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--primary);
+}
+pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+}
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 13px;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: var(--bg-alt);
+  padding: 12px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+/* Emoji & checkmarks */
+.check { color: var(--accent); font-weight: 700; }
+.cross { color: #dc2626; }
+
+/* Print styles */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  .content-inner { max-width: 100%; padding: 20px; }
+  h1, h2 { page-break-after: avoid; }
+  table { page-break-inside: avoid; }
+  pre { white-space: pre-wrap; word-wrap: break-word; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 240px; }
+  .content-inner { padding: 32px 24px; }
+}
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar { position: relative; width: 100%; height: auto; max-height: 300px; }
+  .content { margin-left: 0; }
+  .content-inner { padding: 24px 16px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h2>MetroCoop</h2>
+      <small>Documentation Suite</small>
+    </div>
+    <div class="sidebar-nav">
+      <a href="01-proposal-proposal-teknis-komersial.html" class="">
+      <span class="num">1</span>
+      Proposal Teknis & Komersial
+    </a>
+<a href="02-company-profile-company-profile-portofolio.html" class="">
+      <span class="num">2</span>
+      Company Profile & Portofolio
+    </a>
+<a href="03-nda-nda-draft.html" class="">
+      <span class="num">3</span>
+      Draft NDA
+    </a>
+<a href="04-brd-brd-urs.html" class="active">
+      <span class="num">4</span>
+      BRD / URS
+    </a>
+<a href="05-srs-srs-specification.html" class="">
+      <span class="num">5</span>
+      SRS
+    </a>
+<a href="06-ui-ux-ui-ux-design-spec.html" class="">
+      <span class="num">6</span>
+      UI/UX Design
+    </a>
+<a href="07-project-plan-project-plan.html" class="">
+      <span class="num">7</span>
+      Project Plan
+    </a>
+    </div>
+    <div class="sidebar-footer">
+      MetroCoop © 2026<br>
+      Generated: 16/7/2026
+    </div>
+  </nav>
+  <main class="content">
+    <div class="content-inner">
+      <h1>Dokumen Kebutuhan Bisnis (BRD/URS)</h1>
+<h2>Sistem Informasi Koperasi Simpan Pinjam (KSP) — MetroCoop</h2>
+<strong>Versi Regulatif: Sesuai UU No. 17 Tahun 2012, POJK Koperasi, SAK ETAP, UU PDP</strong>
+
+<hr>
+
+<h3>1. Latar Belakang & Dasar Hukum</h3>
+
+<table><thead><tr><th>Regulasi</th><th>Relevansi untuk Sistem</th></tr></thead><tbody><tr><td><strong>UU No. 17 Tahun 2012</strong> tentang Koperasi</td><td>Dasar utama: keanggotaan, modal, pengurus, pengawas, RAT, SHU, sanksi</td></tr><tr><td><strong>POJK No. 12/POJK.03/2018</strong> (dan amandemennya) tentang KSP</td><td>Prinsip kehati-hatian, KPMM, Kolektibilitas, Pelaporan ke OJK</td></tr><tr><td><strong>POJK No. 70/POJK.03/2019</strong> tentang Laku Pandai</td><td>Inklusi keuangan, layanan digital, e-KYC</td></tr><tr><td><strong>SEOJK No. 14/SEOJK.03/2019</strong></td><td>Standar Pelaporan KSP ke OJK (LKP, BMPK, dll)</td></tr><tr><td><strong>SAK ETAP</strong> (PSAK 70)</td><td>Standar akuntansi: COA, Jurnal, Neraca, Laba Rugi, Arus Kas, Catatan atas LK</td></tr><tr><td><strong>UU No. 27 Tahun 2022</strong> (PDP)</td><td>Perlindungan data pribadi anggota, consent, DPO, breach notification</td></tr><tr><td><strong>UU ITE (UU 11/2008 jo UU 1/2024)</strong></td><td>Transaksi elektronik, tanda tangan digital, bukti elektronik</td></tr></tbody></table>
+<hr>
+
+<h3>2. Pemetaan Proses Bisnis ke Regulasi</h3>
+
+<h4>2.1 Keanggotaan (Pasal 34-39 UU 17/2012)</h4>
+<table><thead><tr><th>Proses</th><th>Aturan Regulatif</th><th>Implementasi Sistem</th></tr></thead><tbody><tr><td><strong>Syarat Jadi Anggota</strong></td><td>WNI, berumur ≥17 th / sudah menikah, bertempat tinggal/berusaha di wilayah kerja</td><td>Validasi NIK (Dukcapil), cek umur otomatis, cek wilayah kode pos</td></tr><tr><td><strong>Hak & Kewajiban</strong></td><td>Pasal 36-37: Hak suara, hak SHU, kewajiban setor modal</td><td>Role-based access: Anggota punya akses portal, voting e-RAT</td></tr><tr><td><strong>Ketentuan Keluar</strong></td><td>Pasal 38: Pengunduran diri, meninggal, PHK, dikeluarkan</td><td>Workflow keluar: hitung saldo, kembalikan modal (Pokok), blokir akses</td></tr><tr><td><strong>Buku Anggota</strong></td><td>Wajib ada buku daftar anggota (Pasal 39)</td><td>Master data digital + audit trail, export PDF untuk keperluan hukum</td></tr></tbody></table>
+<h4>2.2 Modal & Simpanan (Pasal 40-43 UU 17/2012)</h4>
+<table><thead><tr><th>Jenis</th><th>Regulasi</th><th>Aturan Sistem</th></tr></thead><tbody><tr><td><strong>Modal Pokok</strong></td><td>Pasal 40: Setoran wajib saat daftar, tidak bisa ditarik selagi jadi anggota</td><td>Lock saldo pokok saat aktif, auto-return saat keluar</td></tr><tr><td><strong>Simpanan Wajib</strong></td><td>Pasal 41: Berlaku sebagai jaminan pinjaman, setoran berkala</td><td>Validasi pinjaman: cek kelengkapan simpanan wajib min. 3-6 bln terakhir</td></tr><tr><td><strong>Simpanan Sukarela</strong></td><td>Pasal 42: Bisa ditarik kapan saja, mendapat jasa/bunga</td><td>Bunga harian (daily balance) / bulanan, hitung otomatis per SEOJK</td></tr><tr><td><strong>Deposito</strong></td><td>Pasal 43: Berjangka, bunga lebih tinggi, penalti tarik sebelum tempo</td><td>Konfigurasi tenor & rate, auto-rollover, penalty calc otomatis</td></tr></tbody></table>
+<h4>2.3 Pinjaman & Prinsip Kehati-hatian (POJK 12/2018)</h4>
+<table><thead><tr><th>Aspek</th><th>Regulasi</th><th>Implementasi Sistem</th></tr></thead><tbody><tr><td><strong>Plafon Maksimal</strong></td><td>Pasal 14 POJK: Maks 20% Modal Sendiri per debitur (bisa naik jadi 25% dgn syarat)</td><td>Auto-check plafon per anggota vs modal koperasi, hard-stop di API</td></tr><tr><td><strong>Kolektibilitas</strong></td><td>SEOJK: Lancar (1), DPK (2), Kurang Lancar (3), Diragukan (4), Macet (5)</td><td>Scheduler harian update status berdasarkan hari tunggakan</td></tr><tr><td><strong>Cadangan Kerugian (CKPN)</strong></td><td>PSAK 71 / POJK: Minimum cadangan per kolektibilitas</td><td>Auto-calculate CKPN bulanan, jurnal otomatis ke Beban CKPN</td></tr><tr><td><strong>Analisis 5C</strong></td><td>Prinsip Kehati-hatian: Character, Capacity, Capital, Collateral, Condition</td><td><strong>AI Credit Scoring</strong> (Gemini) generate skor 0-100 + rekomendasi</td></tr><tr><td><strong>Denda Tunggakan</strong></td><td>SEOJK: Maks 2%/bulan dari pokok tunggakan (bukan compound)</td><td>Konfigurasi rate denda, kalkulasi harian, cap maksimal per regulasi</td></tr><tr><td><strong>Restrukturisasi</strong></td><td>POJK: Diizinkan dengan syarat, tidak reset kolektibilitas otomatis</td><td>Workflow restruktur: approval pengawas, simpan history kolektibilitas lama</td></tr></tbody></table>
+<h4>2.4 Pengurus & Pengawas (Pasal 45-52 UU 17/2012)</h4>
+<table><thead><tr><th>Peran</th><th>Regulasi</th><th>Mapping Role Sistem</th></tr></thead><tbody><tr><td><strong>Ketua</strong></td><td>Menjalankan RAT, menandatangani laporan</td><td>Superadmin / Admin Utama: approve laporan OJK, e-sign dokumen</td></tr><tr><td><strong>Bendahara</strong></td><td>Mengelola keuangan, kas</td><td>Operator Keuangan: validasi transaksi > threshold, manage kas</td></tr><tr><td><strong>Sekretaris</strong></td><td>Administrasi, buku anggota</td><td>Admin Data: manage master anggota, dokumen legal</td></tr><tr><td><strong>Pengawas</strong></td><td>Mengawasi pengurus, audit internal</td><td>Role <strong>Pengawas</strong> (read-only + audit trail access, export laporan)</td></tr></tbody></table>
+<h4>2.5 RAT & SHU (Pasal 53-58 UU 17/2012)</h4>
+<table><thead><tr><th>Proses</th><th>Regulasi</th><th>Fitur Sistem</th></tr></thead><tbody><tr><td><strong>RAT Tahunan</strong></td><td>Maks 6 bln setelah akhir tahun buku</td><td>Modul <strong>e-RAT</strong>: agenda, undangan digital, voting online, risalah otomatis</td></tr><tr><td><strong>Penggunaan SHU</strong></td><td>Prioritas: Cadangan (min 10%), Pendidikan (max 5%), Jasa Modal, SHU Anggota</td><td>Wizard alokasi SHU dengan validasi persentase wajib</td></tr><tr><td><strong>Pembagian SHU</strong></td><td>Berdasarkan jasa modal (simpanan) & jasa usaha (transaksi)</td><td>Kalkulasi otomatis per anggota, generate SLIP SHU digital</td></tr></tbody></table>
+<h4>2.6 Akuntansi & Pelaporan (SAK ETAP / PSAK 70 / SEOJK)</h4>
+<table><thead><tr><th>Laporan</th><th>Standar</th><th>Frekuensi</th><th>Fitur Sistem</th></tr></thead><tbody><tr><td><strong>Neraca</strong></td><td>PSAK 70</td><td>Bulanan/Tahunan</td><td>Auto-generate dari COA hierarchical, format OJK</td></tr><tr><td><strong>Laporan Laba Rugi</strong></td><td>PSAK 70</td><td>Bulanan/Tahunan</td><td>Termasuk SHU, pembagian SHU, pajak</td></tr><tr><td><strong>Laporan Arus Kas</strong></td><td>PSAK 70 (Metode Langsung)</td><td>Tahunan</td><td>Auto dari jurnal kas/bank</td></tr><tr><td><strong>Catatan Atas LK</strong></td><td>PSAK 70</td><td>Tahunan</td><td>Template terisi otomatis (kebijakan akuntansi, related party, dll)</td></tr><tr><td><strong>LKP (Laporan Keuangan Penyelesaian)</strong></td><td>SEOJK 14</td><td>Bulanan (OJK)</td><td>Export XML/JSON sesuai skema OJK (XBRL-ready)</td></tr><tr><td><strong>BMPK (Bukti Mutasi Penempatan Kas)</strong></td><td>SEOJK</td><td>Bulanan</td><td>Auto dari transaksi kas/bank + investasi</td></tr><tr><td><strong>Laporan Kolektibilitas</strong></td><td>SEOJK</td><td>Bulanan</td><td>Per debitur & agregat, dengan CKPN</td></tr></tbody></table>
+<h4>2.7 Unit Usaha Koperasi (Pasal 7 UU 17/2012)</h4>
+<table><thead><tr><th>Unit</th><th>Regulasi Spesifik</th><th>Catatan Sistem</th></tr></thead><tbody><tr><td><strong>Toko/Retail</strong></td><td>Perdagangan biasa, wajib NPWP jika >4,8M/th</td><td>POS, HPP FIFO, PPN (jika PKP)</td></tr><tr><td><strong>Jasa/PPOB</strong></td><td>Perizinan terkait (BI, PLN, PDAM, BPJS)</td><td>Integrasi API agregator (Midtrans, Digiflazz, dll)</td></tr><tr><td><strong>Sewa Aset</strong></td><td>Kontrak sewa, pajak PPh Final 10%</td><td>Kontrak digital, jadwal bayar, auto PPh</td></tr><tr><td><strong>Ventura/Investasi</strong></td><td>Pasal 7 ayat 2: investasi pada anggota/pihak ketiga</td><td>Pipeline deal, term sheet digital, dividen tracking</td></tr><tr><td><strong>Cicilan Barang</strong></td><td>Penjualan kredit, akad Murabahah (jika Syariah)</td><td>Skema bunga flat/efektif, akad digital</td></tr></tbody></table>
+<hr>
+
+<h3>3. Kebutuhan Fungsional Terperinci (Functional Requirements)</h3>
+
+<h4>3.1 Modul Keanggotaan (BR-F-01)</h4>
+<table><thead><tr><th>ID</th><th>Kebutuhan</th><th>Prioritas</th><th>Referensi Regulasi</th></tr></thead><tbody><tr><td>BR-F-01-01</td><td>Pendaftaran anggota dengan e-KYC (NIK + Face Match opsional)</td><td>Must</td><td>UU 17/2012 Ps.34, POJK 70/2019 (Laku Pandai)</td></tr><tr><td>BR-F-01-02</td><td>Validasi duplikat NIK & Nomor Anggota unik national (jika terpusat)</td><td>Must</td><td>UU 17/2012 Ps.39</td></tr><tr><td>BR-F-01-03</td><td>Manajemen dokumen: KTP, KK, NPWP, Surat Nikah, Foto (digital, encrypted)</td><td>Must</td><td>UU PDP Ps.14 (Keamanan Data)</td></tr><tr><td>BR-F-01-04</td><td>Status keanggotaan: Aktif, Non-aktif, Cuti, Keluar, Dikeluarkan</td><td>Must</td><td>UU 17/2012 Ps.38</td></tr><tr><td>BR-F-01-05</td><td>Histori perubahan data (audit trail) dengan timestamp & user</td><td>Must</td><td>UU PDP Ps.15 (Log Akses), SAK ETAP (Audit Trail)</td></tr></tbody></table>
+<h4>3.2 Modul Simpanan (BR-F-02)</h4>
+<table><thead><tr><th>ID</th><th>Kebutuhan</th><th>Prioritas</th><th>Referensi Regulasi</th></tr></thead><tbody><tr><td>BR-F-02-01</td><td>4 Jenis simpanan: Pokok, Wajib, Sukarela, Deposito</td><td>Must</td><td>UU 17/2012 Ps.40-43</td></tr><tr><td>BR-F-02-02</td><td>Bunga Simpanan Sukarela: Daily Balance / Bulanan, configurable rate</td><td>Must</td><td>SEOJK (Transparansi bunga)</td></tr><tr><td>BR-F-02-03</td><td>Bunga Deposito: Fixed rate per tenor, penalty tarik sebelum tempo</td><td>Must</td><td>UU 17/2012 Ps.43</td></tr><tr><td>BR-F-02-04</td><td>Transaksi: Setor (Teller/Transfer/Virtual Account), Tarik (Teller/ATM/QRIS)</td><td>Must</td><td>POJK 70/2019 (Layanan Digital)</td></tr><tr><td>BR-F-02-05</td><td>Mutasi Rekening: PDF/Excel, periodik, digital signature</td><td>Must</td><td>SAK ETAP (Evidensi), UU ITE (Tanda Tangan Elektronik)</td></tr><tr><td>BR-F-02-06</td><td>Auto-jurnal setiap transaksi (Debit Kas/Bank, Kredit Simpanan)</td><td>Must</td><td>SAK ETAP (Double Entry)</td></tr></tbody></table>
+<h4>3.3 Modul Pinjaman (BR-F-03)</h4>
+<table><thead><tr><th>ID</th><th>Kebutuhan</th><th>Prioritas</th><th>Referensi Regulasi</th></tr></thead><tbody><tr><td>BR-F-03-01</td><td>Produk Pinjaman: KUR, Mikro, Konsumtif, Produktif, Ventura, Syariah (opsional)</td><td>Must</td><td>POJK 12/2018 (Jenis Usaha KSP)</td></tr><tr><td>BR-F-03-02</td><td>3 Metode Bunga: <strong>Flat</strong>, <strong>Efektif (Menurun/Harian)</strong>, <strong>Anuitas</strong></td><td>Must</td><td>Transparansi biaya (SEOJK)</td></tr><tr><td>BR-F-03-03</td><td>Plafon: Auto-check 20% Modal Sendiri (hard limit), 25% dengan syarat</td><td>Must</td><td>POJK 12/2018 Ps.14</td></tr><tr><td>BR-F-03-04</td><td>Workflow: Pengajuan → Verifikasi (5C) → Approval Pengurus → Cair</td><td>Must</td><td>Prinsip Kehati-hatian</td></tr><tr><td>BR-F-03-05</td><td><strong>AI Credit Scoring</strong>: Analisis 5C + Rasio Keuangan (Likuiditas, Solvabilitas, Rentabilitas, BOPO, BMPK)</td><td>Should</td><td>POJK 12/2018 (Prinsip Kehati-hatian)</td></tr><tr><td>BR-F-03-06</td><td>Jaminan: Fisik (SHM, BPKB), Non-fisik (Simpanan, Jaminan Pribadi), Syariah (Rahn)</td><td>Must</td><td>POJK 12/2018 Ps.15-16</td></tr><tr><td>BR-F-03-07</td><td>Angsuran: Auto-generate jadwal, notifikasi (WA/Email), pembayaran parsial/full</td><td>Must</td><td>SEOJK (Kolektibilitas)</td></tr><tr><td>BR-F-03-08</td><td>Denda: Konfigurasi %/hari, cap maks, tidak compound, akrual otomatis</td><td>Must</td><td>SEOJK (Denda Tunggakan)</td></tr><tr><td>BR-F-03-09</td><td>Kolektibilitas: Auto-update harian (1-5), histori perubahan</td><td>Must</td><td>SEOJK 14 (Pelaporan Kolektibilitas)</td></tr><tr><td>BR-F-03-10</td><td>CKPN: Auto-calculate per PSAK 71/POJK, jurnal otomatis ke Beban CKPN</td><td>Must</td><td>PSAK 71, POJK 12/2018</td></tr><tr><td>BR-F-03-11</td><td>Restrukturisasi: Perpanjangan, Rescheduling, Rekondisionering, dengan approval Pengawas</td><td>Should</td><td>POJK 12/2018 Ps.20</td></tr><tr><td>BR-F-03-12</td><td>Write-off: Approval RAT, pencatatan off-balance sheet, upaya penagihan lanjut</td><td>Could</td><td>POJK 12/2018 Ps.21</td></tr></tbody></table>
+<h4>3.4 Modul Akuntansi & Pelaporan (BR-F-04)</h4>
+<table><thead><tr><th>ID</th><th>Kebutuhan</th><th>Prioritas</th><th>Referensi Regulasi</th></tr></thead><tbody><tr><td>BR-F-04-01</td><td>COA Hierarchical 6 Level (SAK ETAP): Kelompok > Jenis > Kategori > Sub > Detail > Sub-detail</td><td>Must</td><td>PSAK 70</td></tr><tr><td>BR-F-04-02</td><td>Jurnal Otomatis: Setiap transaksi generate jurnal balanced (Debit = Kredit)</td><td>Must</td><td>SAK ETAP (Double Entry)</td></tr><tr><td>BR-F-04-03</td><td>Jurnal Manual: Untuk koreksi, penyusutan, amortisasi, akrual (dengan approval)</td><td>Must</td><td>SAK ETAP</td></tr><tr><td>BR-F-04-04</td><td>Periode Akuntansi: 12 periode + 1 periode penyesuaian (Adjusting)</td><td>Must</td><td>PSAK 70</td></tr><tr><td>BR-F-04-05</td><td>Tutup Buku: Proses lock periode, hitung SHU, generate jurnal penutup</td><td>Must</td><td>UU 17/2012 Ps.56, PSAK 70</td></tr><tr><td>BR-F-04-06</td><td>Laporan: Neraca, Laba Rugi, Arus Kas, Perubahan Ekuitas, Catatan LK</td><td>Must</td><td>PSAK 70, SEOJK 14</td></tr><tr><td>BR-F-04-07</td><td>Laporan OJK (LKP, BMPK, Kolektibilitas, KPMM): Export format XML/JSON OJK</td><td>Must</td><td>SEOJK 14</td></tr><tr><td>BR-F-04-08</td><td>Buku Besar & Buku Jurnal: Filter per akun, periode, status (Posted/Draft)</td><td>Must</td><td>SAK ETAP (Evidensi)</td></tr><tr><td>BR-F-04-09</td><td>Neraca Saldo: Sebelum & Sesudah Penyesuaian</td><td>Must</td><td>PSAK 70</td></tr></tbody></table>
+<h4>3.5 Modul Unit Usaha (BR-F-05)</h4>
+<table><thead><tr><th>ID</th><th>Kebutuhan</th><th>Prioritas</th><th>Referensi Regulasi</th></tr></thead><tbody><tr><td>BR-F-05-01</td><td><strong>POS Retail</strong>: Kasir, stok real-time, HPP FIFO, multi-harga (anggota/non-anggota)</td><td>Must</td><td>UU 17/2012 Ps.7</td></tr><tr><td>BR-F-05-02</td><td><strong>Pembelian</strong>: PO, Penerimaan Barang, Invoice Matching, Hutang Dagang</td><td>Should</td><td>SAK ETAP (Hutang)</td></tr><tr><td>BR-F-05-03</td><td><strong>PPOB</strong>: Pulsa, PLN, PDAM, BPJS, VA Bank, QRIS, e-Wallet (via agregator)</td><td>Should</td><td>POJK 70/2019 (Layanan Digital)</td></tr><tr><td>BR-F-05-04</td><td><strong>Sewa Aset</strong>: Kontrak, jadwal bayar, denda, PPh Final 10%, jurnal sewa</td><td>Could</td><td>UU PPh, UU 17/2012 Ps.7</td></tr><tr><td>BR-F-05-05</td><td><strong>Cicilan Barang</strong>: Akad Jual Beli Kredit / Murabahah, DP, tenor, angsuran</td><td>Could</td><td>UU 17/2012 Ps.7, DSN-MUI (jika Syariah)</td></tr><tr><td>BR-F-05-06</td><td><strong>Ventura</strong>: Pipeline investasi, term sheet, dividen, laporan keuangan anak usaha</td><td>Could</td><td>UU 17/2012 Ps.7, PSAK 70 (Consolidation)</td></tr></tbody></table>
+<h4>3.6 Modul Administrasi & Umum (BR-F-06)</h4>
+<table><thead><tr><th>ID</th><th>Kebutuhan</th><th>Prioritas</th><th>Referensi Regulasi</th></tr></thead><tbody><tr><td>BR-F-06-01</td><td><strong>e-RAT</strong>: Undangan digital, voting online, risalah otomatis, e-signature</td><td>Should</td><td>UU 17/2012 Ps.53, UU ITE</td></tr><tr><td>BR-F-06-02</td><td><strong>Pengumuman & Surat</strong>: Broadcast ke anggota (WA/Email/App), template surat</td><td>Must</td><td>UU 17/2012 (Transparansi)</td></tr><tr><td>BR-F-06-03</td><td><strong>Tiket Bantuan</strong>: SLA, kategori, escalation, knowledge base</td><td>Should</td><td>Layanan Anggota</td></tr><tr><td>BR-F-06-04</td><td><strong>Feature Toggle</strong>: Enable/disable modul per kebutuhan koperasi</td><td>Must</td><td>Fleksibilitas operasional</td></tr><tr><td>BR-F-06-05</td><td><strong>Landing Page CMS</strong>: Hero, fitur, tim, testimoni, pricing, kontak (editable admin)</td><td>Should</td><td>Marketing & Transparansi</td></tr></tbody></table>
+<hr>
+
+<h3>4. Kebutuhan Non-Fungsional (Non-Functional Requirements)</h3>
+
+<table><thead><tr><th>Kategori</th><th>Kebutuhan</th><th>Target / Standar</th><th>Referensi</th></tr></thead><tbody><tr><td><strong>Keamanan</strong></td><td>Enkripsi data at rest (AES-256), in transit (TLS 1.3)</td><td>100% data sensitif</td><td>UU PDP Ps.14, ISO 27001</td></tr><tr><td><strong>Keamanan</strong></td><td>RBAC ketat: Superadmin, Admin, Operator, Anggota, Pengawas, Perusahaan</td><td>Zero unauthorized access</td><td>UU 17/2012 (Segregasi Tugas)</td></tr><tr><td><strong>Keamanan</strong></td><td>Audit Trail: Semua CRUD data kritis (log: user, waktu, before, after)</td><td>100% transaksi keuangan & master</td><td>SAK ETAP, UU PDP Ps.15</td></tr><tr><td><strong>Keamanan</strong></td><td>Rate limiting API, WAF, DDoS protection</td><td>< 1% downtime attack</td><td>POJK Keamanan Siber</td></tr><tr><td><strong>Performa</strong></td><td>Response time API < 500ms (p95), Dashboard load < 2s</td><td>SLA 99.9% uptime</td><td>POJK Layanan Digital</td></tr><tr><td><strong>Skalabilitas</strong></td><td>Support 50.000+ anggota, 1.000+ transaksi/hari</td><td>Horizontal scaling ready</td><td>POJK KPMM</td></tr><tr><td><strong>Ketersediaan</strong></td><td>Backup harian (RPO 24h), Point-in-time recovery (RTO < 4h)</td><td>Tested quarterly</td><td>POJK BCM, UU PDP</td></tr><tr><td><strong>Kepatuhan</strong></td><td>Data residency: Primary DC di Indonesia (Railway Jakarta/Singapura)</td><td>Wajib</td><td>UU PDP Ps.17, POJK Data Lokal</td></tr><tr><td><strong>Aksesibilitas</strong></td><td>WCAG 2.1 AA (kontras, keyboard nav, screen reader)</td><td>100% halaman publik</td><td>Inklusi keuangan</td></tr><tr><td><strong>Integritas Data</strong></td><td>Foreign key constraints, database triggers untuk validasi kritis</td><td>Zero data corrupt</td><td>SAK ETAP (Reliability)</td></tr></tbody></table>
+<hr>
+
+<h3>5. Integrasi Eksternal (External Interfaces)</h3>
+
+<table><thead><tr><th>Sistem Eksternal</th><th>Tujuan</th><th>Protokol / Standar</th><th>Frekuensi</th></tr></thead><tbody><tr><td><strong>OJK (SIPED / Lapor OJK)</strong></td><td>Kirim LKP, BMPK, Kolektibilitas, KPMM</td><td>XML/JSON (XBRL), SFTP/API</td><td>Bulanan / Insidental</td></tr><tr><td><strong>Dukcapil (SIAK)</strong></td><td>Verifikasi NIK & KTP (e-KYC)</td><td>API SOAP/REST, Kunci Publik</td><td>Real-time (saat daftar)</td></tr><tr><td><strong>BI-Fast / SKN / RTGS</strong></td><td>Transfer antar bank, clearing</td><td>ISO 20022, API BI</td><td>Real-time</td></tr><tr><td><strong>VA Bank (Mandiri/BNI/BRI/BCA/Permata)</strong></td><td>Virtual Account untuk setor simpanan/bayar angsuran</td><td>API Bank / Aggregator (Midtrans/Xendit)</td><td>Real-time</td></tr><tr><td><strong>QRIS / GPN</strong></td><td>Pembayaran QR di POS & Angsuran</td><td>EMVCo QR, API Aggregator</td><td>Real-time</td></tr><tr><td><strong>Aggregator PPOB (Digiflazz, Midtrans, Tripay)</strong></td><td>Pulsa, Listrik, PDAM, BPJS, Game, dll</td><td>REST API, Callback/WEBHOOK</td><td>Real-time</td></tr><tr><td><strong>Email (SMTP/Resend/SendGrid)</strong></td><td>Notifikasi transaksi, OTP, pengumuman, laporan</td><td>SMTP API, Template HTML</td><td>Event-driven</td></tr><tr><td><strong>WhatsApp Business API (Meta/BSSP)</strong></td><td>Notifikasi WA, reminder angsuran, broadcast</td><td>Cloud API / On-premise</td><td>Event-driven / Scheduled</td></tr><tr><td><strong>Google Gemini (Vertex AI)</strong></td><td>AI Credit Scoring, OCR Dokumen, Chatbot</td><td>REST API, JSON</td><td>On-demand (scoring)</td></tr><tr><td><strong>PJOK / BPJS Kesehatan / Ketenagakerjaan</strong></td><td>Cek status anggota, iuran (jika koperasi bayar)</td><td>API BPJS / SJSN</td><td>Bulanan / On-demand</td></tr></tbody></table>
+<hr>
+
+<h3>6. Matriks Traceabilitas (Regulasi → Fitur → Test Case)</h3>
+
+<table><thead><tr><th>Regulasi</th><th>Fitur Sistem (BR-F-ID)</th><th>Kriteria Penerimaan (UAT)</th></tr></thead><tbody><tr><td>UU 17/2012 Ps.40 (Modal Pokok)</td><td>BR-F-02-01, BR-F-02-06</td><td>Simpanan Pokok tidak bisa ditarik saat status Aktif; auto-kembali saat Keluar</td></tr><tr><td>POJK 12/2018 Ps.14 (Plafon 20%)</td><td>BR-F-03-03</td><td>Penolakan otomatis jika plafo > 20% modal sendiri per debitur</td></tr><tr><td>SEOJK 14 (Kolektibilitas 1-5)</td><td>BR-F-03-09</td><td>Scheduler 00:05 WIB update status berdasarkan hari tunggakan; histori tersimpan</td></tr><tr><td>PSAK 70 (Jurnal Double Entry)</td><td>BR-F-02-06, BR-F-03-02, BR-F-04-02</td><td>Setiap transaksi generate jurnal balanced; Neraca Saldo selalu 0</td></tr><tr><td>UU PDP Ps.14 (Keamanan Data)</td><td>BR-NF-01, BR-NF-02</td><td>Enkripsi AES-256 at rest; TLS 1.3 in transit; RBAC enforced</td></tr><tr><td>UU 17/2012 Ps.53 (RAT)</td><td>BR-F-06-01</td><td>e-RAT: undangan digital, voting, risalah, e-sign; export PDF legal</td></tr></tbody></table>
+<hr>
+
+<h3>7. Asumsi, Ketergantungan & Batasan</h3>
+
+<table><thead><tr><th>Kategori</th><th>Deskripsi</th></tr></thead><tbody><tr><td><strong>Asumsi</strong></td><td>Koperasi sudah memiliki izin usaha (SITU) dan terdaftar di OJK</td></tr><tr><td><strong>Asumsi</strong></td><td>Koneksi internet stabil di kantor cabang (min 10 Mbps)</td></tr><tr><td><strong>Ketergantungan</strong></td><td>Ketersediaan API Bank/VA (Midtrans/Xendit) untuk integrasi pembayaran</td></tr><tr><td><strong>Ketergantungan</strong></td><td>Kuota & akses Google Gemini API untuk AI Scoring</td></tr><tr><td><strong>Batasan</strong></td><td>Sistem <strong>bukan</strong> Core Banking RTGS (bukan participant BI langsung) — menggunakan aggregator</td></tr><tr><td><strong>Batasan</strong></td><td>Modul Syariah (Murabahah, Mudharobah, Wadiah) <strong>tidak</strong> termasuk dalam scope standar (opsional custom)</td></tr><tr><td><strong>Batasan</strong></td><td>Konsolidasi laporan keuangan multi-cabang/anak usaha — dasarnya tersedia, konsolidasi lanjutan custom</td></tr></tbody></table>
+<hr>
+
+<h3>8. Kriteria Penerimaan Proyek (Project Acceptance Criteria)</h3>
+
+<p>Proyek dinyatakan <strong>SELESAI & DITERIMA</strong> jika:<br><ul><li><span class="check">✅</span> Semua fitur <strong>Must</strong> (Priority: Must) lolos UAT tanpa bug Critical/High.</li><br><li><span class="check">✅</span> Laporan OJK (LKP, BMPK, Kolektibilitas) bisa diekspor & <strong>lolos validasi skema OJK</strong> (test ke sandbox OJK).</li><br><li><span class="check">✅</span> Laporan Keuangan (Neraca, Laba Rugi, Arus Kas) <strong>seimbang</strong> & sesuai SAK ETAP.</li><br><li><span class="check">✅</span> Jurnal otomatis dari <strong>semua modul</strong> (Simpanan, Pinjaman, Toko, PPOB, Sewa, Ventura) <strong>balanced</strong> & traceable ke source transaction.</li><br><li><span class="check">✅</span> AI Credit Scoring menghasilkan skor & rekomendasi untuk min. 10 sample pengajuan dengan akurasi > 80% vs analisis manual.</li><br><li><span class="check">✅</span> Audit trail lengkap untuk 100% transaksi keuangan & perubahan master data.</li><br><li><span class="check">✅</span> Penetrasi keamanan (Penetration Test) oleh pihak ketiga: <strong>Zero Critical/High</strong> vulnerability.</li><br><li><span class="check">✅</span> Pelatihan Admin & Operator selesai (min 3 sesi), materi dokumentasi diserahkan.</li><br><li><span class="check">✅</span> Go-Live Production: Health check green, data migrasi tervalidasi, rollback plan tested.</li><br></ul><br><hr></p>
+
+<h3>9. Lampiran</h3>
+
+<p>*   <strong>Lampiran A</strong>: Data Dictionary (Data Elements & Definisi)<br>*   <strong>Lampiran B</strong>: COA Standar KSP (Mapping ke SAK ETAP & OJK)<br>*   <strong>Lampiran C</strong>: Matrix Hak Akses per Role (RBAC Matrix)<br>*   <strong>Lampiran D</strong>: Contoh Formulir & Alur Kerja (Workflow Diagrams)<br>*   <strong>Lampiran E</strong>: SLA Dukungan & Wartel Pasca Go-Live</p>
+
+<hr>
+
+<p><strong>Disetujui Oleh:</strong></p>
+
+<table><thead><tr><th>Peran</th><th>Nama</th><th>Tanda Tangan</th><th>Tanggal</th></tr></thead><tbody><tr><td><strong>Ketua Pengurus Koperasi</strong></td><td></td><td></td><td></td></tr><tr><td><strong>Bendahara / Manajer Keuangan</strong></td><td></td><td></td><td></td></tr><tr><td><strong>Pengawas</strong></td><td></td><td></td><td></td></tr><tr><td><strong>Project Manager MetroCoop</strong></td><td></td><td></td><td></td></tr><tr><td><strong>Tech Lead MetroCoop</strong></td><td></td><td></td><td></td></tr></tbody></table>
+<hr>
+
+<p><em>Dokumen ini adalah <strong>Business Requirements Document (BRD) / User Requirements Specification (URS)</strong> yang menjadi <strong>acuan teknis</strong> untuk pengembangan Spesifikasi Kebutuhan Sistem (SRS) dan desain sistem detail. Setiap perubahan pada dokumen ini memerlukan proses <strong>Change Request</strong> formal.</em></p>
+    </div>
+  </main>
+</body>
+</html>

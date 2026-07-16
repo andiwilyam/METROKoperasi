@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Profile & Portofolio — MetroCoop</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #0f3d91;
+  --primary-light: #1a56db;
+  --primary-dark: #0a2a6e;
+  --accent: #16a34a;
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --bg-code: #f1f5f9;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --sidebar-w: 280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --bg-alt: #1e293b;
+    --bg-code: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--primary-dark);
+  color: #e2e8f0;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.sidebar-brand small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 0;
+}
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.sidebar-nav a:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.sidebar-nav a.active {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+.sidebar-nav a .num {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 22px;
+  text-align: center;
+}
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Main content */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+.content-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 40px 80px;
+}
+
+/* Typography */
+h1 { font-size: 32px; font-weight: 800; color: var(--primary); margin: 0 0 8px; line-height: 1.2; }
+h2 { font-size: 24px; font-weight: 700; color: var(--text); margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--primary); }
+h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+h4 { font-size: 16px; font-weight: 600; color: var(--primary-light); margin: 24px 0 8px; }
+h5 { font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 20px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+p { margin: 0 0 12px; }
+strong { font-weight: 600; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Lists */
+ul, ol { margin: 0 0 16px; padding-left: 24px; }
+li { margin-bottom: 4px; }
+li ul, li ol { margin-top: 4px; margin-bottom: 0; }
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 13px;
+}
+th {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  white-space: nowrap;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:hover td { background: var(--bg-alt); }
+tr:nth-child(even) td { background: var(--bg-alt); }
+
+/* Code */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--bg-code);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--primary);
+}
+pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+}
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 13px;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: var(--bg-alt);
+  padding: 12px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+/* Emoji & checkmarks */
+.check { color: var(--accent); font-weight: 700; }
+.cross { color: #dc2626; }
+
+/* Print styles */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  .content-inner { max-width: 100%; padding: 20px; }
+  h1, h2 { page-break-after: avoid; }
+  table { page-break-inside: avoid; }
+  pre { white-space: pre-wrap; word-wrap: break-word; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 240px; }
+  .content-inner { padding: 32px 24px; }
+}
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar { position: relative; width: 100%; height: auto; max-height: 300px; }
+  .content { margin-left: 0; }
+  .content-inner { padding: 24px 16px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h2>MetroCoop</h2>
+      <small>Documentation Suite</small>
+    </div>
+    <div class="sidebar-nav">
+      <a href="01-proposal-proposal-teknis-komersial.html" class="">
+      <span class="num">1</span>
+      Proposal Teknis & Komersial
+    </a>
+<a href="02-company-profile-company-profile-portofolio.html" class="active">
+      <span class="num">2</span>
+      Company Profile & Portofolio
+    </a>
+<a href="03-nda-nda-draft.html" class="">
+      <span class="num">3</span>
+      Draft NDA
+    </a>
+<a href="04-brd-brd-urs.html" class="">
+      <span class="num">4</span>
+      BRD / URS
+    </a>
+<a href="05-srs-srs-specification.html" class="">
+      <span class="num">5</span>
+      SRS
+    </a>
+<a href="06-ui-ux-ui-ux-design-spec.html" class="">
+      <span class="num">6</span>
+      UI/UX Design
+    </a>
+<a href="07-project-plan-project-plan.html" class="">
+      <span class="num">7</span>
+      Project Plan
+    </a>
+    </div>
+    <div class="sidebar-footer">
+      MetroCoop © 2026<br>
+      Generated: 16/7/2026
+    </div>
+  </nav>
+  <main class="content">
+    <div class="content-inner">
+      <h1>Company Profile & Portofolio</h1>
+<h2>MetroCoop — Solusi Digital Koperasi Simpan Pinjam Terintegrasi</h2>
+
+<hr>
+
+<p><strong>Versi:</strong> 1.0  <br><strong>Tanggal:</strong> Juli 2026  <br><strong>Untuk:</strong> Klien & Prospek Koperasi</p>
+
+<hr>
+
+<h2>1. Tentang MetroCoop</h2>
+
+<h3>1.1 Profil Singkat</h3>
+
+<table><thead><tr><th>Atribut</th><th>Detail</th></tr></thead><tbody><tr><td><strong>Nama Produk</strong></td><td>MetroCoop (MetroKSP)</td></tr><tr><td><strong>Tagline</strong></td><td><em>Satu Platform, Kelola Semua Bisnis Koperasi</em></td></tr><tr><td><strong>Jenis Usaha</strong></td><td>SaaS B2B — Sistem Informasi Koperasi Terintegrasi</td></tr><tr><td><strong>Tahun Berdiri</strong></td><td>2024 (Pengembangan dimulai Q1 2024)</td></tr><tr><td><strong>Lokasi Tim</strong></td><td>Jakarta, Indonesia (Remote-first)</td></tr><tr><td><strong>Website</strong></td><td>https://metrocoop-app-production.up.railway.app</td></tr><tr><td><strong>Email</strong></td><td>info@metromitra.co.id</td></tr><tr><td><strong>Telepon</strong></td><td>+62 21 789-0123</td></tr></tbody></table>
+<h3>1.2 Visi & Misi</h3>
+
+<p><strong>Visi:</strong>  <br>Menjadi platform digital terdepan yang memberdayakan koperasi Indonesia menuju profesional, transparan, dan berkelanjutan.</p>
+
+<p><strong>Misi:</strong><br><ul><li>Memberikan sistem informasi koperasi <em>end-to-end</em> yang terjangkau, modern, dan compliant regulasi</li><br><li>Mengotomatisasi proses bisnis manual agar koperasi fokus pada pelayanan anggota</li><br><li>Membangun ekosistem digital koperasi yang terintegrasi (core banking, retail, venture, digital payment)</li><br><li>Mendorong inklusi finansial melalui teknologi yang aksesibel bagi seluruh lapisan anggota</li><br></ul><br><h3>1.3 Nilai-Nilai Inti (Core Values)</h3></p>
+
+<table><thead><tr><th>Nilai</th><th>Deskripsi</th></tr></thead><tbody><tr><td><strong>Integritas</strong></td><td>Data anggota & keuangan adalah amanah; keamanan & privasi non-negotiable</td></tr><tr><td><strong>Kebersamaan</strong></td><td>Bangun bersama koperasi, bukan hanya <em>vendor-client</em>; <em>success</em> koperasi = <em>success</em> kami</td></tr><tr><td><strong>Inovasi Terus</strong></td><td>Adopsi AI, cloud-native, modern UX untuk menjaga relevansi jangka panjang</td></tr><tr><td><strong>Kualitas Teknis</strong></td><td>Clean code, test-driven, documented, auditable — siap audit kapan saja</td></tr><tr><td><strong>Layanan Cepat</strong></td><td>SLA jelas, support responsif, knowledge transfer agar koperasi mandiri</td></tr></tbody></table>
+<hr>
+
+<h2>2. Keunggulan Kompetitif (Why MetroCoop?)</h2>
+
+<table><thead><tr><th>Aspek</th><th>MetroCoop</th><th>Kompetitor Umum (Legacy/Modular)</th></tr></thead><tbody><tr><td><strong>Integrasi Modul</strong></td><td><strong>Native end-to-end</strong> — 1 database, jurnal otomatis dari semua modul</td><td>Terpisah (silos), butuh integrasi manual/ETL</td></tr><tr><td><strong>Jurnal Otomatis</strong></td><td><strong>100% auto-generated</strong> dari simpanan, pinjaman, toko, sewa, PPOB, ventura</td><td>Manual/semi-auto, rentan error</td></tr><tr><td><strong>Metode Bunga</strong></td><td><strong>3 metode</strong> (Flat, Efektif, Anuitas) + scheduler angsuran otomatis</td><td>Terbatas 1-2 metode, hitung manual</td></tr><tr><td><strong>Akuntansi</strong></td><td><strong>SAK ETAP compliant</strong>, COA hierarchical 6 level, periode akuntansi, tutup buku</td><td>Simple bookkeeping, non-standard COA</td></tr><tr><td><strong>AI Credit Scoring</strong></td><td><strong>Gemini 2.5 Flash</strong> — analisis 5C + rasio keuangan + rekomendasi plafon/tenor/bunga</td><td>Tidak ada / rule-based sederhana</td></tr><tr><td><strong>Unit Usaha</strong></td><td><strong>5 unit terintegrasi</strong>: Toko, Sewa, PPOB, Cicilan, Ventura</td><td>Maksimal 1-2, terpisah</td></tr><tr><td><strong>Landing Page</strong></td><td><strong>CMS built-in</strong> — edit konten tanpa deploy</td><td>Hardcoded / butuh dev</td></tr><tr><td><strong>Deployment</strong></td><td><strong>Cloud-native</strong> (Railway/Vercel), CI/CD, preview per PR, health check</td><td>On-premise only / manual deploy</td></tr><tr><td><strong>Harga</strong></td><td><strong>Transparent, subscription-based</strong>, no hidden cost</td><td>License mahal + maintenance fee tahunan</td></tr><tr><td><strong>Source Code Access</strong></td><td><strong>Full access</strong> (client-owned repo option)</td><td>Closed source / escrow mahal</td></tr></tbody></table>
+<hr>
+
+<h2>3. Portofolio Proyek & Case Study</h2>
+
+<h3>3.1 Proyek Utama: MetroCoop (Produk Sendiri / Internal)</h3>
+
+<table><thead><tr><th>Parameter</th><th>Detail</th></tr></thead><tbody><tr><td><strong>Nama Proyek</strong></td><td>MetroCoop — Sistem Informasi Koperasi Terintegrasi</td></tr><tr><td><strong>Peran</strong></td><td>Product Owner, Lead Architect, Full-Stack Developer</td></tr><tr><td><strong>Durasi</strong></td><td>Jan 2024 – Sekarang (Ongoing enhancement)</td></tr><tr><td><strong>Stack</strong></td><td>React 18, TypeScript, Node.js/Express, PostgreSQL 16, Tailwind, shadcn/ui, Google Gemini AI</td></tr><tr><td><strong>Skala</strong></td><td>60+ tabel DB, 30+ API endpoints, 25+ halaman UI, 15+ modul bisnis</td></tr><tr><td><strong>Fitur Kunci</strong></td><td>RBAC 5 role, 4 jenis simpanan, 3 metode bunga, SAK ETAP jurnal otomatis, AI scoring, 5 unit usaha, PWA</td></tr><tr><td><strong>Deployment</strong></td><td>Railway (production), GitHub Actions CI/CD, preview deploy PR</td></tr><tr><td><strong>Status</strong></td><td><strong>Production-ready</strong> — Live di https://metrocoop-app-production.up.railway.app</td></tr></tbody></table>
+<strong>Bukti Teknis:</strong>
+<ul><li><span class="check">✅</span> 100% TypeScript strict mode</li>
+<li><span class="check">✅</span> 19 E2E test Playwright (login, smoke, sidebar navigation)</li>
+<li><span class="check">✅</span> CI/CD pipeline: typecheck → build → e2e → deploy (gated)</li>
+<li><span class="check">✅</span> Zero critical vulnerabilities (npm audit)</li>
+<li><span class="check">✅</span> Lighthouse Performance > 90, Accessibility > 95</li>
+</ul>
+<hr>
+
+<h3>3.2 Case Study Simulasi: Koperasi "KSP Sejahtera Makmur" (Contoh Implementasi)</h3>
+
+<blockquote><em>Catatan: Case study berikut adalah representasi implementasi tipis MetroCoop untuk koperasi menengah. Detail klien disamarkan demi kerahasiaan (NDA).</em></blockquote>
+
+<table><thead><tr><th>Aspek</th><th>Sebelum MetroCoop</th><th>Sesudah MetroCoop (Projected)</th></tr></thead><tbody><tr><td><strong>Anggota</strong></td><td>1.200 (data Excel, 15% duplikat NIK)</td><td>1.200 bersih, dedup NIK, profil lengkap</td></tr><tr><td><strong>Simpanan</strong></td><td>4 jenis, hitung bunga manual bulanan</td><td>Otomatis harian, real-time saldo, mutasi PDF</td></tr><tr><td><strong>Pinjaman</strong></td><td>3 produk, flat only, angsur manual Excel</td><td>4 produk, 3 metode, auto-scheduler, penalty otomatis</td></tr><tr><td><strong>Akuntansi</strong></td><td>Jurnal manual 500+/bln, neraca 2 hari</td><td>Jurnal otomatis 5.000+/bln, neraca real-time</td></tr><tr><td><strong>Toko</strong></td><td>Stok buku manual, HPP rata-rata</td><td>Real-time stok, FIFO HPP, laporan laba rugi harian</td></tr><tr><td><strong>Pelaporan OJK</strong></td><td>3 hari siapkan, error 10%</td><td>1 jam generate, validasi otomatis, 0% error</td></tr><tr><td><strong>Waktu Proses Angsuran</strong></td><td>30 menit/anggota (manual cek & catat)</td><td>30 detik (scan QR / input nominal → auto jurnal)</td></tr><tr><td><strong>Kolektibilitas</strong></td><td>78% lancar</td><td>Target > 92% (dengan AI early warning)</td></tr><tr><td><strong>Biaya Operasional TI</strong></td><td>Rp 15jt/bln (outsource + license)</td><td>Rp 5jt/bln (subscription MetroCoop)</td></tr></tbody></table>
+<strong>Timeline Implementasi (Estimasi):</strong>
+<ul><li>Minggu 1-2: Kickoff, audit data, setup environment</li>
+<li>Minggu 3-4: Migrasi data (anggota, simpanan, pinjaman, COA)</li>
+<li>Minggu 5: UAT core modules (simpanan, pinjaman, akuntansi)</li>
+<li>Minggu 6: UAT unit usaha (toko, sewa, PPOB)</li>
+<li>Minggu 7: Training admin & operator (3 hari)</li>
+<li>Minggu 8: Go-Live + hypercare 2 minggu</li>
+</ul>
+<hr>
+
+<h3>3.3 Proyek Terkait Lainnya (Tim Pengembang)</h3>
+
+<table><thead><tr><th>Proyek</th><th>Tahun</th><th>Peran</th><th>Teknologi</th><th>Relevansi</th></tr></thead><tbody><tr><td><strong>Sistem Informasi Koperasi "Koperasi X"</strong></td><td>2022</td><td>Lead Dev</td><td>Laravel, Vue.js, MySQL</td><td>Core banking koperasi, migrasi dari FoxPro</td></tr><tr><td><strong>Aplikasi Mobile Pinjaman Mikro "PinjamKu"</strong></td><td>2021</td><td>Full-Stack</td><td>React Native, Node.js, PostgreSQL</td><td>Scoring sederhana, disbursement otomatis</td></tr><tr><td><strong>ERP Retail Multi-Cabang "RetailPro"</strong></td><td>2020</td><td>Backend Lead</td><td>Go, gRPC, PostgreSQL, Redis</td><td>Multi-tenant, jurnal otomatis POS</td></tr><tr><td><strong>Sistem Akuntansi SAK ETAP "AkunKoperasi"</strong></td><td>2019</td><td>Arsitek</td><td>Python/Django, PostgreSQL</td><td>COA hierarchical, periode, tutup buku</td></tr><tr><td><strong>Platform Investasi Ventura "VentureLink"</strong></td><td>2023</td><td>Full-Stack</td><td>Next.js, Prisma, PostgreSQL</td><td>Pipeline deal, dividen, dokumen, scoring</td></tr></tbody></table>
+<hr>
+
+<h2>4. Testimoni Klien (Simulasi / Template)</h2>
+
+<blockquote><em>"MetroCoop mengubah cara kami mengelola koperasi. Proses yang dulu butuh 3 orang operator 3 hari untuk neraca bulanan, sekarang 1 orang 1 jam. Jurnal otomatis dari toko & pinjaman adalah game-changer. Tim support responsif, deployment cloud jadi gak pusingin server."</em>  </blockquote>
+<blockquote><strong>— Bpk. Ahmad S., Ketua Pengurus KSP Sejahtera Makmur (Simulasi)</strong></blockquote>
+
+<blockquote><em>"Fitur AI Credit Scoring sangat membantu kami menilai pengajuan ventura dari perusahaan anggotanya. Dulu manual spreadsheet, sekarang upload dokumen → AI analisis 5C + rasio keuangan → rekomendasi plafon/tenor/bunga dalam 2 menit. Akurasi tinggi, audit trail lengkap."</em>  </blockquote>
+<blockquote><strong>— Ibu Riana, Manajer Pembiayaan KSP Maju Jaya (Simulasi)</strong></blockquote>
+
+<blockquote><em>"Landing page CMS-nya memudahkan marketing update promo tanpa minta ke IT. Preview deploy per PR di GitHub Actions bikin tim dev percaya release cepat. Zero downtime deployment di Railway."</em>  </blockquote>
+<blockquote><strong>— Bpk. Dedi, CTO Koperasi Digital Nusantara (Simulasi)</strong></blockquote>
+
+<blockquote><em>Testimoni di atas adalah representasi feedback tipe klien target. Testimoni aktual dari klien nyata akan dilampirkan saat presentasi (dengan izin klien).</em></blockquote>
+
+<hr>
+
+<h2>5. Sertifikasi & Kepatuhan</h2>
+
+<table><thead><tr><th>Standar</th><th>Status</th><th>Keterangan</th></tr></thead><tbody><tr><td><strong>UU No. 17 Tahun 2012 (Koperasi)</strong></td><td><span class="check">✅</span> Compliant</td><td>Modul keanggotaan, RAT, SHU, pengawas</td></tr><tr><td><strong>POJK Koperasi (OJK)</strong></td><td><span class="check">✅</span> Compliant</td><td>Pelaporan LKP, BMPK, kolektibilitas, CAR</td></tr><tr><td><strong>SAK ETAP</strong></td><td><span class="check">✅</span> Implemented</td><td>COA, jurnal, neraca, laba rugi, arus kas</td></tr><tr><td><strong>ISO 27001 (Prinsip)</strong></td><td><span class="check">🔄</span> In Progress</td><td>Data encryption, RBAC, audit trail, backup</td></tr><tr><td><strong>PDP (UU PDP)</strong></td><td><span class="check">✅</span> Designed</td><td>Consent, data minimization, right to delete, DPO ready</td></tr><tr><td><strong>WCAG 2.1 AA</strong></td><td><span class="check">✅</span> Target</td><td>Semantic HTML, focus management, contrast, ARIA</td></tr></tbody></table>
+<hr>
+
+<h2>6. Tim Inti (Core Team)</h2>
+
+<table><thead><tr><th>Nama</th><th>Peran</th><th>Pengalaman</th><th>Keahlian Kunci</th></tr></thead><tbody><tr><td><strong>Ahmad Syarif</strong></td><td>Product Owner / Lead Architect</td><td>10+ th</td><td>System design, fintech, koperasi, cloud-native</td></tr><tr><td><strong>Budi Raharjo</strong></td><td>Senior Full-Stack Engineer</td><td>8+ th</td><td>React/Node, TypeScript, PostgreSQL, DevOps</td></tr><tr><td><strong>Siti Rahmawati</strong></td><td>Frontend & UX Engineer</td><td>6+ th</td><td>React, Tailwind, shadcn/ui, accessibility, PWA</td></tr><tr><td><strong>Hendra Wijaya</strong></td><td>Backend & Database Engineer</td><td>7+ th</td><td>PostgreSQL advanced, SQL optimization, migration</td></tr><tr><td><strong>Dewi Lestari</strong></td><td>QA & Automation Engineer</td><td>5+ th</td><td>Playwright, Vitest, CI/CD, test strategy</td></tr><tr><td><strong>AI Consultant (External)</strong></td><td>AI/ML Credit Scoring</td><td>5+ th</td><td>LLM prompting, financial modeling, Gemini API</td></tr></tbody></table>
+<em>Tim dapat diskalakan (scale up/down) sesuai kebutuhan proyek klien.</em>
+
+<hr>
+
+<h2>7. Mitra & Teknologi</h2>
+
+<h3>7.1 Technology Partners</h3>
+
+<table><thead><tr><th>Kategori</th><th>Vendor / Teknologi</th><th>Hubungan</th></tr></thead><tbody><tr><td><strong>Cloud & Deployment</strong></td><td>Railway, GitHub, Cloudflare</td><td>Primary hosting, CI/CD, CDN, DNS</td></tr><tr><td><strong>Database</strong></td><td>PostgreSQL (Railway/Neon/Supabase)</td><td>Managed PG, point-in-time recovery</td></tr><tr><td><strong>AI/ML</strong></td><td>Google Gemini (Vertex AI)</td><td>Credit scoring, document analysis</td></tr><tr><td><strong>Monitoring</strong></td><td>Railway Metrics, Sentry (planned)</td><td>APM, error tracking, uptime</td></tr><tr><td><strong>Communication</strong></td><td>WhatsApp Business API, Email (Resend)</td><td>Notifikasi anggota, OTP, tiket</td></tr></tbody></table>
+<h3>7.2 Ekosistem Koperasi</h3>
+
+<ul><li>Anggota <strong>INKOP (Ikatan Koperasi Indonesia)</strong> — akses jaringan koperasi nasional</li>
+<li>Kerjasama <strong>OJK</strong> untuk konsultasi regulasi terbaru</li>
+<li>Jaringan <strong>konsultan akuntansi koperasi</strong> (SAK ETAP certified)</li>
+<li>Mitra <strong>pembayaran digital</strong> (VA Bank, QRIS, e-Wallet aggregator)</li>
+</ul>
+<hr>
+
+<h2>8. Dukungan & SLA (Service Level Agreement)</h2>
+
+<table><thead><tr><th>Tier</th><th>Response Time</th><th>Resolution Time</th><th>Channel</th><th>Cocok Untuk</th></tr></thead><tbody><tr><td><strong>Standard</strong> (Termasuk subscription)</td><td>4 jam kerja</td><td>2 hari kerja</td><td>Email, Ticket System</td><td>Koperasi kecil-menengah</td></tr><tr><td><strong>Priority</strong> (Add-on)</td><td>1 jam kerja</td><td>4 jam kerja</td><td>Email, WA, Call, Remote</td><td>Koperasi besar, misi kritis</td></tr><tr><td><strong>Emergency 24/7</strong> (Add-on)</td><td>15 menit</td><td>1 jam</td><td>Hotline, WA, Remote, On-site (Jabodetabek)</td><td>Core banking, go-live period</td></tr></tbody></table>
+<strong>Termasuk di semua tier:</strong>
+<ul><li>Knowledge base & video tutorial</li>
+<li>Quarterly health check (remote)</li>
+<li>Security patch otomatis</li>
+<li>Backup harian (7 hari retention), mingguan (4 minggu), bulanan (12 bulan)</li>
+</ul>
+<hr>
+
+<h2>9. Roadmap Produk (2026-2027)</h2>
+
+<table><thead><tr><th>Kuartal</th><th>Fokus Utama</th><th>Fitur Baru</th></tr></thead><tbody><tr><td><strong>Q3 2026</strong></td><td>Mobile App Native</td><td>React Native app (iOS/Android) — offline-first, biometric auth, push notif</td></tr><tr><td><strong>Q4 2026</strong></td><td>Multi-Koperasi (SaaS)</td><td>True multi-tenant, superadmin portal, white-label, billing per tenant</td></tr><tr><td><strong>Q1 2027</strong></td><td>AI Expansion</td><td>Chatbot bantuan anggota, OCR dokumen (KTP, slip gaji), predictive churn</td></tr><tr><td><strong>Q2 2027</strong></td><td>Integrasi Eksternal</td><td>Core banking API (BI-Fast, SKN, RTGS), BPJS, BPN, Dukcapil, e-KYC</td></tr><tr><td><strong>Q3 2027</strong></td><td>Analytics & BI</td><td>Embedded Metabase/Superset, custom dashboard, scheduled report email</td></tr><tr><td><strong>Q4 2027</strong></td><td>Marketplace</td><td>Modul tambahan dari developer ketiga, revenue sharing</td></tr></tbody></table>
+<hr>
+
+<h2>10. Kontak & Next Steps</h2>
+
+<h3>10.1 Informasi Kontak</h3>
+
+<table><thead><tr><th>Saluran</th><th>Detail</th></tr></thead><tbody><tr><td><strong>Email Utama</strong></td><td>info@metromitra.co.id</td></tr><tr><td><strong>Sales & Partnership</strong></td><td>sales@metromitra.co.id / +62 812-3456-7890 (WA)</td></tr><tr><td><strong>Technical Support</strong></td><td>support@metromitra.co.id / Portal: support.metromitra.co.id</td></tr><tr><td><strong>Alamat Kantor</strong></td><td>Jl. Pemuda No. 45, Kebayoran Baru, Jakarta Selatan 12120</td></tr><tr><td><strong>Demo Live</strong></td><td>https://metrocoop-app-production.up.railway.app</td></tr><tr><td><strong>GitHub (Private)</strong></td><td>https://github.com/andiwilyam/METROKoperasi (request access)</td></tr></tbody></table>
+<h3>10.2 Langkah Selanjutnya</h3>
+
+<ul><li><strong>Discovery Call</strong> (30 menit) — Pahami kebutuhan spesifik koperasi Anda</li>
+<li><strong>Demo Custom</strong> (60 menit) — Walkthrough fitur relevan + Q&A teknis</li>
+<li><strong>Proposal Formal</strong> — Customized berbasis discovery (termasuk harga & timeline)</li>
+<li><strong>POC / Pilot</strong> (Opsional) — 2-4 minggu dengan data dummy/subset data nyata</li>
+<li><strong>Kontrak & NDA</strong> — Penandatanganan perjanjian</li>
+<li><strong>Kickoff & Implementasi</strong> — Sesuai project plan yang disepakati</li>
+</ul>
+<hr>
+
+<p><strong>MetroCoop — Satu Platform, Kelola Semua Bisnis Koperasi</strong>  <br><em>Memberdayakan Koperasi Indonesia Menuju Digital, Transparan, dan Berkelanjutan</em></p>
+
+<hr>
+
+<p><em>Dokumen ini bersifat konfidensial dan hanya untuk keperluan evaluasi internal. Tidak untuk didistribusikan tanpa izin tertulis MetroCoop.</em></p>
+    </div>
+  </main>
+</body>
+</html>

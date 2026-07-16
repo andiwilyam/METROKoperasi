@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MetroCoop — Documentation Suite</title>
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #0f3d91;
+  --primary-light: #1a56db;
+  --primary-dark: #0a2a6e;
+  --accent: #16a34a;
+  --bg: #ffffff;
+  --bg-alt: #f8fafc;
+  --bg-code: #f1f5f9;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e2e8f0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  --sidebar-w: 280px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f172a;
+    --bg-alt: #1e293b;
+    --bg-code: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border: #334155;
+    --shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--primary-dark);
+  color: #e2e8f0;
+  overflow-y: auto;
+  z-index: 100;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-brand {
+  padding: 24px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.sidebar-brand h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.sidebar-brand small {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 0;
+}
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+  border-left: 3px solid transparent;
+}
+.sidebar-nav a:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+.sidebar-nav a.active {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-left-color: var(--accent);
+}
+.sidebar-nav a .num {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.6);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  min-width: 22px;
+  text-align: center;
+}
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Main content */
+.content {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+.content-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 40px 80px;
+}
+
+/* Typography */
+h1 { font-size: 32px; font-weight: 800; color: var(--primary); margin: 0 0 8px; line-height: 1.2; }
+h2 { font-size: 24px; font-weight: 700; color: var(--text); margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid var(--primary); }
+h3 { font-size: 20px; font-weight: 600; color: var(--text); margin: 32px 0 12px; }
+h4 { font-size: 16px; font-weight: 600; color: var(--primary-light); margin: 24px 0 8px; }
+h5 { font-size: 14px; font-weight: 600; color: var(--text-muted); margin: 20px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+p { margin: 0 0 12px; }
+strong { font-weight: 600; }
+a { color: var(--primary-light); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Lists */
+ul, ol { margin: 0 0 16px; padding-left: 24px; }
+li { margin-bottom: 4px; }
+li ul, li ol { margin-top: 4px; margin-bottom: 0; }
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 13px;
+}
+th {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 14px;
+  text-align: left;
+  white-space: nowrap;
+}
+td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:hover td { background: var(--bg-alt); }
+tr:nth-child(even) td { background: var(--bg-alt); }
+
+/* Code */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  background: var(--bg-code);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--primary);
+}
+pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 20px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 16px 0 24px;
+  line-height: 1.5;
+  border: 1px solid var(--border);
+}
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: 13px;
+}
+
+/* Blockquote */
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: var(--bg-alt);
+  padding: 12px 20px;
+  margin: 16px 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Horizontal rule */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+/* Emoji & checkmarks */
+.check { color: var(--accent); font-weight: 700; }
+.cross { color: #dc2626; }
+
+/* Print styles */
+@media print {
+  .sidebar { display: none; }
+  .content { margin-left: 0; }
+  .content-inner { max-width: 100%; padding: 20px; }
+  h1, h2 { page-break-after: avoid; }
+  table { page-break-inside: avoid; }
+  pre { white-space: pre-wrap; word-wrap: break-word; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 240px; }
+  .content-inner { padding: 32px 24px; }
+}
+@media (max-width: 768px) {
+  body { flex-direction: column; }
+  .sidebar { position: relative; width: 100%; height: auto; max-height: 300px; }
+  .content { margin-left: 0; }
+  .content-inner { padding: 24px 16px; }
+  h1 { font-size: 24px; }
+  h2 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <h2>MetroCoop</h2>
+      <small>Documentation Suite</small>
+    </div>
+    <div class="sidebar-nav">
+      <a href="01-proposal-proposal-teknis-komersial.html" class="active">
+        <span class="num">1</span>
+        Proposal Teknis & Komersial
+      </a>
+<a href="02-company-profile-company-profile-portofolio.html" class="">
+        <span class="num">2</span>
+        Company Profile & Portofolio
+      </a>
+<a href="03-nda-nda-draft.html" class="">
+        <span class="num">3</span>
+        Draft NDA
+      </a>
+<a href="04-brd-brd-urs.html" class="">
+        <span class="num">4</span>
+        BRD / URS
+      </a>
+<a href="05-srs-srs-specification.html" class="">
+        <span class="num">5</span>
+        SRS
+      </a>
+<a href="06-ui-ux-ui-ux-design-spec.html" class="">
+        <span class="num">6</span>
+        UI/UX Design
+      </a>
+<a href="07-project-plan-project-plan.html" class="">
+        <span class="num">7</span>
+        Project Plan
+      </a>
+    </div>
+    <div class="sidebar-footer">
+      MetroCoop © 2026<br>
+      Generated: 16/7/2026
+    </div>
+  </nav>
+  <main class="content">
+    <div class="content-inner">
+      <h1>📋 Documentation Suite — MetroCoop</h1>
+      <p style="color:var(--text-muted);font-size:16px;margin-bottom:32px;">
+        Dokumentasi lengkap Sistem Informasi Koperasi Simpin Pinjam Terintegrasi.<br>
+        Pilih dokumen dari sidebar atau klik tautan di bawah.
+      </p>
+      
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="01-proposal-proposal-teknis-komersial.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:var(--primary);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">1</span>
+          Proposal Teknis & Komersial
+        </a>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="02-company-profile-company-profile-portofolio.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:var(--primary);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">2</span>
+          Company Profile & Portofolio
+        </a>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="03-nda-nda-draft.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:var(--primary);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">3</span>
+          Draft NDA
+        </a>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="04-brd-brd-urs.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:var(--primary);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">4</span>
+          BRD / URS
+        </a>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="05-srs-srs-specification.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:var(--primary);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">5</span>
+          SRS
+        </a>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="06-ui-ux-ui-ux-design-spec.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:var(--primary);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">6</span>
+          UI/UX Design
+        </a>
+      </div>
+      <div style="padding:16px 20px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;transition:all 0.15s;cursor:pointer;" onmouseover="this.style.borderColor='var(--primary)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+        <a href="07-project-plan-project-plan.html" style="font-size:16px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="background:var(--primary);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px;min-width:28px;text-align:center;">7</span>
+          Project Plan
+        </a>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
