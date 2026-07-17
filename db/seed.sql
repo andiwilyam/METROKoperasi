@@ -19,11 +19,6 @@ INSERT INTO anggota (id, nik, nama, no_hp, email, alamat, pekerjaan, penghasilan
 VALUES ('ma1', 'hijau_agri', 'PT Hijau Agri Tech', '0812-9900-1122', 'info@hijauagritech.co.id', 'Jl. Industri Hijau No. 88, Bandung', 'Perusahaan Ventura', 0, 'aktif', '2024-01-01', 0, 0, 0, 'perusahaan')
 ON CONFLICT (id) DO NOTHING;
 
--- Contoh pengajuan pembiayaan ventura milik perusahaan (agar portal perusahaan punya data)
-INSERT INTO pengajuan_pembiayaan (id, perusahaan_id, anggota_id, no_pengajuan, jenis_pembiayaan, pokok_pengajuan, tenor_bulan, tujuan_pembiayaan, bunga_diharapkan, status_pengajuan, created_by)
-VALUES ('pp_seed_hijau', 'p1', 'ma1', 'PP-SEED-001', 'modal_ventura', 750000000, 36, 'Ekspansi otomatisasi hidroponik IoT', 12, 'disetujui', '4')
-ON CONFLICT (id) DO NOTHING;
-
 -- Anggota
 INSERT INTO anggota (id, nik, nama, no_ktp, no_hp, email, alamat, pekerjaan, penghasilan, status_keanggotaan, tanggal_daftar, saldo_simpanan_pokok, saldo_simpanan_wajib, saldo_simpanan_sukarela)
 VALUES
@@ -417,78 +412,83 @@ UPDATE venture_investments SET perusahaan_id = 'p2' WHERE nama_perusahaan = 'PT 
 UPDATE venture_investments SET perusahaan_id = 'p3' WHERE nama_perusahaan = 'PT Solusi Edu Kreatif' AND perusahaan_id IS NULL;
 UPDATE venture_investments SET perusahaan_id = 'p4' WHERE nama_perusahaan = 'PT Bambang Baru Bara' AND perusahaan_id IS NULL;
 
+-- Contoh pengajuan pembiayaan ventura milik perusahaan (agar portal perusahaan punya data)
+INSERT INTO pengajuan_pembiayaan (id, perusahaan_id, anggota_id, no_pengajuan, jenis_pembiayaan, pokok_pengajuan, tenor_bulan, tujuan_pembiayaan, bunga_diharapkan, status_pengajuan, created_by)
+VALUES ('pp_seed_hijau', 'p1', 'ma1', 'PP-SEED-001', 'modal_ventura', 750000000, 36, 'Ekspansi otomatisasi hidroponik IoT', 12, 'disetujui', '4')
+ON CONFLICT (id) DO NOTHING;
+
 -- ============ DOKUMEN WAJIB PENGAJUAN ============
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_l1', '', 'LEGALITAS', 'LEG-01', 'Akta Pendirian Perusahaan & Perubahan', 'Akta Notaris termasuk perubahan terakhir, telah disahkan Kemenkumham', 'UU 40/2007 ttg PT, UU 25/1992 ttg Koperasi', 'belum'
+SELECT 'doc_l1', NULL, 'LEGALITAS', 'LEG-01', 'Akta Pendirian Perusahaan & Perubahan', 'Akta Notaris termasuk perubahan terakhir, telah disahkan Kemenkumham', 'UU 40/2007 ttg PT, UU 25/1992 ttg Koperasi', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'LEG-01');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_l2', '', 'LEGALITAS', 'LEG-02', 'NIB (Nomor Induk Berusaha)', 'Terbitan OSS-RBA, mencantumkan KBLI sesuai usaha', 'PP 5/2021, Permenkop 11/2018', 'belum'
+SELECT 'doc_l2', NULL, 'LEGALITAS', 'LEG-02', 'NIB (Nomor Induk Berusaha)', 'Terbitan OSS-RBA, mencantumkan KBLI sesuai usaha', 'PP 5/2021, Permenkop 11/2018', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'LEG-02');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_l3', '', 'LEGALITAS', 'LEG-03', 'NPWP Badan & Direktur', 'NPWP Perusahaan dan NPWP Penanggung Jawab/Direktur', 'UU PPh 36/2008', 'belum'
+SELECT 'doc_l3', NULL, 'LEGALITAS', 'LEG-03', 'NPWP Badan & Direktur', 'NPWP Perusahaan dan NPWP Penanggung Jawab/Direktur', 'UU PPh 36/2008', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'LEG-03');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_l4', '', 'LEGALITAS', 'LEG-04', 'Izin Usaha / NIB KBLI', 'Izin Usaha sesuai Klasifikasi Baku Lapangan Usaha Indonesia', 'PP 5/2021, Permendag 36/2023', 'belum'
+SELECT 'doc_l4', NULL, 'LEGALITAS', 'LEG-04', 'Izin Usaha / NIB KBLI', 'Izin Usaha sesuai Klasifikasi Baku Lapangan Usaha Indonesia', 'PP 5/2021, Permendag 36/2023', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'LEG-04');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_l5', '', 'LEGALITAS', 'LEG-05', 'SK Domisili Perusahaan', 'Surat Keterangan Domisili dari Kelurahan/Kecamatan setempat', 'Permendagri 4/2010', 'belum'
+SELECT 'doc_l5', NULL, 'LEGALITAS', 'LEG-05', 'SK Domisili Perusahaan', 'Surat Keterangan Domisili dari Kelurahan/Kecamatan setempat', 'Permendagri 4/2010', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'LEG-05');
 
 -- KEUANGAN
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_k1', '', 'KEUANGAN', 'KEU-01', 'Laporan Keuangan Audited 2 Tahun', 'Laporan Keuangan yang telah diaudit akuntan publik 2 tahun terakhir', 'Permenkop 15/2015, SAK ETAP', 'belum'
+SELECT 'doc_k1', NULL, 'KEUANGAN', 'KEU-01', 'Laporan Keuangan Audited 2 Tahun', 'Laporan Keuangan yang telah diaudit akuntan publik 2 tahun terakhir', 'Permenkop 15/2015, SAK ETAP', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'KEU-01');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_k2', '', 'KEUANGAN', 'KEU-02', 'Neraca & Laba Rugi Terbaru', 'Laporan keuangan interim (3 bulan terakhir / triwulan)', 'PSAK/SAK ETAP', 'belum'
+SELECT 'doc_k2', NULL, 'KEUANGAN', 'KEU-02', 'Neraca & Laba Rugi Terbaru', 'Laporan keuangan interim (3 bulan terakhir / triwulan)', 'PSAK/SAK ETAP', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'KEU-02');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_k3', '', 'KEUANGAN', 'KEU-03', 'Laporan Arus Kas', 'Laporan arus kas 2 tahun terakhir', 'PSAK 2 (2015)', 'belum'
+SELECT 'doc_k3', NULL, 'KEUANGAN', 'KEU-03', 'Laporan Arus Kas', 'Laporan arus kas 2 tahun terakhir', 'PSAK 2 (2015)', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'KEU-03');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_k4', '', 'KEUANGAN', 'KEU-04', 'SPT Tahunan PPh Badan (1771)', 'SPT Tahunan 2 tahun pajak terakhir lengkap dengan bukti setor', 'UU PPh 36/2008', 'belum'
+SELECT 'doc_k4', NULL, 'KEUANGAN', 'KEU-04', 'SPT Tahunan PPh Badan (1771)', 'SPT Tahunan 2 tahun pajak terakhir lengkap dengan bukti setor', 'UU PPh 36/2008', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'KEU-04');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_k5', '', 'KEUANGAN', 'KEU-05', 'Rekening Koran Bank 6 Bulan', 'Mutasi rekening seluruh bank 6-12 bulan terakhir', 'POJK 42/2017', 'belum'
+SELECT 'doc_k5', NULL, 'KEUANGAN', 'KEU-05', 'Rekening Koran Bank 6 Bulan', 'Mutasi rekening seluruh bank 6-12 bulan terakhir', 'POJK 42/2017', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'KEU-05');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_k6', '', 'KEUANGAN', 'KEU-06', 'Proyeksi Keuangan 3 Tahun', 'Proyeksi laba rugi, neraca, arus kas 3 tahun ke depan', 'SEOJK 10/2014', 'belum'
+SELECT 'doc_k6', NULL, 'KEUANGAN', 'KEU-06', 'Proyeksi Keuangan 3 Tahun', 'Proyeksi laba rugi, neraca, arus kas 3 tahun ke depan', 'SEOJK 10/2014', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'KEU-06');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_k7', '', 'KEUANGAN', 'KEU-07', 'Rencana Penggunaan Dana', 'Rincian alokasi pinjaman untuk CAPEX dan/atau OPEX', 'SEOJK 20/2014', 'belum'
+SELECT 'doc_k7', NULL, 'KEUANGAN', 'KEU-07', 'Rencana Penggunaan Dana', 'Rincian alokasi pinjaman untuk CAPEX dan/atau OPEX', 'SEOJK 20/2014', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'KEU-07');
 
 -- AGUNAN
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_a1', '', 'AGUNAN', 'AGU-01', 'Sertifikat Tanah/Bangunan (SHM/SHGB)', 'Sertifikat Hak Milik/Hak Guna Bangunan atas nama pemohon', 'UUHT 4/1996, POJK 40/2019', 'belum'
+SELECT 'doc_a1', NULL, 'AGUNAN', 'AGU-01', 'Sertifikat Tanah/Bangunan (SHM/SHGB)', 'Sertifikat Hak Milik/Hak Guna Bangunan atas nama pemohon', 'UUHT 4/1996, POJK 40/2019', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'AGU-01');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_a2', '', 'AGUNAN', 'AGU-02', 'BPKB Kendaraan', 'BPKB kendaraan bermotor atas nama pemohon', 'UU Fidusia 42/1999', 'belum'
+SELECT 'doc_a2', NULL, 'AGUNAN', 'AGU-02', 'BPKB Kendaraan', 'BPKB kendaraan bermotor atas nama pemohon', 'UU Fidusia 42/1999', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'AGU-02');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_a3', '', 'AGUNAN', 'AGU-03', 'Laporan Appraisal Aset', 'Laporan penilai publik untuk aset bernilai > Rp 500 juta', 'POJK 34/2018', 'belum'
+SELECT 'doc_a3', NULL, 'AGUNAN', 'AGU-03', 'Laporan Appraisal Aset', 'Laporan penilai publik untuk aset bernilai > Rp 500 juta', 'POJK 34/2018', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'AGU-03');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_a4', '', 'AGUNAN', 'AGU-04', 'Asuransi Agunan', 'Bukti pertanggungan asuransi atas aset yang diagunkan', 'POJK 74/2016', 'belum'
+SELECT 'doc_a4', NULL, 'AGUNAN', 'AGU-04', 'Asuransi Agunan', 'Bukti pertanggungan asuransi atas aset yang diagunkan', 'POJK 74/2016', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'AGU-04');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_a5', '', 'AGUNAN', 'AGU-05', 'Dokumen Pendukung Agunan Lainnya', 'Faktur pembelian, foto aset, bukti kepemilikan tambahan', 'POJK 40/2019', 'belum'
+SELECT 'doc_a5', NULL, 'AGUNAN', 'AGU-05', 'Dokumen Pendukung Agunan Lainnya', 'Faktur pembelian, foto aset, bukti kepemilikan tambahan', 'POJK 40/2019', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'AGU-05');
 
 -- TATA KELOLA
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_g1', '', 'TATA_KELOLA', 'GCG-01', 'Susunan Direksi & Komisaris', 'Daftar nama, KTP, NPWP, riwayat hidup Direksi dan Komisaris', 'UU 40/2007', 'belum'
+SELECT 'doc_g1', NULL, 'TATA_KELOLA', 'GCG-01', 'Susunan Direksi & Komisaris', 'Daftar nama, KTP, NPWP, riwayat hidup Direksi dan Komisaris', 'UU 40/2007', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'GCG-01');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_g2', '', 'TATA_KELOLA', 'GCG-02', 'Daftar Pemegang Saham', 'Komposisi kepemilikan saham, KTP/NPWP masing-masing pemegang saham', 'UU 40/2007', 'belum'
+SELECT 'doc_g2', NULL, 'TATA_KELOLA', 'GCG-02', 'Daftar Pemegang Saham', 'Komposisi kepemilikan saham, KTP/NPWP masing-masing pemegang saham', 'UU 40/2007', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'GCG-02');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_g3', '', 'TATA_KELOLA', 'GCG-03', 'RUPS / RAT Terakhir', 'Risalah RUPS bagi PT atau RAT bagi Koperasi, termasuk daftar hadir', 'UU 40/2007, UU 25/1992', 'belum'
+SELECT 'doc_g3', NULL, 'TATA_KELOLA', 'GCG-03', 'RUPS / RAT Terakhir', 'Risalah RUPS bagi PT atau RAT bagi Koperasi, termasuk daftar hadir', 'UU 40/2007, UU 25/1992', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'GCG-03');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_g4', '', 'TATA_KELOLA', 'GCG-04', 'Surat Kuasa Khusus', 'Surat kuasa jika pengajuan dilakukan oleh kuasa (bermaterai)', 'KUHPerdata', 'belum'
+SELECT 'doc_g4', NULL, 'TATA_KELOLA', 'GCG-04', 'Surat Kuasa Khusus', 'Surat kuasa jika pengajuan dilakukan oleh kuasa (bermaterai)', 'KUHPerdata', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'GCG-04');
 INSERT INTO dokumen_pengajuan (id, pengajuan_id, kelompok, kode_dokumen, nama_dokumen, deskripsi, dasar_hukum, status_upload)
-SELECT 'doc_g5', '', 'TATA_KELOLA', 'GCG-05', 'SK Pengurus KSP', 'Surat Keputusan Pengurus tentang penetapan pengelola KSP', 'Permenkop 11/2018', 'belum'
+SELECT 'doc_g5', NULL, 'TATA_KELOLA', 'GCG-05', 'SK Pengurus KSP', 'Surat Keputusan Pengurus tentang penetapan pengelola KSP', 'Permenkop 11/2018', 'belum'
 WHERE NOT EXISTS (SELECT 1 FROM dokumen_pengajuan WHERE kode_dokumen = 'GCG-05');
 
 -- PPOB Layanan
