@@ -1,4 +1,4 @@
-﻿-- MetroMitra Database Schema
+-- MetroMitra Database Schema
 -- PostgreSQL 16
 
 CREATE TABLE IF NOT EXISTS koperasi_info (
