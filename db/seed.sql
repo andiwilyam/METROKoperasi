@@ -499,3 +499,203 @@ VALUES
   ('pp3', 'Pembayaran Tagihan PDAM', 'Tagihan', 30000, 500000, 'Aktif'),
   ('pp4', 'Iuran BPJS Kesehatan', 'Tagihan', 35000, 300000, 'Aktif')
 ON CONFLICT (id) DO NOTHING;
+
+
+-- ============================================================
+-- DATA DUMMY TAMBAHAN (realistis, mencakup semua modul)
+-- Semua baris idempoten (ON CONFLICT DO NOTHING) agar aman diulang.
+-- ============================================================
+
+-- ============ SIMPANAN: TRANSAKSI TAMBAHAN ============
+INSERT INTO simpanan_transaksi (id, anggota_id, anggota_nama, jenis_simpanan_id, jenis_nama, tanggal, tipe, jumlah, keterangan)
+VALUES
+  ('st7', 'm2', 'Ahmad Kanh', 'js2', 'Simpanan Wajib Bulanan', '2023-04-10', 'setor', 100000, 'Setoran Wajib April 2023'),
+  ('st8', 'm2', 'Ahmad Kanh', 'js3', 'Simpanan Sukarela Harian', '2023-05-12', 'setor', 1500000, 'Setor Sukarela Bonus THR'),
+  ('st9', 'm3', 'Siti Rahmawati', 'js1', 'Simpanan Pokok', '2023-05-20', 'setor', 1000000, 'Setoran Pokok Awal Siti'),
+  ('st10', 'm3', 'Siti Rahmawati', 'js2', 'Simpanan Wajib Bulanan', '2023-06-20', 'setor', 80000, 'Setoran Wajib Juni 2023'),
+  ('st11', 'm4', 'Hendra Wijaya', 'js1', 'Simpanan Pokok', '2023-06-01', 'setor', 1000000, 'Setoran Pokok Awal Hendra'),
+  ('st12', 'm4', 'Hendra Wijaya', 'js3', 'Simpanan Sukarela Harian', '2023-07-05', 'setor', 12000000, 'Setor Sukarela Hasil THR'),
+  ('st13', 'm5', 'Dewi Lestari', 'js1', 'Simpanan Pokok', '2023-08-15', 'setor', 1000000, 'Setoran Pokok Awal Dewi'),
+  ('st14', 'm5', 'Dewi Lestari', 'js2', 'Simpanan Wajib Bulanan', '2023-09-15', 'setor', 60000, 'Setoran Wajib September 2023'),
+  ('st15', 'm1', 'Marmad Tuaian', 'js2', 'Simpanan Wajib Bulanan', '2023-10-15', 'setor', 100000, 'Setoran Wajib Oktober 2023'),
+  ('st16', 'm1', 'Marmad Tuaian', 'js3', 'Simpanan Sukarela Harian', '2023-11-10', 'setor', 500000, 'Setor Sukarela Tambahan'),
+  ('st17', 'm2', 'Ahmad Kanh', 'js3', 'Simpanan Sukarela Harian', '2023-12-01', 'tarik', 300000, 'Tarik Sukarela Keperluan Lebaran'),
+  ('st18', 'm4', 'Hendra Wijaya', 'js3', 'Simpanan Sukarela Harian', '2023-12-20', 'tarik', 2000000, 'Tarik Sukarela Liburan Akhir Tahun')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ SIMPANAN: PERMOHONAN TARIK ============
+INSERT INTO permohonan_tarik (id, anggota_id, anggota_nama, jenis_simpanan_id, jenis_nama, tanggal, jumlah, status)
+VALUES
+  ('pt1', 'm1', 'Marmad Tuaian', 'js3', 'Simpanan Sukarela Harian', '2026-07-05', 1000000, 'pengajuan'),
+  ('pt2', 'm4', 'Hendra Wijaya', 'js3', 'Simpanan Sukarela Harian', '2026-07-08', 3000000, 'disetujui'),
+  ('pt3', 'm5', 'Dewi Lestari', 'js2', 'Simpanan Wajib Bulanan', '2026-06-28', 60000, 'ditolak')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ BUKTI TRANSFER (SIMPanan) ============
+INSERT INTO bukti_transfer (id, anggota_id, anggota_nama, jenis_simpanan_id, jenis_nama, tanggal, jumlah, keterangan, bank_pengirim, no_ref, status)
+VALUES
+  ('bt1', 'm3', 'Siti Rahmawati', 'js3', 'Simpanan Sukarela Harian', '2026-07-10', 500000, 'Transfer sukarela via Mobile Banking', 'BCA', 'TRX-20260710-001', 'pending'),
+  ('bt2', 'm5', 'Dewi Lestari', 'js1', 'Simpanan Pokok', '2026-07-11', 1000000, 'Pelunasan simpanan pokok', 'Mandiri', 'TRX-20260711-014', 'disetujui'),
+  ('bt3', 'm2', 'Ahmad Kanh', 'js3', 'Simpanan Sukarela Harian', '2026-07-12', 750000, 'Setor sukarela tambahan', 'BRI', 'TRX-20260712-007', 'disetujui')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ PINJAMAN TAMBAHAN ============
+INSERT INTO pinjaman (id, anggota_id, anggota_nama, jenis_pinjaman_id, jenis_nama, no_pinjaman, pokok, tenor_months, bunga_persen, metode_bunga, angsuran_per_bulan, biaya_admin, sisa_pokok, status, tanggal_pengajuan, tanggal_cair)
+VALUES
+  ('p_4', 'm4', 'Hendra Wijaya', 'jp1', 'Pinjaman Umum Multiguna (Flat)', 'LOAN-2024-004', 25000000, 18, 1.0, 'flat', 1665000, 50000, 25000000, 'disetujui', '2026-06-20', NULL),
+  ('p_5', 'm5', 'Dewi Lestari', 'jp2', 'Pinjaman Renovasi Rumah (Efektif)', 'LOAN-2026-005', 60000000, 36, 1.2, 'efektif', 2100000, 100000, 0, 'lunas', '2024-02-15', '2024-02-20'),
+  ('p_6', 'm3', 'Siti Rahmawati', 'jp3', 'Pinjaman Pendidikan Anak', 'LOAN-2026-006', 12000000, 12, 0.8, 'flat', 1080000, 25000, 12000000, 'dicairkan', '2026-07-02', '2026-07-04')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ ANGSURAN: p_2 (lunas), p_5 (lunas), p_6 (berjalan), p_4 (belum cair) ============
+INSERT INTO angsuran (id, pinjaman_id, anggota_nama, angsuran_ke, tanggal_jatuh_tempo, pokok_bayar, bunga_bayar, total_bayar, status, tanggal_bayar)
+VALUES
+  ('a13', 'p_2', 'Ahmad Kanh', 1, '2023-05-12', 800000, 64000, 864000, 'lunas', '2023-05-10'),
+  ('a14', 'p_2', 'Ahmad Kanh', 2, '2023-06-12', 800000, 64000, 864000, 'lunas', '2023-06-11'),
+  ('a15', 'p_2', 'Ahmad Kanh', 3, '2023-07-12', 800000, 64000, 864000, 'lunas', '2023-07-10'),
+  ('a16', 'p_2', 'Ahmad Kanh', 4, '2023-08-12', 800000, 64000, 864000, 'lunas', '2023-08-12'),
+  ('a17', 'p_2', 'Ahmad Kanh', 5, '2023-09-12', 800000, 64000, 864000, 'lunas', '2023-09-11'),
+  ('a18', 'p_2', 'Ahmad Kanh', 6, '2023-10-12', 800000, 64000, 864000, 'lunas', '2023-10-10'),
+  ('a19', 'p_2', 'Ahmad Kanh', 7, '2023-11-12', 800000, 64000, 864000, 'lunas', '2023-11-12'),
+  ('a20', 'p_2', 'Ahmad Kanh', 8, '2023-12-12', 800000, 64000, 864000, 'lunas', '2023-12-10'),
+  ('a21', 'p_5', 'Dewi Lestari', 1, '2024-03-20', 1666667, 720000, 2386667, 'lunas', '2024-03-18'),
+  ('a22', 'p_5', 'Dewi Lestari', 2, '2024-04-20', 1666667, 720000, 2386667, 'lunas', '2024-04-19'),
+  ('a23', 'p_5', 'Dewi Lestari', 3, '2024-05-20', 1666667, 700000, 2366667, 'lunas', '2024-05-20'),
+  ('a24', 'p_5', 'Dewi Lestari', 36, '2027-02-20', 1666667, 0, 1666667, 'lunas', '2027-02-18'),
+  ('a25', 'p_6', 'Siti Rahmawati', 1, '2026-08-04', 1000000, 96000, 1096000, 'belum_bayar', NULL),
+  ('a26', 'p_6', 'Siti Rahmawati', 2, '2026-09-04', 1000000, 96000, 1096000, 'belum_bayar', NULL),
+  ('a27', 'p_6', 'Siti Rahmawati', 3, '2026-10-04', 1000000, 96000, 1096000, 'belum_bayar', NULL)
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ CICILAN BARANG + ANGSURAN ============
+INSERT INTO cicilan_barang (id, anggota_id, anggota_nama, barang_nama, total_harga, dp, pokok_pembiayaan, tenor_months, bunga_persen, angsuran_per_bulan, sisa_pokok, status, tanggal_pengajuan, tanggal_mulai)
+VALUES
+  ('cb1', 'm1', 'Marmad Tuaian', 'Kulkas LG Inverter 2 Pintu', 5250000, 1000000, 4250000, 12, 1.5, 395000, 0, 'lunas', '2024-03-01', '2024-03-05'),
+  ('cb2', 'm3', 'Siti Rahmawati', 'Mesin Cuci Samsung Front Load', 4800000, 800000, 4000000, 10, 1.5, 430000, 2150000, 'aktif', '2026-05-20', '2026-05-25')
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO cicilan_angsuran (id, cicilan_barang_id, anggota_nama, angsuran_ke, tanggal_jatuh_tempo, pokok_bayar, bunga_bayar, total_bayar, status, tanggal_bayar)
+VALUES
+  ('ca1', 'cb1', 'Marmad Tuaian', 1, '2024-04-05', 354167, 40833, 395000, 'lunas', '2024-04-03'),
+  ('ca2', 'cb1', 'Marmad Tuaian', 2, '2024-05-05', 354167, 40833, 395000, 'lunas', '2024-05-04'),
+  ('ca3', 'cb1', 'Marmad Tuaian', 12, '2025-03-05', 354166, 40834, 395000, 'lunas', '2025-03-02'),
+  ('ca4', 'cb2', 'Siti Rahmawati', 1, '2026-06-25', 400000, 30000, 430000, 'lunas', '2026-06-24'),
+  ('ca5', 'cb2', 'Siti Rahmawati', 2, '2026-07-25', 400000, 30000, 430000, 'lunas', '2026-07-24'),
+  ('ca6', 'cb2', 'Siti Rahmawati', 3, '2026-08-25', 400000, 30000, 430000, 'belum_bayar', NULL)
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ PPOB TRANSAKSI ============
+INSERT INTO ppob_transactions (id, anggota_id, anggota_nama, layanan_id, layanan_nama, target_number, nominal, harga_koperasi, harga_jual, tanggal, status, sn, no_referensi)
+VALUES
+  ('ptx1', 'm1', 'Marmad Tuaian', 'pp1', 'Pulsa Seluler (All Operator)', '081234567890', 50000, 49000, 50000, '2026-07-05', 'sukses', 'SN-PL-99812', 'REF-PL-0001'),
+  ('ptx2', 'm2', 'Ahmad Kanh', 'pp2', 'Token Listrik PLN Prabayar', '5381000000123456', 100000, 99000, 100000, '2026-07-06', 'sukses', 'SN-TK-44120', 'REF-TK-0002'),
+  ('ptx3', 'm3', 'Siti Rahmawati', 'pp4', 'Iuran BPJS Kesehatan', '0001234567890', 150000, 150000, 150000, '2026-07-07', 'sukses', 'SN-BP-77821', 'REF-BP-0003'),
+  ('ptx4', 'm4', 'Hendra Wijaya', 'pp3', 'Pembayaran Tagihan PDAM', '021000998877', 120000, 118000, 120000, '2026-07-09', 'proses', '', 'REF-PD-0004'),
+  ('ptx5', 'm5', 'Dewi Lestari', 'pp1', 'Pulsa Seluler (All Operator)', '087844556677', 100000, 98000, 100000, '2026-07-10', 'sukses', 'SN-PL-10032', 'REF-PL-0005')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ VIRTUAL ACCOUNT + VA TRANSAKSI ============
+INSERT INTO virtual_accounts (id, anggota_id, anggota_nama, bank, nomor_va, label, status)
+VALUES
+  ('va1', 'm1', 'Marmad Tuaian', 'Mandiri', '8901234567800001', 'VA Simpanan Sukarela', 'aktif'),
+  ('va2', 'm2', 'Ahmad Kanh', 'BNI', '8801234567800002', 'VA Angsuran Pinjaman', 'aktif'),
+  ('va3', 'm4', 'Hendra Wijaya', 'BRI', '8881234567800004', 'VA Multipurpose', 'aktif')
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO va_transactions (id, anggota_id, anggota_nama, nomor_va, bank, nominal, jenis_trx, tanggal, status)
+VALUES
+  ('vt1', 'm1', 'Marmad Tuaian', '8901234567800001', 'Mandiri', 500000, 'topup_sukarela', '2026-07-06', 'sukses'),
+  ('vt2', 'm2', 'Ahmad Kanh', '8801234567800002', 'BNI', 1120000, 'bayar_angsuran', '2026-07-07', 'sukses'),
+  ('vt3', 'm4', 'Hendra Wijaya', '8881234567800004', 'BRI', 3000000, 'topup_sukarela', '2026-07-08', 'sukses'),
+  ('vt4', 'm3', 'Siti Rahmawati', '8801234567800002', 'BNI', 1096000, 'bayar_cicilan_barang', '2026-07-24', 'pending')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ SEWA TRANSAKSI ============
+INSERT INTO sewa_transactions (id, anggota_id, anggota_nama, aset_id, aset_nama, tanggal_mulai, tanggal_selesai, jumlah_hari, total_biaya, denda, status, bukti_bayar_url)
+VALUES
+  ('stx1', 'm1', 'Marmad Tuaian', 'sw3', 'Kursi Lipat Futura (Set isi 50)', '2026-07-10', '2026-07-12', 3, 600000, 0, 'selesai', 'bukti/sewa/sw3_m1.jpg'),
+  ('stx2', 'm4', 'Hendra Wijaya', 'sw1', 'Laptop Lenovo ThinkPad L14', '2026-07-15', '2026-07-22', 8, 960000, 0, 'berjalan', 'bukti/sewa/sw1_m4.jpg'),
+  ('stx3', 'm5', 'Dewi Lestari', 'sw5', 'Gedung Serbaguna Graha Koperasi', '2026-08-01', '2026-08-02', 2, 2400000, 0, 'pengajuan', '')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ PENJUALAN (POS) ============
+INSERT INTO penjualan (id, no_faktur, tanggal, items, total, metode_bayar, diskon)
+VALUES
+  ('pj1', 'F-2026-0001', '2026-07-05', '[{"id":"b1","nama":"Beras Pandan Wangi Premium 5kg","qty":2,"harga":78000,"subtotal":156000},{"id":"b5","nama":"Pulpen Gel Pilot G2 Black","qty":5,"harga":15500,"subtotal":77500}]', 233500, 'Tunai', 0),
+  ('pj2', 'F-2026-0002', '2026-07-06', '[{"id":"b2","nama":"Minyak Goreng Sania 2L","qty":3,"harga":34500,"subtotal":103500},{"id":"b3","nama":"Gula Pasir Gulaku 1kg","qty":4,"harga":16000,"subtotal":64000}]', 167500, 'QRIS', 5000),
+  ('pj3', 'F-2026-0003', '2026-07-07', '[{"id":"b7","nama":"Powerbank Anker PowerCore 10000mAh","qty":1,"harga":320000,"subtotal":320000}]', 320000, 'Transfer Bank', 0),
+  ('pj4', 'F-2026-0004', '2026-07-09', '[{"id":"b4","nama":"Kertas HVS Sinar Dunia A4 80gr","qty":2,"harga":51000,"subtotal":102000},{"id":"b6","nama":"Indomie Goreng Spesial (Kardus)","qty":1,"harga":112000,"subtotal":112000}]', 214000, 'E-Wallet', 0)
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ PEMBELIAN (PO ke Supplier) ============
+INSERT INTO pembelian (id, no_invoice, tanggal, supplier_id, supplier_nama, items, total, status)
+VALUES
+  ('pm1', 'INV-SUP1-006', '2026-07-03', 'sup1', 'PT Indofood Makmur Mandiri', '[{"id":"b1","nama":"Beras Pandan Wangi Premium 5kg","qty":50,"harga":65000,"subtotal":3250000},{"id":"b3","nama":"Gula Pasir Gulaku 1kg","qty":80,"harga":12500,"subtotal":1000000}]', 4250000, 'diterima'),
+  ('pm2', 'INV-SUP2-011', '2026-07-04', 'sup2', 'CV Atk Jaya Bersama', '[{"id":"b4","nama":"Kertas HVS Sinar Dunia A4 80gr","qty":40,"harga":42000,"subtotal":1680000},{"id":"b5","nama":"Pulpen Gel Pilot G2 Black","qty":150,"harga":12000,"subtotal":1800000}]', 3480000, 'diterima'),
+  ('pm3', 'INV-SUP3-004', '2026-07-08', 'sup3', 'PT Unilever Indonesia Tbk', '[{"id":"b2","nama":"Minyak Goreng Sania 2L","qty":70,"harga":28000,"subtotal":1960000}]', 1960000, 'pesan')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ JURNAL UMUM (otomatis terinspirasi transaksi) ============
+INSERT INTO journal_entries (id, no_jurnal, tanggal, keterangan, sumber, debit, kredit, details)
+VALUES
+  ('je1', 'JU-2026-0001', '2026-07-05', 'Setoran simpanan sukarela Marmad (VA)', 'Simpanan', 500000, 500000, '[{"akun":"1.1.01","debit":500000,"kredit":0},{"akun":"2.1.03","debit":0,"kredit":500000}]'),
+  ('je2', 'JU-2026-0002', '2026-07-06', 'Angsuran pinjaman Ahmad (VA BNI)', 'Pinjaman', 1120000, 1120000, '[{"akun":"1.1.02","debit":1120000,"kredit":0},{"akun":"1.2.01","debit":0,"kredit":1000000},{"akun":"4.1.01","debit":0,"kredit":120000}]'),
+  ('je3', 'JU-2026-0003', '2026-07-07', 'Penjualan toko (QRIS)', 'Toko', 168500, 168500, '[{"akun":"1.1.07","debit":168500,"kredit":0},{"akun":"4.1.04","debit":0,"kredit":168500}]'),
+  ('je4', 'JU-2026-0004', '2026-07-07', 'Pembelian dari supplier (Hutang)', 'Toko', 4250000, 4250000, '[{"akun":"1.4.01","debit":4250000,"kredit":0},{"akun":"2.1.06","debit":0,"kredit":4250000}]'),
+  ('je5', 'JU-2026-0005', '2026-07-10', 'Dividen ventura PT Bambang Baru Bara', 'Ventura', 52000000, 52000000, '[{"akun":"1.1.02","debit":52000000,"kredit":0},{"akun":"4.1.07","debit":0,"kredit":52000000}]'),
+  ('je6', 'JU-2026-0006', '2026-07-12', 'Beban gaji karyawan bulan Juli', 'Beban', 9300000, 9300000, '[{"akun":"5.1.02","debit":9300000,"kredit":0},{"akun":"1.1.01","debit":0,"kredit":9300000}]')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ APPROVAL JURNAL ============
+INSERT INTO journal_approvals (id, jurnal_id, status, created_by, approved_by, approved_at, notes)
+VALUES
+  ('ja1', 'je1', 'approved', '2', '1', '2026-07-05 09:30:00', 'Validasi setoran VA'),
+  ('ja2', 'je2', 'approved', '2', '1', '2026-07-06 10:15:00', 'Angsuran tepat waktu'),
+  ('ja3', 'je3', 'posted', '2', NULL, NULL, 'Menunggu posting akhir bulan'),
+  ('ja4', 'je5', 'approved', '2', '1', '2026-07-10 14:00:00', 'Dividen sesuai kontrak'),
+  ('ja5', 'je6', 'draft', '2', NULL, NULL, 'Verifikasi slip gaji')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ SUBLEDGER PIUTANG ============
+INSERT INTO subledger_piutang (id, anggota_id, no_pinjaman, pokok_piutang, tunggakan_pokok, tunggakan_bunga, hari_tunggakan, kolektibilitas, tanggal_update)
+VALUES
+  ('sl1', 'm1', 'LOAN-2023-001', 12000000, 4000000, 480000, 45, 'Kurang Lancar', '2026-07-12'),
+  ('sl2', 'm4', 'LOAN-2024-004', 25000000, 0, 0, 0, 'Lancar', '2026-07-12'),
+  ('sl3', 'm3', 'LOAN-2026-006', 12000000, 0, 0, 0, 'Lancar', '2026-07-12')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ TIKET BANTUAN ============
+INSERT INTO tiket_bantuan (id, anggota_id, anggota_nama, subjek, pesan, kategori, prioritas, tanggal, status, balasan_admin)
+VALUES
+  ('tb1', 'm2', 'Ahmad Kanh', 'Tidak bisa cairkan simpanan sukarela', 'Saya sudah ajukan penarikan tapi status masih pending sejak 2 hari lalu.', 'Simpanan', 'Sedang', '2026-07-09', 'Diproses', 'Mohon maaf, sedang kami verifikasi saldo. Akan diproses maksimal H+1.'),
+  ('tb2', 'm5', 'Dewi Lestari', 'Label tagihan angsuran di VA salah nominal', 'Di aplikasi tertulis Rp1.090.000 tapi VA menampilkan Rp1.200.000.', 'Pinjaman', 'Tinggi', '2026-07-10', 'Terbuka', ''),
+  ('tb3', 'm3', 'Siti Rahmawati', 'Cara ajukan cicilan barang lewat aplikasi?', 'Saya ingin cicilan mesin cuci tapi tidak menemukan menu di portal anggota.', 'Toko', 'Rendah', '2026-07-11', 'Selesai', 'Menu tersedia di Portal Anggota > Toko > Cicilan Barang. Terima kasih.')
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ HASIL SKORING AI (pengajuan ventura) ============
+INSERT INTO hasil_skoring (id, pengajuan_id, skor_keseluruhan, status_kelayakan, skor_character, skor_capacity, skor_capital, skor_collateral, skor_condition, rasio_likuiditas, rasio_solvabilitas, rasio_profitabilitas, rasio_bopo, bmpk_persen, bmpk_status, collateral_coverage, rekomendasi_plafon, rekomendasi_tenor, rekomendasi_bunga, syarat_khusus, ai_analisis_json)
+VALUES
+  ('hs1', 'pp_seed_hijau', 82.5, 'Layak', 85, 80, 78, 90, 80, 2.4, 45.5, 18.2, 65.0, 12.5, 'Aman', 130.0, 750000000, 36, 12.0, 'Jaminan perusahaan aktif & laporan keuangan audited 2 tahun terakhir.', NULL)
+ON CONFLICT (id) DO NOTHING;
+
+-- ============ LANDING PAGE CMS (team, testimonial, pricing) ============
+INSERT INTO landing_team (id, name, position, sort_order)
+VALUES
+  ('lt1', 'Ir. H. Supriyanto, M.M.', 'Ketua Pengurus Koperasi', 1),
+  ('lt2', 'Riana Safitri, S.E.', 'Bendahara', 2),
+  ('lt3', 'Ahmad Syarif', 'Admin Sistem & Operasional', 3)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO landing_testimonials (id, name, position, content, rating, sort_order)
+VALUES
+  ('lte1', 'Marmad Tuaian', 'Anggota sejak 2023', 'Sangat mudah mengelola simpanan dan pinjaman lewat satu aplikasi. Laporannya transparan.', 5, 1),
+  ('lte2', 'Hendra Wijaya', 'Anggota sejak 2023', 'Fitur ventura membantu saya berinvestasi ke UMKM lokal dengan pantauan dividen jelas.', 5, 2),
+  ('lte3', 'Siti Rahmawati', 'Anggota sejak 2023', 'Toko koperasi lengkap, bisa belanja dan cicilan langsung dari portal anggota.', 4, 3)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO landing_pricing (id, plan_name, price_label, price_amount, description, is_popular, features, cta_text, cta_link, sort_order)
+VALUES
+  ('lp1', 'Basic', 'Gratis', '0', 'Untuk koperasi pemula dengan fitur inti.', false, '["Manajemen Anggota","Simpanan & Pinjaman","Laporan Dasar"]', 'Mulai', '#', 1),
+  ('lp2', 'Professional', 'Rp 499rb/bulan', '499000', 'Untuk koperasi yang butuh akuntansi & digital payment.', true, '["Semua fitur Basic","Akuntansi SAK ETAP","PPOB & Virtual Account","Ventura & AI Audit"]', 'Pilih', '#', 2),
+  ('lp3', 'Enterprise', 'Kustom', '0', 'Untuk koperasi besar dengan multi-cabang.', false, '["Semua fitur Professional","Multi-cabang","API Integrasi","Dukungan Prioritas"]', 'Hubungi', '#', 3)
+ON CONFLICT (id) DO NOTHING;
