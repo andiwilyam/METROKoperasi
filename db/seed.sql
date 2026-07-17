@@ -81,7 +81,13 @@ VALUES
   ('jp2', 'Pinjaman Renovasi Rumah (Efektif)', 1.2, 'efektif', 36, 100000000, 100000),
   ('jp3', 'Pinjaman Pendidikan Anak (Flat)', 0.8, 'flat', 12, 15000000, 25000),
   ('jp4', 'Pinjaman Darurat Mikro (Flat)', 1.5, 'flat', 6, 5000000, 10000)
-ON CONFLICT (id) DO NOTHING;
+ON CONFLICT (id) DO UPDATE SET
+  nama = EXCLUDED.nama,
+  bunga_persen = EXCLUDED.bunga_persen,
+  metode_bunga = EXCLUDED.metode_bunga,
+  maks_tenor = EXCLUDED.maks_tenor,
+  maks_plafon = EXCLUDED.maks_plafon,
+  biaya_admin = EXCLUDED.biaya_admin;
 
 -- Kategori Barang
 INSERT INTO kategori_barang (id, nama)
