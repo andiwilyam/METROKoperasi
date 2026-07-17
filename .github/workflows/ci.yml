@@ -45,6 +45,8 @@ jobs:
             apps/web/dist
             dist/server.cjs
             dist/server.cjs.map
+            db/schema.sql
+            db/seed.sql
           retention-days: 1
 
   e2e-test:

@@ -70,10 +70,15 @@ async function startServer() {
   );
   app.use(express.json({ limit: '10mb' }));
 
-  // Run database migrations (non-blocking for fast healthcheck)
-  runMigrations()
-    .then(() => console.log('Database ready.'))
-    .catch(err => console.warn('Migration warning (non-fatal):', err));
+  // Run database migrations BEFORE accepting requests so the DB schema is
+  // guaranteed ready when the first login hits. Run inline (await) instead of
+  // fire-and-forget to avoid a race where requests arrive before tables exist.
+  try {
+    await runMigrations();
+    console.log('Database ready.');
+  } catch (err) {
+    console.warn('Migration warning (non-fatal):', err);
+  }
 
   // ==================== PUBLIC AUTH ROUTES ====================
   app.use('/api/auth', authRoutes);

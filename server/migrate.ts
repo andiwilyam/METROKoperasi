@@ -14,8 +14,24 @@ try {
 export async function runMigrations() {
   const client = await pool.connect();
   try {
-    const schemaPath = path.join(baseDir, '..', 'db', 'schema.sql');
-    const seedPath = path.join(baseDir, '..', 'db', 'seed.sql');
+    // Resolve SQL files across dev (root/db), production (dist/db) and
+    // CI/local runs launched from the project root (cwd/db). The first
+    // existing candidate wins so migrations never fail on a missing path.
+    const schemaCandidates = [
+      path.join(baseDir, '..', 'db', 'schema.sql'),
+      path.join(baseDir, '..', '..', 'db', 'schema.sql'),
+      path.join(process.cwd(), 'db', 'schema.sql'),
+    ];
+    const seedCandidates = [
+      path.join(baseDir, '..', 'db', 'seed.sql'),
+      path.join(baseDir, '..', '..', 'db', 'seed.sql'),
+      path.join(process.cwd(), 'db', 'seed.sql'),
+    ];
+    const schemaPath = schemaCandidates.find(p => fs.existsSync(p));
+    const seedPath = seedCandidates.find(p => fs.existsSync(p));
+    if (!schemaPath) {
+      throw new Error(`schema.sql not found in: ${schemaCandidates.join(', ')}`);
+    }
 
     // Check if migrations table exists and if schema was applied
     const { rows } = await client.query(

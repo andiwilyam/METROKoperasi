@@ -17,14 +17,21 @@ if (defaults && defaults.parseInt8 !== undefined) {
   defaults.parseInt8 = true;
 }
 
-const pool = process.env.DATABASE_URL
-  ? new pg.Pool({ 
-      connectionString: process.env.DATABASE_URL, 
-      max: 20, 
+// Only enable TLS when explicitly required (cloud DBs like Supabase/Railway).
+// Local PostgreSQL (and many servers) reject SSL entirely, so forcing it
+// makes pool.connect() fail with "The server does not support SSL connections".
+const dbUrl = process.env.DATABASE_URL || '';
+const sslEnabled =
+  /sslmode=require/i.test(dbUrl) || process.env.DB_SSL === 'true';
+
+const pool = dbUrl
+  ? new pg.Pool({
+      connectionString: dbUrl,
+      max: 20,
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 10000,
-      ssl: { rejectUnauthorized: false },
-      family: 4  // Force IPv4 for Supabase/Railway compatibility
+      ssl: sslEnabled ? { rejectUnauthorized: false } : undefined,
+      family: 4, // Force IPv4 for Supabase/Railway compatibility
     })
   : new pg.Pool({
       host: process.env.DB_HOST || 'localhost',

@@ -11,7 +11,7 @@ export default function AppContent() {
   const loadAllData = useLoadAllData();
   const location = useLocation();
   useEffect(() => { if (user) { loadAllData(); } }, [user]);
-  if (location.pathname === '/') { return <MetroKspLandingPage />; }
   if (!user) { return <LoginScreen />; }
+  if (location.pathname === '/') { return <MetroKspLandingPage />; }
   return <DashboardApp />;
 }

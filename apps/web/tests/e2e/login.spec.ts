@@ -38,12 +38,8 @@ test.describe('Login Flow', () => {
         await page.click('button:has-text("Masuk Sistem")');
       }
       
-      // Wait for dashboard to load
-      await page.waitForLoadState('networkidle');
-      await page.waitForTimeout(1000);
-      
-      // Verify logged in - check for sidebar or dashboard content
-      await expect(page.locator('aside, nav, button:has-text("Keluar Aplikasi")').first()).toBeVisible({ timeout: 5000 });
+      // Wait for dashboard to render (avoid networkidle: loadAllData fires 40+ fire-and-forget fetches)
+      await expect(page.locator('aside, nav, button:has-text("Keluar Aplikasi")').first()).toBeVisible({ timeout: 15000 });
     });
   }
 });
